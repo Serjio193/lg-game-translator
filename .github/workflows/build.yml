@@ -56,7 +56,7 @@ jobs:
           cp build/webos/lg-game-capture-probe probe/env-probe.sh build/ipk-app/
           chmod +x build/ipk-app/lg-game-capture-probe build/ipk-app/env-probe.sh
           # appinfo currently names an icon we do not ship; remove that optional field for this probe package.
-          python3 -c 'import json; p="build/ipk-app/appinfo.json"; d=json.load(open(p)); d.pop("icon",None); open(p,"w").write(json.dumps(d,indent=2)+"\\n")'
+          python3 -c 'import json; p="build/ipk-app/appinfo.json"; d=json.load(open(p)); d.pop("icon",None); open(p,"w").write(json.dumps(d,indent=2)+chr(10))'
           ares-package build/ipk-app -o build/ipk-out
           ls -lh build/ipk-out/*.ipk
           file build/ipk-out/*.ipk
