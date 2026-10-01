@@ -1,0 +1,9 @@
+{
+  "id": "com.serjio193.lggametranslator",
+  "version": "0.1.0",
+  "vendor": "Serjio193",
+  "type": "web",
+  "main": "index.html",
+  "title": "LG Game Translator",
+  "icon": "icon.png"
+}
