@@ -44,7 +44,7 @@ jobs:
           mkdir -p build/artifact
           cp build/webos/lg-game-capture-probe build/artifact/
           cp probe/env-probe.sh build/artifact/
-          cp packaging/appinfo.json packaging/index.html build/artifact/
+          cp packaging/appinfo.json packaging/index.html packaging/icon.png build/artifact/
           chmod +x build/artifact/lg-game-capture-probe build/artifact/env-probe.sh
 
       - name: Package installable IPK
@@ -52,11 +52,9 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p build/ipk-app build/ipk-out
-          cp packaging/appinfo.json packaging/index.html build/ipk-app/
+          cp packaging/appinfo.json packaging/index.html packaging/icon.png build/ipk-app/
           cp build/webos/lg-game-capture-probe probe/env-probe.sh build/ipk-app/
           chmod +x build/ipk-app/lg-game-capture-probe build/ipk-app/env-probe.sh
-          # appinfo currently names an icon we do not ship; remove that optional field for this probe package.
-          python3 -c 'import json; p="build/ipk-app/appinfo.json"; d=json.load(open(p)); d.pop("icon",None); open(p,"w").write(json.dumps(d,indent=2)+chr(10))'
           ares-package build/ipk-app -o build/ipk-out
           ls -lh build/ipk-out/*.ipk
           file build/ipk-out/*.ipk
