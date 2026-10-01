@@ -1,0 +1,54 @@
+name: build-webos-probe
+
+on:
+  push:
+    branches: [capture-probe]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install host dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build curl xz-utils file
+
+      - name: Install webOSbrew native toolchain
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git clone --depth=1 https://github.com/webosbrew/meta-lg-webos-ndk.git /tmp/meta-lg-webos-ndk
+          find /tmp/meta-lg-webos-ndk -maxdepth 3 -type f | sort | head -200
+          echo "Toolchain bootstrap repository downloaded."
+
+      - name: Locate usable toolchain
+        id: toolchain
+        shell: bash
+        run: |
+          set -euxo pipefail
+          TC="$(find /tmp/meta-lg-webos-ndk -type f -name 'toolchainfile.cmake' -o -name '*toolchain*.cmake' | head -n1 || true)"
+          if [ -z "$TC" ]; then
+            echo "No ready CMake toolchain found in meta-lg-webos-ndk."
+            echo "This is intentionally a hard failure: do not produce a host binary as a TV artifact."
+            exit 2
+          fi
+          echo "file=$TC" >> "$GITHUB_OUTPUT"
+
+      - name: Cross-compile probe
+        run: |
+          TOOLCHAIN_FILE="${{ steps.toolchain.outputs.file }}" ./scripts/build-webos.sh
+          file build/webos/lg-game-capture-probe
+
+      - name: Stage package
+        run: |
+          mkdir -p build/artifact
+          cp build/webos/lg-game-capture-probe build/artifact/
+          cp packaging/appinfo.json packaging/index.html build/artifact/
+
+      - name: Upload ARM probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: lg-game-translator-webos-probe
+          path: build/artifact/
