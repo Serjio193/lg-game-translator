@@ -52,3 +52,7 @@ Code reused from another project must retain its required license and attributio
 ## Safety
 
 This project targets TVs owned and rooted by the user. Do not expose the TV's root shell or debug services to the public Internet.
+
+## G5 screen capture
+
+PicCap capture measurements and the verified 1920×1080 screen frame are documented in [docs/g5-piccap-screen-capture.md](docs/g5-piccap-screen-capture.md).
