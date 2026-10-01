@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           export TOOLCHAIN_FILE=/tmp/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake
-          ./scripts/build-webos.sh
+          sh ./scripts/build-webos.sh
           file build/webos/lg-game-capture-probe
           file build/webos/lg-game-capture-probe | grep -E 'ARM|arm'
 
