@@ -1,0 +1,48 @@
+name: build-webos-probe
+
+on:
+  push:
+    branches: [capture-probe, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install host dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build curl xz-utils file
+
+      - name: Download webOS buildroot toolchain
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cd /tmp
+          curl -fL -o webos-sdk.tar.gz \
+            https://github.com/openlgtv/buildroot-nc4/releases/download/webos-b17b4cc/arm-webos-linux-gnueabi_sdk-buildroot.tar.gz
+          tar -xzf webos-sdk.tar.gz
+          /tmp/arm-webos-linux-gnueabi_sdk-buildroot/relocate-sdk.sh
+          test -f /tmp/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake
+
+      - name: Cross-compile ARM probe
+        shell: bash
+        run: |
+          export TOOLCHAIN_FILE=/tmp/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake
+          ./scripts/build-webos.sh
+          file build/webos/lg-game-capture-probe
+          file build/webos/lg-game-capture-probe | grep -E 'ARM|arm'
+
+      - name: Stage TV files
+        run: |
+          mkdir -p build/artifact
+          cp build/webos/lg-game-capture-probe build/artifact/
+          cp probe/env-probe.sh build/artifact/
+          cp packaging/appinfo.json packaging/index.html build/artifact/
+
+      - name: Upload ARM probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: lg-game-translator-webos-probe
+          path: build/artifact/
