@@ -1,0 +1,6 @@
+build/
+*.ipk
+*.o
+*.so
+*.log
+.DS_Store
