@@ -56,3 +56,7 @@ This project targets TVs owned and rooted by the user. Do not expose the TV's ro
 ## G5 screen capture
 
 PicCap capture measurements and the verified 1920×1080 screen frame are documented in [docs/g5-piccap-screen-capture.md](docs/g5-piccap-screen-capture.md).
+
+## Roadmap
+
+The agreed OCR, translation, overlay and TTS direction is documented in [docs/roadmap.md](docs/roadmap.md).
