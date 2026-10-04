@@ -36,7 +36,9 @@ def main():
     parser.add_argument("--host", default="root@192.168.1.3")
     parser.add_argument("--image", default="text.ppm")
     parser.add_argument("--output", type=pathlib.Path, required=True)
-    parser.add_argument("--backends", nargs="+", choices=("contrast", "ppocr"), default=["contrast", "ppocr"])
+    parser.add_argument("--backends", nargs="+",
+                        choices=("contrast", "ppocr", "ppocrv3", "ppocrv4", "ppocrv6", "east", "craft"),
+                        default=["contrast", "ppocr"])
     parser.add_argument("--edges", nargs="+", type=int, choices=(320, 640, 960), default=[320, 640, 960])
     parser.add_argument("--iterations", type=int, default=8)
     parser.add_argument("--period-ms", type=int, default=1000)

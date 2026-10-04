@@ -35,19 +35,21 @@ int main(int argc, char** argv)
 {
     try {
         if (argc != 7) {
-            std::fprintf(stderr, "Usage: %s contrast|ppocr image.ppm max_edge iterations period_ms model_prefix\n", argv[0]);
+            std::fprintf(stderr, "Usage: %s contrast|ppocr|ppocrv3|ppocrv4|ppocrv6|east|craft image.ppm max_edge iterations period_ms model_prefix\n", argv[0]);
             return 2;
         }
         std::string backend(argv[1]);
-        if (backend != "contrast" && backend != "ppocr")
+        if (backend != "contrast" && backend != "ppocr" && backend != "ppocrv3"
+            && backend != "ppocrv4" && backend != "ppocrv6" && backend != "east"
+            && backend != "craft")
             throw std::runtime_error("Unknown backend");
         int edge = argument(argv[3], 160, 1280);
         int iterations = argument(argv[4], 1, 100);
         int period_ms = argument(argv[5], 0, 10000);
         Image source = read_image(argv[2]);
         std::unique_ptr<NeuralDetector> neural;
-        if (backend == "ppocr")
-            neural.reset(new NeuralDetector(argv[6]));
+        if (backend != "contrast")
+            neural.reset(new NeuralDetector(argv[6], backend));
         auto detect = [&](const Image& image) {
             return neural ? neural->detect(image) : detect_contrast(image);
         };

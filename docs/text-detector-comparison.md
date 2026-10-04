@@ -3,6 +3,8 @@
 Further tests with multiline dialogue, smaller headings and another game are
 recorded in [the follow-up](text-detector-followup.md). They show why 320 alone
 and confidence-only filtering are insufficient for all scenes.
+Additional PP-OCR versions, EAST, CRAFT and DBNet18 are covered by the
+[expanded comparison](text-detector-expanded-comparison.md).
 
 ## Scope and actual inputs
 

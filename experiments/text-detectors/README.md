@@ -112,3 +112,8 @@ capture remains 1280×720; these smaller sizes apply only to detector processing
 parses OCR TSVs using the existing Pillow package. The follow-up game cases used
 `run_tv.py --edges 320 640 --iterations 5 --image FRAME.pgm`; see
 `docs/text-detector-followup.md` for the crops, recognition and limits.
+
+The expanded ARM32 comparison adds PP-OCRv3/v4/v6, EAST and CRAFT diagnostic
+backends to the runner. Results and the DBNet18 conversion limitation are in
+`docs/text-detector-expanded-comparison.md`. This does not enable a detector in
+PicCap.
