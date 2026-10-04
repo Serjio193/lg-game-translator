@@ -1,0 +1,573 @@
+{
+  "baseline_fps": 58.891115263327,
+  "cases": [
+    {
+      "backend": "contrast",
+      "max_edge": 320,
+      "mean_cpu_ms": 10.272,
+      "four_core_cpu_percent": 0.26025,
+      "mean_piccap_fps": 57.93449697159561,
+      "candidates": 11,
+      "aborted": false
+    },
+    {
+      "backend": "contrast",
+      "max_edge": 640,
+      "mean_cpu_ms": 39.014,
+      "four_core_cpu_percent": 0.9815,
+      "mean_piccap_fps": 59.123945019457004,
+      "candidates": 16,
+      "aborted": false
+    },
+    {
+      "backend": "ppocr",
+      "max_edge": 320,
+      "mean_cpu_ms": 63.297,
+      "four_core_cpu_percent": 1.58125,
+      "mean_piccap_fps": 59.0641859704992,
+      "candidates": 9,
+      "aborted": false
+    },
+    {
+      "backend": "ppocr",
+      "max_edge": 640,
+      "mean_cpu_ms": 253.291,
+      "four_core_cpu_percent": 6.3305,
+      "mean_piccap_fps": 57.197385338291,
+      "candidates": 4,
+      "aborted": false
+    }
+  ],
+  "ocr": {
+    "brothership-dialog.tsv": {
+      "words": [
+        {
+          "text": "What's",
+          "confidence": 92.62645,
+          "box": [
+            10,
+            12,
+            119,
+            28
+          ]
+        },
+        {
+          "text": "that?",
+          "confidence": 92.249275,
+          "box": [
+            142,
+            12,
+            88,
+            28
+          ]
+        },
+        {
+          "text": "You",
+          "confidence": 91.846298,
+          "box": [
+            241,
+            13,
+            68,
+            27
+          ]
+        },
+        {
+          "text": "want",
+          "confidence": 92.183929,
+          "box": [
+            322,
+            13,
+            84,
+            27
+          ]
+        },
+        {
+          "text": "to",
+          "confidence": 90.46946,
+          "box": [
+            10,
+            68,
+            35,
+            26
+          ]
+        },
+        {
+          "text": "know",
+          "confidence": 92.542313,
+          "box": [
+            59,
+            67,
+            91,
+            27
+          ]
+        },
+        {
+          "text": "where",
+          "confidence": 92.401772,
+          "box": [
+            162,
+            67,
+            107,
+            27
+          ]
+        },
+        {
+          "text": "you",
+          "confidence": 92.518723,
+          "box": [
+            281,
+            72,
+            62,
+            27
+          ]
+        },
+        {
+          "text": "are?",
+          "confidence": 88.565475,
+          "box": [
+            358,
+            67,
+            76,
+            27
+          ]
+        }
+      ],
+      "text": "What's that? You want to know where you are?"
+    },
+    "brothership-name.tsv": {
+      "words": [
+        {
+          "text": "{Connie]",
+          "confidence": 14.18959,
+          "box": [
+            0,
+            0,
+            110,
+            37
+          ]
+        }
+      ],
+      "text": "{Connie]"
+    },
+    "full-frame.tsv": {
+      "words": [
+        {
+          "text": "2",
+          "confidence": 59.374069,
+          "box": [
+            486,
+            0,
+            8,
+            9
+          ]
+        },
+        {
+          "text": "T",
+          "confidence": 39.882488,
+          "box": [
+            506,
+            4,
+            11,
+            3
+          ]
+        },
+        {
+          "text": "BT",
+          "confidence": 42.332031,
+          "box": [
+            532,
+            0,
+            101,
+            15
+          ]
+        },
+        {
+          "text": "=]",
+          "confidence": 13.559082,
+          "box": [
+            388,
+            5,
+            52,
+            17
+          ]
+        },
+        {
+          "text": "A",
+          "confidence": 0.0,
+          "box": [
+            457,
+            23,
+            39,
+            20
+          ]
+        },
+        {
+          "text": "B",
+          "confidence": 34.133507,
+          "box": [
+            1076,
+            30,
+            30,
+            8
+          ]
+        },
+        {
+          "text": "T",
+          "confidence": 23.13781,
+          "box": [
+            1151,
+            13,
+            92,
+            23
+          ]
+        },
+        {
+          "text": "<",
+          "confidence": 74.4132,
+          "box": [
+            1220,
+            9,
+            25,
+            37
+          ]
+        },
+        {
+          "text": "~",
+          "confidence": 84.813881,
+          "box": [
+            858,
+            71,
+            25,
+            6
+          ]
+        },
+        {
+          "text": "oy",
+          "confidence": 1.061401,
+          "box": [
+            903,
+            60,
+            64,
+            22
+          ]
+        },
+        {
+          "text": "¥",
+          "confidence": 26.209396,
+          "box": [
+            1000,
+            17,
+            52,
+            58
+          ]
+        },
+        {
+          "text": "What's",
+          "confidence": 91.663101,
+          "box": [
+            390,
+            111,
+            118,
+            27
+          ]
+        },
+        {
+          "text": "that?",
+          "confidence": 91.663101,
+          "box": [
+            522,
+            111,
+            88,
+            27
+          ]
+        },
+        {
+          "text": "You",
+          "confidence": 92.089699,
+          "box": [
+            621,
+            111,
+            68,
+            27
+          ]
+        },
+        {
+          "text": "want",
+          "confidence": 92.260963,
+          "box": [
+            703,
+            111,
+            83,
+            27
+          ]
+        },
+        {
+          "text": "\\'©",
+          "confidence": 66.179497,
+          "box": [
+            1094,
+            87,
+            93,
+            43
+          ]
+        },
+        {
+          "text": "bx",
+          "confidence": 0.0,
+          "box": [
+            13,
+            135,
+            36,
+            48
+          ]
+        },
+        {
+          "text": "LJ",
+          "confidence": 14.296379,
+          "box": [
+            73,
+            139,
+            32,
+            40
+          ]
+        },
+        {
+          "text": "/N",
+          "confidence": 0.0,
+          "box": [
+            282,
+            202,
+            44,
+            28
+          ]
+        },
+        {
+          "text": "to",
+          "confidence": 92.88723,
+          "box": [
+            391,
+            166,
+            34,
+            26
+          ]
+        },
+        {
+          "text": "know",
+          "confidence": 92.68924,
+          "box": [
+            440,
+            165,
+            90,
+            27
+          ]
+        },
+        {
+          "text": "where",
+          "confidence": 92.040092,
+          "box": [
+            542,
+            165,
+            107,
+            27
+          ]
+        },
+        {
+          "text": "you",
+          "confidence": 90.533394,
+          "box": [
+            662,
+            170,
+            61,
+            27
+          ]
+        },
+        {
+          "text": "are?",
+          "confidence": 90.247231,
+          "box": [
+            738,
+            165,
+            76,
+            27
+          ]
+        },
+        {
+          "text": "s",
+          "confidence": 58.022633,
+          "box": [
+            4,
+            224,
+            54,
+            33
+          ]
+        },
+        {
+          "text": "-",
+          "confidence": 44.953697,
+          "box": [
+            264,
+            268,
+            12,
+            5
+          ]
+        },
+        {
+          "text": "A",
+          "confidence": 47.811626,
+          "box": [
+            294,
+            254,
+            14,
+            34
+          ]
+        },
+        {
+          "text": "4",
+          "confidence": 47.811626,
+          "box": [
+            324,
+            240,
+            10,
+            52
+          ]
+        },
+        {
+          "text": "D",
+          "confidence": 37.782944,
+          "box": [
+            351,
+            244,
+            88,
+            32
+          ]
+        },
+        {
+          "text": "M|",
+          "confidence": 32.728081,
+          "box": [
+            65,
+            222,
+            94,
+            87
+          ]
+        },
+        {
+          "text": ">",
+          "confidence": 57.288704,
+          "box": [
+            170,
+            319,
+            10,
+            6
+          ]
+        },
+        {
+          "text": "o",
+          "confidence": 35.844353,
+          "box": [
+            189,
+            304,
+            12,
+            28
+          ]
+        },
+        {
+          "text": "Y",
+          "confidence": 20.846336,
+          "box": [
+            451,
+            262,
+            82,
+            40
+          ]
+        },
+        {
+          "text": "TN",
+          "confidence": 30.783859,
+          "box": [
+            974,
+            246,
+            304,
+            75
+          ]
+        },
+        {
+          "text": "-",
+          "confidence": 85.400093,
+          "box": [
+            973,
+            332,
+            12,
+            5
+          ]
+        },
+        {
+          "text": "T",
+          "confidence": 2.363022,
+          "box": [
+            1030,
+            325,
+            75,
+            13
+          ]
+        },
+        {
+          "text": "————",
+          "confidence": 0.0,
+          "box": [
+            1174,
+            316,
+            97,
+            32
+          ]
+        },
+        {
+          "text": "~",
+          "confidence": 0.0,
+          "box": [
+            645,
+            447,
+            9,
+            3
+          ]
+        },
+        {
+          "text": "3",
+          "confidence": 0.0,
+          "box": [
+            668,
+            445,
+            15,
+            12
+          ]
+        },
+        {
+          "text": "II",
+          "confidence": 95.973846,
+          "box": [
+            603,
+            458,
+            90,
+            67
+          ]
+        }
+      ],
+      "text": "2 T BT =] A B T < ~ oy ¥ What's that? You want \\'© bx LJ /N to know where you are? s - A 4 D M| > o Y TN - T ———— ~ 3 II"
+    },
+    "name-white-200.tsv": {
+      "words": [
+        {
+          "text": "Connie",
+          "confidence": 78.402336,
+          "box": [
+            12,
+            13,
+            83,
+            23
+          ]
+        }
+      ],
+      "text": "Connie"
+    }
+  }
+}

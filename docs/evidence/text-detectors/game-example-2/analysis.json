@@ -1,0 +1,1128 @@
+{
+  "baseline_fps": 58.901594461707745,
+  "cases": [
+    {
+      "backend": "contrast",
+      "max_edge": 320,
+      "mean_cpu_ms": 10.607,
+      "four_core_cpu_percent": 0.27,
+      "mean_piccap_fps": 58.855588741352996,
+      "candidates": 12,
+      "aborted": false
+    },
+    {
+      "backend": "contrast",
+      "max_edge": 640,
+      "mean_cpu_ms": 37.824,
+      "four_core_cpu_percent": 0.95075,
+      "mean_piccap_fps": 58.566352677213196,
+      "candidates": 18,
+      "aborted": false
+    },
+    {
+      "backend": "ppocr",
+      "max_edge": 320,
+      "mean_cpu_ms": 64.833,
+      "four_core_cpu_percent": 1.62075,
+      "mean_piccap_fps": 58.719441931104804,
+      "candidates": 2,
+      "aborted": false
+    },
+    {
+      "backend": "ppocr",
+      "max_edge": 640,
+      "mean_cpu_ms": 266.291,
+      "four_core_cpu_percent": 6.66,
+      "mean_piccap_fps": 57.2463776275776,
+      "candidates": 3,
+      "aborted": false
+    }
+  ],
+  "ocr": {
+    "example-2-dialog.tsv": {
+      "words": [
+        {
+          "text": "May",
+          "confidence": 88.42009,
+          "box": [
+            12,
+            16,
+            67,
+            30
+          ]
+        },
+        {
+          "text": "|",
+          "confidence": 92.904488,
+          "box": [
+            92,
+            16,
+            6,
+            23
+          ]
+        },
+        {
+          "text": "ask",
+          "confidence": 92.904488,
+          "box": [
+            112,
+            14,
+            48,
+            25
+          ]
+        },
+        {
+          "text": "you",
+          "confidence": 92.728485,
+          "box": [
+            173,
+            22,
+            54,
+            24
+          ]
+        },
+        {
+          "text": "to",
+          "confidence": 92.629311,
+          "box": [
+            239,
+            17,
+            31,
+            22
+          ]
+        },
+        {
+          "text": "take",
+          "confidence": 92.68055,
+          "box": [
+            281,
+            14,
+            67,
+            25
+          ]
+        },
+        {
+          "text": "a",
+          "confidence": 92.191788,
+          "box": [
+            360,
+            22,
+            16,
+            17
+          ]
+        },
+        {
+          "text": "close",
+          "confidence": 92.191788,
+          "box": [
+            389,
+            14,
+            75,
+            25
+          ]
+        },
+        {
+          "text": "look",
+          "confidence": 92.424911,
+          "box": [
+            477,
+            14,
+            63,
+            25
+          ]
+        },
+        {
+          "text": "at",
+          "confidence": 91.946632,
+          "box": [
+            553,
+            17,
+            29,
+            22
+          ]
+        },
+        {
+          "text": "my",
+          "confidence": 93.03476,
+          "box": [
+            594,
+            22,
+            47,
+            24
+          ]
+        },
+        {
+          "text": "contents",
+          "confidence": 92.03524,
+          "box": [
+            10,
+            56,
+            132,
+            23
+          ]
+        },
+        {
+          "text": "and",
+          "confidence": 92.818298,
+          "box": [
+            154,
+            53,
+            55,
+            26
+          ]
+        },
+        {
+          "text": "see",
+          "confidence": 88.908813,
+          "box": [
+            221,
+            61,
+            47,
+            18
+          ]
+        },
+        {
+          "text": "if",
+          "confidence": 88.908813,
+          "box": [
+            281,
+            52,
+            22,
+            27
+          ]
+        },
+        {
+          "text": "anything",
+          "confidence": 92.555756,
+          "box": [
+            313,
+            53,
+            134,
+            33
+          ]
+        },
+        {
+          "text": "is",
+          "confidence": 92.188393,
+          "box": [
+            461,
+            55,
+            20,
+            24
+          ]
+        },
+        {
+          "text": "amiss?",
+          "confidence": 92.354988,
+          "box": [
+            493,
+            53,
+            102,
+            26
+          ]
+        }
+      ],
+      "text": "May | ask you to take a close look at my contents and see if anything is amiss?"
+    },
+    "example-2-title-2x.tsv": {
+      "words": [
+        {
+          "text": ".Shépter",
+          "confidence": 41.85474,
+          "box": [
+            0,
+            0,
+            196,
+            88
+          ]
+        },
+        {
+          "text": "1:",
+          "confidence": 51.784943,
+          "box": [
+            223,
+            26,
+            35,
+            36
+          ]
+        },
+        {
+          "text": "Wildwoods",
+          "confidence": 90.247162,
+          "box": [
+            281,
+            26,
+            252,
+            39
+          ]
+        }
+      ],
+      "text": ".Shépter 1: Wildwoods"
+    },
+    "example-2-title.tsv": {
+      "words": [
+        {
+          "text": "_Qhéplcr",
+          "confidence": 45.679146,
+          "box": [
+            0,
+            0,
+            98,
+            44
+          ]
+        },
+        {
+          "text": "1:",
+          "confidence": 88.86409,
+          "box": [
+            111,
+            13,
+            18,
+            18
+          ]
+        },
+        {
+          "text": "Wildwoods",
+          "confidence": 91.663429,
+          "box": [
+            141,
+            13,
+            125,
+            20
+          ]
+        }
+      ],
+      "text": "_Qhéplcr 1: Wildwoods"
+    },
+    "full-frame.tsv": {
+      "words": [
+        {
+          "text": "“»",
+          "confidence": 27.408768,
+          "box": [
+            238,
+            11,
+            71,
+            49
+          ]
+        },
+        {
+          "text": "-1",
+          "confidence": 43.16383,
+          "box": [
+            1194,
+            0,
+            86,
+            68
+          ]
+        },
+        {
+          "text": "A\\",
+          "confidence": 52.097439,
+          "box": [
+            51,
+            0,
+            55,
+            69
+          ]
+        },
+        {
+          "text": "-",
+          "confidence": 52.097439,
+          "box": [
+            144,
+            0,
+            25,
+            87
+          ]
+        },
+        {
+          "text": "&",
+          "confidence": 54.591732,
+          "box": [
+            192,
+            0,
+            33,
+            97
+          ]
+        },
+        {
+          "text": "»y",
+          "confidence": 0.0,
+          "box": [
+            327,
+            41,
+            77,
+            45
+          ]
+        },
+        {
+          "text": "b",
+          "confidence": 8.057449,
+          "box": [
+            173,
+            116,
+            21,
+            10
+          ]
+        },
+        {
+          "text": ".",
+          "confidence": 33.296021,
+          "box": [
+            213,
+            103,
+            421,
+            35
+          ]
+        },
+        {
+          "text": ".",
+          "confidence": 11.911095,
+          "box": [
+            559,
+            99,
+            26,
+            43
+          ]
+        },
+        {
+          "text": "—",
+          "confidence": 11.911095,
+          "box": [
+            602,
+            99,
+            37,
+            43
+          ]
+        },
+        {
+          "text": "Chap\\er",
+          "confidence": 69.307663,
+          "box": [
+            226,
+            149,
+            90,
+            21
+          ]
+        },
+        {
+          "text": "i",
+          "confidence": 27.541618,
+          "box": [
+            329,
+            149,
+            18,
+            18
+          ]
+        },
+        {
+          "text": "Wlldwoods",
+          "confidence": 66.426086,
+          "box": [
+            358,
+            149,
+            127,
+            20
+          ]
+        },
+        {
+          "text": "200",
+          "confidence": 39.040596,
+          "box": [
+            974,
+            151,
+            23,
+            9
+          ]
+        },
+        {
+          "text": "|",
+          "confidence": 32.045525,
+          "box": [
+            1015,
+            143,
+            6,
+            21
+          ]
+        },
+        {
+          "text": ")",
+          "confidence": 0.0,
+          "box": [
+            286,
+            182,
+            11,
+            4
+          ]
+        },
+        {
+          "text": "Ve",
+          "confidence": 32.152771,
+          "box": [
+            299,
+            178,
+            122,
+            12
+          ]
+        },
+        {
+          "text": "L",
+          "confidence": 79.660553,
+          "box": [
+            957,
+            182,
+            41,
+            32
+          ]
+        },
+        {
+          "text": "7",
+          "confidence": 0.0,
+          "box": [
+            559,
+            231,
+            21,
+            11
+          ]
+        },
+        {
+          "text": "/",
+          "confidence": 82.559326,
+          "box": [
+            4,
+            154,
+            44,
+            99
+          ]
+        },
+        {
+          "text": "-1",
+          "confidence": 36.659149,
+          "box": [
+            349,
+            251,
+            22,
+            4
+          ]
+        },
+        {
+          "text": "5o",
+          "confidence": 48.718895,
+          "box": [
+            546,
+            256,
+            3,
+            6
+          ]
+        },
+        {
+          "text": "8",
+          "confidence": 33.460793,
+          "box": [
+            573,
+            253,
+            2,
+            6
+          ]
+        },
+        {
+          "text": "=2",
+          "confidence": 31.678932,
+          "box": [
+            773,
+            257,
+            32,
+            11
+          ]
+        },
+        {
+          "text": "1]",
+          "confidence": 12.991394,
+          "box": [
+            254,
+            257,
+            28,
+            20
+          ]
+        },
+        {
+          "text": "3",
+          "confidence": 77.459084,
+          "box": [
+            771,
+            269,
+            22,
+            22
+          ]
+        },
+        {
+          "text": "&",
+          "confidence": 17.868454,
+          "box": [
+            766,
+            304,
+            13,
+            15
+          ]
+        },
+        {
+          "text": "%",
+          "confidence": 76.161034,
+          "box": [
+            801,
+            346,
+            58,
+            12
+          ]
+        },
+        {
+          "text": "P",
+          "confidence": 53.230835,
+          "box": [
+            202,
+            331,
+            11,
+            59
+          ]
+        },
+        {
+          "text": "|",
+          "confidence": 63.559235,
+          "box": [
+            267,
+            346,
+            2,
+            7
+          ]
+        },
+        {
+          "text": "0",
+          "confidence": 49.430294,
+          "box": [
+            286,
+            372,
+            14,
+            16
+          ]
+        },
+        {
+          "text": "RO,",
+          "confidence": 0.0,
+          "box": [
+            439,
+            369,
+            45,
+            25
+          ]
+        },
+        {
+          "text": "-~",
+          "confidence": 51.041428,
+          "box": [
+            110,
+            409,
+            32,
+            11
+          ]
+        },
+        {
+          "text": "i",
+          "confidence": 43.031258,
+          "box": [
+            1011,
+            367,
+            4,
+            18
+          ]
+        },
+        {
+          "text": "B",
+          "confidence": 0.0,
+          "box": [
+            655,
+            408,
+            45,
+            14
+          ]
+        },
+        {
+          "text": "e",
+          "confidence": 0.0,
+          "box": [
+            739,
+            415,
+            14,
+            12
+          ]
+        },
+        {
+          "text": "-",
+          "confidence": 47.695774,
+          "box": [
+            923,
+            432,
+            16,
+            9
+          ]
+        },
+        {
+          "text": "Pl",
+          "confidence": 15.010544,
+          "box": [
+            272,
+            435,
+            28,
+            14
+          ]
+        },
+        {
+          "text": "P",
+          "confidence": 29.806335,
+          "box": [
+            376,
+            462,
+            6,
+            7
+          ]
+        },
+        {
+          "text": "i,",
+          "confidence": 62.156448,
+          "box": [
+            1135,
+            449,
+            8,
+            7
+          ]
+        },
+        {
+          "text": "N7",
+          "confidence": 49.245834,
+          "box": [
+            75,
+            449,
+            141,
+            41
+          ]
+        },
+        {
+          "text": "w17",
+          "confidence": 41.528053,
+          "box": [
+            1240,
+            495,
+            40,
+            20
+          ]
+        },
+        {
+          "text": "o",
+          "confidence": 42.969872,
+          "box": [
+            121,
+            524,
+            13,
+            6
+          ]
+        },
+        {
+          "text": "X",
+          "confidence": 31.69825,
+          "box": [
+            145,
+            517,
+            12,
+            14
+          ]
+        },
+        {
+          "text": "m",
+          "confidence": 90.54718,
+          "box": [
+            809,
+            516,
+            20,
+            7
+          ]
+        },
+        {
+          "text": "4",
+          "confidence": 28.646744,
+          "box": [
+            97,
+            537,
+            34,
+            26
+          ]
+        },
+        {
+          "text": "=",
+          "confidence": 59.203156,
+          "box": [
+            328,
+            547,
+            34,
+            17
+          ]
+        },
+        {
+          "text": "S",
+          "confidence": 27.126656,
+          "box": [
+            38,
+            563,
+            37,
+            21
+          ]
+        },
+        {
+          "text": "©",
+          "confidence": 53.269009,
+          "box": [
+            100,
+            571,
+            15,
+            9
+          ]
+        },
+        {
+          "text": "il",
+          "confidence": 68.907738,
+          "box": [
+            1023,
+            518,
+            29,
+            66
+          ]
+        },
+        {
+          "text": ")",
+          "confidence": 81.793129,
+          "box": [
+            1222,
+            554,
+            17,
+            65
+          ]
+        },
+        {
+          "text": "X",
+          "confidence": 49.125099,
+          "box": [
+            1259,
+            558,
+            18,
+            43
+          ]
+        },
+        {
+          "text": "May",
+          "confidence": 88.42009,
+          "box": [
+            280,
+            612,
+            67,
+            30
+          ]
+        },
+        {
+          "text": "|",
+          "confidence": 92.904488,
+          "box": [
+            360,
+            612,
+            6,
+            23
+          ]
+        },
+        {
+          "text": "ask",
+          "confidence": 92.904488,
+          "box": [
+            380,
+            610,
+            48,
+            25
+          ]
+        },
+        {
+          "text": "you",
+          "confidence": 92.728485,
+          "box": [
+            441,
+            618,
+            54,
+            24
+          ]
+        },
+        {
+          "text": "to",
+          "confidence": 92.629311,
+          "box": [
+            507,
+            613,
+            31,
+            22
+          ]
+        },
+        {
+          "text": "take",
+          "confidence": 92.68055,
+          "box": [
+            549,
+            610,
+            67,
+            25
+          ]
+        },
+        {
+          "text": "a",
+          "confidence": 92.191788,
+          "box": [
+            628,
+            618,
+            16,
+            17
+          ]
+        },
+        {
+          "text": "close",
+          "confidence": 92.191788,
+          "box": [
+            657,
+            610,
+            75,
+            25
+          ]
+        },
+        {
+          "text": "look",
+          "confidence": 92.424911,
+          "box": [
+            745,
+            610,
+            63,
+            25
+          ]
+        },
+        {
+          "text": "at",
+          "confidence": 91.946632,
+          "box": [
+            821,
+            613,
+            29,
+            22
+          ]
+        },
+        {
+          "text": "my",
+          "confidence": 93.03476,
+          "box": [
+            862,
+            618,
+            47,
+            24
+          ]
+        },
+        {
+          "text": "%",
+          "confidence": 63.52129,
+          "box": [
+            15,
+            642,
+            6,
+            7
+          ]
+        },
+        {
+          "text": "\n2\t1\t41\t0\t0\t0\t1214\t653\t22\t11\t-1\t\n3\t1\t41\t1\t0\t0\t1214\t653\t22\t11\t-1\t\n4\t1\t41\t1\t1\t0\t1214\t653\t22\t11\t-1\t\n5\t1\t41\t1\t1\t1\t1214\t653\t22\t11\t0.000000\t/~",
+          "confidence": 53.950916,
+          "box": [
+            48,
+            631,
+            27,
+            39
+          ]
+        },
+        {
+          "text": "N",
+          "confidence": 20.861542,
+          "box": [
+            1223,
+            628,
+            28,
+            25
+          ]
+        },
+        {
+          "text": "contents",
+          "confidence": 92.03524,
+          "box": [
+            278,
+            652,
+            132,
+            23
+          ]
+        },
+        {
+          "text": "and",
+          "confidence": 92.818298,
+          "box": [
+            422,
+            649,
+            55,
+            26
+          ]
+        },
+        {
+          "text": "see",
+          "confidence": 88.908813,
+          "box": [
+            489,
+            657,
+            47,
+            18
+          ]
+        },
+        {
+          "text": "if",
+          "confidence": 88.908813,
+          "box": [
+            549,
+            648,
+            22,
+            27
+          ]
+        },
+        {
+          "text": "anything",
+          "confidence": 92.555756,
+          "box": [
+            581,
+            649,
+            134,
+            33
+          ]
+        },
+        {
+          "text": "is",
+          "confidence": 92.188393,
+          "box": [
+            729,
+            651,
+            20,
+            24
+          ]
+        },
+        {
+          "text": "amiss?",
+          "confidence": 92.354988,
+          "box": [
+            761,
+            649,
+            102,
+            26
+          ]
+        },
+        {
+          "text": "[\\",
+          "confidence": 16.940674,
+          "box": [
+            52,
+            696,
+            25,
+            21
+          ]
+        },
+        {
+          "text": "e",
+          "confidence": 27.431091,
+          "box": [
+            106,
+            696,
+            97,
+            23
+          ]
+        },
+        {
+          "text": "-",
+          "confidence": 63.51701,
+          "box": [
+            634,
+            703,
+            64,
+            17
+          ]
+        },
+        {
+          "text": "——",
+          "confidence": 0.0,
+          "box": [
+            775,
+            701,
+            56,
+            3
+          ]
+        },
+        {
+          "text": "—~—",
+          "confidence": 51.453682,
+          "box": [
+            968,
+            684,
+            56,
+            36
+          ]
+        },
+        {
+          "text": "7",
+          "confidence": 26.054466,
+          "box": [
+            1081,
+            701,
+            42,
+            18
+          ]
+        }
+      ],
+      "text": "“» -1 A\\ - & »y b . . — Chap\\er i Wlldwoods 200 | ) Ve L 7 / -1 5o 8 =2 1] 3 & % P | 0 RO, -~ i B e - Pl P i, N7 w17 o X m 4 = S © il ) X May | ask you to take a close look at my % \n2\t1\t41\t0\t0\t0\t1214\t653\t22\t11\t-1\t\n3\t1\t41\t1\t0\t0\t1214\t653\t22\t11\t-1\t\n4\t1\t41\t1\t1\t0\t1214\t653\t22\t11\t-1\t\n5\t1\t41\t1\t1\t1\t1214\t653\t22\t11\t0.000000\t/~ N contents and see if anything is amiss? [\\ e - —— —~— 7"
+    },
+    "title-threshold-100.tsv": {
+      "words": [
+        {
+          "text": ".Chaptcy",
+          "confidence": 48.577808,
+          "box": [
+            0,
+            13,
+            98,
+            31
+          ]
+        },
+        {
+          "text": "1:",
+          "confidence": 27.224548,
+          "box": [
+            112,
+            13,
+            17,
+            18
+          ]
+        },
+        {
+          "text": "Wildwoods",
+          "confidence": 90.221672,
+          "box": [
+            141,
+            13,
+            125,
+            20
+          ]
+        }
+      ],
+      "text": ".Chaptcy 1: Wildwoods"
+    }
+  }
+}

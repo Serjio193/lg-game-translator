@@ -1,5 +1,9 @@
 # G5 text-detector pilot, 2026-10-04
 
+Further tests with multiline dialogue, smaller headings and another game are
+recorded in [the follow-up](text-detector-followup.md). They show why 320 alone
+and confidence-only filtering are insufficient for all scenes.
+
 ## Scope and actual inputs
 
 Two detectors were cross-compiled and run on this G5 while its existing PicCap

@@ -107,3 +107,8 @@ input is `docs/evidence/text-detectors/game/input.png`, converted losslessly to
 PGM. The additional ROI run used `--backends ppocr --edges 320 --image
 game-bottom.pgm`; that image is rows 540–719 of the same input. Original game
 capture remains 1280×720; these smaller sizes apply only to detector processing.
+
+`export_example.py CASE_DIR OUTPUT_DIR` creates PC-side annotated evidence and
+parses OCR TSVs using the existing Pillow package. The follow-up game cases used
+`run_tv.py --edges 320 640 --iterations 5 --image FRAME.pgm`; see
+`docs/text-detector-followup.md` for the crops, recognition and limits.
