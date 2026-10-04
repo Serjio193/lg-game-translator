@@ -143,9 +143,14 @@ packages were installed. Board reports 8 CPU cores and 16 GiB RAM.
 | Orange Pi 5 Max test | Quality | Warm-up / repeats | Median latency | Peak RSS | CPU time / wall time | Result |
 |---|---:|---|---:|---:|---:|---|
 | Argos EN→RU 1.9, CTranslate2 4.8.2, 1 intra-thread | 4/10 | One warm-up + five measured runs | 3,208.92 ms | 306,784 KiB | 100% of one core | Translation completed; literal “держи линию”, masculine “заметил/понял”, and bank ambiguity remains wrong. |
-| Argos EN→RU 1.9, CTranslate2 4.8.2, 4 intra-threads | 4/10 | Two independent batches, each one warm-up + five runs | 1,471.99 ms first; 1,441.58 ms repeat | 305,924–305,980 KiB | 629% of one core (~6.3 core equivalents) | Fastest measured setting so far; identical output in all runs. |
+| Argos EN→RU 1.9, CTranslate2 4.8.2, 4 intra-threads | 4/10 | Two independent batches, each one warm-up + five runs | 1,471.99 ms first; 1,441.58 ms repeat; 1,459.79 ms latest | 305,924–311,724 KiB | 629% of one core (~6.3 core equivalents) | Fast but weak; identical output in all runs. Latest run loaded in 471 ms. |
 | Argos EN→RU 1.9, CTranslate2 4.8.2, 8 intra-threads | 4/10 | One warm-up + five measured runs | 8,343.98 ms | 305,272 KiB | 740% of one core (~7.4 core equivalents) | Slower than 1 or 4 threads despite high aggregate CPU use. |
 | Meta NLLB-200 distilled 600M INT8, CTranslate2 4.8.2, 4 intra-threads | 5/10 | One warm-up + five measured runs; CPU | 5,350.94 ms median | 1,037,880 KiB | 515% of one core (~5.2 core equivalents) | Correct feminine “заметила” and shore sense, but pluralized “duck”, translated “Hold the line” literally, and rendered bank vault as “хранилище берега”. |
+| Bergamot base-memory EN→RU, ARM64 Orange Pi build | 6/10 | Model loaded once, one warm-up + five measured requests | 680.07 ms warmed median | 429,720 KiB | 100% of one core | Best speed among valid Orange Pi translations so far; retains the known “Дергите линию” idiom error and masculine agreement. |
+| Meta M2M100 418M INT8, CTranslate2 4.8.2, 4 intra-threads | 5/10 | One warm-up + five measured runs; CPU | 4,482.53 ms median; load 2,145 ms | 803,144 KiB | 561% of one core (~5.6 core equivalents) | Translation completed consistently, but “duck” became “дук”, “Hold the line” became “Дайте линию”, and bank/vault distinction was lost. Slower and larger than NLLB-600M for similar quality. |
+| Meta NLLB-200 distilled 1.3B INT8, CTranslate2 4.8.2, 4 intra-threads | 6/10 | One warm-up + five measured runs; CPU | 10,520.22 ms median; load 1,330 ms | 1,884,752 KiB | 531% of one core (~5.3 core equivalents) | Better grammatical agreement and shore sense, but “Hold the line” remained literal and “duck” pluralized. About twice the NLLB-600M latency and 1.8 GiB RSS. |
+| OPUS-MT EN→RU CT2 INT8 (`ordois` conversion) | — | One warm-up + five measured runs; CPU, 4 intra-threads | 4,983 ms median | 211,512 KiB | Not retained in the first raw report | Output repeated clauses and malformed wording, including on the conversion card's short validation sentence. No model-family quality score assigned. |
+| OPUS-MT EN→RU CT2 INT8 (`manancode` Android conversion) | — | One warm-up + five measured runs; CPU, 4 intra-threads | 4,870.70 ms median; load 297 ms | 211,584 KiB | 571% of one core (~5.7 core equivalents) | Invalid output: repeated clauses and words, inconsistent gender, and no useful full-sentence translation. No model-family quality score assigned; treat this conversion as unusable. |
 
 Translation output in all runs:
 
@@ -170,8 +175,48 @@ was about 1,013 MiB, and `MemAvailable` after the run was 8.60 GiB. NLLB's
 CC-BY-NC-4.0 license is non-commercial; keep that restriction in mind for any
 future product use.
 
-Reproduce the direct model benchmarks with
+### Orange Pi follow-up: Bergamot, M2M100, larger NLLB and OPUS-MT
+
+The Bergamot base-memory candidate was rebuilt natively for ARM64 on the Orange
+Pi from the same source revision already used for the G5 experiment. The added
+`scripts/bench-bergamot.cpp` harness loads the model once and measures a warm-up
+plus five serial translations. It measured 136.6 ms model load, 680.07 ms warm
+median, 429,720 KiB process peak RSS, and 100% of one core. Its translation was
+the same previously scored 6/10; this is a new Orange Pi performance result,
+not a new quality sample.
+
+Meta's M2M100 418M INT8 CTranslate2 conversion was tested with the matching
+official tokenizer, English source language and Russian target prefix. It
+returned a stable but weak translation on all six invocations. The exported
+model is about 467 MiB and distributed as MIT; this specific third-party
+conversion is [gn64/M2M100_418M_CTranslate2](https://huggingface.co/gn64/M2M100_418M_CTranslate2)
+of [facebook/m2m100_418M](https://huggingface.co/facebook/m2m100_418M). CTranslate2
+documents M2M100 support and the required language-token prefix in its
+[Transformers guide](https://opennmt.net/CTranslate2/guides/transformers.html).
+
+NLLB-200 distilled 1.3B INT8 was tested from the
+[OpenNMT conversion](https://huggingface.co/OpenNMT/nllb-200-distilled-1.3B-ct2-int8).
+Its CPU backend warned that saved `int8_float16` weights are unsupported for
+efficient CPU execution and converted them to `int8_float32` in memory. The
+translation was somewhat more grammatical than the 600M output, but took
+10.52 seconds warmed and 1.80 GiB peak RSS. This model is also CC-BY-NC-4.0, so
+it is restricted to non-commercial use.
+
+Two separately packaged OPUS-MT INT8 conversions were checked using the same
+source sentence and CTranslate2 runtime. The
+[ordois conversion](https://huggingface.co/ordois/opus-mt-en-ru-ctranslate2-int8)
+and [manancode Android conversion](https://huggingface.co/manancode/opus-mt-en-ru-ctranslate2-android)
+both emitted long, repetitive, malformed Russian instead of a valid
+translation; the latter used about 207 MiB RSS and a 4.87 second median. These
+are failed conversion/artifact tests, not evidence that all OPUS-MT checkpoints
+are poor. No quality score is assigned. An alternate OPUS model exported and
+validated directly from the original Helsinki-NLP checkpoint remains a useful
+next candidate.
+
+Reproduce the direct CTranslate2 model benchmarks with
 [`bench-ctranslate2.py`](../scripts/bench-ctranslate2.py), choosing `--family`
-`argos` or `nllb` and setting `--model`, `--sentencepiece`, and `--threads`.
+`argos`, `nllb`, `opusmt` or `m2m100` and setting the matching tokenizer/model
+paths and `--threads`. M2M100 additionally needs Transformers tokenizer files
+and `--tokenizer`, plus `--source-language en --target-language ru`.
 Fetch the NLLB INT8 conversion by running `sh` on
 [`fetch-nllb-ct2.sh`](../scripts/fetch-nllb-ct2.sh).
