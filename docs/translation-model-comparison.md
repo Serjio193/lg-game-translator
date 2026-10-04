@@ -152,6 +152,7 @@ packages were installed. Board reports 8 CPU cores and 16 GiB RAM.
 | Meta NLLB-200 distilled 600M INT8, CTranslate2 4.8.2, 4 intra-threads, greedy | 5/10 | One warm-up + five measured runs; beam 1 | 4,544.12 ms median; load 884 ms | 1,048,268 KiB | 464% of one core (~4.6 core equivalents) | About 15% faster than beam 4 with no clear quality change; idiom remains wrong, but shore sense and Mira's feminine agreement are correct. |
 | Meta NLLB-200 distilled 600M INT8, CTranslate2 4.8.2, 1 intra-thread, greedy | 5/10 | One warm-up + five measured runs; beam 1 | 10,953.25 ms median; load 876 ms | 1,049,816 KiB | 100% of one core | Same translation as the 4-thread greedy run, but 2.4× slower. |
 | Meta NLLB-200 distilled 1.3B INT8, CTranslate2 4.8.2, 4 intra-threads | 6/10 | One warm-up + five measured runs; CPU | 10,520.22 ms median; load 1,330 ms | 1,884,752 KiB | 531% of one core (~5.3 core equivalents) | Better grammatical agreement and shore sense, but “Hold the line” remained literal and “duck” pluralized. About twice the NLLB-600M latency and 1.8 GiB RSS. |
+| Google MADLAD-400 3B INT8, CTranslate2 4.8.2, 4 intra-threads, greedy | 7/10 | One warm-up + five measured runs; beam 1, decode cap 128 | 17,404.90 ms median; load 4,813 ms | 3,533,008 KiB | 466% of one core (~4.7 core equivalents) | Best meaning/grammar on this phrase: correctly chose river shore and bank vault, and feminine agreement. “Hold the line” became “Сохраняйте веревку.” Too slow for frequent live use. |
 | OPUS-MT EN→RU CT2 INT8 (`ordois` conversion) | — | One warm-up + five measured runs; CPU, 4 intra-threads | 4,983 ms median | 211,512 KiB | Not retained in the first raw report | Output repeated clauses and malformed wording, including on the conversion card's short validation sentence. No model-family quality score assigned. |
 | OPUS-MT EN→RU CT2 INT8 (`manancode` Android conversion) | — | One warm-up + five measured runs; CPU, 4 intra-threads | 4,870.70 ms median; load 297 ms | 211,584 KiB | 571% of one core (~5.7 core equivalents) | Invalid output: repeated clauses and words, inconsistent gender, and no useful full-sentence translation. No model-family quality score assigned; treat this conversion as unusable. |
 | OPUS-MT EN→RU CT2 INT8 (`manancode` Android conversion), greedy | — | One warm-up + five measured runs; beam 1 | 2,722.56 ms median; load 317 ms | 174,040 KiB | 535% of one core (~5.4 core equivalents) | Worse: every output reached the 256-token maximum with extreme repetition. No quality score. |
@@ -179,7 +180,7 @@ was about 1,013 MiB, and `MemAvailable` after the run was 8.60 GiB. NLLB's
 CC-BY-NC-4.0 license is non-commercial; keep that restriction in mind for any
 future product use.
 
-### Orange Pi follow-up: Bergamot, M2M100, larger NLLB and OPUS-MT
+### Orange Pi follow-up: Bergamot, M2M100, NLLB, MADLAD and OPUS-MT
 
 The Bergamot base-memory candidate was rebuilt natively for ARM64 on the Orange
 Pi from the same source revision already used for the G5 experiment. The added
@@ -206,6 +207,22 @@ translation was somewhat more grammatical than the 600M output, but took
 10.52 seconds warmed and 1.80 GiB peak RSS. This model is also CC-BY-NC-4.0, so
 it is restricted to non-commercial use.
 
+Google MADLAD-400-3B INT8 was tested using the
+[CTranslate2 conversion by cstr](https://huggingface.co/cstr/madlad400-3b-ct2-int8),
+which lists Apache-2.0 and a 2.95 GB model binary. The test used its matching
+T5 tokenizer with the documented `<2ru>` target-language prefix. With four
+threads and greedy decoding, model/tokenizer load took 4.81 seconds; warmed
+median was 17.40 seconds, process peak RSS 3,533,008 KiB (3.37 GiB), and CPU
+use 466% of one core. At the time of measurement the board still had about
+6.1 GiB available. Output:
+
+> Когда капитан сказал: «Сохраняйте веревку, следите за берегом и не трогайте ключ», Мира заметила у реки утку, а не банковский сейф, и поняла, что он имел в виду берег.
+
+This was the best semantic result so far (7/10), but the idiom error and
+17-second latency make it a quality ceiling rather than the practical live
+translator. The model's Apache-2.0 license is less restrictive than NLLB's
+non-commercial terms.
+
 Two separately packaged OPUS-MT INT8 conversions were checked using the same
 source sentence and CTranslate2 runtime. The
 [ordois conversion](https://huggingface.co/ordois/opus-mt-en-ru-ctranslate2-int8)
@@ -221,15 +238,17 @@ Greedy decoding reduced latency for NLLB-600M by about 15% and for M2M100 by
 about 28%, but did not improve their human quality scores. Reducing NLLB to one
 thread preserved the exact greedy output but increased median latency to nearly
 11 seconds. Greedy decoding did not rescue the Android OPUS-MT artifact: it
-filled the 256-token output limit with repeated fragments. Keep NLLB-600M at
-four CPU threads and beam 1 as the current CTranslate2 compromise if its
-non-commercial license is acceptable; Bergamot base-memory remains much faster
-and smaller overall.
+filled the 256-token output limit with repeated fragments. MADLAD scores best
+for translation meaning but is too slow for frequent live updates. For
+responsive use, Bergamot base-memory is the practical leader at 680 ms and
+429,720 KiB RSS, with 6/10 quality. NLLB-600M at four threads and beam 1 is a
+second choice (4.54 s, 5/10) only when its non-commercial license is acceptable.
 
 Reproduce the direct CTranslate2 model benchmarks with
 [`bench-ctranslate2.py`](../scripts/bench-ctranslate2.py), choosing `--family`
-`argos`, `nllb`, `opusmt` or `m2m100` and setting the matching tokenizer/model
+`argos`, `nllb`, `opusmt`, `m2m100` or `madlad` and setting the matching tokenizer/model
 paths and `--threads`. M2M100 additionally needs Transformers tokenizer files
-and `--tokenizer`, plus `--source-language en --target-language ru`.
+and `--tokenizer`, plus `--source-language en --target-language ru`. MADLAD
+uses its Transformers tokenizer directory and prepends `<2ru>` to the source.
 Fetch the NLLB INT8 conversion by running `sh` on
 [`fetch-nllb-ct2.sh`](../scripts/fetch-nllb-ct2.sh).

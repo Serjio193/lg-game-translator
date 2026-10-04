@@ -37,7 +37,9 @@ def mem_available_kib():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--family", choices=("argos", "nllb", "opusmt", "m2m100"), required=True
+        "--family",
+        choices=("argos", "nllb", "opusmt", "m2m100", "madlad"),
+        required=True,
     )
     parser.add_argument("--model", default=os.environ.get("TRANSLATION_MODEL", "model"))
     parser.add_argument("--sentencepiece", default=os.environ.get(
@@ -65,6 +67,13 @@ def main():
         hf_tokenizer = M2M100Tokenizer.from_pretrained(args.tokenizer)
         hf_tokenizer.src_lang = args.source_language
         source_tokenizer = target_tokenizer = None
+    elif args.family == "madlad":
+        if not args.tokenizer:
+            parser.error("--tokenizer is required for madlad")
+        from transformers import AutoTokenizer
+
+        hf_tokenizer = AutoTokenizer.from_pretrained(args.tokenizer)
+        source_tokenizer = target_tokenizer = None
     else:
         source_tokenizer = spm.SentencePieceProcessor(model_file=args.sentencepiece)
         target_tokenizer = spm.SentencePieceProcessor(
@@ -74,10 +83,14 @@ def main():
         args.model, device="cpu", inter_threads=1, intra_threads=args.threads
     )
     load_seconds = time.perf_counter() - load_start
-    if hf_tokenizer:
+    if args.family == "m2m100":
         source_ids = hf_tokenizer.encode(args.text)
         pieces = hf_tokenizer.convert_ids_to_tokens(source_ids)
         target_prefix = [hf_tokenizer.lang_code_to_token[args.target_language]]
+    elif args.family == "madlad":
+        source_ids = hf_tokenizer.encode(f"<2{args.target_language}> {args.text}")
+        pieces = hf_tokenizer.convert_ids_to_tokens(source_ids)
+        target_prefix = None
     else:
         pieces = source_tokenizer.encode(args.text, out_type=str)
         target_prefix = None
@@ -100,6 +113,15 @@ def main():
             )[0].hypotheses[0]
             if hypotheses and hypotheses[0] == target_prefix[0]:
                 hypotheses = hypotheses[1:]
+            return hf_tokenizer.decode(
+                hf_tokenizer.convert_tokens_to_ids(hypotheses),
+                skip_special_tokens=True,
+            ), hypotheses
+        elif args.family == "madlad":
+            hypotheses = translator.translate_batch(
+                [pieces], beam_size=args.beam_size,
+                max_decoding_length=args.max_decoding_length,
+            )[0].hypotheses[0]
             return hf_tokenizer.decode(
                 hf_tokenizer.convert_tokens_to_ids(hypotheses),
                 skip_special_tokens=True,
