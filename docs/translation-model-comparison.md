@@ -148,9 +148,13 @@ packages were installed. Board reports 8 CPU cores and 16 GiB RAM.
 | Meta NLLB-200 distilled 600M INT8, CTranslate2 4.8.2, 4 intra-threads | 5/10 | One warm-up + five measured runs; CPU | 5,350.94 ms median | 1,037,880 KiB | 515% of one core (~5.2 core equivalents) | Correct feminine “заметила” and shore sense, but pluralized “duck”, translated “Hold the line” literally, and rendered bank vault as “хранилище берега”. |
 | Bergamot base-memory EN→RU, ARM64 Orange Pi build | 6/10 | Model loaded once, one warm-up + five measured requests | 680.07 ms warmed median | 429,720 KiB | 100% of one core | Best speed among valid Orange Pi translations so far; retains the known “Дергите линию” idiom error and masculine agreement. |
 | Meta M2M100 418M INT8, CTranslate2 4.8.2, 4 intra-threads | 5/10 | One warm-up + five measured runs; CPU | 4,482.53 ms median; load 2,145 ms | 803,144 KiB | 561% of one core (~5.6 core equivalents) | Translation completed consistently, but “duck” became “дук”, “Hold the line” became “Дайте линию”, and bank/vault distinction was lost. Slower and larger than NLLB-600M for similar quality. |
+| Meta M2M100 418M INT8, CTranslate2 4.8.2, 4 intra-threads, greedy | 4/10 | One warm-up + five measured runs; beam 1 | 3,242.60 ms median; load 2,149 ms | 766,476 KiB | 491% of one core (~4.9 core equivalents) | About 28% faster than beam 4, but still transliterated “duck” as “дука”, mangled “Hold the line”, and lost the vault distinction. |
+| Meta NLLB-200 distilled 600M INT8, CTranslate2 4.8.2, 4 intra-threads, greedy | 5/10 | One warm-up + five measured runs; beam 1 | 4,544.12 ms median; load 884 ms | 1,048,268 KiB | 464% of one core (~4.6 core equivalents) | About 15% faster than beam 4 with no clear quality change; idiom remains wrong, but shore sense and Mira's feminine agreement are correct. |
+| Meta NLLB-200 distilled 600M INT8, CTranslate2 4.8.2, 1 intra-thread, greedy | 5/10 | One warm-up + five measured runs; beam 1 | 10,953.25 ms median; load 876 ms | 1,049,816 KiB | 100% of one core | Same translation as the 4-thread greedy run, but 2.4× slower. |
 | Meta NLLB-200 distilled 1.3B INT8, CTranslate2 4.8.2, 4 intra-threads | 6/10 | One warm-up + five measured runs; CPU | 10,520.22 ms median; load 1,330 ms | 1,884,752 KiB | 531% of one core (~5.3 core equivalents) | Better grammatical agreement and shore sense, but “Hold the line” remained literal and “duck” pluralized. About twice the NLLB-600M latency and 1.8 GiB RSS. |
 | OPUS-MT EN→RU CT2 INT8 (`ordois` conversion) | — | One warm-up + five measured runs; CPU, 4 intra-threads | 4,983 ms median | 211,512 KiB | Not retained in the first raw report | Output repeated clauses and malformed wording, including on the conversion card's short validation sentence. No model-family quality score assigned. |
 | OPUS-MT EN→RU CT2 INT8 (`manancode` Android conversion) | — | One warm-up + five measured runs; CPU, 4 intra-threads | 4,870.70 ms median; load 297 ms | 211,584 KiB | 571% of one core (~5.7 core equivalents) | Invalid output: repeated clauses and words, inconsistent gender, and no useful full-sentence translation. No model-family quality score assigned; treat this conversion as unusable. |
+| OPUS-MT EN→RU CT2 INT8 (`manancode` Android conversion), greedy | — | One warm-up + five measured runs; beam 1 | 2,722.56 ms median; load 317 ms | 174,040 KiB | 535% of one core (~5.4 core equivalents) | Worse: every output reached the 256-token maximum with extreme repetition. No quality score. |
 
 Translation output in all runs:
 
@@ -212,6 +216,15 @@ are failed conversion/artifact tests, not evidence that all OPUS-MT checkpoints
 are poor. No quality score is assigned. An alternate OPUS model exported and
 validated directly from the original Helsinki-NLP checkpoint remains a useful
 next candidate.
+
+Greedy decoding reduced latency for NLLB-600M by about 15% and for M2M100 by
+about 28%, but did not improve their human quality scores. Reducing NLLB to one
+thread preserved the exact greedy output but increased median latency to nearly
+11 seconds. Greedy decoding did not rescue the Android OPUS-MT artifact: it
+filled the 256-token output limit with repeated fragments. Keep NLLB-600M at
+four CPU threads and beam 1 as the current CTranslate2 compromise if its
+non-commercial license is acceptable; Bergamot base-memory remains much faster
+and smaller overall.
 
 Reproduce the direct CTranslate2 model benchmarks with
 [`bench-ctranslate2.py`](../scripts/bench-ctranslate2.py), choosing `--family`
