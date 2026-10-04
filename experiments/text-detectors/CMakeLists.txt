@@ -10,3 +10,6 @@ add_executable(lg-text-detector-bench benchmark.cpp image.cpp contrast.cpp neura
 target_include_directories(lg-text-detector-bench PRIVATE "${NCNN_SOURCE}/src" "${NCNN_BUILD}/src")
 target_link_libraries(lg-text-detector-bench PRIVATE "${NCNN_BUILD}/src/libncnn.a" Threads::Threads dl)
 target_compile_options(lg-text-detector-bench PRIVATE -Wall -Wextra -Werror)
+
+add_executable(lg-frame-diff-bench frame_diff.cpp image.cpp)
+target_compile_options(lg-frame-diff-bench PRIVATE -Wall -Wextra -Werror)

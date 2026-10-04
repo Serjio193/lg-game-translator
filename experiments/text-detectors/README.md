@@ -117,3 +117,14 @@ The expanded ARM32 comparison adds PP-OCRv3/v4/v6, EAST and CRAFT diagnostic
 backends to the runner. Results and the DBNet18 conversion limitation are in
 `docs/text-detector-expanded-comparison.md`. This does not enable a detector in
 PicCap.
+
+`lg-frame-diff-bench BEFORE.pgm AFTER.pgm X Y WIDTH HEIGHT ITERATIONS THRESHOLD`
+measures frame-to-frame pixel change in a full frame or a tracked ROI on ARM.
+It reports the changed-pixel percentage and per-comparison CPU/wall time. The
+G5 two-stage experiment and results are in `docs/text-detector-two-stage.md`.
+The source is included in the ARM experiment build; for example, a text ROI in
+a 1280×720 frame can be measured with:
+
+```sh
+lg-frame-diff-bench before.pgm after.pgm 280 95 590 100 50 8
+```
