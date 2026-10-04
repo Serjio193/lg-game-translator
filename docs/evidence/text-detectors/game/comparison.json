@@ -1,0 +1,516 @@
+{
+  "baseline_fps": 58.860088072421,
+  "initially_active": true,
+  "image": "game.pgm",
+  "results": [
+    {
+      "backend": "contrast",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 320,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 15.648,
+      "min_wall_ms": 10.028,
+      "max_wall_ms": 23.1,
+      "mean_cpu_ms": 10.596,
+      "run_ms": 8008.606,
+      "one_core_cpu_percent": 1.074,
+      "max_rss_kb": 4864,
+      "boxes": [
+        {
+          "x": 0,
+          "y": 32,
+          "width": 356,
+          "height": 80,
+          "score": 0.5
+        },
+        {
+          "x": 300,
+          "y": 596,
+          "width": 464,
+          "height": 104,
+          "score": 0.6
+        },
+        {
+          "x": 436,
+          "y": 500,
+          "width": 756,
+          "height": 84,
+          "score": 0.9
+        },
+        {
+          "x": 592,
+          "y": 656,
+          "width": 100,
+          "height": 40,
+          "score": 0.3
+        },
+        {
+          "x": 776,
+          "y": 192,
+          "width": 152,
+          "height": 44,
+          "score": 0.3
+        },
+        {
+          "x": 928,
+          "y": 656,
+          "width": 88,
+          "height": 44,
+          "score": 0.3
+        },
+        {
+          "x": 932,
+          "y": 588,
+          "width": 208,
+          "height": 56,
+          "score": 0.3
+        },
+        {
+          "x": 16,
+          "y": 12,
+          "width": 176,
+          "height": 56,
+          "score": 0.3
+        },
+        {
+          "x": 276,
+          "y": 628,
+          "width": 184,
+          "height": 28,
+          "score": 0.6
+        },
+        {
+          "x": 552,
+          "y": 628,
+          "width": 312,
+          "height": 32,
+          "score": 1.0
+        }
+      ],
+      "four_core_cpu_percent": 0.2685,
+      "piccap_fps_samples": [
+        58.148888290171,
+        58.56286723798,
+        59.36931971665,
+        59.592151316391,
+        58.396149747193,
+        59.090130175557,
+        59.466997303172
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "contrast",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 640,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 61.759,
+      "min_wall_ms": 41.471,
+      "max_wall_ms": 101.348,
+      "mean_cpu_ms": 38.832,
+      "run_ms": 8007.373,
+      "one_core_cpu_percent": 3.901,
+      "max_rss_kb": 6472,
+      "boxes": [
+        {
+          "x": 30,
+          "y": 6,
+          "width": 290,
+          "height": 50,
+          "score": 0.4
+        },
+        {
+          "x": 50,
+          "y": 524,
+          "width": 58,
+          "height": 16,
+          "score": 0.3
+        },
+        {
+          "x": 132,
+          "y": 704,
+          "width": 74,
+          "height": 16,
+          "score": 0.3
+        },
+        {
+          "x": 252,
+          "y": 492,
+          "width": 100,
+          "height": 20,
+          "score": 0.4
+        },
+        {
+          "x": 438,
+          "y": 498,
+          "width": 750,
+          "height": 86,
+          "score": 0.7
+        },
+        {
+          "x": 552,
+          "y": 678,
+          "width": 160,
+          "height": 20,
+          "score": 0.5
+        },
+        {
+          "x": 634,
+          "y": 704,
+          "width": 82,
+          "height": 16,
+          "score": 0.4
+        },
+        {
+          "x": 936,
+          "y": 704,
+          "width": 108,
+          "height": 16,
+          "score": 0.5
+        },
+        {
+          "x": 982,
+          "y": 482,
+          "width": 116,
+          "height": 26,
+          "score": 0.3
+        },
+        {
+          "x": 14,
+          "y": 10,
+          "width": 180,
+          "height": 58,
+          "score": 0.3
+        },
+        {
+          "x": 158,
+          "y": 376,
+          "width": 78,
+          "height": 20,
+          "score": 0.3
+        },
+        {
+          "x": 276,
+          "y": 630,
+          "width": 588,
+          "height": 32,
+          "score": 1.0
+        },
+        {
+          "x": 950,
+          "y": 556,
+          "width": 108,
+          "height": 34,
+          "score": 0.3
+        },
+        {
+          "x": 1020,
+          "y": 448,
+          "width": 104,
+          "height": 26,
+          "score": 0.3
+        }
+      ],
+      "four_core_cpu_percent": 0.97525,
+      "piccap_fps_samples": [
+        59.494475442168,
+        57.580468705015,
+        58.284398723572,
+        59.439897842629,
+        59.566889148998,
+        59.457627521747,
+        58.195248939877
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "contrast",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 960,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 120.374,
+      "min_wall_ms": 99.77,
+      "max_wall_ms": 136.091,
+      "mean_cpu_ms": 96.233,
+      "run_ms": 8009.475,
+      "one_core_cpu_percent": 9.648,
+      "max_rss_kb": 9168,
+      "boxes": [
+        {
+          "x": 13,
+          "y": 520,
+          "width": 95,
+          "height": 20,
+          "score": 0.5
+        },
+        {
+          "x": 172,
+          "y": 493,
+          "width": 47,
+          "height": 13,
+          "score": 0.3
+        },
+        {
+          "x": 253,
+          "y": 494,
+          "width": 135,
+          "height": 25,
+          "score": 0.7
+        },
+        {
+          "x": 272,
+          "y": 53,
+          "width": 59,
+          "height": 25,
+          "score": 0.3
+        },
+        {
+          "x": 556,
+          "y": 704,
+          "width": 160,
+          "height": 16,
+          "score": 0.8
+        },
+        {
+          "x": 581,
+          "y": 622,
+          "width": 179,
+          "height": 38,
+          "score": 0.3
+        },
+        {
+          "x": 610,
+          "y": 241,
+          "width": 160,
+          "height": 45,
+          "score": 0.3
+        },
+        {
+          "x": 933,
+          "y": 704,
+          "width": 111,
+          "height": 16,
+          "score": 0.5
+        },
+        {
+          "x": 980,
+          "y": 432,
+          "width": 84,
+          "height": 43,
+          "score": 0.3
+        },
+        {
+          "x": 1072,
+          "y": 485,
+          "width": 126,
+          "height": 26,
+          "score": 0.6
+        },
+        {
+          "x": 2,
+          "y": 534,
+          "width": 93,
+          "height": 17,
+          "score": 0.4
+        },
+        {
+          "x": 4,
+          "y": 501,
+          "width": 78,
+          "height": 17,
+          "score": 0.3
+        },
+        {
+          "x": 72,
+          "y": 514,
+          "width": 48,
+          "height": 18,
+          "score": 0.3
+        },
+        {
+          "x": 134,
+          "y": 492,
+          "width": 80,
+          "height": 19,
+          "score": 0.4
+        },
+        {
+          "x": 153,
+          "y": 353,
+          "width": 41,
+          "height": 17,
+          "score": 0.3
+        },
+        {
+          "x": 190,
+          "y": 469,
+          "width": 57,
+          "height": 17,
+          "score": 0.3
+        },
+        {
+          "x": 276,
+          "y": 629,
+          "width": 588,
+          "height": 34,
+          "score": 1.0
+        },
+        {
+          "x": 901,
+          "y": 440,
+          "width": 78,
+          "height": 22,
+          "score": 0.4
+        },
+        {
+          "x": 998,
+          "y": 462,
+          "width": 69,
+          "height": 18,
+          "score": 0.3
+        }
+      ],
+      "four_core_cpu_percent": 2.412,
+      "piccap_fps_samples": [
+        58.600846196219,
+        58.649822437663,
+        58.45104724793,
+        59.19635034768,
+        59.85592678423,
+        59.932875179799,
+        58.533387444198
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "ppocr",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 320,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 99.954,
+      "min_wall_ms": 70.854,
+      "max_wall_ms": 235.1,
+      "mean_cpu_ms": 65.026,
+      "run_ms": 8006.048,
+      "one_core_cpu_percent": 6.503,
+      "max_rss_kb": 40112,
+      "boxes": [
+        {
+          "x": 276,
+          "y": 624,
+          "width": 584,
+          "height": 40,
+          "score": 0.985
+        }
+      ],
+      "four_core_cpu_percent": 1.62575,
+      "piccap_fps_samples": [
+        59.617375682867,
+        59.413999720754,
+        59.256391542533,
+        59.522097082524,
+        59.241647668199,
+        59.403646789876,
+        55.845330771894
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "ppocr",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 640,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 340.401,
+      "min_wall_ms": 302.046,
+      "max_wall_ms": 429.585,
+      "mean_cpu_ms": 257.029,
+      "run_ms": 8007.626,
+      "one_core_cpu_percent": 25.699,
+      "max_rss_kb": 123196,
+      "boxes": [
+        {
+          "x": 280,
+          "y": 628,
+          "width": 584,
+          "height": 30,
+          "score": 0.983
+        }
+      ],
+      "four_core_cpu_percent": 6.42475,
+      "piccap_fps_samples": [
+        57.821293655077,
+        55.523269802374,
+        49.837157089211,
+        59.362682243434,
+        57.06106960975,
+        58.611379203901,
+        58.339596737261
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "ppocr",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 960,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 663.568,
+      "min_wall_ms": 532.313,
+      "max_wall_ms": 773.97,
+      "mean_cpu_ms": 551.651,
+      "run_ms": 8007.537,
+      "one_core_cpu_percent": 55.15,
+      "max_rss_kb": 237988,
+      "boxes": [
+        {
+          "x": 280,
+          "y": 629,
+          "width": 582,
+          "height": 30,
+          "score": 0.991
+        }
+      ],
+      "four_core_cpu_percent": 13.7875,
+      "piccap_fps_samples": [
+        54.931825027489,
+        58.34095817245,
+        53.280289844777,
+        53.220600275151,
+        52.783122068887,
+        54.552000785549,
+        54.551752793277,
+        56.165523542247
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    }
+  ]
+}

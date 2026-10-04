@@ -1,0 +1,52 @@
+{
+  "baseline_fps": 55.7367889466535,
+  "initially_active": true,
+  "image": "bottom.ppm",
+  "results": [
+    {
+      "backend": "ppocr",
+      "source_width": 1280,
+      "source_height": 180,
+      "max_edge": 640,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 97.103,
+      "min_wall_ms": 79.014,
+      "max_wall_ms": 125.374,
+      "mean_cpu_ms": 64.881,
+      "run_ms": 8006.791,
+      "one_core_cpu_percent": 6.487,
+      "max_rss_kb": 37656,
+      "boxes": [
+        {
+          "x": 88,
+          "y": 72,
+          "width": 140,
+          "height": 32,
+          "score": 0.987
+        },
+        {
+          "x": 82,
+          "y": 112,
+          "width": 216,
+          "height": 22,
+          "score": 0.989
+        }
+      ],
+      "four_core_cpu_percent": 1.62175,
+      "piccap_fps_samples": [
+        53.205592617192,
+        54.763212994215,
+        53.916397234448,
+        55.944212431363,
+        56.224997446448,
+        56.496749553676,
+        56.855816492167
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    }
+  ]
+}

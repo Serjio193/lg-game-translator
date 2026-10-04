@@ -1,0 +1,45 @@
+{
+  "baseline_fps": 58.64272707140325,
+  "initially_active": true,
+  "image": "game-bottom.pgm",
+  "results": [
+    {
+      "backend": "ppocr",
+      "source_width": 1280,
+      "source_height": 180,
+      "max_edge": 320,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 29.268,
+      "min_wall_ms": 24.481,
+      "max_wall_ms": 31.236,
+      "mean_cpu_ms": 21.502,
+      "run_ms": 8005.096,
+      "one_core_cpu_percent": 2.153,
+      "max_rss_kb": 20132,
+      "boxes": [
+        {
+          "x": 276,
+          "y": 80,
+          "width": 588,
+          "height": 44,
+          "score": 0.956
+        }
+      ],
+      "four_core_cpu_percent": 0.53825,
+      "piccap_fps_samples": [
+        59.70440349828,
+        57.562239171104,
+        59.654421933738,
+        58.175669189875,
+        59.48079216519,
+        59.651930982716,
+        59.334797584283
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    }
+  ]
+}

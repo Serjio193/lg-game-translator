@@ -18,6 +18,13 @@ OCR worker. HyperHDR Forwarder is disabled. On 2026-10-04, the measured RGB
 English OCR was about 0.43 FPS. See [measured dual output report](ocr-dual-output.md)
 for actual input formats, paired frame proof, limitations, and reproducible patches.
 
+Two text detectors were compared on this G5: contrast/component grouping and
+PP-OCRv5 mobile through ncnn. On one real English game dialogue, neural detection
+at max edge 320 cost about 65 ms CPU for the full frame or 21.5 ms for a known
+bottom ROI. See [detector pilot](text-detector-comparison.md) for scene-dependent
+results, CPU/FPS limits, and OCR crop evidence. Adaptive region tracking remains
+the next implementation stage; detectors are not enabled permanently yet.
+
 ## OCR
 
 Initial OCR language priority:

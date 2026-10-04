@@ -1,8 +1,8 @@
 diff --git a/README.md b/README.md
-index 3d8ced6..7e89f00 100644
+index 3d8ced6..c37f7f5 100644
 --- a/README.md
 +++ b/README.md
-@@ -54,6 +54,27 @@ We use different libraries to capture TVs content. These are used by hyperion-we
+@@ -54,6 +54,31 @@ We use different libraries to capture TVs content. These are used by hyperion-we
  ### Advanced settings
  Some TV models are comptabile with a specific backend, but require a slightly different routine to work reliably. You can find an explaination for  these so called quirks [here](https://github.com/webosbrew/hyperion-webos/tree/main#quirks).
  
@@ -22,6 +22,10 @@ index 3d8ced6..7e89f00 100644
 +`/tmp/piccap-ocr-input.txt`. The latest TSV and actual completion count, processing
 +time, and OCR throughput are available in `/tmp/piccap-ocr-latest.tsv` and
 +`/tmp/piccap-ocr-status.txt`. These are bounded snapshots, not a video recording.
++For an additional current OCR input, create `/tmp/piccap-ocr-snapshot-request`.
++The worker consumes that request after a successful OCR and overwrites just
++`/tmp/piccap-ocr-snapshot.pgm` and its matching `.tsv`. It does not start another
++capture or change the existing output profile.
 +
 +The sender completes partial TCP writes before starting another FlatBuffers
 +packet, reads complete reply headers/payloads, validates replies, and reconnects
@@ -30,7 +34,7 @@ index 3d8ced6..7e89f00 100644
  ## Development
  ### Dependencies
  To build PicCap and hyperion-webos you will need:  
-@@ -89,6 +110,11 @@ npm run-script build-backend    # Build hyperion-webos + deps only
+@@ -89,6 +114,11 @@ npm run-script build-backend    # Build hyperion-webos + deps only
  npm run-script package
  ```  
  

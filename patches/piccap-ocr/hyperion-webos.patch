@@ -499,14 +499,37 @@ index 0000000..b33a3ee
 +}
 diff --git a/unicapture/ocr_diagnostics.c b/unicapture/ocr_diagnostics.c
 new file mode 100644
-index 0000000..e7760b1
+index 0000000..39c8d24
 --- /dev/null
 +++ b/unicapture/ocr_diagnostics.c
-@@ -0,0 +1,85 @@
+@@ -0,0 +1,109 @@
 +#include "ocr_diagnostics.h"
 +#include "log.h"
 +#include "unicapture.h"
 +#include <stdio.h>
++#include <unistd.h>
++
++static void requested_snapshot(const uint8_t* pixels, int width, int height,
++    const char* tsv)
++{
++    if (unlink("/tmp/piccap-ocr-snapshot-request") != 0)
++        return;
++    FILE* image = fopen("/tmp/piccap-ocr-snapshot.pgm.tmp", "wb");
++    if (!image)
++        return;
++    fprintf(image, "P5\n%d %d\n255\n", width, height);
++    size_t count = fwrite(pixels, 1, (size_t)width * height, image);
++    int closed = fclose(image);
++    if (count != (size_t)width * height || closed != 0
++        || rename("/tmp/piccap-ocr-snapshot.pgm.tmp", "/tmp/piccap-ocr-snapshot.pgm") != 0)
++        return;
++    unlink("/tmp/piccap-ocr-snapshot.tsv");
++    FILE* text = fopen("/tmp/piccap-ocr-snapshot.tsv", "w");
++    if (text) {
++        fputs(tsv, text);
++        fclose(text);
++    }
++}
 +
 +static const char* format_name(pixel_format_t format)
 +{
@@ -559,6 +582,7 @@ index 0000000..e7760b1
 +void ocr_diagnostics_result(const uint8_t* pixels, int width, int height,
 +    uint64_t sequence, const char* tsv, double elapsed_ms, uint64_t completed, double uptime_s)
 +{
++    requested_snapshot(pixels, width, height, tsv);
 +    INFO("OCR_RESULT seq=%llu input=%dx%d GRAY8 bytes=%zu elapsed_ms=%.1f",
 +        (unsigned long long)sequence, width, height, (size_t)width * height, elapsed_ms);
 +    FILE* stats = fopen("/tmp/piccap-ocr-status.txt", "w");

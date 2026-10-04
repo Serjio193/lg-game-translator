@@ -121,8 +121,12 @@ with exact base commits and clean-base reconstruction checks.
 
 Local IPK: `E:\Github\piccap\build\org.webosbrew.piccap_0.5.4_all.ipk`.
 Local native binary: `E:\Github\piccap\hyperion-webos\build\ocr\hyperion-webos`.
-Deployed binary SHA256:
+Binary SHA256 used for the 236-second measurement above:
 `4cb4bf4d0efd23a92a6436e4ed7344fdbc7c4914f17c2c6641d27c832eb08b3f`.
+
+Later detector experiments and an on-demand OCR snapshot extension are recorded
+in [the detector comparison](text-detector-comparison.md); these do not enable
+GUI capture or introduce another video capture.
 
 `file` reports ELF 32-bit LSB executable, ARM, EABI5, dynamically linked,
 interpreter `/lib/ld-linux.so.3`, GNU/Linux 3.10.0, debug_info, not stripped.

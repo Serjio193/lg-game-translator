@@ -1,0 +1,297 @@
+{
+  "baseline_fps": 58.461564105196246,
+  "initially_active": true,
+  "image": "text.ppm",
+  "results": [
+    {
+      "backend": "contrast",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 320,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 16.439,
+      "min_wall_ms": 9.217,
+      "max_wall_ms": 27.039,
+      "mean_cpu_ms": 8.576,
+      "run_ms": 8006.198,
+      "one_core_cpu_percent": 0.875,
+      "max_rss_kb": 6528,
+      "boxes": [
+        {
+          "x": 1076,
+          "y": 344,
+          "width": 172,
+          "height": 52,
+          "score": 0.4
+        },
+        {
+          "x": 800,
+          "y": 336,
+          "width": 160,
+          "height": 48,
+          "score": 0.4
+        }
+      ],
+      "four_core_cpu_percent": 0.21875,
+      "piccap_fps_samples": [
+        55.379213781302,
+        58.355370590644,
+        55.419674723456,
+        56.22262660867,
+        57.74383295864,
+        55.266633875131,
+        53.424891725553
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "contrast",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 640,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 67.783,
+      "min_wall_ms": 40.621,
+      "max_wall_ms": 136.378,
+      "mean_cpu_ms": 31.357,
+      "run_ms": 8009.281,
+      "one_core_cpu_percent": 3.157,
+      "max_rss_kb": 6528,
+      "boxes": [
+        {
+          "x": 528,
+          "y": 352,
+          "width": 56,
+          "height": 24,
+          "score": 0.3
+        },
+        {
+          "x": 892,
+          "y": 330,
+          "width": 58,
+          "height": 24,
+          "score": 0.3
+        },
+        {
+          "x": 130,
+          "y": 616,
+          "width": 96,
+          "height": 26,
+          "score": 0.3
+        },
+        {
+          "x": 190,
+          "y": 654,
+          "width": 68,
+          "height": 20,
+          "score": 0.4
+        },
+        {
+          "x": 796,
+          "y": 332,
+          "width": 148,
+          "height": 38,
+          "score": 0.4
+        }
+      ],
+      "four_core_cpu_percent": 0.78925,
+      "piccap_fps_samples": [
+        44.533280091323,
+        54.913575184921,
+        54.056391627746,
+        57.592075330435,
+        54.748821531617,
+        57.791943225195,
+        59.091352276051
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "contrast",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 960,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 141.474,
+      "min_wall_ms": 102.365,
+      "max_wall_ms": 252.636,
+      "mean_cpu_ms": 80.657,
+      "run_ms": 8041.656,
+      "one_core_cpu_percent": 8.064,
+      "max_rss_kb": 9088,
+      "boxes": [
+        {
+          "x": 86,
+          "y": 618,
+          "width": 56,
+          "height": 22,
+          "score": 0.4
+        },
+        {
+          "x": 524,
+          "y": 352,
+          "width": 54,
+          "height": 23,
+          "score": 0.4
+        },
+        {
+          "x": 896,
+          "y": 330,
+          "width": 54,
+          "height": 25,
+          "score": 0.3
+        },
+        {
+          "x": 82,
+          "y": 653,
+          "width": 218,
+          "height": 22,
+          "score": 1.0
+        },
+        {
+          "x": 110,
+          "y": 617,
+          "width": 117,
+          "height": 26,
+          "score": 0.4
+        },
+        {
+          "x": 796,
+          "y": 341,
+          "width": 122,
+          "height": 33,
+          "score": 0.3
+        }
+      ],
+      "four_core_cpu_percent": 2.016,
+      "piccap_fps_samples": [
+        55.141585210292,
+        56.217200776922,
+        55.751667207148,
+        54.969771206651,
+        59.45291428277,
+        55.906888940033,
+        52.468007632346
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "ppocr",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 320,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 138.304,
+      "min_wall_ms": 102.253,
+      "max_wall_ms": 196.177,
+      "mean_cpu_ms": 66.444,
+      "run_ms": 8004.09,
+      "one_core_cpu_percent": 6.646,
+      "max_rss_kb": 39908,
+      "boxes": [
+        {
+          "x": 96,
+          "y": 616,
+          "width": 56,
+          "height": 24,
+          "score": 0.605
+        }
+      ],
+      "four_core_cpu_percent": 1.6615,
+      "piccap_fps_samples": [
+        54.497892748147,
+        57.666413254817,
+        56.211723329645,
+        57.29684924626,
+        48.776879108944,
+        57.578424212879,
+        59.230419163805
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "ppocr",
+      "source_width": 1280,
+      "source_height": 720,
+      "max_edge": 640,
+      "iterations": 8,
+      "period_ms": 1000,
+      "threads": 1,
+      "mean_wall_ms": 568.511,
+      "min_wall_ms": 437.326,
+      "max_wall_ms": 888.961,
+      "mean_cpu_ms": 282.756,
+      "run_ms": 8010.881,
+      "one_core_cpu_percent": 28.263,
+      "max_rss_kb": 123144,
+      "boxes": [
+        {
+          "x": 1110,
+          "y": 344,
+          "width": 28,
+          "height": 14,
+          "score": 0.749
+        },
+        {
+          "x": 88,
+          "y": 614,
+          "width": 138,
+          "height": 30,
+          "score": 0.988
+        },
+        {
+          "x": 82,
+          "y": 654,
+          "width": 216,
+          "height": 20,
+          "score": 0.96
+        }
+      ],
+      "four_core_cpu_percent": 7.06575,
+      "piccap_fps_samples": [
+        58.283436235978,
+        50.63269775233,
+        48.414036843082,
+        48.679724732383,
+        55.586127925915,
+        50.398695681756,
+        44.439572550565
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    },
+    {
+      "backend": "ppocr",
+      "max_edge": 960,
+      "aborted": true,
+      "exit_code": 4294967295,
+      "piccap_fps_samples": [
+        49.560808634154,
+        56.256733227758,
+        46.881665986883,
+        45.418314026765,
+        43.501303951586
+      ],
+      "hyperhdr_pids": [
+        32464
+      ]
+    }
+  ]
+}
