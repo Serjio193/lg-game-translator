@@ -1,0 +1,9 @@
+source=video-only-before-UI
+width=1280
+height=720
+format=ARGB32-BGRA-bytes
+stride=5120
+tesseract_format=GRAY8-PGM
+tesseract_stride=1280
+gray_bytes=921600
+copy_us=4584

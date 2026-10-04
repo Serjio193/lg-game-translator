@@ -1,0 +1,219 @@
+diff --git a/README.md b/README.md
+index 3d8ced6..7e89f00 100644
+--- a/README.md
++++ b/README.md
+@@ -54,6 +54,27 @@ We use different libraries to capture TVs content. These are used by hyperion-we
+ ### Advanced settings
+ Some TV models are comptabile with a specific backend, but require a slightly different routine to work reliably. You can find an explaination for  these so called quirks [here](https://github.com/webosbrew/hyperion-webos/tree/main#quirks).
+ 
++### Experimental text recognition
++The modified service has an opt-in **Recognize English text** setting. It submits at most one grayscale video frame per second to the Tesseract installation on the TV and writes recognized words with bounding boxes and confidence to the hyperion-webos log. It processes the video frame before the TV UI is blended in, so the menu is not part of OCR. The feature requires `/usr/bin/tesseract` and `/usr/share/tessdata/eng.traineddata`; it is disabled by default. When enabled, both capture backends request at least 1280×720. The captured video frame is used directly for OCR and for the existing HyperHDR composition/output path; no second capture or OCR-only downscaled copy is created.
++
++For the G5 dual output profile, explicitly select 1280×720, RGB output (`nv12:false`),
++disable UI capture (`nogui:true`), enable OCR and autostart, and retain the HyperHDR
++destination `127.0.0.1:19400`. OCR runs in a separate worker with one replaceable
++pending grayscale frame; it skips a sample when the queue mutex is busy.
++Tesseract runs with `OMP_THREAD_LIMIT=1` and niceness 10. The one-frame-per-second
++setting limits submissions; completed OCR can be substantially slower.
++
++Diagnostics retain one paired capture sample per session in
++`/tmp/piccap-hyperhdr-sample.ppm`, `/tmp/piccap-ocr-sample.pgm`, and
++`/tmp/piccap-ocr-sample.tsv`. Input dimensions/stride are recorded in
++`/tmp/piccap-ocr-input.txt`. The latest TSV and actual completion count, processing
++time, and OCR throughput are available in `/tmp/piccap-ocr-latest.tsv` and
++`/tmp/piccap-ocr-status.txt`. These are bounded snapshots, not a video recording.
++
++The sender completes partial TCP writes before starting another FlatBuffers
++packet, reads complete reply headers/payloads, validates replies, and reconnects
++after a failed partial send. Invalid capture frames are not sent to HyperHDR.
++
+ ## Development
+ ### Dependencies
+ To build PicCap and hyperion-webos you will need:  
+@@ -89,6 +110,11 @@ npm run-script build-backend    # Build hyperion-webos + deps only
+ npm run-script package
+ ```  
+ 
++Packaging also requires Python 3 (standard library only). The package wrapper
++preserves mode 0755 for the native executable and service scripts even when
++`ares-package` runs on Windows. The boot hook uses the supported `status` method
++to activate the native service; the persisted autostart option starts capture.
++
+ ## Other
+ 
+ ### Known issues  
+diff --git a/frontend/appinfo.json b/frontend/appinfo.json
+index c87cc59..43591f6 100644
+--- a/frontend/appinfo.json
++++ b/frontend/appinfo.json
+@@ -1,6 +1,6 @@
+ {
+   "id": "org.webosbrew.piccap",
+-  "version": "0.5.3",
++  "version": "0.5.4",
+   "vendor": "Homebrew",
+   "type": "web",
+   "main": "index.html",
+diff --git a/frontend/index.html b/frontend/index.html
+index 6eae8bb..001721b 100644
+--- a/frontend/index.html
++++ b/frontend/index.html
+@@ -184,6 +184,11 @@
+          </ul><br/><br/>
+          <div class="GlobalCheckbox checklabel blueMode">
+            <ul>
++             <li>
++               <div class="checkboxes blueMode">
++                 <label for="checkSettingsOCR">Recognize English text (Tesseract, capture/output at least 1280×720, about 1 frame/s)<input type="checkbox" id="checkSettingsOCR"/></label>
++               </div>
++             </li>
+              <li>
+                <div class="checkboxes blueMode">
+                  <label for="checkSettingsNoHDR">Disable HyperHDR SDR/HDR switch<input type="checkbox" id="checkSettingsNoHDR"/></label>
+diff --git a/frontend/js/servicecalls.js b/frontend/js/servicecalls.js
+index 5e71612..b1183b1 100644
+--- a/frontend/js/servicecalls.js
++++ b/frontend/js/servicecalls.js
+@@ -230,6 +230,7 @@ function getSettings() {
+           document.getElementById('checkSettingsNoHDR').checked = result.nohdr;
+           document.getElementById('checkSettingsNoPowerstate').checked = result.nopowerstate;
+           document.getElementById('checkSettingsNV12').checked = result.nv12;
++          document.getElementById('checkSettingsOCR').checked = result.ocr;
+ 
+           logIt('Loading settings done!');
+           document.getElementById('txtInfoState').innerHTML = 'Settings loaded';
+@@ -300,6 +301,7 @@ window.serviceResetSettings = () => {
+     vsync: true,
+     autostart: false,
+     nv12: false,
++    ocr: false,
+   };
+   logIt(config);
+ 
+@@ -391,7 +393,8 @@ window.serviceSaveSettings = () => {
+     nohdr: document.getElementById('checkSettingsNoHDR').checked,
+     nopowerstate: document.getElementById('checkSettingsNoPowerstate').checked,
+     nv12: document.getElementById('checkSettingsNV12').checked,
+-};
++    ocr: document.getElementById('checkSettingsOCR').checked,
++  };
+ 
+   logIt(`Config: ${JSON.stringify(config)}`);
+ 
+diff --git a/package-lock.json b/package-lock.json
+index 881825a..058c3db 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "org.webosbrew.piccap",
+-  "version": "0.5.3",
++  "version": "0.5.4",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "org.webosbrew.piccap",
+-      "version": "0.5.3",
++      "version": "0.5.4",
+       "license": "MIT",
+       "dependencies": {
+         "@babel/preset-env": "^7.18.10",
+diff --git a/package.json b/package.json
+index 6e4925b..2a4ecfd 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "org.webosbrew.piccap",
+-  "version": "0.5.3",
++  "version": "0.5.4",
+   "description": "PicCap - Hyperion Sender App",
+   "main": "index.html",
+   "scripts": {
+@@ -12,7 +12,7 @@
+     "build-frontend": "mkdir -p ./build/piccap-frontend && webpack",
+     "build-backend": "mkdir -p ./build/hyperion-webos && mkdir -p ./hyperion-webos/build && cd ./hyperion-webos/build && cmake -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE .. && make hyperion-webos gm_backend halgal_backend dile_vt_backend vtcapture_backend && cd ../.. && cp ./hyperion-webos/build/hyperion-webos ./build/hyperion-webos/ && cp ./hyperion-webos/build/libdile_vt_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libgm_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libhalgal_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libvtcapture_backend.so ./build/hyperion-webos/ && cp ./servicefiles/* ./build/hyperion-webos && chmod +x ./build/hyperion-webos/hyperion-webos ./build/hyperion-webos/piccapautostart",
+     "build-all": "mkdir -p ./build/piccap-frontend && webpack && mkdir -p ./build/hyperion-webos && mkdir -p ./hyperion-webos/build && cd ./hyperion-webos/build && cmake -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE .. && make && cd ../.. && cp ./hyperion-webos/build/hyperion-webos ./build/hyperion-webos/ && cp ./hyperion-webos/build/libdile_vt_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libgm_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libhalgal_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libvtcapture_backend.so ./build/hyperion-webos/ && cp ./servicefiles/* ./build/hyperion-webos && chmod +x ./build/hyperion-webos/hyperion-webos ./build/hyperion-webos/piccapautostart",
+-    "package": "ares-package ./build/piccap-frontend ./build/hyperion-webos -o ./build",
++    "package": "python scripts/package.py",
+     "deploy": "ares-install org.webosbrew.piccap_${npm_package_version}_all.ipk",
+     "launch": "ares-launch org.webosbrew.piccap"
+   },
+diff --git a/servicefiles/piccapautostart b/servicefiles/piccapautostart
+index 2155894..58891ef 100644
+--- a/servicefiles/piccapautostart
++++ b/servicefiles/piccapautostart
+@@ -1,3 +1,3 @@
+ #!/bin/bash
+-luna-send -n 1 -f luna://org.webosbrew.piccap.service/isRunning '{}' &
++luna-send -n 1 -f luna://org.webosbrew.piccap.service/status '{}' &
+ exit 0
+diff --git a/scripts/package.py b/scripts/package.py
+new file mode 100644
+index 0000000..940fa5e
+--- /dev/null
++++ b/scripts/package.py
+@@ -0,0 +1,62 @@
++"""Build an IPK and preserve executable modes when packaging from Windows."""
++
++import io
++import json
++import pathlib
++import subprocess
++import tarfile
++
++
++def fix_modes(path):
++    archive = path.read_bytes()
++    if archive[:8] != b"!<arch>\n":
++        raise ValueError("Invalid ar package")
++    rebuilt = bytearray(archive[:8])
++    offset = 8
++    fixed = set()
++    executables = {"hyperion-webos", "piccapautostart", "setuplegacylogging.sh"}
++    while offset < len(archive):
++        header = bytearray(archive[offset:offset + 60])
++        size = int(header[48:58])
++        data = archive[offset + 60:offset + 60 + size]
++        name = header[:16].decode("ascii").strip().rstrip("/")
++        if name == "data.tar.gz":
++            output = io.BytesIO()
++            with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as source:
++                with tarfile.open(fileobj=output, mode="w:gz", format=tarfile.GNU_FORMAT) as target:
++                    for member in source:
++                        parts = pathlib.PurePosixPath(member.name).parts
++                        if ("org.webosbrew.piccap.service" in parts
++                                and member.name.rsplit("/", 1)[-1] in executables
++                                and member.isfile()):
++                            member.mode = 0o755
++                            fixed.add(parts[-1])
++                        target.addfile(member, source.extractfile(member) if member.isfile() else None)
++            data = output.getvalue()
++        header[48:58] = str(len(data)).encode("ascii").ljust(10, b" ")
++        rebuilt.extend(header)
++        rebuilt.extend(data)
++        if len(data) % 2:
++            rebuilt.extend(b"\n")
++        offset += 60 + size + size % 2
++    if fixed != executables:
++        raise ValueError(f"Missing service executables: {executables - fixed}")
++    temporary = path.with_suffix(".ipk.tmp")
++    temporary.write_bytes(rebuilt)
++    temporary.replace(path)
++    print(f"Verified executable modes 0755: {', '.join(sorted(fixed))}")
++
++
++def main():
++    root = pathlib.Path(__file__).resolve().parents[1]
++    version = json.loads((root / "frontend/appinfo.json").read_text())["version"]
++    subprocess.run([
++        "node", str(root / "node_modules/@webosose/ares-cli/bin/ares-package.js"),
++        str(root / "build/piccap-frontend"), str(root / "build/hyperion-webos"),
++        "-o", str(root / "build"),
++    ], check=True, cwd=root)
++    fix_modes(root / f"build/org.webosbrew.piccap_{version}_all.ipk")
++
++
++if __name__ == "__main__":
++    main()

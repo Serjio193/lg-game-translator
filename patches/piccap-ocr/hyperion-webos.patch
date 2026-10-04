@@ -1,0 +1,1004 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 61d805f..f07c090 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -52,6 +52,7 @@ add_executable(hyperion-webos
+     src/log.c
+     src/utils.c
+     src/hyperion_client.c
++    src/socket_io.c
+     src/json_rpc_client.c
+ )
+ set_target_properties(hyperion-webos PROPERTIES
+diff --git a/fbs/CMakeLists.txt b/fbs/CMakeLists.txt
+index 832fdb3..6064e1a 100644
+--- a/fbs/CMakeLists.txt
++++ b/fbs/CMakeLists.txt
+@@ -21,8 +21,8 @@ ExternalProject_Add(flatcc-native
+ 
+ SET(FLATCC_EXECUTABLE ${FLATCC_EXECUTABLE})
+ add_custom_command(
+-        OUTPUT hyperion_reply_builder.h hyperion_reply_reader.h flatbuffers_common_builder.h flatbuffers_common_reader.h
+-        COMMAND ${FLATCC_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/hyperion_reply.fbs -w --common_reader --common_builder
++        OUTPUT hyperion_reply_builder.h hyperion_reply_reader.h hyperion_reply_verifier.h flatbuffers_common_builder.h flatbuffers_common_reader.h
++        COMMAND ${FLATCC_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/hyperion_reply.fbs -w -v --common_reader --common_builder
+         DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/hyperion_reply.fbs
+ )
+ 
+@@ -37,6 +37,7 @@ add_custom_target(generate-fbs DEPENDS
+         flatbuffers_common_reader.h
+         hyperion_reply_builder.h
+         hyperion_reply_reader.h
++        hyperion_reply_verifier.h
+         hyperion_request_builder.h
+         hyperion_request_reader.h)
+ add_dependencies(generate-fbs flatcc-native)
+diff --git a/src/hyperion_client.c b/src/hyperion_client.c
+index 4722d08..bc22e50 100644
+--- a/src/hyperion_client.c
++++ b/src/hyperion_client.c
+@@ -1,10 +1,12 @@
+ #include "hyperion_client.h"
+ #include "log.h"
++#include "socket_io.h"
+ 
+ #include <arpa/inet.h>
+ #include <errno.h>
+ #include <netdb.h>
+ #include <netinet/in.h>
++#include <pthread.h>
+ #include <stdbool.h>
+ #include <stdio.h>
+ #include <string.h>
+@@ -15,6 +17,7 @@
+ #include <unistd.h>
+ 
+ #include "hyperion_reply_reader.h"
++#include "hyperion_reply_verifier.h"
+ #include "hyperion_request_builder.h"
+ 
+ static int _connect_unix_socket(const char* hostname);
+@@ -24,6 +27,7 @@ static int _write_message(const void* buffer, size_t size);
+ static bool _parse_reply(hyperionnet_Reply_table_t reply);
+ 
+ static int sockfd;
++static pthread_mutex_t socket_lock = PTHREAD_MUTEX_INITIALIZER;
+ static bool _registered = false;
+ static int _priority = 0;
+ static const char* _origin = NULL;
+@@ -32,17 +36,16 @@ unsigned char recvBuff[1024];
+ 
+ int hyperion_client(const char* origin, const char* hostname, int port, bool unix_socket, int priority)
+ {
++    pthread_mutex_lock(&socket_lock);
+     _origin = origin;
+     _priority = priority;
+     _connected = false;
+     _registered = false;
+     sockfd = 0;
+ 
+-    if (unix_socket) {
+-        return _connect_unix_socket(hostname);
+-    } else {
+-        return _connect_inet_socket(hostname, port);
+-    }
++    int result = unix_socket ? _connect_unix_socket(hostname) : _connect_inet_socket(hostname, port);
++    pthread_mutex_unlock(&socket_lock);
++    return result;
+ }
+ 
+ int hyperion_read()
+@@ -50,23 +53,29 @@ int hyperion_read()
+     if (!sockfd)
+         return -1;
+     uint8_t headbuff[4];
+-    int n = read(sockfd, headbuff, 4);
+-    uint32_t messageSize = ((headbuff[0] << 24) & 0xFF000000) | ((headbuff[1] << 16) & 0x00FF0000) | ((headbuff[2] << 8) & 0x0000FF00) | ((headbuff[3]) & 0x000000FF);
+-    if (n < 0 || messageSize >= sizeof(recvBuff))
++    if (socket_read_exact(sockfd, headbuff, sizeof(headbuff)) != 0)
+         return -1;
+-    n = read(sockfd, recvBuff, messageSize);
+-    if (n < 0)
++    uint32_t messageSize = ((uint32_t)headbuff[0] << 24) | ((uint32_t)headbuff[1] << 16)
++        | ((uint32_t)headbuff[2] << 8) | headbuff[3];
++    if (!messageSize || messageSize > sizeof(recvBuff)
++        || socket_read_exact(sockfd, recvBuff, messageSize) != 0
++        || hyperionnet_Reply_verify_as_root(recvBuff, messageSize) != 0)
+         return -1;
++    pthread_mutex_lock(&socket_lock);
+     _parse_reply(hyperionnet_Reply_as_root(recvBuff));
++    pthread_mutex_unlock(&socket_lock);
+     return 0;
+ }
+ 
+ int hyperion_destroy()
+ {
+-    if (!sockfd)
+-        return 0;
+-    close(sockfd);
++    pthread_mutex_lock(&socket_lock);
++    if (sockfd)
++        close(sockfd);
+     sockfd = 0;
++    _connected = false;
++    _registered = false;
++    pthread_mutex_unlock(&socket_lock);
+     return 0;
+ }
+ 
+@@ -123,32 +132,24 @@ int hyperion_set_register(const char* origin, int priority)
+ 
+ int _write_message(const void* buffer, size_t size)
+ {
+-    const uint8_t header[] = {
+-        (uint8_t)((size >> 24) & 0xFF),
+-        (uint8_t)((size >> 16) & 0xFF),
+-        (uint8_t)((size >> 8) & 0xFF),
+-        (uint8_t)(size & 0xFF)
+-    };
+-    const struct iovec iov[] = {
+-        { (void*)header, sizeof(header) },
+-        { (void*)buffer, size }
+-    };
+-
+-    return writev(sockfd, iov, 2) == (ssize_t)(sizeof(header) + size) ? 0 : -1;
++    int result = socket_write_packet(sockfd, buffer, size);
++    if (result != 0) {
++        // A partially sent packet cannot be followed by another header.
++        _connected = false;
++        shutdown(sockfd, SHUT_RDWR);
++    }
++    return result;
+ }
+ 
+ int _send_message(const void* buffer, size_t size)
+ {
+-    if (!sockfd)
+-        return 0;
+-    if (!_connected)
+-        return 0;
+-
+-    if (!_registered) {
+-        return hyperion_set_register(_origin, _priority);
++    pthread_mutex_lock(&socket_lock);
++    int result = 0;
++    if (sockfd && _connected) {
++        result = _registered ? _write_message(buffer, size) : hyperion_set_register(_origin, _priority);
+     }
+-
+-    return _write_message(buffer, size);
++    pthread_mutex_unlock(&socket_lock);
++    return result;
+ }
+ 
+ bool _parse_reply(hyperionnet_Reply_table_t reply)
+diff --git a/src/service.c b/src/service.c
+index fcaaa30..75b2926 100644
+--- a/src/service.c
++++ b/src/service.c
+@@ -89,6 +89,7 @@ int service_init(service_t* service, settings_t* settings)
+     service->unicapture.callback_nv12 = &service_feed_nv12_frame;
+     service->unicapture.callback_data = (void*)service;
+     service->unicapture.dump_frames = settings->dump_frames;
++    service->unicapture.ocr_enabled = settings->ocr_enabled;
+ 
+     service_init_backends(service);
+ 
+@@ -105,6 +106,13 @@ void service_init_backends(service_t* service)
+     config.fps = settings->fps;
+     config.quirks = settings->quirks;
+ 
++    // OCR consumes the same full-resolution frame sent to HyperHDR. Raise both
++    // capture backends together so UI blending and video output stay aligned.
++    if (settings->ocr_enabled) {
++        if (config.resolution_width < 1280) config.resolution_width = 1280;
++        if (config.resolution_height < 720) config.resolution_height = 720;
++    }
++
+     const char* const ui_backends[] = { "libgm_backend.so", "libhalgal_backend.so", NULL };
+     const char* const video_backends[] = { "libvtcapture_backend.so", "libdile_vt_backend.so", NULL };
+     char backend_name[FILENAME_MAX] = { 0 };
+diff --git a/src/settings.c b/src/settings.c
+index 5c35ec6..fa9941b 100644
+--- a/src/settings.c
++++ b/src/settings.c
+@@ -26,6 +26,7 @@ void settings_init(settings_t* settings)
+     settings->no_powerstate = false;
+ 
+     settings->dump_frames = false;
++    settings->ocr_enabled = false;
+ }
+ 
+ int settings_load_json(settings_t* settings, jvalue_ref source)
+@@ -78,6 +79,8 @@ int settings_load_json(settings_t* settings, jvalue_ref source)
+         jboolean_get(value, &settings->no_gui);
+     if ((value = jobject_get(source, j_cstr_to_buffer("autostart"))) && jis_boolean(value))
+         jboolean_get(value, &settings->autostart);
++    if ((value = jobject_get(source, j_cstr_to_buffer("ocr"))) && jis_boolean(value))
++        jboolean_get(value, &settings->ocr_enabled);
+ 
+     if ((value = jobject_get(source, j_cstr_to_buffer("nohdr"))) && jis_boolean(value))
+         jboolean_get(value, &settings->no_hdr);
+@@ -107,6 +110,7 @@ int settings_save_json(settings_t* settings, jvalue_ref target)
+     jobject_set(target, j_cstr_to_buffer("novideo"), jboolean_create(settings->no_video));
+     jobject_set(target, j_cstr_to_buffer("nogui"), jboolean_create(settings->no_gui));
+     jobject_set(target, j_cstr_to_buffer("autostart"), jboolean_create(settings->autostart));
++    jobject_set(target, j_cstr_to_buffer("ocr"), jboolean_create(settings->ocr_enabled));
+ 
+     jobject_set(target, j_cstr_to_buffer("nohdr"), jboolean_create(settings->no_hdr));
+     jobject_set(target, j_cstr_to_buffer("nopowerstate"), jboolean_create(settings->no_powerstate));
+diff --git a/src/settings.h b/src/settings.h
+index 50baae7..3a0991b 100644
+--- a/src/settings.h
++++ b/src/settings.h
+@@ -29,6 +29,7 @@ typedef struct _settings_t {
+     bool autostart;
+ 
+     bool dump_frames;
++    bool ocr_enabled;
+ 
+     bool no_hdr;
+     bool no_powerstate;
+diff --git a/unicapture/CMakeLists.txt b/unicapture/CMakeLists.txt
+index 4f62f1a..2ada59c 100644
+--- a/unicapture/CMakeLists.txt
++++ b/unicapture/CMakeLists.txt
+@@ -1,6 +1,8 @@
+ add_library(unicapture STATIC
+         unicapture.c
+         converter.c
++        ocr_worker.c
++        ocr_diagnostics.c
+ )
+ set(UNICAPTURE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/../src")
+ target_include_directories(unicapture PUBLIC ${UNICAPTURE_INCLUDE_DIRS})
+diff --git a/unicapture/unicapture.c b/unicapture/unicapture.c
+index e6a3bd1..724411e 100644
+--- a/unicapture/unicapture.c
++++ b/unicapture/unicapture.c
+@@ -1,4 +1,5 @@
+ #include "unicapture.h"
++#include "ocr_diagnostics.h"
+ #include "converter.h"
+ #include "log.h"
+ #include "utils.h"
+@@ -145,6 +146,9 @@ void* unicapture_run(void* data)
+     converter_init(&video_converter);
+     converter_init(&final_converter);
+ 
++    if (ocr_worker_start(&this->ocr_worker, this->ocr_enabled) != 0)
++        WARN("Unable to start OCR worker; capture will continue without OCR");
++
+     pthread_mutex_init(&this->vsync_lock, NULL);
+     pthread_cond_init(&this->vsync_cond, NULL);
+ 
+@@ -228,6 +232,10 @@ void* unicapture_run(void* data)
+ 
+         uint64_t frame_converted = getticks_us();
+ 
++        // OCR uses the video-only frame, before PicCap blends in the TV interface.
++        if (video_frame_converted.pixel_format != PIXFMT_INVALID)
++            ocr_worker_submit(&this->ocr_worker, &video_frame_converted);
++
+         bool got_frame = true;
+ 
+         // Blend frames and prepare for sending
+@@ -327,6 +335,9 @@ void* unicapture_run(void* data)
+ 
+         uint64_t frame_processed = getticks_us();
+ 
++        if (this->ocr_enabled && got_frame && framecounter == 0)
++            ocr_diagnostics_output(&final_frame);
++
+         if (this->dump_frames && got_frame && framecounter % 30 == 0) {
+             char filename[256];
+             snprintf(filename, sizeof(filename), "/tmp/hyperion-webos-dump.%03d.data", (int)(framecounter / 30) % 10);
+@@ -343,11 +354,13 @@ void* unicapture_run(void* data)
+             INFO("Buffer dumped to: %s", filename);
+         }
+ 
+-        if (this->callback != NULL && (target_format == PIXFMT_RGB || target_format == PIXFMT_ARGB)) {
++        if (got_frame && final_frame.pixel_format == target_format && this->callback != NULL
++            && (target_format == PIXFMT_RGB || target_format == PIXFMT_ARGB)) {
+             this->callback(this->callback_data, final_frame.width, final_frame.height, final_frame.planes[0].buffer);
+         }
+ 
+-        if (this->callback_nv12 != NULL && target_format == PIXFMT_YUV420_SEMI_PLANAR) {
++        if (got_frame && final_frame.pixel_format == target_format && this->callback_nv12 != NULL
++            && target_format == PIXFMT_YUV420_SEMI_PLANAR) {
+             this->callback_nv12(this->callback_data, final_frame.width, final_frame.height, final_frame.planes[0].buffer,
+                 final_frame.planes[1].buffer, final_frame.planes[0].stride, final_frame.planes[1].stride);
+         }
+@@ -403,6 +416,8 @@ void* unicapture_run(void* data)
+         this->video_capture_running = false;
+     }
+ 
++    ocr_worker_stop(&this->ocr_worker);
++
+     for (int i = 0; i < MAX_PLANES; i++) {
+         if (blended_frame.planes[i].buffer != NULL) {
+             free(blended_frame.planes[i].buffer);
+diff --git a/unicapture/unicapture.h b/unicapture/unicapture.h
+index 6c8d407..e5d769b 100644
+--- a/unicapture/unicapture.h
++++ b/unicapture/unicapture.h
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include "common.h"
++#include "ocr_worker.h"
+ #include <pthread.h>
+ #include <stdint.h>
+ 
+@@ -102,6 +103,8 @@ typedef struct _unicapture_state {
+     void* callback_data;
+ 
+     bool dump_frames;
++    bool ocr_enabled;
++    ocr_worker_t ocr_worker;
+ 
+     struct {
+         double framerate;
+diff --git a/src/socket_io.c b/src/socket_io.c
+new file mode 100644
+index 0000000..3f468dc
+--- /dev/null
++++ b/src/socket_io.c
+@@ -0,0 +1,51 @@
++#include "socket_io.h"
++#include <errno.h>
++#include <stdint.h>
++#include <sys/socket.h>
++#include <sys/uio.h>
++#include <unistd.h>
++
++int socket_read_exact(int fd, void* buffer, size_t size)
++{
++    uint8_t* cursor = buffer;
++    while (size) {
++        ssize_t count = read(fd, cursor, size);
++        if (count < 0 && errno == EINTR)
++            continue;
++        if (count <= 0)
++            return -1;
++        cursor += count;
++        size -= (size_t)count;
++    }
++    return 0;
++}
++
++int socket_write_packet(int fd, const void* buffer, size_t size)
++{
++    if (size > UINT32_MAX)
++        return -1;
++    uint8_t header[] = { (uint8_t)(size >> 24), (uint8_t)(size >> 16),
++        (uint8_t)(size >> 8), (uint8_t)size };
++    struct iovec vectors[] = { { header, sizeof(header) }, { (void*)buffer, size } };
++    struct msghdr message = { 0 };
++    message.msg_iov = vectors;
++    message.msg_iovlen = 2;
++    while (message.msg_iovlen) {
++        ssize_t count = sendmsg(fd, &message, MSG_NOSIGNAL);
++        if (count < 0 && errno == EINTR)
++            continue;
++        if (count <= 0)
++            return -1;
++        size_t sent = (size_t)count;
++        while (message.msg_iovlen && sent >= message.msg_iov[0].iov_len) {
++            sent -= message.msg_iov[0].iov_len;
++            message.msg_iov++;
++            message.msg_iovlen--;
++        }
++        if (message.msg_iovlen && sent) {
++            message.msg_iov[0].iov_base = (uint8_t*)message.msg_iov[0].iov_base + sent;
++            message.msg_iov[0].iov_len -= sent;
++        }
++    }
++    return 0;
++}
+diff --git a/src/socket_io.h b/src/socket_io.h
+new file mode 100644
+index 0000000..e8690c6
+--- /dev/null
++++ b/src/socket_io.h
+@@ -0,0 +1,6 @@
++#pragma once
++
++#include <stddef.h>
++
++int socket_read_exact(int fd, void* buffer, size_t size);
++int socket_write_packet(int fd, const void* buffer, size_t size);
+diff --git a/tests/socket_io_test.c b/tests/socket_io_test.c
+new file mode 100644
+index 0000000..b33a3ee
+--- /dev/null
++++ b/tests/socket_io_test.c
+@@ -0,0 +1,84 @@
++#include "socket_io.h"
++#include <assert.h>
++#include <errno.h>
++#include <pthread.h>
++#include <stdint.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <sys/socket.h>
++#include <unistd.h>
++
++#define FRAME_BYTES (1280 * 720 * 3)
++
++ssize_t __real_sendmsg(int fd, const struct msghdr* message, int flags);
++ssize_t __real_read(int fd, void* buffer, size_t size);
++
++ssize_t __wrap_sendmsg(int fd, const struct msghdr* message, int flags)
++{
++    static int calls;
++    if (++calls == 1) {
++        errno = EINTR;
++        return -1;
++    }
++    struct msghdr short_message = *message;
++    struct iovec part = message->msg_iov[0];
++    if (part.iov_len > 97)
++        part.iov_len = 97;
++    short_message.msg_iov = &part;
++    short_message.msg_iovlen = 1;
++    return __real_sendmsg(fd, &short_message, flags);
++}
++
++ssize_t __wrap_read(int fd, void* buffer, size_t size)
++{
++    static int calls;
++    if (++calls == 1) {
++        errno = EINTR;
++        return -1;
++    }
++    return __real_read(fd, buffer, size > 37 ? 37 : size);
++}
++
++static void* receiver(void* argument)
++{
++    int fd = *(int*)argument;
++    uint8_t* received = malloc(FRAME_BYTES);
++    assert(received);
++    for (int packet = 0; packet < 2; packet++) {
++        uint8_t header[4];
++        assert(socket_read_exact(fd, header, sizeof(header)) == 0);
++        uint32_t size = ((uint32_t)header[0] << 24) | ((uint32_t)header[1] << 16)
++            | ((uint32_t)header[2] << 8) | header[3];
++        assert(size == FRAME_BYTES);
++        assert(socket_read_exact(fd, received, size) == 0);
++        for (size_t i = 0; i < size; i++)
++            assert(received[i] == (uint8_t)(i + packet));
++    }
++    free(received);
++    return NULL;
++}
++
++int main(void)
++{
++    int pair[2];
++    assert(socketpair(AF_UNIX, SOCK_STREAM, 0, pair) == 0);
++    pthread_t thread;
++    assert(pthread_create(&thread, NULL, receiver, &pair[1]) == 0);
++    uint8_t* pixels = malloc(FRAME_BYTES);
++    assert(pixels);
++    for (int packet = 0; packet < 2; packet++) {
++        for (size_t i = 0; i < FRAME_BYTES; i++)
++            pixels[i] = (uint8_t)(i + packet);
++        assert(socket_write_packet(pair[0], pixels, FRAME_BYTES) == 0);
++    }
++    pthread_join(thread, NULL);
++    free(pixels);
++    close(pair[1]);
++    uint8_t byte;
++    assert(socket_read_exact(pair[0], &byte, 1) == -1);
++    assert(socket_write_packet(pair[0], &byte, 1) == -1);
++    close(pair[0]);
++    puts("PASS: two 720p RGB packets, partial I/O, EINTR, EOF, closed peer");
++    return 0;
++}
+diff --git a/unicapture/ocr_diagnostics.c b/unicapture/ocr_diagnostics.c
+new file mode 100644
+index 0000000..e7760b1
+--- /dev/null
++++ b/unicapture/ocr_diagnostics.c
+@@ -0,0 +1,85 @@
++#include "ocr_diagnostics.h"
++#include "log.h"
++#include "unicapture.h"
++#include <stdio.h>
++
++static const char* format_name(pixel_format_t format)
++{
++    switch (format) {
++    case PIXFMT_RGB: return "RGB24";
++    case PIXFMT_ARGB: return "ARGB32-BGRA-bytes";
++    case PIXFMT_ABGR: return "ABGR32-RGBA-bytes";
++    case PIXFMT_YUV420_SEMI_PLANAR: return "NV12";
++    case PIXFMT_YUV420_PLANAR: return "I420";
++    default: return "other";
++    }
++}
++
++void ocr_diagnostics_source(const struct _frame_info* source, uint64_t copy_us)
++{
++    const frame_info_t* frame = source;
++    INFO("OCR_INPUT video-only %dx%d format=%s stride=%d gray_bytes=%zu copy_us=%llu",
++        frame->width, frame->height, format_name(frame->pixel_format),
++        frame->planes[0].stride, (size_t)frame->width * frame->height,
++        (unsigned long long)copy_us);
++    FILE* file = fopen("/tmp/piccap-ocr-input.txt", "w");
++    if (!file)
++        return;
++    fprintf(file, "source=video-only-before-UI\nwidth=%d\nheight=%d\nformat=%s\n"
++        "stride=%d\ntesseract_format=GRAY8-PGM\ntesseract_stride=%d\n"
++        "gray_bytes=%zu\ncopy_us=%llu\n",
++        frame->width, frame->height, format_name(frame->pixel_format),
++        frame->planes[0].stride, frame->width, (size_t)frame->width * frame->height,
++        (unsigned long long)copy_us);
++    fclose(file);
++}
++
++void ocr_diagnostics_output(const struct _frame_info* source)
++{
++    const frame_info_t* frame = source;
++    INFO("HYPERHDR_OUTPUT %dx%d format=%s stride=%d",
++        frame->width, frame->height, format_name(frame->pixel_format), frame->planes[0].stride);
++    if (frame->pixel_format != PIXFMT_RGB || !frame->planes[0].buffer)
++        return;
++    FILE* file = fopen("/tmp/piccap-hyperhdr-sample.ppm", "wb");
++    if (!file)
++        return;
++    fprintf(file, "P6\n%d %d\n255\n", frame->width, frame->height);
++    for (int y = 0; y < frame->height; y++)
++        fwrite(frame->planes[0].buffer + (size_t)y * frame->planes[0].stride,
++            1, (size_t)frame->width * 3, file);
++    fclose(file);
++}
++
++void ocr_diagnostics_result(const uint8_t* pixels, int width, int height,
++    uint64_t sequence, const char* tsv, double elapsed_ms, uint64_t completed, double uptime_s)
++{
++    INFO("OCR_RESULT seq=%llu input=%dx%d GRAY8 bytes=%zu elapsed_ms=%.1f",
++        (unsigned long long)sequence, width, height, (size_t)width * height, elapsed_ms);
++    FILE* stats = fopen("/tmp/piccap-ocr-status.txt", "w");
++    if (stats) {
++        fprintf(stats, "sequence=%llu\nwidth=%d\nheight=%d\nformat=GRAY8\n"
++            "bytes=%zu\nelapsed_ms=%.1f\ncompleted=%llu\nuptime_s=%.3f\nocr_fps=%.3f\n",
++            (unsigned long long)sequence, width, height, (size_t)width * height, elapsed_ms,
++            (unsigned long long)completed, uptime_s, uptime_s > 0 ? completed / uptime_s : 0);
++        fclose(stats);
++    }
++    FILE* latest = fopen("/tmp/piccap-ocr-latest.tsv", "w");
++    if (latest) {
++        fputs(tsv, latest);
++        fclose(latest);
++    }
++    if (sequence != 1)
++        return;
++    FILE* image = fopen("/tmp/piccap-ocr-sample.pgm", "wb");
++    if (image) {
++        fprintf(image, "P5\n%d %d\n255\n", width, height);
++        fwrite(pixels, 1, (size_t)width * height, image);
++        fclose(image);
++    }
++    FILE* sample = fopen("/tmp/piccap-ocr-sample.tsv", "w");
++    if (sample) {
++        fputs(tsv, sample);
++        fclose(sample);
++    }
++}
+diff --git a/unicapture/ocr_diagnostics.h b/unicapture/ocr_diagnostics.h
+new file mode 100644
+index 0000000..4070de1
+--- /dev/null
++++ b/unicapture/ocr_diagnostics.h
+@@ -0,0 +1,10 @@
++#pragma once
++
++#include <stdint.h>
++
++struct _frame_info;
++
++void ocr_diagnostics_source(const struct _frame_info* frame, uint64_t copy_us);
++void ocr_diagnostics_output(const struct _frame_info* frame);
++void ocr_diagnostics_result(const uint8_t* pixels, int width, int height,
++    uint64_t sequence, const char* tsv, double elapsed_ms, uint64_t completed, double uptime_s);
+diff --git a/unicapture/ocr_worker.c b/unicapture/ocr_worker.c
+new file mode 100644
+index 0000000..1261c56
+--- /dev/null
++++ b/unicapture/ocr_worker.c
+@@ -0,0 +1,357 @@
++#define _POSIX_C_SOURCE 200809L
++
++#include "ocr_worker.h"
++#include "ocr_diagnostics.h"
++#include "log.h"
++#include "unicapture.h"
++#include "utils.h"
++#include <errno.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <unistd.h>
++#include <sys/types.h>
++#include <sys/wait.h>
++
++#define OCR_INTERVAL_US 1000000ULL
++#define OCR_OUTPUT_LIMIT (256 * 1024)
++
++static int write_all(int fd, const uint8_t* data, size_t size)
++{
++    while (size > 0) {
++        ssize_t written = write(fd, data, size);
++        if (written < 0 && errno == EINTR)
++            continue;
++        if (written <= 0)
++            return -1;
++        data += written;
++        size -= (size_t)written;
++    }
++    return 0;
++}
++
++static int create_pgm(char* path, const uint8_t* pixels, int width, int height)
++{
++    int fd = mkstemp(path);
++    if (fd < 0)
++        return -1;
++
++    char header[64];
++    int header_size = snprintf(header, sizeof(header), "P5\n%d %d\n255\n", width, height);
++    int result = header_size > 0 && (size_t)header_size < sizeof(header)
++        ? write_all(fd, (const uint8_t*)header, (size_t)header_size)
++        : -1;
++    if (result == 0)
++        result = write_all(fd, pixels, (size_t)width * (size_t)height);
++    if (result == 0 && lseek(fd, 0, SEEK_SET) < 0)
++        result = -1;
++    if (result != 0) {
++        close(fd);
++        unlink(path);
++        return -1;
++    }
++    return fd;
++}
++
++static char* read_output(int fd)
++{
++    size_t size = 0;
++    size_t capacity = 4096;
++    char* output = malloc(capacity);
++    if (!output)
++        return NULL;
++
++    while (size < OCR_OUTPUT_LIMIT) {
++        if (size + 2048 + 1 > capacity) {
++            size_t next_capacity = capacity * 2;
++            if (next_capacity > OCR_OUTPUT_LIMIT + 1)
++                next_capacity = OCR_OUTPUT_LIMIT + 1;
++            char* next = realloc(output, next_capacity);
++            if (!next) {
++                free(output);
++                return NULL;
++            }
++            output = next;
++            capacity = next_capacity;
++        }
++        ssize_t count = read(fd, output + size, capacity - size - 1);
++        if (count < 0 && errno == EINTR)
++            continue;
++        if (count <= 0)
++            break;
++        size += (size_t)count;
++    }
++
++    char discard[4096];
++    for (;;) {
++        ssize_t count = read(fd, discard, sizeof(discard));
++        if (count < 0 && errno == EINTR)
++            continue;
++        if (count <= 0)
++            break;
++    }
++    output[size] = '\0';
++    return output;
++}
++
++static void log_tsv_words(char* output, uint64_t sequence)
++{
++    char* line = output;
++    bool found = false;
++    while (line && *line) {
++        char* next_line = strchr(line, '\n');
++        if (next_line)
++            *next_line++ = '\0';
++
++        char* fields[12];
++        fields[0] = line;
++        int field_count = 1;
++        for (char* cursor = line; *cursor && field_count < 12; cursor++) {
++            if (*cursor == '\t') {
++                *cursor = '\0';
++                fields[field_count++] = cursor + 1;
++            }
++        }
++
++        if (field_count == 12 && strcmp(fields[0], "level") != 0 && atoi(fields[0]) == 5 && fields[11][0]) {
++            int x = atoi(fields[6]);
++            int y = atoi(fields[7]);
++            int width = atoi(fields[8]);
++            int height = atoi(fields[9]);
++            double confidence = atof(fields[10]);
++            if (confidence >= 0.0) {
++                INFO("OCR_TEXT seq=%llu box=%d,%d,%d,%d confidence=%.1f text=%.*s",
++                    (unsigned long long)sequence, x, y, width, height, confidence, 160, fields[11]);
++                found = true;
++            }
++        }
++        line = next_line;
++    }
++    if (!found)
++        DBG("OCR_EMPTY seq=%llu", (unsigned long long)sequence);
++}
++
++static int run_tesseract(const uint8_t* pixels, int width, int height, uint64_t sequence,
++    uint64_t completed, uint64_t worker_started_us)
++{
++    uint64_t started_us = getticks_us();
++    char image_path[] = "/tmp/piccap-ocr-XXXXXX";
++    int image_fd = create_pgm(image_path, pixels, width, height);
++    if (image_fd < 0) {
++        WARN("OCR could not create temporary input: %s", strerror(errno));
++        return -1;
++    }
++
++    int output_pipe[2];
++    if (pipe(output_pipe) != 0) {
++        WARN("OCR could not create output pipe: %s", strerror(errno));
++        close(image_fd);
++        unlink(image_path);
++        return -1;
++    }
++
++    pid_t child = fork();
++    if (child == 0) {
++        close(output_pipe[0]);
++        if (dup2(image_fd, STDIN_FILENO) < 0 || dup2(output_pipe[1], STDOUT_FILENO) < 0)
++            _exit(126);
++        close(image_fd);
++        close(output_pipe[1]);
++        execl("/usr/bin/env", "env", "OMP_THREAD_LIMIT=1", "/usr/bin/nice", "-n", "10", "/usr/bin/tesseract",
++            "stdin", "stdout", "-l", "eng", "--psm", "11", "tsv", (char*)NULL);
++        _exit(127);
++    }
++
++    close(image_fd);
++    unlink(image_path);
++    close(output_pipe[1]);
++    if (child < 0) {
++        WARN("OCR could not start Tesseract: %s", strerror(errno));
++        close(output_pipe[0]);
++        return -1;
++    }
++
++    char* output = read_output(output_pipe[0]);
++    close(output_pipe[0]);
++    int status = 0;
++    pid_t waited;
++    do {
++        waited = waitpid(child, &status, 0);
++    } while (waited < 0 && errno == EINTR);
++
++    if (!output) {
++        WARN("OCR could not allocate Tesseract output buffer");
++        return -1;
++    }
++    if (waited != child || !WIFEXITED(status) || WEXITSTATUS(status) != 0) {
++        WARN("Tesseract failed for frame %llu (status=%d)", (unsigned long long)sequence, status);
++        free(output);
++        return -1;
++    }
++
++    ocr_diagnostics_result(pixels, width, height, sequence, output,
++        (getticks_us() - started_us) / 1000.0, completed,
++        (getticks_us() - worker_started_us) / 1000000.0);
++    log_tsv_words(output, sequence);
++    free(output);
++    return 0;
++}
++
++static void* worker_main(void* data)
++{
++    ocr_worker_t* worker = data;
++    uint8_t* local_frame = NULL;
++    size_t local_capacity = 0;
++    uint64_t completed = 0;
++    uint64_t started_us = getticks_us();
++    for (;;) {
++        pthread_mutex_lock(&worker->mutex);
++        while (!worker->has_frame && !worker->stopping)
++            pthread_cond_wait(&worker->condition, &worker->mutex);
++        if (worker->stopping) {
++            pthread_mutex_unlock(&worker->mutex);
++            break;
++        }
++
++        int width = worker->width;
++        int height = worker->height;
++        uint64_t sequence = worker->sequence;
++        size_t size = (size_t)width * (size_t)height;
++        if (local_capacity < size) {
++            uint8_t* next = realloc(local_frame, size);
++            if (!next) {
++                worker->has_frame = false;
++                pthread_mutex_unlock(&worker->mutex);
++                WARN("OCR could not allocate worker frame");
++                continue;
++            }
++            local_frame = next;
++            local_capacity = size;
++        }
++        memcpy(local_frame, worker->frame, size);
++        worker->has_frame = false;
++        pthread_mutex_unlock(&worker->mutex);
++        if (run_tesseract(local_frame, width, height, sequence, completed + 1, started_us) == 0)
++            completed++;
++    }
++    free(local_frame);
++    return NULL;
++}
++
++int ocr_worker_start(ocr_worker_t* worker, bool enabled)
++{
++    memset(worker, 0, sizeof(*worker));
++    worker->enabled = enabled;
++    if (!enabled)
++        return 0;
++    if (access("/usr/bin/tesseract", X_OK) != 0 || access("/usr/share/tessdata/eng.traineddata", R_OK) != 0) {
++        WARN("OCR enabled but Tesseract English runtime/model is missing");
++        worker->enabled = false;
++        return 0;
++    }
++    if (pthread_mutex_init(&worker->mutex, NULL) != 0)
++        return -1;
++    if (pthread_cond_init(&worker->condition, NULL) != 0) {
++        pthread_mutex_destroy(&worker->mutex);
++        return -1;
++    }
++    if (pthread_create(&worker->thread, NULL, worker_main, worker) != 0) {
++        pthread_cond_destroy(&worker->condition);
++        pthread_mutex_destroy(&worker->mutex);
++        return -1;
++    }
++    worker->running = true;
++    INFO("OCR worker started (Tesseract 5, English, max 1 frame/s)");
++    return 0;
++}
++
++static int copy_frame_to_gray(const frame_info_t* frame, uint8_t* target)
++{
++    if (frame->pixel_format == PIXFMT_YUV420_SEMI_PLANAR || frame->pixel_format == PIXFMT_YUV420_PLANAR) {
++        int stride = frame->planes[0].stride;
++        if (!frame->planes[0].buffer || stride < frame->width)
++            return -1;
++        for (int y = 0; y < frame->height; y++)
++            memcpy(target + (size_t)y * frame->width, frame->planes[0].buffer + (size_t)y * stride, (size_t)frame->width);
++        return 0;
++    }
++
++    if (frame->pixel_format == PIXFMT_ARGB || frame->pixel_format == PIXFMT_ABGR || frame->pixel_format == PIXFMT_RGB) {
++        int bytes_per_pixel = frame->pixel_format == PIXFMT_RGB ? 3 : 4;
++        int stride = frame->planes[0].stride;
++        if (!frame->planes[0].buffer || stride < frame->width * bytes_per_pixel)
++            return -1;
++        for (int y = 0; y < frame->height; y++) {
++            const uint8_t* source = frame->planes[0].buffer + (size_t)y * stride;
++            uint8_t* destination = target + (size_t)y * frame->width;
++            for (int x = 0; x < frame->width; x++) {
++                const uint8_t* pixel = source + (size_t)x * bytes_per_pixel;
++                int red = frame->pixel_format == PIXFMT_ARGB ? pixel[2] : pixel[0];
++                int green = pixel[1];
++                int blue = frame->pixel_format == PIXFMT_ARGB ? pixel[0] : pixel[2];
++                destination[x] = (uint8_t)((77 * red + 150 * green + 29 * blue) >> 8);
++            }
++        }
++        return 0;
++    }
++    return -1;
++}
++
++void ocr_worker_submit(ocr_worker_t* worker, const struct _frame_info* source)
++{
++    const frame_info_t* frame = (const frame_info_t*)source;
++    if (!worker->enabled || !worker->running || !frame || frame->pixel_format == PIXFMT_INVALID)
++        return;
++    if (frame->width <= 0 || frame->height <= 0 || frame->width > 4096 || frame->height > 4096)
++        return;
++    uint64_t now = getticks_us();
++    if (now - worker->last_submit_us < OCR_INTERVAL_US)
++        return;
++
++    size_t size = (size_t)frame->width * (size_t)frame->height;
++    // Capture must not wait for the OCR consumer. A busy slot drops this sample.
++    if (pthread_mutex_trylock(&worker->mutex) != 0)
++        return;
++    if (worker->capacity < size) {
++        uint8_t* next = realloc(worker->frame, size);
++        if (!next) {
++            pthread_mutex_unlock(&worker->mutex);
++            WARN("OCR could not allocate queued frame");
++            return;
++        }
++        worker->frame = next;
++        worker->capacity = size;
++    }
++    if (copy_frame_to_gray(frame, worker->frame) != 0) {
++        if (!worker->unsupported_format_logged) {
++            WARN("OCR does not support captured pixel format %d", frame->pixel_format);
++            worker->unsupported_format_logged = true;
++        }
++        pthread_mutex_unlock(&worker->mutex);
++        return;
++    }
++    worker->width = frame->width;
++    worker->height = frame->height;
++    worker->sequence++;
++    if (worker->sequence == 1)
++        ocr_diagnostics_source(frame, getticks_us() - now);
++    worker->last_submit_us = now;
++    worker->has_frame = true;
++    pthread_cond_signal(&worker->condition);
++    pthread_mutex_unlock(&worker->mutex);
++}
++
++void ocr_worker_stop(ocr_worker_t* worker)
++{
++    if (!worker->running)
++        return;
++    pthread_mutex_lock(&worker->mutex);
++    worker->stopping = true;
++    pthread_cond_signal(&worker->condition);
++    pthread_mutex_unlock(&worker->mutex);
++    pthread_join(worker->thread, NULL);
++    pthread_cond_destroy(&worker->condition);
++    pthread_mutex_destroy(&worker->mutex);
++    free(worker->frame);
++    memset(worker, 0, sizeof(*worker));
++}
+diff --git a/unicapture/ocr_worker.h b/unicapture/ocr_worker.h
+new file mode 100644
+index 0000000..832a862
+--- /dev/null
++++ b/unicapture/ocr_worker.h
+@@ -0,0 +1,29 @@
++#pragma once
++
++#include <pthread.h>
++#include <stdbool.h>
++#include <stddef.h>
++#include <stdint.h>
++
++struct _frame_info;
++
++typedef struct _ocr_worker {
++    pthread_t thread;
++    pthread_mutex_t mutex;
++    pthread_cond_t condition;
++    bool enabled;
++    bool running;
++    bool stopping;
++    bool has_frame;
++    bool unsupported_format_logged;
++    int width;
++    int height;
++    uint8_t* frame;
++    size_t capacity;
++    uint64_t sequence;
++    uint64_t last_submit_us;
++} ocr_worker_t;
++
++int ocr_worker_start(ocr_worker_t* worker, bool enabled);
++void ocr_worker_submit(ocr_worker_t* worker, const struct _frame_info* frame);
++void ocr_worker_stop(ocr_worker_t* worker);

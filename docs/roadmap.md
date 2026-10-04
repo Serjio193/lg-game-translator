@@ -11,9 +11,12 @@ This document records the agreed direction for the LG Game Translator project.
 - 1920×1080 works but is currently much slower (~14.6 FPS), so 720p is the working target.
 - Existing PicCap + HyperHDR lighting must keep working.
 
-For access to frames there are two planned paths:
-1. Reuse the existing PicCap/HyperHDR local stream in parallel if HyperHDR exposes the received frames safely.
-2. If that is not practical, fork/modify PicCap so it sends a second local stream to the translator while continuing to feed HyperHDR.
+The current implementation uses modified PicCap: a single video capture feeds
+HyperHDR over its existing loopback TCP connection and an independent internal
+OCR worker. HyperHDR Forwarder is disabled. On 2026-10-04, the measured RGB
+1280×720 profile with OCR enabled averaged about 57 FPS; completed full-frame
+English OCR was about 0.43 FPS. See [measured dual output report](ocr-dual-output.md)
+for actual input formats, paired frame proof, limitations, and reproducible patches.
 
 ## OCR
 

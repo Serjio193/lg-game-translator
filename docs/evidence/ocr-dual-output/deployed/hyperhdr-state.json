@@ -1,0 +1,46 @@
+{
+  "lastError": "2026-10-04 13:55:40 [FLATBUFSERVER] Could not start local domain socket server 'hyperhdr-domain'",
+  "priorities": [
+    {
+      "active": true,
+      "componentId": "FLATBUFSERVER",
+      "origin": "webos@::ffff:127.0.0.1",
+      "priority": 150,
+      "visible": true
+    }
+  ],
+  "components": [
+    {
+      "enabled": true,
+      "name": "ALL"
+    },
+    {
+      "enabled": false,
+      "name": "HDR"
+    },
+    {
+      "enabled": true,
+      "name": "SMOOTHING"
+    },
+    {
+      "enabled": true,
+      "name": "BLACKBORDER"
+    },
+    {
+      "enabled": false,
+      "name": "FORWARDER"
+    },
+    {
+      "enabled": false,
+      "name": "VIDEOGRABBER"
+    },
+    {
+      "enabled": false,
+      "name": "SYSTEMGRABBER"
+    },
+    {
+      "enabled": true,
+      "name": "LEDDEVICE"
+    }
+  ]
+}

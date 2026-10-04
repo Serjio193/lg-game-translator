@@ -1,0 +1,24 @@
+{
+  "start": "2026-10-04T13:56:47.0074872+03:00",
+  "end": "2026-10-04T14:00:43.7810928+03:00",
+  "samples": 24,
+  "sample_span_s": 236.773605,
+  "capture_reported_fps": {
+    "mean": 57.0283600490905,
+    "min": 54.140630287171,
+    "max": 58.960815624616
+  },
+  "all_piccap_running_connected_video": true,
+  "all_hyperhdr_running": true,
+  "hyperhdr_pids": [
+    32464
+  ],
+  "ocr_completed_delta": 101,
+  "ocr_completion_window_s": 236.2159999999999,
+  "ocr_completed_fps": 0.4275747620821623,
+  "sampled_ocr_elapsed_ms": {
+    "min": 1226.3,
+    "max": 4272.1
+  },
+  "note": "Capture FPS is PicCap status telemetry, not unique-frame counting. OCR timings are sampled latest results, not all results."
+}
