@@ -1,0 +1,483 @@
+diff --git a/unicapture/CMakeLists.txt b/unicapture/CMakeLists.txt
+index 2ada59c..fa7f729 100644
+--- a/unicapture/CMakeLists.txt
++++ b/unicapture/CMakeLists.txt
+@@ -2,6 +2,7 @@ add_library(unicapture STATIC
+         unicapture.c
+         converter.c
+         ocr_worker.c
++        translator_worker.c
+         ocr_diagnostics.c
+ )
+ set(UNICAPTURE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/../src")
+diff --git a/unicapture/ocr_worker.c b/unicapture/ocr_worker.c
+index 1261c56..5bc245c 100644
+--- a/unicapture/ocr_worker.c
++++ b/unicapture/ocr_worker.c
+@@ -94,8 +94,16 @@ static char* read_output(int fd)
+     return output;
+ }
+ 
+-static void log_tsv_words(char* output, uint64_t sequence)
++static char* log_tsv_words(char* output, uint64_t sequence)
+ {
++    char* recognized = calloc(3001, 1);
++    if (!recognized)
++        return NULL;
++    size_t recognized_size = 0;
++    int previous_page = -1;
++    int previous_block = -1;
++    int previous_paragraph = -1;
++    int previous_line = -1;
+     char* line = output;
+     bool found = false;
+     while (line && *line) {
+@@ -114,6 +122,10 @@ static void log_tsv_words(char* output, uint64_t sequence)
+         }
+ 
+         if (field_count == 12 && strcmp(fields[0], "level") != 0 && atoi(fields[0]) == 5 && fields[11][0]) {
++            int page = atoi(fields[1]);
++            int block = atoi(fields[2]);
++            int paragraph = atoi(fields[3]);
++            int line_number = atoi(fields[4]);
+             int x = atoi(fields[6]);
+             int y = atoi(fields[7]);
+             int width = atoi(fields[8]);
+@@ -123,16 +135,34 @@ static void log_tsv_words(char* output, uint64_t sequence)
+                 INFO("OCR_TEXT seq=%llu box=%d,%d,%d,%d confidence=%.1f text=%.*s",
+                     (unsigned long long)sequence, x, y, width, height, confidence, 160, fields[11]);
+                 found = true;
++                char separator = ' ';
++                if (previous_page >= 0 && (page != previous_page || block != previous_block
++                        || paragraph != previous_paragraph || line_number != previous_line))
++                    separator = '\n';
++                size_t word_size = strlen(fields[11]);
++                size_t separator_size = recognized_size ? 1 : 0;
++                if (recognized_size + separator_size + word_size <= 3000) {
++                    if (separator_size)
++                        recognized[recognized_size++] = separator;
++                    memcpy(recognized + recognized_size, fields[11], word_size);
++                    recognized_size += word_size;
++                    recognized[recognized_size] = '\0';
++                }
++                previous_page = page;
++                previous_block = block;
++                previous_paragraph = paragraph;
++                previous_line = line_number;
+             }
+         }
+         line = next_line;
+     }
+     if (!found)
+         DBG("OCR_EMPTY seq=%llu", (unsigned long long)sequence);
++    return recognized;
+ }
+ 
+ static int run_tesseract(const uint8_t* pixels, int width, int height, uint64_t sequence,
+-    uint64_t completed, uint64_t worker_started_us)
++    uint64_t completed, uint64_t worker_started_us, translator_worker_t* translator)
+ {
+     uint64_t started_us = getticks_us();
+     char image_path[] = "/tmp/piccap-ocr-XXXXXX";
+@@ -192,7 +222,11 @@ static int run_tesseract(const uint8_t* pixels, int width, int height, uint64_t
+     ocr_diagnostics_result(pixels, width, height, sequence, output,
+         (getticks_us() - started_us) / 1000.0, completed,
+         (getticks_us() - worker_started_us) / 1000000.0);
+-    log_tsv_words(output, sequence);
++    char* recognized = log_tsv_words(output, sequence);
++    if (recognized) {
++        translator_worker_submit(translator, recognized);
++        free(recognized);
++    }
+     free(output);
+     return 0;
+ }
+@@ -231,7 +265,8 @@ static void* worker_main(void* data)
+         memcpy(local_frame, worker->frame, size);
+         worker->has_frame = false;
+         pthread_mutex_unlock(&worker->mutex);
+-        if (run_tesseract(local_frame, width, height, sequence, completed + 1, started_us) == 0)
++        if (run_tesseract(local_frame, width, height, sequence, completed + 1,
++                started_us, &worker->translator) == 0)
+             completed++;
+     }
+     free(local_frame);
+@@ -249,15 +284,26 @@ int ocr_worker_start(ocr_worker_t* worker, bool enabled)
+         worker->enabled = false;
+         return 0;
+     }
+-    if (pthread_mutex_init(&worker->mutex, NULL) != 0)
++    if (translator_worker_start(&worker->translator) != 0)
++        WARN("Unable to start Orange Pi translator worker; OCR will continue locally");
++    else
++        worker->translator_running = true;
++    if (pthread_mutex_init(&worker->mutex, NULL) != 0) {
++        if (worker->translator_running)
++            translator_worker_stop(&worker->translator);
+         return -1;
++    }
+     if (pthread_cond_init(&worker->condition, NULL) != 0) {
+         pthread_mutex_destroy(&worker->mutex);
++        if (worker->translator_running)
++            translator_worker_stop(&worker->translator);
+         return -1;
+     }
+     if (pthread_create(&worker->thread, NULL, worker_main, worker) != 0) {
+         pthread_cond_destroy(&worker->condition);
+         pthread_mutex_destroy(&worker->mutex);
++        if (worker->translator_running)
++            translator_worker_stop(&worker->translator);
+         return -1;
+     }
+     worker->running = true;
+@@ -350,6 +396,8 @@ void ocr_worker_stop(ocr_worker_t* worker)
+     pthread_cond_signal(&worker->condition);
+     pthread_mutex_unlock(&worker->mutex);
+     pthread_join(worker->thread, NULL);
++    if (worker->translator_running)
++        translator_worker_stop(&worker->translator);
+     pthread_cond_destroy(&worker->condition);
+     pthread_mutex_destroy(&worker->mutex);
+     free(worker->frame);
+diff --git a/unicapture/ocr_worker.h b/unicapture/ocr_worker.h
+index 832a862..338e595 100644
+--- a/unicapture/ocr_worker.h
++++ b/unicapture/ocr_worker.h
+@@ -4,6 +4,7 @@
+ #include <stdbool.h>
+ #include <stddef.h>
+ #include <stdint.h>
++#include "translator_worker.h"
+ 
+ struct _frame_info;
+ 
+@@ -16,12 +17,14 @@ typedef struct _ocr_worker {
+     bool stopping;
+     bool has_frame;
+     bool unsupported_format_logged;
++    bool translator_running;
+     int width;
+     int height;
+     uint8_t* frame;
+     size_t capacity;
+     uint64_t sequence;
+     uint64_t last_submit_us;
++    translator_worker_t translator;
+ } ocr_worker_t;
+ 
+ int ocr_worker_start(ocr_worker_t* worker, bool enabled);
+diff --git a/unicapture/translator_worker.c b/unicapture/translator_worker.c
+new file mode 100644
+index 0000000..7502f35
+--- /dev/null
++++ b/unicapture/translator_worker.c
+@@ -0,0 +1,283 @@
++#define _POSIX_C_SOURCE 200809L
++
++#include "translator_worker.h"
++#include "log.h"
++
++#include <errno.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <sys/socket.h>
++#include <sys/time.h>
++#include <netdb.h>
++#include <unistd.h>
++
++#define TRANSLATOR_HOST "192.168.1.11"
++#define TRANSLATOR_PORT "8765"
++#define TRANSLATOR_PATH "/api/translate"
++#define TRANSLATOR_TEXT_LIMIT 3000
++#define RESPONSE_LIMIT (16 * 1024)
++#define IO_TIMEOUT_SECONDS 120
++
++static int send_all(int fd, const char* data, size_t size)
++{
++    while (size > 0) {
++        ssize_t sent = send(fd, data, size, MSG_NOSIGNAL);
++        if (sent < 0 && errno == EINTR)
++            continue;
++        if (sent <= 0)
++            return -1;
++        data += sent;
++        size -= (size_t)sent;
++    }
++    return 0;
++}
++
++static char* json_escape(const char* text)
++{
++    size_t input_size = strlen(text);
++    if (input_size > TRANSLATOR_TEXT_LIMIT)
++        return NULL;
++    char* escaped = malloc(input_size * 6 + 1);
++    if (!escaped)
++        return NULL;
++    char* out = escaped;
++    for (const unsigned char* in = (const unsigned char*)text; *in; in++) {
++        if (*in == '"' || *in == '\\') {
++            *out++ = '\\';
++            *out++ = (char)*in;
++        } else if (*in < 0x20) {
++            int written = snprintf(out, 7, "\\u%04x", *in);
++            if (written != 6) {
++                free(escaped);
++                return NULL;
++            }
++            out += 6;
++        } else {
++            *out++ = (char)*in;
++        }
++    }
++    *out = '\0';
++    return escaped;
++}
++
++static int connect_translator(void)
++{
++    struct addrinfo hints = { 0 };
++    struct addrinfo* addresses = NULL;
++    hints.ai_family = AF_INET;
++    hints.ai_socktype = SOCK_STREAM;
++    int lookup = getaddrinfo(TRANSLATOR_HOST, TRANSLATOR_PORT, &hints, &addresses);
++    if (lookup != 0) {
++        WARN("Translator DNS lookup failed: %s", gai_strerror(lookup));
++        return -1;
++    }
++
++    int fd = -1;
++    for (struct addrinfo* address = addresses; address; address = address->ai_next) {
++        fd = socket(address->ai_family, address->ai_socktype, address->ai_protocol);
++        if (fd < 0)
++            continue;
++        struct timeval timeout = { IO_TIMEOUT_SECONDS, 0 };
++        setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
++        setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
++        if (connect(fd, address->ai_addr, address->ai_addrlen) == 0)
++            break;
++        close(fd);
++        fd = -1;
++    }
++    freeaddrinfo(addresses);
++    return fd;
++}
++
++static int write_response_file(const char* body, size_t size)
++{
++    const char* temporary = "/tmp/piccap-translation-latest.json.tmp";
++    const char* latest = "/tmp/piccap-translation-latest.json";
++    FILE* file = fopen(temporary, "w");
++    if (!file)
++        return -1;
++    int result = fwrite(body, 1, size, file) == size && fputc('\n', file) != EOF ? 0 : -1;
++    if (fclose(file) != 0)
++        result = -1;
++    if (result == 0 && rename(temporary, latest) != 0)
++        result = -1;
++    if (result != 0)
++        unlink(temporary);
++    return result;
++}
++
++static bool request_translation(const char* text)
++{
++    INFO("Sending OCR text to Orange Pi (%zu bytes)", strlen(text));
++    char* escaped = json_escape(text);
++    if (!escaped) {
++        WARN("Translator request text is too large or could not be encoded");
++        return false;
++    }
++
++    size_t body_capacity = strlen(escaped) + 64;
++    char* body = malloc(body_capacity);
++    if (!body) {
++        free(escaped);
++        WARN("Translator request allocation failed");
++        return false;
++    }
++    int body_size = snprintf(body, body_capacity,
++        "{\"provider\":\"madlad\",\"text\":\"%s\"}", escaped);
++    free(escaped);
++    if (body_size < 0 || (size_t)body_size >= body_capacity) {
++        free(body);
++        WARN("Translator request serialization failed");
++        return false;
++    }
++
++    int fd = connect_translator();
++    if (fd < 0) {
++        WARN("Cannot connect to translator at %s:%s", TRANSLATOR_HOST, TRANSLATOR_PORT);
++        free(body);
++        return false;
++    }
++
++    char headers[512];
++    int header_size = snprintf(headers, sizeof(headers),
++        "POST %s HTTP/1.1\r\nHost: %s:%s\r\n"
++        "Content-Type: application/json; charset=utf-8\r\n"
++        "Connection: close\r\nContent-Length: %d\r\n\r\n",
++        TRANSLATOR_PATH, TRANSLATOR_HOST, TRANSLATOR_PORT, body_size);
++    int sent = header_size > 0 && (size_t)header_size < sizeof(headers)
++        ? send_all(fd, headers, (size_t)header_size) : -1;
++    if (sent == 0)
++        sent = send_all(fd, body, (size_t)body_size);
++    free(body);
++    if (sent != 0) {
++        WARN("Failed to send translator request");
++        close(fd);
++        return false;
++    }
++
++    char response[RESPONSE_LIMIT + 1];
++    size_t used = 0;
++    for (;;) {
++        ssize_t count = recv(fd, response + used, RESPONSE_LIMIT - used, 0);
++        if (count < 0 && errno == EINTR)
++            continue;
++        if (count <= 0)
++            break;
++        used += (size_t)count;
++        if (used == RESPONSE_LIMIT)
++            break;
++    }
++    close(fd);
++    response[used] = '\0';
++
++    char* body_start = strstr(response, "\r\n\r\n");
++    if (!body_start || (strncmp(response, "HTTP/1.0 200", 12) != 0
++            && strncmp(response, "HTTP/1.1 200", 12) != 0)) {
++        WARN("Translator returned invalid/failed HTTP response: %.*s",
++            240, response);
++        return false;
++    }
++    body_start += 4;
++    size_t response_size = used - (size_t)(body_start - response);
++    if (!response_size || response_size > RESPONSE_LIMIT) {
++        WARN("Translator returned an empty or oversized response");
++        return false;
++    }
++    if (write_response_file(body_start, response_size) != 0)
++        WARN("Could not save latest translator response: %s", strerror(errno));
++    INFO("TRANSLATION_RESPONSE %.*s", (int)response_size, body_start);
++    return true;
++}
++
++static void* worker_main(void* data)
++{
++    translator_worker_t* worker = data;
++    for (;;) {
++        pthread_mutex_lock(&worker->mutex);
++        while (!worker->pending && !worker->stopping)
++            pthread_cond_wait(&worker->condition, &worker->mutex);
++        if (worker->stopping) {
++            pthread_mutex_unlock(&worker->mutex);
++            break;
++        }
++        char* text = worker->text;
++        worker->text = NULL;
++        worker->pending = false;
++        free(worker->active_text);
++        worker->active_text = strdup(text);
++        pthread_mutex_unlock(&worker->mutex);
++        bool succeeded = request_translation(text);
++        pthread_mutex_lock(&worker->mutex);
++        if (succeeded) {
++            free(worker->last_text);
++            worker->last_text = strdup(text);
++        }
++        free(worker->active_text);
++        worker->active_text = NULL;
++        pthread_mutex_unlock(&worker->mutex);
++        free(text);
++    }
++    return NULL;
++}
++
++int translator_worker_start(translator_worker_t* worker)
++{
++    memset(worker, 0, sizeof(*worker));
++    if (pthread_mutex_init(&worker->mutex, NULL) != 0)
++        return -1;
++    if (pthread_cond_init(&worker->condition, NULL) != 0) {
++        pthread_mutex_destroy(&worker->mutex);
++        return -1;
++    }
++    if (pthread_create(&worker->thread, NULL, worker_main, worker) != 0) {
++        pthread_cond_destroy(&worker->condition);
++        pthread_mutex_destroy(&worker->mutex);
++        return -1;
++    }
++    worker->running = true;
++    INFO("Orange Pi translation worker started (%s:%s)", TRANSLATOR_HOST, TRANSLATOR_PORT);
++    return 0;
++}
++
++void translator_worker_submit(translator_worker_t* worker, const char* text)
++{
++    if (!worker->running || !text || !text[0])
++        return;
++    size_t size = strlen(text);
++    if (size > TRANSLATOR_TEXT_LIMIT)
++        size = TRANSLATOR_TEXT_LIMIT;
++    char* copy = strndup(text, size);
++    if (!copy)
++        return;
++
++    pthread_mutex_lock(&worker->mutex);
++    if (!worker->stopping && (!worker->last_text || strcmp(worker->last_text, copy) != 0)
++        && (!worker->active_text || strcmp(worker->active_text, copy) != 0)
++        && (!worker->text || strcmp(worker->text, copy) != 0)) {
++        free(worker->text);
++        worker->text = copy;
++        worker->pending = true;
++        copy = NULL;
++        pthread_cond_signal(&worker->condition);
++    }
++    pthread_mutex_unlock(&worker->mutex);
++    free(copy);
++}
++
++void translator_worker_stop(translator_worker_t* worker)
++{
++    if (!worker->running)
++        return;
++    pthread_mutex_lock(&worker->mutex);
++    worker->stopping = true;
++    pthread_cond_signal(&worker->condition);
++    pthread_mutex_unlock(&worker->mutex);
++    pthread_join(worker->thread, NULL);
++    pthread_cond_destroy(&worker->condition);
++    pthread_mutex_destroy(&worker->mutex);
++    free(worker->text);
++    free(worker->active_text);
++    free(worker->last_text);
++    memset(worker, 0, sizeof(*worker));
++}
+diff --git a/unicapture/translator_worker.h b/unicapture/translator_worker.h
+new file mode 100644
+index 0000000..e12a9b5
+--- /dev/null
++++ b/unicapture/translator_worker.h
+@@ -0,0 +1,20 @@
++#pragma once
++
++#include <pthread.h>
++#include <stdbool.h>
++
++typedef struct _translator_worker {
++    pthread_t thread;
++    pthread_mutex_t mutex;
++    pthread_cond_t condition;
++    bool running;
++    bool stopping;
++    bool pending;
++    char* text;
++    char* active_text;
++    char* last_text;
++} translator_worker_t;
++
++int translator_worker_start(translator_worker_t* worker);
++void translator_worker_submit(translator_worker_t* worker, const char* text);
++void translator_worker_stop(translator_worker_t* worker);

@@ -21,14 +21,19 @@ cd piccap-ocr
 git checkout a243d0e0f4426f83e270553c4a5631964ee74358
 git submodule update --init --recursive
 git -C hyperion-webos checkout 00c932f092084b234b3f619b060a98fa134c12bd
+sed 's/\r$//' "$PATCHES/hyperion-webos.patch" > /tmp/hyperion-webos.patch
+sed 's/\r$//' "$PATCHES/translator-worker.patch" > /tmp/translator-worker.patch
 git apply --check "$PATCHES/piccap.patch"
 git apply "$PATCHES/piccap.patch"
-git -C hyperion-webos apply --check "$PATCHES/hyperion-webos.patch"
-git -C hyperion-webos apply "$PATCHES/hyperion-webos.patch"
+git -C hyperion-webos apply --check /tmp/hyperion-webos.patch
+git -C hyperion-webos apply /tmp/hyperion-webos.patch
+git -C hyperion-webos apply --check /tmp/translator-worker.patch
+git -C hyperion-webos apply /tmp/translator-worker.patch
 ```
 
-Both patches were applied to archived clean bases and their resulting modified
-files compared with the development checkout (normalizing CRLF/LF): PASS.
+The translator worker is an incremental patch applied after the capture/OCR
+patch. It adds a separate POSIX HTTP worker; capture and HyperHDR forwarding do
+not wait for the translation request.
 
 ## Build
 
@@ -62,7 +67,12 @@ consumer of HyperHDR Forwarder or a second capture process.
 
 Tesseract and English data must already be available at `/usr/bin/tesseract` and
 `/usr/share/tessdata/eng.traineddata`. If missing, OCR disables itself and capture
-continues. The current OCR prototype has no tracker/cache/translation/overlay.
+continues. OCR TSV words are currently sent as one unfiltered text block to the
+Orange Pi endpoint `192.168.1.11:8765/api/translate` with provider `madlad`.
+An HTTP 200 response is saved on the TV at
+`/tmp/piccap-translation-latest.json`. Google selection, text-region filtering,
+sentence assembly, character-name handling, tracking/cache, and overlay are not
+implemented in this worker.
 
 See `docs/ocr-dual-output.md` in lg-game-translator for measured behavior and
 diagnostic sample paths.

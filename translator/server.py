@@ -19,9 +19,6 @@ LOG = logging.getLogger("lg-game-translator")
 MODEL_PATH = Path(os.environ.get(
     "TRANSLATOR_MODEL", "/home/orangepi/translator-test/madlad3b"
 ))
-UI_PATH = Path(os.environ.get(
-    "TRANSLATOR_UI", str(Path(__file__).resolve().parent.parent / "packaging/index.html")
-))
 THREADS = max(1, int(os.environ.get("TRANSLATOR_THREADS", "4")))
 MAX_BODY_BYTES = 64 * 1024
 MAX_TEXT_CHARS = 4000
@@ -152,18 +149,6 @@ class Handler(BaseHTTPRequestHandler):
                 },
                 "google": {"available": bool(os.environ.get("GOOGLE_API_KEY"))},
             })
-            return
-        if self.path in ("/", "/index.html"):
-            try:
-                data = UI_PATH.read_bytes()
-            except OSError:
-                self._send_json(404, {"error": "UI file not found"})
-                return
-            self.send_response(200)
-            self._headers("text/html; charset=utf-8")
-            self.send_header("Content-Length", str(len(data)))
-            self.end_headers()
-            self.wfile.write(data)
             return
         self._send_json(404, {"error": "Not found"})
 

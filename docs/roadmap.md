@@ -58,9 +58,16 @@ The TV should primarily remain responsible for capture. Orange Pi or Shield are 
 Current prototype direction:
 - English → Russian;
 - MADLAD-400 3B INT8 through CTranslate2 on Orange Pi 5 is the local/offline option;
-- Google Cloud Translation v2 is an optional second provider selected in the app UI;
+- Google Cloud Translation v2 is a future optional second provider on the Orange Pi;
 - the Orange Pi hosts the translation API and keeps the Google API key server-side;
-- the LG app currently accepts text manually; OCR is not connected yet.
+- PicCap's OCR worker sends recognized text to the Orange Pi; no separate TV UI app is part of this path.
+
+The first live PicCap-to-MADLAD request returned an HTTP 200 response, but
+PicCap currently submits every word Tesseract finds on the full screen. The
+44.9-second response exhausted MADLAD's 128-token generation limit and was
+repetitive OCR noise. This confirms transport only; sentence selection and
+useful translation are still the next step. See
+[`ocr-dual-output.md`](ocr-dual-output.md) for the live TSV and response.
 
 On 2026-10-05, the exact benchmark sentence completed through the Orange Pi API
 in 17.4 s after model load (4.42 s model load; 59 generated tokens). The process

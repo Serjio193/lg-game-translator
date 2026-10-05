@@ -110,9 +110,42 @@ the current Tesseract invocation.
 
 The model is **English only**. Samples containing Cyrillic or background texture
 produce noisy/incorrect words. TSV output confirms the OCR path runs, not that
-game text recognition quality is sufficient. Next work should measure real
-English game text and add text-region selection/tracking/cache before expecting
-frequent updates. No translation or overlay is implemented.
+game text recognition quality is sufficient.
+
+## PicCap OCR → Orange Pi translation handoff
+
+On 2026-10-05, PicCap was rebuilt and updated on the OLED65G51LW with a separate
+translation worker. The installed service reported `elevated:true`,
+`videoRunning:true`, `connected:true`, and about 59.6 capture FPS at 1280×720.
+HyperHDR stayed connected to PicCap throughout the final measurement. Tesseract
+completed about 0.40 full-frame OCR/s; each OCR result was passed to the
+translation worker without blocking capture.
+
+The worker sends an HTTP POST to `192.168.1.11:8765/api/translate`:
+
+```json
+{"provider":"madlad","text":"<all recognized TSV words>"}
+```
+
+It saves each successful HTTP 200 response atomically to
+`/tmp/piccap-translation-latest.json` on the TV. A response was received on
+2026-10-05 in 44.9 s after 3.7 s model load, with 128 generated tokens. The
+result was repetitive OCR noise, not a usable translation. Tesseract did find
+the game text `I passed out... When I woke up, I was here on Shipshape Island.`
+among the TSV words, but the current handoff sends every recognized word,
+including interface and background noise, as one request. This proves the
+PicCap → OCR → Orange Pi → PicCap-response-file transport, not useful sentence
+selection or translation quality.
+
+Saved evidence from that live run:
+- [PicCap word-level TSV rows](evidence/ocr-dual-output/deployed/piccap-live-ocr-20261005.tsv)
+- [Orange Pi response](evidence/ocr-dual-output/deployed/orange-pi-response-20261005.json)
+
+The next design step is to decide which OCR words form a translation request:
+separate character names from dialogue, preserve names with placeholders, and
+buffer text until sentence-ending punctuation or another clear end-of-thought
+signal. That behavior is intentionally not implemented yet. Google remains a
+future provider; the installed PicCap worker currently selects MADLAD only.
 
 ## Reproducible artifacts and verification
 
