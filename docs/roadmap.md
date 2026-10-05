@@ -55,15 +55,25 @@ The TV should primarily remain responsible for capture. Orange Pi or Shield are 
 
 ## Translation
 
-Initial direction:
+Current prototype direction:
 - English → Russian;
-- local translation preferred for low latency and offline use;
-- start with MarianMT / Helsinki EN→RU;
-- compare later with NLLB distilled or other models.
+- MADLAD-400 3B INT8 through CTranslate2 on Orange Pi 5 is the local/offline option;
+- Google Cloud Translation v2 is an optional second provider selected in the app UI;
+- the Orange Pi hosts the translation API and keeps the Google API key server-side;
+- the LG app currently accepts text manually; OCR is not connected yet.
+
+On 2026-10-05, the exact benchmark sentence completed through the Orange Pi API
+in 17.4 s after model load (4.42 s model load; 59 generated tokens). The process
+used about 3.5 GiB RSS after loading, leaving about 6.2 GiB available. MADLAD
+translated the ambiguous phrase “Hold the line” as “Сохраняйте веревку”, which
+is a quality limitation. Google remains selectable but is unavailable until
+`GOOGLE_API_KEY` is configured in the Orange Pi service environment. The local
+service setup and measured result should not be treated as a real-time claim.
 
 Translation should retain short dialogue context instead of treating every OCR line as a completely independent sentence. Keep a small rolling context of prior lines where useful.
 
-Cloud translation can remain an optional fallback, not the main path.
+Cloud translation is an optional quality fallback, not the default path. Keep
+the API key off the TV and out of the app bundle.
 
 ## Output modes
 

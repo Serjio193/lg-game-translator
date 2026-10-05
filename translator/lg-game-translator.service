@@ -1,0 +1,20 @@
+[Unit]
+Description=LG Game Translator API
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/orangepi/lg-game-translator-runtime
+Environment=PYTHONUNBUFFERED=1
+Environment=TRANSLATOR_BIND=192.168.1.11
+Environment=TRANSLATOR_PORT=8765
+Environment=TRANSLATOR_MODEL=/home/orangepi/translator-test/madlad3b
+Environment=TRANSLATOR_UI=/home/orangepi/lg-game-translator-runtime/packaging/index.html
+Environment=TRANSLATOR_THREADS=4
+EnvironmentFile=-/home/orangepi/.config/lg-game-translator/secrets.env
+ExecStart=/home/orangepi/lg-game-translator-runtime/.venv/bin/python /home/orangepi/lg-game-translator-runtime/translator/server.py
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
