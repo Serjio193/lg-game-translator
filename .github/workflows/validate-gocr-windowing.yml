@@ -1,0 +1,32 @@
+name: Validate GOCR recognizer windowing
+
+on:
+  push:
+    paths:
+      - '.github/workflows/validate-gocr-windowing.yml'
+      - 'scripts/validate-gocr-windowing.py'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: python3 -m pip install --quiet ai-edge-litert pillow protobuf numpy
+      - name: Export ScreenAI
+        run: |
+          mkdir -p wincheck/bin wincheck/pkg
+          curl -fsSL "https://chrome-infra-packages.appspot.com/client?platform=linux-amd64&version=latest" -o wincheck/bin/cipd
+          chmod +x wincheck/bin/cipd
+          printf 'chromium/third_party/screen-ai/linux latest\n' | wincheck/bin/cipd export -root wincheck/pkg -ensure-file -
+          curl -fsSL https://raw.githubusercontent.com/AuroraWright/owocr/master/owocr/screenai_protos/chrome_screen_ai_pb2.py -o wincheck/chrome_screen_ai_pb2.py
+      - name: Compare windowing
+        run: python3 scripts/validate-gocr-windowing.py wincheck/pkg wincheck/chrome_screen_ai_pb2.py wincheck/report.json
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: gocr-windowing-validation
+          path: wincheck/
+          retention-days: 7
