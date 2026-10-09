@@ -1,0 +1,43 @@
+{
+  "apk": "/tmp/google-runtime/google.apk",
+  "apk_sha256": "2e3fb6182625e93e60f827b63c57a5bf63e202e66f8990d03ded42c86a54d979",
+  "libs": {
+    "liblens_ondevice_engine_base.so": {
+      "source": "lib/arm64-v8a/liblens_ondevice_engine_base.so",
+      "bytes": 275680,
+      "sha256": "1ada5226d1923762e21c843a2bbdc1e3e754e328fb7d6426ee4cf08d8cf6da93"
+    },
+    "liblens_ondevice_engine_play_ml.so": {
+      "source": "lib/arm64-v8a/liblens_ondevice_engine_play_ml.so",
+      "bytes": 19906776,
+      "sha256": "d9cfafb045a296708246727f3c0473895790bcd5ae61265713459bb5bd515203"
+    },
+    "liblens_vision.so": {
+      "source": "lib/arm64-v8a/liblens_vision.so",
+      "bytes": 18912,
+      "sha256": "c8af8d909ad7693be5ddab63dca6c5a5dd48a971d7f76ada5d9b08353e189cf6"
+    },
+    "libtensorflowlite_jni_gms_client.so": {
+      "source": "lib/arm64-v8a/libtensorflowlite_jni_gms_client.so",
+      "bytes": 527872,
+      "sha256": "92c48469ee752562264527259cc8982878153026fd74a54a704ee73fbbe800f9"
+    }
+  },
+  "assets": {
+    "gocr_group_rpn_text_detection_config_2024_q4.binarypb": {
+      "source": "assets/lens_ondevice_text_stack_multiscript_omni/third_party/lens/line_detector/v688492737/gocr_group_rpn_text_detection_config_2024_q4.binarypb",
+      "bytes": 645,
+      "sha256": "45033fc42999a90e9fae90ef8303ee76e013f575ca1caa811d315a1e0107481c"
+    },
+    "gocr_group_rpn_text_detection_model_2024_q4.tflite": {
+      "source": "assets/lens_ondevice_text_stack_multiscript_omni/third_party/lens/line_detector/v688492737/gocr_group_rpn_text_detection_model_2024_q4.tflite",
+      "bytes": 2083136,
+      "sha256": "55ab1290b1b481d71c65636d93570f4e48ae0d2c0a748f773d93b9cd13126a51"
+    },
+    "recognizer_latn_vi_cyrl_lm_retrained.tflite": {
+      "source": "assets/lens_ondevice_text_stack_multiscript_omni/third_party/lens/line_recognition/v678672708/recognizer_latn_vi_cyrl_lm_retrained.tflite",
+      "bytes": 1805208,
+      "sha256": "23501a73630270f22ad7fc9b54a6daa566db4b492eb7addaa160b88afba6d002"
+    }
+  }
+}
