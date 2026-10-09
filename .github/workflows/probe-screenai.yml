@@ -1,0 +1,37 @@
+name: Probe Chrome ScreenAI reference
+
+on:
+  push:
+    paths:
+      - '.github/workflows/probe-screenai.yml'
+      - 'scripts/probe-screenai.py'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: |
+          python3 -m pip install --quiet pillow protobuf
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq curl
+      - name: Export ScreenAI package
+        run: |
+          mkdir -p screenai-ref/bin screenai-ref/pkg
+          curl -fsSL "https://chrome-infra-packages.appspot.com/client?platform=linux-amd64&version=latest" -o screenai-ref/bin/cipd
+          chmod +x screenai-ref/bin/cipd
+          printf 'chromium/third_party/screen-ai/linux latest\n' | screenai-ref/bin/cipd export -root screenai-ref/pkg -ensure-file -
+      - name: Fetch proto and probe
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/AuroraWright/owocr/master/owocr/screenai_protos/chrome_screen_ai_pb2.py -o screenai-ref/chrome_screen_ai_pb2.py
+          python3 scripts/probe-screenai.py screenai-ref/pkg screenai-ref/chrome_screen_ai_pb2.py screenai-ref/report.json
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenai-reference-probe
+          path: screenai-ref/
+          retention-days: 7
