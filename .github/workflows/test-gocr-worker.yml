@@ -1,0 +1,52 @@
+name: Test GOCR worker
+
+on:
+  push:
+    paths:
+      - 'gocr_worker/**'
+      - 'scripts/extract-gocr-assets.py'
+      - '.github/workflows/test-gocr-worker.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install
+        run: python3 -m pip install --quiet -r gocr_worker/requirements.txt
+      - name: Syntax
+        run: python3 -m compileall -q gocr_worker scripts/extract-gocr-assets.py
+      - name: Download Google App
+        run: |
+          mkdir -p /tmp/gocr-test/assets
+          curl -fL -A "Mozilla/5.0" "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest" -o /tmp/gocr-test/google.apk
+          python3 scripts/extract-gocr-assets.py /tmp/gocr-test/google.apk /tmp/gocr-test/assets
+      - name: Synthetic crop
+        run: |
+          python3 - <<'PY'
+          from PIL import Image,ImageDraw,ImageFont
+          im=Image.new("L",(900,70),255)
+          font=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",42)
+          ImageDraw.Draw(im).text((12,8),"HELLO WORLD Привет мир",font=font,fill=0)
+          im.save("/tmp/gocr-test/crop.png")
+          PY
+          PYTHONPATH=. python3 -m gocr_worker.worker --assets /tmp/gocr-test/assets --threads 2 crop /tmp/gocr-test/crop.png > /tmp/gocr-test/result.json
+          cat /tmp/gocr-test/result.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open("/tmp/gocr-test/result.json"))
+          assert x["schema"]=="gocr.worker.v1"
+          assert x["mode"]=="crop"
+          assert x["lines"] and isinstance(x["lines"][0]["text"],str)
+          assert x["parity"]["recognizer_model"]=="google_original"
+          PY
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: gocr-worker-test
+          path: |
+            /tmp/gocr-test/result.json
+            /tmp/gocr-test/assets/manifest.json
+          retention-days: 7
