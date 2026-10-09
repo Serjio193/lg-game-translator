@@ -1,0 +1,284 @@
+
+/mnt/c/Users/serji/AppData/Local/Temp/gocr-system-tflite.so:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+003881e4 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base>:
+  3881e4:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  3881e8:	e24dd0d4 	sub	sp, sp, #212	; 0xd4
+  3881ec:	e59da0f8 	ldr	sl, [sp, #248]	; 0xf8
+  3881f0:	e280c004 	add	ip, r0, #4
+  3881f4:	e58dc044 	str	ip, [sp, #68]	; 0x44
+  3881f8:	f42c678f 	vld1.32	{d6}, [ip]
+  3881fc:	e28ac004 	add	ip, sl, #4
+  388200:	e58dc04c 	str	ip, [sp, #76]	; 0x4c
+  388204:	f42c778f 	vld1.32	{d7}, [ip]
+  388208:	e282c004 	add	ip, r2, #4
+  38820c:	e58dc048 	str	ip, [sp, #72]	; 0x48
+  388210:	f42c578f 	vld1.32	{d5}, [ip]
+  388214:	ee17ca10 	vmov	ip, s14
+  388218:	e35c0000 	cmp	ip, #0
+  38821c:	ee15ea10 	vmov	lr, s10
+  388220:	c3a06001 	movgt	r6, #1
+  388224:	d3a06000 	movle	r6, #0
+  388228:	e58dc028 	str	ip, [sp, #40]	; 0x28
+  38822c:	ee37cb10 	vmov.32	ip, d7[1]
+  388230:	e35c0000 	cmp	ip, #0
+  388234:	d3a06000 	movle	r6, #0
+  388238:	c2066001 	andgt	r6, r6, #1
+  38823c:	e25e7000 	subs	r7, lr, #0
+  388240:	d3a06000 	movle	r6, #0
+  388244:	c2066001 	andgt	r6, r6, #1
+  388248:	ee359b10 	vmov.32	r9, d5[1]
+  38824c:	e3590000 	cmp	r9, #0
+  388250:	d3a06000 	movle	r6, #0
+  388254:	c2066001 	andgt	r6, r6, #1
+  388258:	ee16ea10 	vmov	lr, s12
+  38825c:	e159000c 	cmp	r9, ip
+  388260:	13a06000 	movne	r6, #0
+  388264:	02066001 	andeq	r6, r6, #1
+  388268:	e35e0000 	cmp	lr, #0
+  38826c:	d3a06000 	movle	r6, #0
+  388270:	c2066001 	andgt	r6, r6, #1
+  388274:	e58de030 	str	lr, [sp, #48]	; 0x30
+  388278:	ee36eb10 	vmov.32	lr, d6[1]
+  38827c:	e35e0000 	cmp	lr, #0
+  388280:	d3a06000 	movle	r6, #0
+  388284:	c2066001 	andgt	r6, r6, #1
+  388288:	e59db100 	ldr	fp, [sp, #256]	; 0x100
+  38828c:	e15e0007 	cmp	lr, r7
+  388290:	13a06000 	movne	r6, #0
+  388294:	02066001 	andeq	r6, r6, #1
+  388298:	e58d1020 	str	r1, [sp, #32]
+  38829c:	e3560000 	cmp	r6, #0
+  3882a0:	e5906004 	ldr	r6, [r0, #4]
+  3882a4:	e58d3024 	str	r3, [sp, #36]	; 0x24
+  3882a8:	e58d6038 	str	r6, [sp, #56]	; 0x38
+  3882ac:	e5926008 	ldr	r6, [r2, #8]
+  3882b0:	e58d603c 	str	r6, [sp, #60]	; 0x3c
+  3882b4:	e59a6004 	ldr	r6, [sl, #4]
+  3882b8:	e58d6040 	str	r6, [sp, #64]	; 0x40
+  3882bc:	0a00007b 	beq	3884b0 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x2cc>
+  3882c0:	e5908000 	ldr	r8, [r0]
+  3882c4:	e1a05000 	mov	r5, r0
+  3882c8:	e59d6104 	ldr	r6, [sp, #260]	; 0x104
+  3882cc:	e1a04002 	mov	r4, r2
+  3882d0:	e58d8018 	str	r8, [sp, #24]
+  3882d4:	e59a8000 	ldr	r8, [sl]
+  3882d8:	e58d801c 	str	r8, [sp, #28]
+  3882dc:	e5d68014 	ldrb	r8, [r6, #20]
+  3882e0:	e5926000 	ldr	r6, [r2]
+  3882e4:	e58d802c 	str	r8, [sp, #44]	; 0x2c
+  3882e8:	e59d801c 	ldr	r8, [sp, #28]
+  3882ec:	e58d6014 	str	r6, [sp, #20]
+  3882f0:	e2588000 	subs	r8, r8, #0
+  3882f4:	13a08001 	movne	r8, #1
+  3882f8:	e1a06008 	mov	r6, r8
+  3882fc:	e58d8034 	str	r8, [sp, #52]	; 0x34
+  388300:	e59d8018 	ldr	r8, [sp, #24]
+  388304:	e3580001 	cmp	r8, #1
+  388308:	1a000007 	bne	38832c <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x148>
+  38830c:	e59d8014 	ldr	r8, [sp, #20]
+  388310:	e3580000 	cmp	r8, #0
+  388314:	1a000002 	bne	388324 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x140>
+  388318:	e59d802c 	ldr	r8, [sp, #44]	; 0x2c
+  38831c:	e1986006 	orrs	r6, r8, r6
+  388320:	0a000074 	beq	3884f8 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x314>
+  388324:	e59d6018 	ldr	r6, [sp, #24]
+  388328:	ea000006 	b	388348 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x164>
+  38832c:	e59d3018 	ldr	r3, [sp, #24]
+  388330:	e3530000 	cmp	r3, #0
+  388334:	e59d3030 	ldr	r3, [sp, #48]	; 0x30
+  388338:	11a0300e 	movne	r3, lr
+  38833c:	13a06001 	movne	r6, #1
+  388340:	03a06000 	moveq	r6, #0
+  388344:	e1a0e003 	mov	lr, r3
+  388348:	e59d3020 	ldr	r3, [sp, #32]
+  38834c:	e58de06c 	str	lr, [sp, #108]	; 0x6c
+  388350:	e5d5100c 	ldrb	r1, [r5, #12]
+  388354:	e58d3060 	str	r3, [sp, #96]	; 0x60
+  388358:	e28d3064 	add	r3, sp, #100	; 0x64
+  38835c:	f403678f 	vst1.32	{d6}, [r3]
+  388360:	e59d3014 	ldr	r3, [sp, #20]
+  388364:	e2532000 	subs	r2, r3, #0
+  388368:	e59d302c 	ldr	r3, [sp, #44]	; 0x2c
+  38836c:	13a02001 	movne	r2, #1
+  388370:	e3530000 	cmp	r3, #0
+  388374:	e3a03000 	mov	r3, #0
+  388378:	e58d3074 	str	r3, [sp, #116]	; 0x74
+  38837c:	e58d3070 	str	r3, [sp, #112]	; 0x70
+  388380:	e5cd1074 	strb	r1, [sp, #116]	; 0x74
+  388384:	e58d308c 	str	r3, [sp, #140]	; 0x8c
+  388388:	e1d410dc 	ldrsb	r1, [r4, #12]
+  38838c:	e58d30a4 	str	r3, [sp, #164]	; 0xa4
+  388390:	e5cd6070 	strb	r6, [sp, #112]	; 0x70
+  388394:	e58d3088 	str	r3, [sp, #136]	; 0x88
+  388398:	e58d30a0 	str	r3, [sp, #160]	; 0xa0
+  38839c:	0a000045 	beq	3884b8 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x2d4>
+  3883a0:	e5d5300d 	ldrb	r3, [r5, #13]
+  3883a4:	e3530001 	cmp	r3, #1
+  3883a8:	0a000002 	beq	3883b8 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x1d4>
+  3883ac:	e3530002 	cmp	r3, #2
+  3883b0:	03a03003 	moveq	r3, #3
+  3883b4:	13a03000 	movne	r3, #0
+  3883b8:	e5cd3075 	strb	r3, [sp, #117]	; 0x75
+  3883bc:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+  3883c0:	e59d0014 	ldr	r0, [sp, #20]
+  3883c4:	e5cd2088 	strb	r2, [sp, #136]	; 0x88
+  3883c8:	e28d207c 	add	r2, sp, #124	; 0x7c
+  3883cc:	e58d3078 	str	r3, [sp, #120]	; 0x78
+  3883d0:	e5d4300d 	ldrb	r3, [r4, #13]
+  3883d4:	e3500000 	cmp	r0, #0
+  3883d8:	11a07009 	movne	r7, r9
+  3883dc:	e5cd108c 	strb	r1, [sp, #140]	; 0x8c
+  3883e0:	e58d7084 	str	r7, [sp, #132]	; 0x84
+  3883e4:	e3530001 	cmp	r3, #1
+  3883e8:	f402578f 	vst1.32	{d5}, [r2]
+  3883ec:	0a000002 	beq	3883fc <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x218>
+  3883f0:	e3530002 	cmp	r3, #2
+  3883f4:	03a03003 	moveq	r3, #3
+  3883f8:	13a03000 	movne	r3, #0
+  3883fc:	e5cd308d 	strb	r3, [sp, #141]	; 0x8d
+  388400:	e59d201c 	ldr	r2, [sp, #28]
+  388404:	e28d40ac 	add	r4, sp, #172	; 0xac
+  388408:	e59d3028 	ldr	r3, [sp, #40]	; 0x28
+  38840c:	e1a0e004 	mov	lr, r4
+  388410:	e59d10fc 	ldr	r1, [sp, #252]	; 0xfc
+  388414:	e3520000 	cmp	r2, #0
+  388418:	e5da200c 	ldrb	r2, [sl, #12]
+  38841c:	01a0c003 	moveq	ip, r3
+  388420:	e59d3034 	ldr	r3, [sp, #52]	; 0x34
+  388424:	e58dc09c 	str	ip, [sp, #156]	; 0x9c
+  388428:	e58d1090 	str	r1, [sp, #144]	; 0x90
+  38842c:	e5cd30a0 	strb	r3, [sp, #160]	; 0xa0
+  388430:	e59f31fc 	ldr	r3, [pc, #508]	; 388634 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x450>
+  388434:	e5cd20a4 	strb	r2, [sp, #164]	; 0xa4
+  388438:	e59b5008 	ldr	r5, [fp, #8]
+  38843c:	e08f3003 	add	r3, pc, r3
+  388440:	e283c02c 	add	ip, r3, #44	; 0x2c
+  388444:	e28d3094 	add	r3, sp, #148	; 0x94
+  388448:	f403778f 	vst1.32	{d7}, [r3]
+  38844c:	e8bc000f 	ldm	ip!, {r0, r1, r2, r3}
+  388450:	e8ae000f 	stmia	lr!, {r0, r1, r2, r3}
+  388454:	e89c0007 	ldm	ip, {r0, r1, r2}
+  388458:	e88e0007 	stm	lr, {r0, r1, r2}
+  38845c:	e1a02004 	mov	r2, r4
+  388460:	e5dd30c3 	ldrb	r3, [sp, #195]	; 0xc3
+  388464:	e59b1010 	ldr	r1, [fp, #16]
+  388468:	e3530000 	cmp	r3, #0
+  38846c:	059b000c 	ldreq	r0, [fp, #12]
+  388470:	03a03001 	moveq	r3, #1
+  388474:	159b000c 	ldrne	r0, [fp, #12]
+  388478:	05cd30c3 	strbeq	r3, [sp, #195]	; 0xc3
+  38847c:	058d50b0 	streq	r5, [sp, #176]	; 0xb0
+  388480:	158d50b0 	strne	r5, [sp, #176]	; 0xb0
+  388484:	e1dbc1b4 	ldrh	ip, [fp, #20]
+  388488:	e59d3104 	ldr	r3, [sp, #260]	; 0x104
+  38848c:	e58d00b8 	str	r0, [sp, #184]	; 0xb8
+  388490:	e28d0090 	add	r0, sp, #144	; 0x90
+  388494:	e58d10ac 	str	r1, [sp, #172]	; 0xac
+  388498:	e28d1078 	add	r1, sp, #120	; 0x78
+  38849c:	e5933004 	ldr	r3, [r3, #4]
+  3884a0:	e58d0000 	str	r0, [sp]
+  3884a4:	e28d0060 	add	r0, sp, #96	; 0x60
+  3884a8:	e1cdccb0 	strh	ip, [sp, #192]	; 0xc0
+  3884ac:	ebf485e6 	bl	a9c4c <void ruy::Mul<(ruy::Path)17, signed char, signed char, int, signed char>(ruy::Matrix<signed char> const&, ruy::Matrix<signed char> const&, ruy::MulParams<int, signed char> const&, ruy::Context*, ruy::Matrix<signed char>*)@plt>
+  3884b0:	e28dd0d4 	add	sp, sp, #212	; 0xd4
+  3884b4:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  3884b8:	e59d3014 	ldr	r3, [sp, #20]
+  3884bc:	e5cd2088 	strb	r2, [sp, #136]	; 0x88
+  3884c0:	e3530000 	cmp	r3, #0
+  3884c4:	e28d307c 	add	r3, sp, #124	; 0x7c
+  3884c8:	f403578f 	vst1.32	{d5}, [r3]
+  3884cc:	1a000004 	bne	3884e4 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x300>
+  3884d0:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+  3884d4:	e58d7084 	str	r7, [sp, #132]	; 0x84
+  3884d8:	e5cd108c 	strb	r1, [sp, #140]	; 0x8c
+  3884dc:	e58d3078 	str	r3, [sp, #120]	; 0x78
+  3884e0:	eaffffc6 	b	388400 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x21c>
+  3884e4:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+  3884e8:	e58d9084 	str	r9, [sp, #132]	; 0x84
+  3884ec:	e5cd108c 	strb	r1, [sp, #140]	; 0x8c
+  3884f0:	e58d3078 	str	r3, [sp, #120]	; 0x78
+  3884f4:	eaffffc1 	b	388400 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x21c>
+  3884f8:	e35c0001 	cmp	ip, #1
+  3884fc:	0a000037 	beq	3885e0 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x3fc>
+  388500:	e59d3020 	ldr	r3, [sp, #32]
+  388504:	e1da10dc 	ldrsb	r1, [sl, #12]
+  388508:	e1d520dc 	ldrsb	r2, [r5, #12]
+  38850c:	e58d3060 	str	r3, [sp, #96]	; 0x60
+  388510:	e59d3024 	ldr	r3, [sp, #36]	; 0x24
+  388514:	e58d10c4 	str	r1, [sp, #196]	; 0xc4
+  388518:	e28d106c 	add	r1, sp, #108	; 0x6c
+  38851c:	e2622000 	rsb	r2, r2, #0
+  388520:	ed8d5a21 	vstr	s10, [sp, #132]	; 0x84
+  388524:	e58d3078 	str	r3, [sp, #120]	; 0x78
+  388528:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+  38852c:	f481688f 	vst1.32	{d6[1]}, [r1]
+  388530:	e59d10fc 	ldr	r1, [sp, #252]	; 0xfc
+  388534:	e58d30c0 	str	r3, [sp, #192]	; 0xc0
+  388538:	e59d3038 	ldr	r3, [sp, #56]	; 0x38
+  38853c:	e58d1090 	str	r1, [sp, #144]	; 0x90
+  388540:	ed8d6a33 	vstr	s12, [sp, #204]	; 0xcc
+  388544:	e58d3054 	str	r3, [sp, #84]	; 0x54
+  388548:	e59d303c 	ldr	r3, [sp, #60]	; 0x3c
+  38854c:	e58d2050 	str	r2, [sp, #80]	; 0x50
+  388550:	e28d2078 	add	r2, sp, #120	; 0x78
+  388554:	e58d305c 	str	r3, [sp, #92]	; 0x5c
+  388558:	e1d430dc 	ldrsb	r3, [r4, #12]
+  38855c:	e2633000 	rsb	r3, r3, #0
+  388560:	e58d3058 	str	r3, [sp, #88]	; 0x58
+  388564:	e28d30ac 	add	r3, sp, #172	; 0xac
+  388568:	e58d3008 	str	r3, [sp, #8]
+  38856c:	e28d3058 	add	r3, sp, #88	; 0x58
+  388570:	e58d3004 	str	r3, [sp, #4]
+  388574:	e28d3090 	add	r3, sp, #144	; 0x90
+  388578:	e59b1010 	ldr	r1, [fp, #16]
+  38857c:	e58d10c8 	str	r1, [sp, #200]	; 0xc8
+  388580:	e59b1008 	ldr	r1, [fp, #8]
+  388584:	e58d10b4 	str	r1, [sp, #180]	; 0xb4
+  388588:	e59b100c 	ldr	r1, [fp, #12]
+  38858c:	e58d10bc 	str	r1, [sp, #188]	; 0xbc
+  388590:	e1db11d5 	ldrsb	r1, [fp, #21]
+  388594:	e58d10b0 	str	r1, [sp, #176]	; 0xb0
+  388598:	e1db11d4 	ldrsb	r1, [fp, #20]
+  38859c:	e58d10ac 	str	r1, [sp, #172]	; 0xac
+  3885a0:	e28d1064 	add	r1, sp, #100	; 0x64
+  3885a4:	e59d0104 	ldr	r0, [sp, #260]	; 0x104
+  3885a8:	f401678f 	vst1.32	{d6}, [r1]
+  3885ac:	e28d107c 	add	r1, sp, #124	; 0x7c
+  3885b0:	ed8d7a2e 	vstr	s14, [sp, #184]	; 0xb8
+  3885b4:	f401578f 	vst1.32	{d5}, [r1]
+  3885b8:	e28d1094 	add	r1, sp, #148	; 0x94
+  3885bc:	f401778f 	vst1.32	{d7}, [r1]
+  3885c0:	e28d1050 	add	r1, sp, #80	; 0x50
+  3885c4:	e58d1000 	str	r1, [sp]
+  3885c8:	e28d1060 	add	r1, sp, #96	; 0x60
+  3885cc:	e5900008 	ldr	r0, [r0, #8]
+  3885d0:	ed8d7a27 	vstr	s14, [sp, #156]	; 0x9c
+  3885d4:	ebf48fbc 	bl	ac4cc <void gemmlowp::DispatchGemmShape<signed char, signed char, gemmlowp::BitDepthParams<gemmlowp::OperandRange<-127, 127>, gemmlowp::OperandRange<-128, 127> >, (gemmlowp::MapOrder)1, (gemmlowp::MapOrder)0, (gemmlowp::MapOrder)0, gemmlowp::VectorDup<int const, (gemmlowp::VectorShape)0>, gemmlowp::VectorDup<int const, (gemmlowp::VectorShape)1>, std::tuple<gemmlowp::OutputStageBiasAddition<gemmlowp::VectorMap<int const, (gemmlowp::VectorShape)0> >, gemmlowp::OutputStageScaleInt32ByFixedPointAndExponentPC<(gemmlowp::VectorShape)0>, gemmlowp::OutputStageClamp, gemmlowp::OutputStageSaturatingCastToInt8>, gemmlowp::GemmContext>(gemmlowp::GemmContext*, gemmlowp::MatrixMap<signed char const, (gemmlowp::MapOrder)1> const&, gemmlowp::MatrixMap<signed char const, (gemmlowp::MapOrder)0> const&, gemmlowp::MatrixMap<signed char, (gemmlowp::MapOrder)0>*, gemmlowp::VectorDup<int const, (gemmlowp::VectorShape)0> const&, gemmlowp::VectorDup<int const, (gemmlowp::VectorShape)1> const&, std::tuple<gemmlowp::OutputStageBiasAddition<gemmlowp::VectorMap<int const, (gemmlowp::VectorShape)0> >, gemmlowp::OutputStageScaleInt32ByFixedPointAndExponentPC<(gemmlowp::VectorShape)0>, gemmlowp::OutputStageClamp, gemmlowp::OutputStageSaturatingCastToInt8> const&)@plt>
+  3885d8:	e28dd0d4 	add	sp, sp, #212	; 0xd4
+  3885dc:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  3885e0:	e59dc104 	ldr	ip, [sp, #260]	; 0x104
+  3885e4:	e58db008 	str	fp, [sp, #8]
+  3885e8:	e58dc00c 	str	ip, [sp, #12]
+  3885ec:	e59dc0fc 	ldr	ip, [sp, #252]	; 0xfc
+  3885f0:	e88d1400 	stm	sp, {sl, ip}
+  3885f4:	ebf48750 	bl	aa33c <bool tflite::cpu_backend_gemm::detail::CustomGemv<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@plt>
+  3885f8:	e3500000 	cmp	r0, #0
+  3885fc:	1affffab 	bne	3884b0 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x2cc>
+  388600:	e59d3044 	ldr	r3, [sp, #68]	; 0x44
+  388604:	f423678f 	vld1.32	{d6}, [r3]
+  388608:	e59d3048 	ldr	r3, [sp, #72]	; 0x48
+  38860c:	f423578f 	vld1.32	{d5}, [r3]
+  388610:	e59d304c 	ldr	r3, [sp, #76]	; 0x4c
+  388614:	f423778f 	vld1.32	{d7}, [r3]
+  388618:	e5953004 	ldr	r3, [r5, #4]
+  38861c:	e58d3038 	str	r3, [sp, #56]	; 0x38
+  388620:	e5943008 	ldr	r3, [r4, #8]
+  388624:	e58d303c 	str	r3, [sp, #60]	; 0x3c
+  388628:	e59a3004 	ldr	r3, [sl, #4]
+  38862c:	e58d3040 	str	r3, [sp, #64]	; 0x40
+  388630:	eaffffb2 	b	388500 <void tflite::cpu_backend_gemm::Gemm<signed char, signed char, int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2>(tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char const*, tflite::cpu_backend_gemm::MatrixParams<signed char> const&, signed char*, tflite::cpu_backend_gemm::GemmParams<int, signed char, (tflite::cpu_backend_gemm::QuantizationFlavor)2> const&, tflite::CpuBackendContext*)@@Base+0x31c>
+  388634:	001d8f3c 	andseq	r8, sp, ip, lsr pc

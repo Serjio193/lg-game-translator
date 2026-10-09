@@ -1,0 +1,116 @@
+
+/mnt/c/Users/serji/AppData/Local/Temp/gocr-system-tflite.so:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00323394 <tflite::ops::builtin::batch_matmul::TransposeRowsColumns(TfLiteContext*, TfLiteTensor const*, TfLiteTensor*)@@Base+0x344>:
+  323394:	e59f0004 	ldr	r0, [pc, #4]	; 3233a0 <tflite::ops::builtin::batch_matmul::TransposeRowsColumns(TfLiteContext*, TfLiteTensor const*, TfLiteTensor*)@@Base+0x350>
+  323398:	e08f0000 	add	r0, pc, r0
+  32339c:	e12fff1e 	bx	lr
+  3233a0:	00229908 	eoreq	r9, r2, r8, lsl #18
+  3233a4:	e92d4010 	push	{r4, lr}
+  3233a8:	ed2d8b10 	vpush	{d8-d15}
+  3233ac:	e59d2048 	ldr	r2, [sp, #72]	; 0x48
+  3233b0:	e59dc04c 	ldr	ip, [sp, #76]	; 0x4c
+  3233b4:	e59de054 	ldr	lr, [sp, #84]	; 0x54
+  3233b8:	e59d4050 	ldr	r4, [sp, #80]	; 0x50
+  3233bc:	e1a03103 	lsl	r3, r3, #2
+  3233c0:	ed9c0b00 	vldr	d0, [ip]
+  3233c4:	f2c00050 	vmov.i32	q8, #0	; 0x00000000
+  3233c8:	ed924b00 	vldr	d4, [r2]
+  3233cc:	f2c02050 	vmov.i32	q9, #0	; 0x00000000
+  3233d0:	ed9c2b04 	vldr	d2, [ip, #16]
+  3233d4:	f26041f0 	vorr	q10, q8, q8
+  3233d8:	ed926b04 	vldr	d6, [r2, #16]
+  3233dc:	f26061f0 	vorr	q11, q8, q8
+  3233e0:	ed9c1b02 	vldr	d1, [ip, #8]
+  3233e4:	f26081f0 	vorr	q12, q8, q8
+  3233e8:	ed925b02 	vldr	d5, [r2, #8]
+  3233ec:	f260a1f0 	vorr	q13, q8, q8
+  3233f0:	ed9c3b06 	vldr	d3, [ip, #24]
+  3233f4:	f260c1f0 	vorr	q14, q8, q8
+  3233f8:	ed927b06 	vldr	d7, [r2, #24]
+  3233fc:	f260e1f0 	vorr	q15, q8, q8
+  323400:	f2808c04 	vmull.s8	q4, d0, d4
+  323404:	e28cc020 	add	ip, ip, #32
+  323408:	f282ac04 	vmull.s8	q5, d2, d4
+  32340c:	ed924b08 	vldr	d4, [r2, #32]
+  323410:	f280cc06 	vmull.s8	q6, d0, d6
+  323414:	f282ec06 	vmull.s8	q7, d2, d6
+  323418:	ed926b0c 	vldr	d6, [r2, #48]	; 0x30
+  32341c:	f2818805 	vmlal.s8	q4, d1, d5
+  323420:	f283a805 	vmlal.s8	q5, d3, d5
+  323424:	ed925b0a 	vldr	d5, [r2, #40]	; 0x28
+  323428:	f281c807 	vmlal.s8	q6, d1, d7
+  32342c:	f283e807 	vmlal.s8	q7, d3, d7
+  323430:	ed927b0e 	vldr	d7, [r2, #56]	; 0x38
+  323434:	f3f40648 	vpadal.s16	q8, q4
+  323438:	e2822040 	add	r2, r2, #64	; 0x40
+  32343c:	f3f4264a 	vpadal.s16	q9, q5
+  323440:	e25ee010 	subs	lr, lr, #16
+  323444:	f3f4464c 	vpadal.s16	q10, q6
+  323448:	f3f4664e 	vpadal.s16	q11, q7
+  32344c:	0a000014 	beq	3234a4 <tflite::ops::builtin::batch_matmul::TransposeRowsColumns(TfLiteContext*, TfLiteTensor const*, TfLiteTensor*)@@Base+0x454>
+  323450:	f2808c04 	vmull.s8	q4, d0, d4
+  323454:	f282ac04 	vmull.s8	q5, d2, d4
+  323458:	ed924b00 	vldr	d4, [r2]
+  32345c:	f280cc06 	vmull.s8	q6, d0, d6
+  323460:	ed9c0b00 	vldr	d0, [ip]
+  323464:	f282ec06 	vmull.s8	q7, d2, d6
+  323468:	ed9c2b04 	vldr	d2, [ip, #16]
+  32346c:	f2818805 	vmlal.s8	q4, d1, d5
+  323470:	ed926b04 	vldr	d6, [r2, #16]
+  323474:	f283a805 	vmlal.s8	q5, d3, d5
+  323478:	ed925b02 	vldr	d5, [r2, #8]
+  32347c:	f281c807 	vmlal.s8	q6, d1, d7
+  323480:	ed9c1b02 	vldr	d1, [ip, #8]
+  323484:	f283e807 	vmlal.s8	q7, d3, d7
+  323488:	ed9c3b06 	vldr	d3, [ip, #24]
+  32348c:	f3f48648 	vpadal.s16	q12, q4
+  323490:	ed927b06 	vldr	d7, [r2, #24]
+  323494:	f3f4a64a 	vpadal.s16	q13, q5
+  323498:	f3f4c64c 	vpadal.s16	q14, q6
+  32349c:	f3f4e64e 	vpadal.s16	q15, q7
+  3234a0:	eaffffd6 	b	323400 <tflite::ops::builtin::batch_matmul::TransposeRowsColumns(TfLiteContext*, TfLiteTensor const*, TfLiteTensor*)@@Base+0x3b0>
+  3234a4:	f2808c04 	vmull.s8	q4, d0, d4
+  3234a8:	f282ac04 	vmull.s8	q5, d2, d4
+  3234ac:	f280cc06 	vmull.s8	q6, d0, d6
+  3234b0:	f282ec06 	vmull.s8	q7, d2, d6
+  3234b4:	f2818805 	vmlal.s8	q4, d1, d5
+  3234b8:	f283a805 	vmlal.s8	q5, d3, d5
+  3234bc:	f281c807 	vmlal.s8	q6, d1, d7
+  3234c0:	f283e807 	vmlal.s8	q7, d3, d7
+  3234c4:	f3f48648 	vpadal.s16	q12, q4
+  3234c8:	f3f4a64a 	vpadal.s16	q13, q5
+  3234cc:	f3f4c64c 	vpadal.s16	q14, q6
+  3234d0:	f3f4e64e 	vpadal.s16	q15, q7
+  3234d4:	e3540000 	cmp	r4, #0
+  3234d8:	f2200bb1 	vpadd.i32	d0, d16, d17
+  3234dc:	f2221bb3 	vpadd.i32	d1, d18, d19
+  3234e0:	f2242bb5 	vpadd.i32	d2, d20, d21
+  3234e4:	f2263bb7 	vpadd.i32	d3, d22, d23
+  3234e8:	f2284bb9 	vpadd.i32	d4, d24, d25
+  3234ec:	f22a5bbb 	vpadd.i32	d5, d26, d27
+  3234f0:	f22c6bbd 	vpadd.i32	d6, d28, d29
+  3234f4:	f22e7bbf 	vpadd.i32	d7, d30, d31
+  3234f8:	1a000004 	bne	323510 <tflite::ops::builtin::batch_matmul::TransposeRowsColumns(TfLiteContext*, TfLiteTensor const*, TfLiteTensor*)@@Base+0x4c0>
+  3234fc:	f2208b12 	vpadd.i32	d8, d0, d2
+  323500:	f2249b16 	vpadd.i32	d9, d4, d6
+  323504:	f221ab13 	vpadd.i32	d10, d1, d3
+  323508:	f225bb17 	vpadd.i32	d11, d5, d7
+  32350c:	ea000008 	b	323534 <tflite::ops::builtin::batch_matmul::TransposeRowsColumns(TfLiteContext*, TfLiteTensor const*, TfLiteTensor*)@@Base+0x4e4>
+  323510:	e1a00001 	mov	r0, r1
+  323514:	f4600a83 	vld1.32	{d16-d17}, [r0], r3
+  323518:	f2208b12 	vpadd.i32	d8, d0, d2
+  32351c:	f2249b16 	vpadd.i32	d9, d4, d6
+  323520:	f4602a8f 	vld1.32	{d18-d19}, [r0]
+  323524:	f221ab13 	vpadd.i32	d10, d1, d3
+  323528:	f225bb17 	vpadd.i32	d11, d5, d7
+  32352c:	f22088c8 	vadd.i32	q4, q8, q4
+  323530:	f222a8ca 	vadd.i32	q5, q9, q5
+  323534:	e1a00001 	mov	r0, r1
+  323538:	f4008a83 	vst1.32	{d8-d9}, [r0], r3
+  32353c:	f400aa8f 	vst1.32	{d10-d11}, [r0]
+  323540:	ecbd8b10 	vpop	{d8-d15}
+  323544:	e8bd8010 	pop	{r4, pc}

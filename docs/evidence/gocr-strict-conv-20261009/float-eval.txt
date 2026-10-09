@@ -1,0 +1,395 @@
+
+/mnt/c/Users/serji/AppData/Local/Temp/gocr-system-tflite.so:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0038f80c <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base>:
+  38f80c:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  38f810:	e24dd02c 	sub	sp, sp, #44	; 0x2c
+  38f814:	e28d301c 	add	r3, sp, #28
+  38f818:	e3a02000 	mov	r2, #0
+  38f81c:	e1a05001 	mov	r5, r1
+  38f820:	e1a06000 	mov	r6, r0
+  38f824:	e5918014 	ldr	r8, [r1, #20]
+  38f828:	e5917010 	ldr	r7, [r1, #16]
+  38f82c:	ebf46f48 	bl	ab554 <tflite::GetOutputSafe(TfLiteContext const*, TfLiteNode const*, int, TfLiteTensor**)@plt>
+  38f830:	e2504000 	subs	r4, r0, #0
+  38f834:	0a000002 	beq	38f844 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x38>
+  38f838:	e1a00004 	mov	r0, r4
+  38f83c:	e28dd02c 	add	sp, sp, #44	; 0x2c
+  38f840:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  38f844:	e1a02004 	mov	r2, r4
+  38f848:	e28d3020 	add	r3, sp, #32
+  38f84c:	e1a01005 	mov	r1, r5
+  38f850:	e1a00006 	mov	r0, r6
+  38f854:	ebf482f8 	bl	b043c <tflite::GetInputSafe(TfLiteContext const*, TfLiteNode const*, int, TfLiteTensor const**)@plt>
+  38f858:	e2504000 	subs	r4, r0, #0
+  38f85c:	1afffff5 	bne	38f838 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x2c>
+  38f860:	e28d3024 	add	r3, sp, #36	; 0x24
+  38f864:	e3a02001 	mov	r2, #1
+  38f868:	e1a01005 	mov	r1, r5
+  38f86c:	e1a00006 	mov	r0, r6
+  38f870:	ebf482f1 	bl	b043c <tflite::GetInputSafe(TfLiteContext const*, TfLiteNode const*, int, TfLiteTensor const**)@plt>
+  38f874:	e2504000 	subs	r4, r0, #0
+  38f878:	1affffee 	bne	38f838 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x2c>
+  38f87c:	e5953000 	ldr	r3, [r5]
+  38f880:	e5933000 	ldr	r3, [r3]
+  38f884:	e3530003 	cmp	r3, #3
+  38f888:	11a0a004 	movne	sl, r4
+  38f88c:	0a000037 	beq	38f970 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x164>
+  38f890:	e5d79072 	ldrb	r9, [r7, #114]	; 0x72
+  38f894:	e3590000 	cmp	r9, #0
+  38f898:	0a000005 	beq	38f8b4 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0xa8>
+  38f89c:	e595300c 	ldr	r3, [r5, #12]
+  38f8a0:	e5972054 	ldr	r2, [r7, #84]	; 0x54
+  38f8a4:	e5969008 	ldr	r9, [r6, #8]
+  38f8a8:	e0833102 	add	r3, r3, r2, lsl #2
+  38f8ac:	e5933004 	ldr	r3, [r3, #4]
+  38f8b0:	e0899303 	add	r9, r9, r3, lsl #6
+  38f8b4:	e5d71070 	ldrb	r1, [r7, #112]	; 0x70
+  38f8b8:	e3510000 	cmp	r1, #0
+  38f8bc:	01a0b001 	moveq	fp, r1
+  38f8c0:	0a000008 	beq	38f8e8 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0xdc>
+  38f8c4:	e5972058 	ldr	r2, [r7, #88]	; 0x58
+  38f8c8:	e595300c 	ldr	r3, [r5, #12]
+  38f8cc:	e5961008 	ldr	r1, [r6, #8]
+  38f8d0:	e0833102 	add	r3, r3, r2, lsl #2
+  38f8d4:	e5d72071 	ldrb	r2, [r7, #113]	; 0x71
+  38f8d8:	e5933004 	ldr	r3, [r3, #4]
+  38f8dc:	e3520000 	cmp	r2, #0
+  38f8e0:	e081b303 	add	fp, r1, r3, lsl #6
+  38f8e4:	0a000027 	beq	38f988 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x17c>
+  38f8e8:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
+  38f8ec:	e59dc020 	ldr	ip, [sp, #32]
+  38f8f0:	e59d201c 	ldr	r2, [sp, #28]
+  38f8f4:	e5903000 	ldr	r3, [r0]
+  38f8f8:	e3530009 	cmp	r3, #9
+  38f8fc:	13530003 	cmpne	r3, #3
+  38f900:	1a000010 	bne	38f948 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x13c>
+  38f904:	e5d73075 	ldrb	r3, [r7, #117]	; 0x75
+  38f908:	e3530000 	cmp	r3, #0
+  38f90c:	1a000002 	bne	38f91c <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x110>
+  38f910:	e5973078 	ldr	r3, [r7, #120]	; 0x78
+  38f914:	e3530001 	cmp	r3, #1
+  38f918:	0a000020 	beq	38f9a0 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x194>
+  38f91c:	e58d2010 	str	r2, [sp, #16]
+  38f920:	e1a03007 	mov	r3, r7
+  38f924:	e98d0401 	stmib	sp, {r0, sl}
+  38f928:	e1a02008 	mov	r2, r8
+  38f92c:	e1a01005 	mov	r1, r5
+  38f930:	e1a00006 	mov	r0, r6
+  38f934:	e58d900c 	str	r9, [sp, #12]
+  38f938:	e58dc000 	str	ip, [sp]
+  38f93c:	ebf47dc0 	bl	af044 <TfLiteStatus tflite::ops::builtin::conv::EvalHybridPerChannel<(tflite::ops::builtin::conv::KernelType)2>(TfLiteContext*, TfLiteNode*, TfLiteConvParams*, tflite::ops::builtin::conv::OpData*, TfLiteTensor const*, TfLiteTensor const*, TfLiteTensor const*, TfLiteTensor*, TfLiteTensor*)@plt>
+  38f940:	e1a04000 	mov	r4, r0
+  38f944:	eaffffbb 	b	38f838 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x2c>
+  38f948:	e58d2010 	str	r2, [sp, #16]
+  38f94c:	e1a0300c 	mov	r3, ip
+  38f950:	e88d0401 	stm	sp, {r0, sl}
+  38f954:	e1a02007 	mov	r2, r7
+  38f958:	e1a01008 	mov	r1, r8
+  38f95c:	e1a00006 	mov	r0, r6
+  38f960:	e58db00c 	str	fp, [sp, #12]
+  38f964:	e58d9008 	str	r9, [sp, #8]
+  38f968:	ebfffe91 	bl	38f3b4 <TfLiteStatus tflite::ops::builtin::conv::Eval<(tflite::ops::builtin::conv::KernelType)0>(TfLiteContext*, TfLiteNode*)@@Base+0xdc>
+  38f96c:	eaffffb1 	b	38f838 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x2c>
+  38f970:	e3a02002 	mov	r2, #2
+  38f974:	e1a01005 	mov	r1, r5
+  38f978:	e1a00006 	mov	r0, r6
+  38f97c:	ebf485c6 	bl	b109c <tflite::GetInput(TfLiteContext const*, TfLiteNode const*, int)@plt>
+  38f980:	e1a0a000 	mov	sl, r0
+  38f984:	eaffffc1 	b	38f890 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x84>
+  38f988:	e59d0024 	ldr	r0, [sp, #36]	; 0x24
+  38f98c:	e1a0100b 	mov	r1, fp
+  38f990:	ebf46b32 	bl	aa660 <tflite::ops::builtin::conv::TransposeFloatTensor(TfLiteTensor const*, TfLiteTensor*)@plt>
+  38f994:	e3a03001 	mov	r3, #1
+  38f998:	e5c73071 	strb	r3, [r7, #113]	; 0x71
+  38f99c:	eaffffd1 	b	38f8e8 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0xdc>
+  38f9a0:	e58d2014 	str	r2, [sp, #20]
+  38f9a4:	e1a03007 	mov	r3, r7
+  38f9a8:	e5971064 	ldr	r1, [r7, #100]	; 0x64
+  38f9ac:	e1a02008 	mov	r2, r8
+  38f9b0:	e595e00c 	ldr	lr, [r5, #12]
+  38f9b4:	e08ee101 	add	lr, lr, r1, lsl #2
+  38f9b8:	e1a01005 	mov	r1, r5
+  38f9bc:	e59ee004 	ldr	lr, [lr, #4]
+  38f9c0:	e98d0401 	stmib	sp, {r0, sl}
+  38f9c4:	e1a00006 	mov	r0, r6
+  38f9c8:	e58d900c 	str	r9, [sp, #12]
+  38f9cc:	e58dc000 	str	ip, [sp]
+  38f9d0:	e596c008 	ldr	ip, [r6, #8]
+  38f9d4:	e08cc30e 	add	ip, ip, lr, lsl #6
+  38f9d8:	e58dc010 	str	ip, [sp, #16]
+  38f9dc:	ebf47f33 	bl	af6b0 <TfLiteStatus tflite::ops::builtin::conv::EvalHybrid<(tflite::ops::builtin::conv::KernelType)2>(TfLiteContext*, TfLiteNode*, TfLiteConvParams*, tflite::ops::builtin::conv::OpData*, TfLiteTensor const*, TfLiteTensor const*, TfLiteTensor const*, TfLiteTensor*, TfLiteTensor*, TfLiteTensor*)@plt>
+  38f9e0:	e1a04000 	mov	r4, r0
+  38f9e4:	eaffff93 	b	38f838 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x2c>
+  38f9e8:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  38f9ec:	e1a04003 	mov	r4, r3
+  38f9f0:	e591300c 	ldr	r3, [r1, #12]
+  38f9f4:	ed2d8b02 	vpush	{d8}
+  38f9f8:	e24ddf49 	sub	sp, sp, #292	; 0x124
+  38f9fc:	e3530001 	cmp	r3, #1
+  38fa00:	e59da154 	ldr	sl, [sp, #340]	; 0x154
+  38fa04:	e59db160 	ldr	fp, [sp, #352]	; 0x160
+  38fa08:	e58d0044 	str	r0, [sp, #68]	; 0x44
+  38fa0c:	0a000076 	beq	38fbec <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x3e0>
+  38fa10:	e3530003 	cmp	r3, #3
+  38fa14:	0a000071 	beq	38fbe0 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x3d4>
+  38fa18:	eddf8afc 	vldr	s17, [pc, #1008]	; 38fe10 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x604>
+  38fa1c:	e3530002 	cmp	r3, #2
+  38fa20:	ed9f8afb 	vldr	s16, [pc, #1004]	; 38fe14 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x608>
+  38fa24:	eeb77a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
+  38fa28:	eeff7a00 	vmov.f32	s15, #240	; 0xbf800000 -1.0
+  38fa2c:	0ef08a47 	vmoveq.f32	s17, s14
+  38fa30:	0eb08a67 	vmoveq.f32	s16, s15
+  38fa34:	e5d23073 	ldrb	r3, [r2, #115]	; 0x73
+  38fa38:	e5920078 	ldr	r0, [r2, #120]	; 0x78
+  38fa3c:	e5915000 	ldr	r5, [r1]
+  38fa40:	e3530000 	cmp	r3, #0
+  38fa44:	ed8d8a46 	vstr	s16, [sp, #280]	; 0x118
+  38fa48:	15d23074 	ldrbne	r3, [r2, #116]	; 0x74
+  38fa4c:	03a03003 	moveq	r3, #3
+  38fa50:	edcd8a47 	vstr	s17, [sp, #284]	; 0x11c
+  38fa54:	11a03083 	lslne	r3, r3, #1
+  38fa58:	e3500001 	cmp	r0, #1
+  38fa5c:	13a03000 	movne	r3, #0
+  38fa60:	e3550001 	cmp	r5, #1
+  38fa64:	12455002 	subne	r5, r5, #2
+  38fa68:	058d5030 	streq	r5, [sp, #48]	; 0x30
+  38fa6c:	116f5f15 	clzne	r5, r5
+  38fa70:	11a052a5 	lsrne	r5, r5, #5
+  38fa74:	11a00085 	lslne	r0, r5, #1
+  38fa78:	e1d150f4 	ldrsh	r5, [r1, #4]
+  38fa7c:	158d0030 	strne	r0, [sp, #48]	; 0x30
+  38fa80:	e3530002 	cmp	r3, #2
+  38fa84:	e59d0030 	ldr	r0, [sp, #48]	; 0x30
+  38fa88:	e1cd55b0 	strh	r5, [sp, #80]	; 0x50
+  38fa8c:	e5cd00e8 	strb	r0, [sp, #232]	; 0xe8
+  38fa90:	e1d100f8 	ldrsh	r0, [r1, #8]
+  38fa94:	e1cd05b2 	strh	r0, [sp, #82]	; 0x52
+  38fa98:	e58d0040 	str	r0, [sp, #64]	; 0x40
+  38fa9c:	e1d101f0 	ldrsh	r0, [r1, #16]
+  38faa0:	e1d111f4 	ldrsh	r1, [r1, #20]
+  38faa4:	e1cd05b4 	strh	r0, [sp, #84]	; 0x54
+  38faa8:	e1cd15b6 	strh	r1, [sp, #86]	; 0x56
+  38faac:	e58d104c 	str	r1, [sp, #76]	; 0x4c
+  38fab0:	e1d211fc 	ldrsh	r1, [r2, #28]
+  38fab4:	eddd0b14 	vldr	d16, [sp, #80]	; 0x50
+  38fab8:	e58d0048 	str	r0, [sp, #72]	; 0x48
+  38fabc:	e58d1038 	str	r1, [sp, #56]	; 0x38
+  38fac0:	e1cd1eba 	strh	r1, [sp, #234]	; 0xea
+  38fac4:	e1d212f0 	ldrsh	r1, [r2, #32]
+  38fac8:	e58d103c 	str	r1, [sp, #60]	; 0x3c
+  38facc:	e1cd1ebc 	strh	r1, [sp, #236]	; 0xec
+  38fad0:	e28d10f2 	add	r1, sp, #242	; 0xf2
+  38fad4:	f441074f 	vst1.16	{d16}, [r1]
+  38fad8:	0a000079 	beq	38fcc4 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x4b8>
+  38fadc:	e3d33002 	bics	r3, r3, #2
+  38fae0:	e28d60cc 	add	r6, sp, #204	; 0xcc
+  38fae4:	e1a01004 	mov	r1, r4
+  38fae8:	e1a00006 	mov	r0, r6
+  38faec:	1a000041 	bne	38fbf8 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x3ec>
+  38faf0:	e28d70b0 	add	r7, sp, #176	; 0xb0
+  38faf4:	ebf48322 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38faf8:	e3540000 	cmp	r4, #0
+  38fafc:	e59d1150 	ldr	r1, [sp, #336]	; 0x150
+  38fb00:	e1a00007 	mov	r0, r7
+  38fb04:	15944004 	ldrne	r4, [r4, #4]
+  38fb08:	ebf4831d 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fb0c:	e59d3150 	ldr	r3, [sp, #336]	; 0x150
+  38fb10:	e28d9094 	add	r9, sp, #148	; 0x94
+  38fb14:	e1a0100a 	mov	r1, sl
+  38fb18:	e1a00009 	mov	r0, r9
+  38fb1c:	e3530000 	cmp	r3, #0
+  38fb20:	15933004 	ldrne	r3, [r3, #4]
+  38fb24:	158d3150 	strne	r3, [sp, #336]	; 0x150
+  38fb28:	ebf48315 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fb2c:	e28d8078 	add	r8, sp, #120	; 0x78
+  38fb30:	e35a0000 	cmp	sl, #0
+  38fb34:	e1a0100b 	mov	r1, fp
+  38fb38:	e1a00008 	mov	r0, r8
+  38fb3c:	159aa004 	ldrne	sl, [sl, #4]
+  38fb40:	ebf4830f 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fb44:	e28d305c 	add	r3, sp, #92	; 0x5c
+  38fb48:	e35b0000 	cmp	fp, #0
+  38fb4c:	e59d1158 	ldr	r1, [sp, #344]	; 0x158
+  38fb50:	e1a00003 	mov	r0, r3
+  38fb54:	159bb004 	ldrne	fp, [fp, #4]
+  38fb58:	e58d3034 	str	r3, [sp, #52]	; 0x34
+  38fb5c:	ebf48308 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fb60:	e59d2150 	ldr	r2, [sp, #336]	; 0x150
+  38fb64:	e59d3040 	ldr	r3, [sp, #64]	; 0x40
+  38fb68:	e1cd03d8 	ldrd	r0, [sp, #56]	; 0x38
+  38fb6c:	e58d201c 	str	r2, [sp, #28]
+  38fb70:	e59d204c 	ldr	r2, [sp, #76]	; 0x4c
+  38fb74:	e58db02c 	str	fp, [sp, #44]	; 0x2c
+  38fb78:	e58da024 	str	sl, [sp, #36]	; 0x24
+  38fb7c:	e58d2004 	str	r2, [sp, #4]
+  38fb80:	e59d2048 	ldr	r2, [sp, #72]	; 0x48
+  38fb84:	e58d4014 	str	r4, [sp, #20]
+  38fb88:	e58d8028 	str	r8, [sp, #40]	; 0x28
+  38fb8c:	e58d2000 	str	r2, [sp]
+  38fb90:	e1a02005 	mov	r2, r5
+  38fb94:	e58d9020 	str	r9, [sp, #32]
+  38fb98:	e58d7018 	str	r7, [sp, #24]
+  38fb9c:	e58d6010 	str	r6, [sp, #16]
+  38fba0:	edcd8a03 	vstr	s17, [sp, #12]
+  38fba4:	ed8d8a02 	vstr	s16, [sp, #8]
+  38fba8:	ebff3251 	bl	35c4f4 <tflite::ops::builtin::conv::Free(TfLiteContext*, void*)@@Base+0x2d6c>
+  38fbac:	e59d0034 	ldr	r0, [sp, #52]	; 0x34
+  38fbb0:	ebf472e7 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fbb4:	e1a00008 	mov	r0, r8
+  38fbb8:	ebf472e5 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fbbc:	e1a00009 	mov	r0, r9
+  38fbc0:	ebf472e3 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fbc4:	e1a00007 	mov	r0, r7
+  38fbc8:	ebf472e1 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fbcc:	e1a00006 	mov	r0, r6
+  38fbd0:	ebf472df 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fbd4:	e28ddf49 	add	sp, sp, #292	; 0x124
+  38fbd8:	ecbd8b02 	vpop	{d8}
+  38fbdc:	e8bd8ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  38fbe0:	ed9f8a8c 	vldr	s16, [pc, #560]	; 38fe18 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x60c>
+  38fbe4:	eef18a08 	vmov.f32	s17, #24	; 0x40c00000  6.0
+  38fbe8:	eaffff91 	b	38fa34 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x228>
+  38fbec:	eddf8a87 	vldr	s17, [pc, #540]	; 38fe10 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x604>
+  38fbf0:	ed9f8a88 	vldr	s16, [pc, #544]	; 38fe18 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x60c>
+  38fbf4:	eaffff8e 	b	38fa34 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x228>
+  38fbf8:	e28d70b0 	add	r7, sp, #176	; 0xb0
+  38fbfc:	ebf482e0 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fc00:	e3540000 	cmp	r4, #0
+  38fc04:	e59d1150 	ldr	r1, [sp, #336]	; 0x150
+  38fc08:	e1a00007 	mov	r0, r7
+  38fc0c:	15944004 	ldrne	r4, [r4, #4]
+  38fc10:	ebf482db 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fc14:	e59d3150 	ldr	r3, [sp, #336]	; 0x150
+  38fc18:	e28d9094 	add	r9, sp, #148	; 0x94
+  38fc1c:	e1a0100a 	mov	r1, sl
+  38fc20:	e1a00009 	mov	r0, r9
+  38fc24:	e3530000 	cmp	r3, #0
+  38fc28:	15933004 	ldrne	r3, [r3, #4]
+  38fc2c:	158d3150 	strne	r3, [sp, #336]	; 0x150
+  38fc30:	ebf482d3 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fc34:	e28d8078 	add	r8, sp, #120	; 0x78
+  38fc38:	e35a0000 	cmp	sl, #0
+  38fc3c:	e1a0100b 	mov	r1, fp
+  38fc40:	e1a00008 	mov	r0, r8
+  38fc44:	159aa004 	ldrne	sl, [sl, #4]
+  38fc48:	ebf482cd 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fc4c:	e28d305c 	add	r3, sp, #92	; 0x5c
+  38fc50:	e35b0000 	cmp	fp, #0
+  38fc54:	e59d1158 	ldr	r1, [sp, #344]	; 0x158
+  38fc58:	e1a00003 	mov	r0, r3
+  38fc5c:	159bb004 	ldrne	fp, [fp, #4]
+  38fc60:	e58d3034 	str	r3, [sp, #52]	; 0x34
+  38fc64:	ebf482c6 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fc68:	e59d3158 	ldr	r3, [sp, #344]	; 0x158
+  38fc6c:	e59d0044 	ldr	r0, [sp, #68]	; 0x44
+  38fc70:	e3530000 	cmp	r3, #0
+  38fc74:	15933004 	ldrne	r3, [r3, #4]
+  38fc78:	158d3158 	strne	r3, [sp, #344]	; 0x158
+  38fc7c:	ebf47b67 	bl	aea20 <tflite::CpuBackendContext::GetFromContext(TfLiteContext*)@plt>
+  38fc80:	e59d3158 	ldr	r3, [sp, #344]	; 0x158
+  38fc84:	e1a02004 	mov	r2, r4
+  38fc88:	e59d4034 	ldr	r4, [sp, #52]	; 0x34
+  38fc8c:	e1a01006 	mov	r1, r6
+  38fc90:	e58d0018 	str	r0, [sp, #24]
+  38fc94:	e28d00e8 	add	r0, sp, #232	; 0xe8
+  38fc98:	e58d3014 	str	r3, [sp, #20]
+  38fc9c:	e59d3150 	ldr	r3, [sp, #336]	; 0x150
+  38fca0:	e58db00c 	str	fp, [sp, #12]
+  38fca4:	e58da004 	str	sl, [sp, #4]
+  38fca8:	e58d3000 	str	r3, [sp]
+  38fcac:	e1a03007 	mov	r3, r7
+  38fcb0:	e58d4010 	str	r4, [sp, #16]
+  38fcb4:	e58d8008 	str	r8, [sp, #8]
+  38fcb8:	ebff4e6d 	bl	363674 <tflite::ops::builtin::conv::Prepare(tflite::ops::builtin::conv::KernelType, TfLiteContext*, TfLiteNode*)@@Base+0x4fe4>
+  38fcbc:	e1a00004 	mov	r0, r4
+  38fcc0:	eaffffba 	b	38fbb0 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x3a4>
+  38fcc4:	e5d23070 	ldrb	r3, [r2, #112]	; 0x70
+  38fcc8:	e3530000 	cmp	r3, #0
+  38fccc:	1a000035 	bne	38fda8 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x59c>
+  38fcd0:	e59d3150 	ldr	r3, [sp, #336]	; 0x150
+  38fcd4:	e3530000 	cmp	r3, #0
+  38fcd8:	0a000036 	beq	38fdb8 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5ac>
+  38fcdc:	e5933004 	ldr	r3, [r3, #4]
+  38fce0:	e58d315c 	str	r3, [sp, #348]	; 0x15c
+  38fce4:	e59d0044 	ldr	r0, [sp, #68]	; 0x44
+  38fce8:	e28d60cc 	add	r6, sp, #204	; 0xcc
+  38fcec:	ebf4728f 	bl	ac730 <tflite::eigen_support::GetThreadPoolDevice(TfLiteContext*)@plt>
+  38fcf0:	e28d70b0 	add	r7, sp, #176	; 0xb0
+  38fcf4:	e1a01004 	mov	r1, r4
+  38fcf8:	e58d0044 	str	r0, [sp, #68]	; 0x44
+  38fcfc:	e1a00006 	mov	r0, r6
+  38fd00:	ebf4829f 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fd04:	e3540000 	cmp	r4, #0
+  38fd08:	e59d1150 	ldr	r1, [sp, #336]	; 0x150
+  38fd0c:	e1a00007 	mov	r0, r7
+  38fd10:	15944004 	ldrne	r4, [r4, #4]
+  38fd14:	ebf4829a 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fd18:	e28d9094 	add	r9, sp, #148	; 0x94
+  38fd1c:	e1a0100a 	mov	r1, sl
+  38fd20:	e1a00009 	mov	r0, r9
+  38fd24:	ebf48296 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fd28:	e28d8078 	add	r8, sp, #120	; 0x78
+  38fd2c:	e35a0000 	cmp	sl, #0
+  38fd30:	e1a0100b 	mov	r1, fp
+  38fd34:	e1a00008 	mov	r0, r8
+  38fd38:	159aa004 	ldrne	sl, [sl, #4]
+  38fd3c:	ebf48290 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fd40:	e28d305c 	add	r3, sp, #92	; 0x5c
+  38fd44:	e35b0000 	cmp	fp, #0
+  38fd48:	e59d1158 	ldr	r1, [sp, #344]	; 0x158
+  38fd4c:	e1a00003 	mov	r0, r3
+  38fd50:	159bb004 	ldrne	fp, [fp, #4]
+  38fd54:	e58d3034 	str	r3, [sp, #52]	; 0x34
+  38fd58:	ebf48289 	bl	b0784 <tflite::GetTensorShape(TfLiteTensor const*)@plt>
+  38fd5c:	e59d2040 	ldr	r2, [sp, #64]	; 0x40
+  38fd60:	e59dc15c 	ldr	ip, [sp, #348]	; 0x15c
+  38fd64:	e59d1030 	ldr	r1, [sp, #48]	; 0x30
+  38fd68:	e58d2004 	str	r2, [sp, #4]
+  38fd6c:	e59d0044 	ldr	r0, [sp, #68]	; 0x44
+  38fd70:	e1cd23d8 	ldrd	r2, [sp, #56]	; 0x38
+  38fd74:	e58db02c 	str	fp, [sp, #44]	; 0x2c
+  38fd78:	e58da024 	str	sl, [sp, #36]	; 0x24
+  38fd7c:	e58d4014 	str	r4, [sp, #20]
+  38fd80:	e58d5000 	str	r5, [sp]
+  38fd84:	e58d8028 	str	r8, [sp, #40]	; 0x28
+  38fd88:	e58d9020 	str	r9, [sp, #32]
+  38fd8c:	e58dc01c 	str	ip, [sp, #28]
+  38fd90:	e58d7018 	str	r7, [sp, #24]
+  38fd94:	e58d6010 	str	r6, [sp, #16]
+  38fd98:	edcd8a03 	vstr	s17, [sp, #12]
+  38fd9c:	ed8d8a02 	vstr	s16, [sp, #8]
+  38fda0:	ebff51c9 	bl	3644cc <tflite::ops::builtin::conv::Prepare(tflite::ops::builtin::conv::KernelType, TfLiteContext*, TfLiteNode*)@@Base+0x5e3c>
+  38fda4:	eaffff80 	b	38fbac <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x3a0>
+  38fda8:	e59d315c 	ldr	r3, [sp, #348]	; 0x15c
+  38fdac:	e3530000 	cmp	r3, #0
+  38fdb0:	1affffc9 	bne	38fcdc <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x4d0>
+  38fdb4:	eaffffca 	b	38fce4 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x4d8>
+  38fdb8:	e59d3150 	ldr	r3, [sp, #336]	; 0x150
+  38fdbc:	e58d315c 	str	r3, [sp, #348]	; 0x15c
+  38fdc0:	eaffffc7 	b	38fce4 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x4d8>
+  38fdc4:	e1a00006 	mov	r0, r6
+  38fdc8:	ebf47261 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fdcc:	ebf47434 	bl	acea4 <__cxa_end_cleanup@plt>
+  38fdd0:	e1a00007 	mov	r0, r7
+  38fdd4:	ebf4725e 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fdd8:	eafffff9 	b	38fdc4 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5b8>
+  38fddc:	e1a00009 	mov	r0, r9
+  38fde0:	ebf4725b 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fde4:	eafffff9 	b	38fdd0 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5c4>
+  38fde8:	e1a00008 	mov	r0, r8
+  38fdec:	ebf47258 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fdf0:	eafffff9 	b	38fddc <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5d0>
+  38fdf4:	e59d0034 	ldr	r0, [sp, #52]	; 0x34
+  38fdf8:	ebf47255 	bl	ac754 <tflite::RuntimeShape::~RuntimeShape()@plt>
+  38fdfc:	eafffff9 	b	38fde8 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5dc>
+  38fe00:	eaffffef 	b	38fdc4 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5b8>
+  38fe04:	eafffff1 	b	38fdd0 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5c4>
+  38fe08:	eafffff3 	b	38fddc <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5d0>
+  38fe0c:	eafffff5 	b	38fde8 <TfLiteStatus tflite::ops::builtin::conv::EvalImpl<(tflite::ops::builtin::conv::KernelType)2, (TfLiteType)1>(TfLiteContext*, TfLiteNode*)@@Base+0x5dc>
+  38fe10:	7f7fffff 	svcvc	0x007fffff
+  38fe14:	ff7fffff 			; <UNDEFINED> instruction: 0xff7fffff
+  38fe18:	00000000 	andeq	r0, r0, r0

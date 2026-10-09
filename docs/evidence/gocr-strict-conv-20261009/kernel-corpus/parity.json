@@ -1,0 +1,102 @@
+{
+  "system_sha256": "cace8a26cd74882b359fcdf1061c2f5e99dd6422a1e7455d4352b6bf68e70138",
+  "detector_threads": 2,
+  "recognizer_threads": 2,
+  "xnnpack": false,
+  "warmup_per_frame": 1,
+  "measured_per_frame": 1,
+  "parity_passed": true,
+  "gates": [
+    {
+      "frame": "fast-corpus/00-description-screen-20261006-capture.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/01-description-screen-20261006-current-full.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/02-font-matching-20261007-source-frame.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/03-ocr-candidates-20261007-live-frame.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/04-ocr-fullscreen-discussion-20261005-screen.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/05-ocr-policy-live-20261005-frame.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/06-ppocr-only-live-20261007-frame.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/07-text-detectors-video-only-input.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/08-game-input.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/09-game-brothership-input.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/10-game-example-2-input.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    }
+  ]
+}

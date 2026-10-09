@@ -1,0 +1,27 @@
+{
+  "runtime_sha256": "cace8a26cd74882b359fcdf1061c2f5e99dd6422a1e7455d4352b6bf68e70138",
+  "offsets": {
+    "int8_eval": 3707644,
+    "float_eval": 3733516,
+    "gemmlowp_neon_run": 3290020,
+    "gemmlowp_dispatch": 3679528,
+    "ruy_trmul": 5388860
+  },
+  "command": [
+    "python3",
+    "-B",
+    "scripts/probe-gocr-conv-dispatch.py",
+    "--assets",
+    "assets",
+    "--output",
+    "conv-dispatch-trace",
+    "--probe",
+    "strict-runtime-experiment/libgocr_conv_probe.so",
+    "--repeats",
+    "1",
+    "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+    "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm"
+  ],
+  "cleanup_errors": [],
+  "trace_error": "[Errno 95] Operation not supported"
+}

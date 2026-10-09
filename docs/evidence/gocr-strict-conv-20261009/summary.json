@@ -1,0 +1,948 @@
+{
+  "registration_bytes": 48,
+  "prepare_offset": "0x36c790",
+  "eval_offset": "0x391ed0",
+  "conv_nodes": 167,
+  "eigen_nodes": 11,
+  "gemmlowp_nodes": 156,
+  "ruy_observed_calls": 0,
+  "top20": [
+    {
+      "node": 83,
+      "reference_median_ms": 53.1805,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          64
+        ],
+        [
+          7,
+          5,
+          5,
+          64
+        ],
+        [
+          7
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          7
+        ]
+      ],
+      "observed_path": "Eigen float32",
+      "probe_mean_eval_ms_including_warmup": 52.878461538461536,
+      "gemmlowp_fraction_of_eval": 0.0,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 1,
+      "malloc_calls_per_eval_mean": 27.25,
+      "requested_bytes_per_eval_mean": 29474973.846153848,
+      "temporaries": [
+        {
+          "index": 636,
+          "type": 1,
+          "allocation_type": 3,
+          "bytes": 44800,
+          "address": 4099334208,
+          "address_or_size_changes": 0
+        }
+      ]
+    },
+    {
+      "node": 167,
+      "reference_median_ms": 53.6718,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          64
+        ],
+        [
+          7,
+          5,
+          5,
+          64
+        ],
+        [
+          7
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          7
+        ]
+      ],
+      "observed_path": "Eigen float32",
+      "probe_mean_eval_ms_including_warmup": 51.095,
+      "gemmlowp_fraction_of_eval": 0.0,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 1,
+      "malloc_calls_per_eval_mean": 27.0,
+      "requested_bytes_per_eval_mean": 29474164.0,
+      "temporaries": [
+        {
+          "index": 644,
+          "type": 1,
+          "allocation_type": 3,
+          "bytes": 44800,
+          "address": 4099513408,
+          "address_or_size_changes": 0
+        }
+      ]
+    },
+    {
+      "node": 84,
+      "reference_median_ms": 44.8997,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          64
+        ],
+        [
+          7,
+          5,
+          5,
+          64
+        ],
+        [
+          7
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          7
+        ]
+      ],
+      "observed_path": "Eigen float32",
+      "probe_mean_eval_ms_including_warmup": 50.905,
+      "gemmlowp_fraction_of_eval": 0.0,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 1,
+      "malloc_calls_per_eval_mean": 27.0,
+      "requested_bytes_per_eval_mean": 29474164.0,
+      "temporaries": [
+        {
+          "index": 637,
+          "type": 1,
+          "allocation_type": 3,
+          "bytes": 44800,
+          "address": 4099379008,
+          "address_or_size_changes": 0
+        }
+      ]
+    },
+    {
+      "node": 168,
+      "reference_median_ms": 45.8601,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          64
+        ],
+        [
+          7,
+          5,
+          5,
+          64
+        ],
+        [
+          7
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          7
+        ]
+      ],
+      "observed_path": "Eigen float32",
+      "probe_mean_eval_ms_including_warmup": 49.950192307692305,
+      "gemmlowp_fraction_of_eval": 0.0,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 1,
+      "malloc_calls_per_eval_mean": 27.0,
+      "requested_bytes_per_eval_mean": 29474164.0,
+      "temporaries": [
+        {
+          "index": 645,
+          "type": 1,
+          "allocation_type": 3,
+          "bytes": 44800,
+          "address": 4099558208,
+          "address_or_size_changes": 0
+        }
+      ]
+    },
+    {
+      "node": 96,
+      "reference_median_ms": 35.2615,
+      "input_shapes": [
+        [
+          1,
+          184,
+          320,
+          16
+        ],
+        [
+          64,
+          1,
+          1,
+          16
+        ],
+        [
+          64
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          184,
+          320,
+          64
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 35.70288461538461,
+      "gemmlowp_fraction_of_eval": 0.9994936845223668,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 2316.0,
+      "temporaries": []
+    },
+    {
+      "node": 12,
+      "reference_median_ms": 33.66,
+      "input_shapes": [
+        [
+          1,
+          184,
+          320,
+          16
+        ],
+        [
+          64,
+          1,
+          1,
+          16
+        ],
+        [
+          64
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          184,
+          320,
+          64
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 35.987692307692306,
+      "gemmlowp_fraction_of_eval": 0.9995350974692203,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 2316.0,
+      "temporaries": []
+    },
+    {
+      "node": 100,
+      "reference_median_ms": 33.5712,
+      "input_shapes": [
+        [
+          1,
+          184,
+          320,
+          16
+        ],
+        [
+          64,
+          1,
+          1,
+          16
+        ],
+        [
+          64
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          184,
+          320,
+          64
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 35.11942307692308,
+      "gemmlowp_fraction_of_eval": 0.9995236035286194,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 2316.0,
+      "temporaries": []
+    },
+    {
+      "node": 16,
+      "reference_median_ms": 32.7143,
+      "input_shapes": [
+        [
+          1,
+          184,
+          320,
+          16
+        ],
+        [
+          64,
+          1,
+          1,
+          16
+        ],
+        [
+          64
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          184,
+          320,
+          64
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 36.425576923076925,
+      "gemmlowp_fraction_of_eval": 0.9995618041000353,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 2316.0,
+      "temporaries": []
+    },
+    {
+      "node": 25,
+      "reference_median_ms": 18.4878,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          32
+        ],
+        [
+          128,
+          1,
+          1,
+          32
+        ],
+        [
+          128
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          128
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 19.264615384615386,
+      "gemmlowp_fraction_of_eval": 0.9992413352499601,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 8460.0,
+      "temporaries": []
+    },
+    {
+      "node": 105,
+      "reference_median_ms": 18.945,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          32
+        ],
+        [
+          128,
+          1,
+          1,
+          32
+        ],
+        [
+          128
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          128
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 19.082076923076922,
+      "gemmlowp_fraction_of_eval": 0.9991353142497792,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 8460.0,
+      "temporaries": []
+    },
+    {
+      "node": 21,
+      "reference_median_ms": 19.1358,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          32
+        ],
+        [
+          128,
+          1,
+          1,
+          32
+        ],
+        [
+          128
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          128
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 19.219442307692308,
+      "gemmlowp_fraction_of_eval": 0.9992115355944653,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 8460.0,
+      "temporaries": []
+    },
+    {
+      "node": 78,
+      "reference_median_ms": 14.9103,
+      "input_shapes": [
+        [
+          1,
+          23,
+          40,
+          128
+        ],
+        [
+          1024,
+          1,
+          1,
+          128
+        ],
+        [
+          1024
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          23,
+          40,
+          1024
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 14.758692307692307,
+      "gemmlowp_fraction_of_eval": 0.9922861625222165,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 262412.0,
+      "temporaries": []
+    },
+    {
+      "node": 109,
+      "reference_median_ms": 18.4581,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          32
+        ],
+        [
+          128,
+          1,
+          1,
+          32
+        ],
+        [
+          128
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          128
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 18.782326923076923,
+      "gemmlowp_fraction_of_eval": 0.9991460876171441,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 8460.0,
+      "temporaries": []
+    },
+    {
+      "node": 162,
+      "reference_median_ms": 13.6115,
+      "input_shapes": [
+        [
+          1,
+          23,
+          40,
+          128
+        ],
+        [
+          1024,
+          1,
+          1,
+          128
+        ],
+        [
+          1024
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          23,
+          40,
+          1024
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 14.593211538461539,
+      "gemmlowp_fraction_of_eval": 0.9968201758720796,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 262412.0,
+      "temporaries": []
+    },
+    {
+      "node": 94,
+      "reference_median_ms": 14.418,
+      "input_shapes": [
+        [
+          1,
+          736,
+          1280,
+          1
+        ],
+        [
+          16,
+          4,
+          4,
+          1
+        ],
+        [
+          16
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          184,
+          320,
+          16
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 12.958499999999999,
+      "gemmlowp_fraction_of_eval": 0.7361369579218868,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 780.0,
+      "temporaries": [
+        {
+          "index": 640,
+          "type": 9,
+          "allocation_type": 2,
+          "bytes": 942080,
+          "address": 4102917184,
+          "address_or_size_changes": 0
+        }
+      ]
+    },
+    {
+      "node": 81,
+      "reference_median_ms": 10.9978,
+      "input_shapes": [
+        [
+          1,
+          92,
+          160,
+          64
+        ],
+        [
+          64,
+          1,
+          1,
+          64
+        ],
+        [
+          64
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          92,
+          160,
+          64
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 11.24746153846154,
+      "gemmlowp_fraction_of_eval": 0.9985808763686849,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 8460.0,
+      "temporaries": []
+    },
+    {
+      "node": 50,
+      "reference_median_ms": 14.0008,
+      "input_shapes": [
+        [
+          1,
+          46,
+          80,
+          64
+        ],
+        [
+          256,
+          1,
+          1,
+          64
+        ],
+        [
+          256
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          46,
+          80,
+          256
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 11.480538461538462,
+      "gemmlowp_fraction_of_eval": 0.9985812110126165,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 33036.0,
+      "temporaries": []
+    },
+    {
+      "node": 101,
+      "reference_median_ms": 12.1458,
+      "input_shapes": [
+        [
+          1,
+          184,
+          320,
+          64
+        ],
+        [
+          16,
+          1,
+          1,
+          64
+        ],
+        [
+          16
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          184,
+          320,
+          16
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 12.199807692307692,
+      "gemmlowp_fraction_of_eval": 0.9986743170604833,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 2316.0,
+      "temporaries": []
+    },
+    {
+      "node": 13,
+      "reference_median_ms": 11.5759,
+      "input_shapes": [
+        [
+          1,
+          184,
+          320,
+          64
+        ],
+        [
+          16,
+          1,
+          1,
+          64
+        ],
+        [
+          16
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          184,
+          320,
+          16
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 12.501884615384615,
+      "gemmlowp_fraction_of_eval": 0.9975772883472954,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 2316.0,
+      "temporaries": []
+    },
+    {
+      "node": 46,
+      "reference_median_ms": 10.2624,
+      "input_shapes": [
+        [
+          1,
+          46,
+          80,
+          64
+        ],
+        [
+          256,
+          1,
+          1,
+          64
+        ],
+        [
+          256
+        ]
+      ],
+      "output_shapes": [
+        [
+          1,
+          46,
+          80,
+          256
+        ]
+      ],
+      "observed_path": "gemmlowp per-channel int8",
+      "probe_mean_eval_ms_including_warmup": 11.17101923076923,
+      "gemmlowp_fraction_of_eval": 0.998646910876874,
+      "prepare_calls": 1,
+      "eval_calls": 52,
+      "transpose_calls": 0,
+      "malloc_calls_per_eval_mean": 5.0,
+      "requested_bytes_per_eval_mean": 33036.0,
+      "temporaries": []
+    }
+  ],
+  "reference_timings": [
+    {
+      "frame": "fast-corpus/00-description-screen-20261006-capture.ppm",
+      "median_ms": {
+        "detector": 1329.74616,
+        "detector_tflite_invoke": 1305.83428,
+        "recognizer": 99.029,
+        "crop_rectify": 22.932,
+        "total": 1464.354
+      }
+    },
+    {
+      "frame": "fast-corpus/01-description-screen-20261006-current-full.ppm",
+      "median_ms": {
+        "detector": 1339.9572199999998,
+        "detector_tflite_invoke": 1309.93582,
+        "recognizer": 326.371,
+        "crop_rectify": 34.124,
+        "total": 1710.492
+      }
+    },
+    {
+      "frame": "fast-corpus/02-font-matching-20261007-source-frame.ppm",
+      "median_ms": {
+        "detector": 1328.90742,
+        "detector_tflite_invoke": 1305.56556,
+        "recognizer": 98.132,
+        "crop_rectify": 15.308,
+        "total": 1449.407
+      }
+    },
+    {
+      "frame": "fast-corpus/03-ocr-candidates-20261007-live-frame.ppm",
+      "median_ms": {
+        "detector": 1357.93886,
+        "detector_tflite_invoke": 1333.81862,
+        "recognizer": 92.031,
+        "crop_rectify": 15.317,
+        "total": 1477.81
+      }
+    },
+    {
+      "frame": "fast-corpus/04-ocr-fullscreen-discussion-20261005-screen.ppm",
+      "median_ms": {
+        "detector": 1348.5457999999999,
+        "detector_tflite_invoke": 1306.76008,
+        "recognizer": 397.837,
+        "crop_rectify": 49.755,
+        "total": 1805.221
+      }
+    },
+    {
+      "frame": "fast-corpus/05-ocr-policy-live-20261005-frame.ppm",
+      "median_ms": {
+        "detector": 1318.43564,
+        "detector_tflite_invoke": 1294.43668,
+        "recognizer": 97.79,
+        "crop_rectify": 23.058,
+        "total": 1456.441
+      }
+    },
+    {
+      "frame": "fast-corpus/06-ppocr-only-live-20261007-frame.ppm",
+      "median_ms": {
+        "detector": 1323.12294,
+        "detector_tflite_invoke": 1299.65896,
+        "recognizer": 76.906,
+        "crop_rectify": 11.195,
+        "total": 1417.473
+      }
+    },
+    {
+      "frame": "fast-corpus/07-text-detectors-video-only-input.ppm",
+      "median_ms": {
+        "detector": 1325.0345599999998,
+        "detector_tflite_invoke": 1303.2974,
+        "recognizer": 0.0,
+        "crop_rectify": 0.0,
+        "total": 1330.182
+      }
+    },
+    {
+      "frame": "fast-corpus/08-game-input.ppm",
+      "median_ms": {
+        "detector": 1308.74744,
+        "detector_tflite_invoke": 1285.83182,
+        "recognizer": 46.967,
+        "crop_rectify": 11.649,
+        "total": 1372.977
+      }
+    },
+    {
+      "frame": "fast-corpus/09-game-brothership-input.ppm",
+      "median_ms": {
+        "detector": 1320.37814,
+        "detector_tflite_invoke": 1296.98966,
+        "recognizer": 91.476,
+        "crop_rectify": 15.445,
+        "total": 1431.114
+      }
+    },
+    {
+      "frame": "fast-corpus/10-game-example-2-input.ppm",
+      "median_ms": {
+        "detector": 1318.34102,
+        "detector_tflite_invoke": 1287.98648,
+        "recognizer": 281.448,
+        "crop_rectify": 33.941,
+        "total": 1625.103
+      }
+    },
+    {
+      "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+      "median_ms": {
+        "detector": 1394.2691799999998,
+        "detector_tflite_invoke": 1353.6495,
+        "recognizer": 422.31,
+        "crop_rectify": 45.594,
+        "total": 1871.942
+      }
+    },
+    {
+      "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+      "median_ms": {
+        "detector": 1343.9277999999997,
+        "detector_tflite_invoke": 1311.83298,
+        "recognizer": 334.219,
+        "crop_rectify": 41.704,
+        "total": 1748.591
+      }
+    }
+  ]
+}

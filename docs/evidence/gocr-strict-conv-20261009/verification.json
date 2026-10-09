@@ -1,0 +1,21 @@
+{
+  "system_sha256": "cace8a26cd74882b359fcdf1061c2f5e99dd6422a1e7455d4352b6bf68e70138",
+  "host_tests_passed": 43,
+  "tv_tests_passed": 43,
+  "arm_sdk_build_passed": true,
+  "corpus_frames": 13,
+  "main_corpus_measured_calls": 78,
+  "cold_warm_measured_calls": 20,
+  "kernel_corpus_measured_calls": 26,
+  "all_gates_exact": true,
+  "production_config_absent": true,
+  "trace_instances_and_definitions_empty_after_cleanup": true,
+  "capture_after": {
+    "returnValue": true,
+    "isRunning": true,
+    "connected": true,
+    "elevated": true,
+    "framerate": 58.343227372309
+  },
+  "source_reference_commit": "293afaf"
+}

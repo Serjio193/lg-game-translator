@@ -18,6 +18,12 @@
 - `gocr_worker/execution_profile.py`: explicit STRICT/experimental FAST_XNNPACK selection.
 - `gocr_worker/model_operator_metadata.py`: untimed model node/tensor metadata for STRICT profiling.
 - `scripts/profile-gocr-strict-ops.py`: node-level native system TFLite timing and allocated shapes.
+- `native/gocr_detector_native/conv_dispatch_probe.cpp`, `scripts/probe-gocr-conv-dispatch.py`:
+  isolated forwarding diagnostics for actual CONV dispatch and repeated allocations,
+  with corpus-wide exact parity. `build-gocr-conv-probe.sh` builds only this probe.
+- `scripts/trace-gocr-conv-uprobes.py`: private, temporary tracefs call probes;
+  reports unsupported kernel instrumentation and verifies cleanup.
+- `scripts/analyze-gocr-conv-dispatch.py`: per-node evidence summary, separate from timing benchmarks.
 - `scripts/build-gocr-strict-runtime.sh`, `scripts/benchmark-gocr-strict-runtimes.py`: isolated ARMv7 candidates and exact detector-runtime gate; never change production.
 - `gocr_worker/runner_config.py`: recovered runner decoder shared by CLI and runtime.
 - `gocr_worker/runner_diagnostics.py`, `scripts/benchmark-google-runner.py`:

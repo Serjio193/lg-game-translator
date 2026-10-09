@@ -1,0 +1,25 @@
+{
+  "system_sha256": "cace8a26cd74882b359fcdf1061c2f5e99dd6422a1e7455d4352b6bf68e70138",
+  "detector_threads": 2,
+  "recognizer_threads": 2,
+  "xnnpack": false,
+  "warmup_per_frame": 1,
+  "measured_per_frame": 5,
+  "parity_passed": true,
+  "gates": [
+    {
+      "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    },
+    {
+      "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+      "same_frame": true,
+      "all_4_inputs_11_outputs_exact": true,
+      "quads_crops_windows_utf8_exact": true,
+      "proposals_dedupe_components_exact": true
+    }
+  ]
+}
