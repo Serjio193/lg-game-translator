@@ -1,0 +1,45 @@
+
+/mnt/c/Users/serji/.codex/worktrees/gocr-integration/lg-game-translator/build/system-tflite-2.17.so:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0035e440 <tflite::ops::builtin::Register_CONVOLUTION_REF()@@Base>:
+  35e440:	e59f0004 	ldr	r0, [pc, #4]	; 35e44c <tflite::ops::builtin::Register_CONVOLUTION_REF()@@Base+0xc>
+  35e444:	e08f0000 	add	r0, pc, r0
+  35e448:	e12fff1e 	bx	lr
+  35e44c:	0023f6bc 	strhteq	pc, [r3], -ip	; <UNPREDICTABLE>
+
+0035e450 <tflite::ops::builtin::Register_CONVOLUTION_GENERIC_OPT()@@Base>:
+  35e450:	e59f0008 	ldr	r0, [pc, #8]	; 35e460 <tflite::ops::builtin::Register_CONVOLUTION_GENERIC_OPT()@@Base+0x10>
+  35e454:	e08f0000 	add	r0, pc, r0
+  35e458:	e2800030 	add	r0, r0, #48	; 0x30
+  35e45c:	e12fff1e 	bx	lr
+  35e460:	0023f6ac 	eoreq	pc, r3, ip, lsr #13
+
+0035e464 <tflite::ops::builtin::Register_CONVOLUTION_GENERIC_OPT_UINT8()@@Base>:
+  35e464:	e59f0008 	ldr	r0, [pc, #8]	; 35e474 <tflite::ops::builtin::Register_CONVOLUTION_GENERIC_OPT_UINT8()@@Base+0x10>
+  35e468:	e08f0000 	add	r0, pc, r0
+  35e46c:	e2800060 	add	r0, r0, #96	; 0x60
+  35e470:	e12fff1e 	bx	lr
+  35e474:	0023f698 	mlaeq	r3, r8, r6, pc	; <UNPREDICTABLE>
+
+0035e478 <tflite::ops::builtin::Register_CONVOLUTION_MULTITHREADED_OPT()@@Base>:
+  35e478:	e59f0008 	ldr	r0, [pc, #8]	; 35e488 <tflite::ops::builtin::Register_CONVOLUTION_MULTITHREADED_OPT()@@Base+0x10>
+  35e47c:	e08f0000 	add	r0, pc, r0
+  35e480:	e2800090 	add	r0, r0, #144	; 0x90
+  35e484:	e12fff1e 	bx	lr
+  35e488:	0023f684 	eoreq	pc, r3, r4, lsl #13
+
+0035e48c <tflite::ops::builtin::Register_CONVOLUTION_CBLAS_OPT()@@Base>:
+  35e48c:	e59f0008 	ldr	r0, [pc, #8]	; 35e49c <tflite::ops::builtin::Register_CONVOLUTION_CBLAS_OPT()@@Base+0x10>
+  35e490:	e08f0000 	add	r0, pc, r0
+  35e494:	e28000c0 	add	r0, r0, #192	; 0xc0
+  35e498:	e12fff1e 	bx	lr
+  35e49c:	0023f670 	eoreq	pc, r3, r0, ror r6	; <UNPREDICTABLE>
+
+0035e4a0 <tflite::ops::builtin::Register_CONV_2D()@@Base>:
+  35e4a0:	eaf53d1f 	b	ad924 <tflite::ops::builtin::Register_CONVOLUTION_MULTITHREADED_OPT()@plt>
+
+0035e4a4 <tflite::ops::builtin::Register_CONV_2D_UINT8()@@Base>:
+  35e4a4:	eaf53076 	b	aa684 <tflite::ops::builtin::Register_CONV_2D()@plt>

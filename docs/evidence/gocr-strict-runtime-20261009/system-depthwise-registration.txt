@@ -1,0 +1,38 @@
+
+/mnt/c/Users/serji/.codex/worktrees/gocr-integration/lg-game-translator/build/system-tflite-2.17.so:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+003a8860 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_REF()@@Base>:
+  3a8860:	e59f0004 	ldr	r0, [pc, #4]	; 3a886c <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_REF()@@Base+0xc>
+  3a8864:	e08f0000 	add	r0, pc, r0
+  3a8868:	e12fff1e 	bx	lr
+  3a886c:	001f550c 	andseq	r5, pc, ip, lsl #10
+
+003a8870 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_GENERIC_OPT()@@Base>:
+  3a8870:	e59f0008 	ldr	r0, [pc, #8]	; 3a8880 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_GENERIC_OPT()@@Base+0x10>
+  3a8874:	e08f0000 	add	r0, pc, r0
+  3a8878:	e2800030 	add	r0, r0, #48	; 0x30
+  3a887c:	e12fff1e 	bx	lr
+  3a8880:	001f54fc 			; <UNDEFINED> instruction: 0x001f54fc
+
+003a8884 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_NEON_OPT()@@Base>:
+  3a8884:	e59f0008 	ldr	r0, [pc, #8]	; 3a8894 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_NEON_OPT()@@Base+0x10>
+  3a8888:	e08f0000 	add	r0, pc, r0
+  3a888c:	e2800060 	add	r0, r0, #96	; 0x60
+  3a8890:	e12fff1e 	bx	lr
+  3a8894:	001f54e8 	andseq	r5, pc, r8, ror #9
+
+003a8898 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_NEON_OPT_UINT8()@@Base>:
+  3a8898:	e59f0008 	ldr	r0, [pc, #8]	; 3a88a8 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_NEON_OPT_UINT8()@@Base+0x10>
+  3a889c:	e08f0000 	add	r0, pc, r0
+  3a88a0:	e2800090 	add	r0, r0, #144	; 0x90
+  3a88a4:	e12fff1e 	bx	lr
+  3a88a8:	001f54d4 			; <UNDEFINED> instruction: 0x001f54d4
+
+003a88ac <tflite::ops::builtin::Register_DEPTHWISE_CONV_2D()@@Base>:
+  3a88ac:	eaf40d59 	b	abe18 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_NEON_OPT()@plt>
+
+003a88b0 <tflite::ops::builtin::Register_DEPTHWISE_CONV_2D_UINT8()@@Base>:
+  3a88b0:	eaf409e6 	b	ab050 <tflite::ops::builtin::Register_DEPTHWISE_CONVOLUTION_NEON_OPT_UINT8()@plt>

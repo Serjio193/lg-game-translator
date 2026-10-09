@@ -1,0 +1,93 @@
+[
+  {
+    "frame": "fast-corpus/00-description-screen-20261006-capture.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/01-description-screen-20261006-current-full.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/02-font-matching-20261007-source-frame.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/03-ocr-candidates-20261007-live-frame.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/04-ocr-fullscreen-discussion-20261005-screen.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/05-ocr-policy-live-20261005-frame.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/06-ppocr-only-live-20261007-frame.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/07-text-detectors-video-only-input.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/08-game-input.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/09-game-brothership-input.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/10-game-example-2-input.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  },
+  {
+    "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+    "heads": true,
+    "all_line_fields": true,
+    "diagnostics": true,
+    "repeat_stable": true
+  }
+]

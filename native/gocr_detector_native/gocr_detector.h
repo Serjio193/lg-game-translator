@@ -32,6 +32,8 @@ int gocr_detector_detect(GocrDetector*, const uint8_t*, size_t, GocrLine*, int, 
 size_t gocr_detector_copy_input(GocrDetector*, int ordinal, void*, size_t);
 size_t gocr_detector_copy_output(GocrDetector*, int head, void*, size_t);
 int gocr_detector_copy_proposals(GocrDetector*, GocrProposal*, int capacity);
+void gocr_detector_reset_profile(GocrDetector*);
+int gocr_detector_tensor_dims(GocrDetector*, int tensor_index, int* dimensions, int capacity);
 #ifdef __cplusplus
 }
 #endif

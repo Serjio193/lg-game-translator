@@ -1,0 +1,53 @@
+{
+  "baseline": {
+    "source_commit": "ad6d8cc177d0c868982e39e0823d0efbfb95f04c",
+    "bytes": 3089548,
+    "sha256": "de3269d41ce9ce6e0f9441a5872a15509ff3aae2f190cfc376fc4171944a02d2",
+    "compile_command_count": 760,
+    "conv_flags": [
+      "--sysroot=/home/serji/.local/sdk/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot -DCPUINFO_SUPPORTED_PLATFORM=1 -DEIGEN_MPL2_ONLY -DNOMINMAX=1 -DPTHREADPOOL_NO_DEPRECATED_API=1 -I/home/serji/gocr-tflite-20261009/source/third_party/xla/third_party/tsl -I/home/serji/gocr-tflite-20261009/source/third_party/xla -I/home/serji/gocr-tflite-20261009/source -I/home/serji/gocr-strict-runtime-20261009/baseline/eigen -I/home/serji/gocr-strict-runtime-20261009/baseline/abseil-cpp -I/home/serji/gocr-strict-runtime-20261009/baseline/farmhash/src -I/home/serji/gocr-strict-runtime-20261009/baseline/flatbuffers/include -I/home/serji/gocr-strict-runtime-20261009/baseline/gemmlowp -I/home/serji/gocr-strict-runtime-20261009/baseline/ml_dtypes -I/home/serji/gocr-strict-runtime-20261009/baseline/ml_dtypes/ml_dtypes -I/home/serji/gocr-strict-runtime-20261009/baseline/ruy -I/home/serji/gocr-strict-runtime-20261009/baseline/cpuinfo/include -I/home/serji/gocr-strict-runtime-20261009/baseline/pthreadpool-source/include -march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=softfp -fno-fast-math -fno-unsafe-math-optimizations -fno-associative-math -fno-reciprocal-math -fno-finite-math-only -ffp-contract=off -DEIGEN_FAST_MATH=0 -O2 -DNDEBUG -std=gnu++17 -fPIC -DEIGEN_NEON_GEBP_NR=4 -DTFLITE_WITH_RUY -DTFL_STATIC_LIBRARY_BUILD -pthread"
+    ],
+    "unsafe_flag_commands": [],
+    "xnn_source_count": 0,
+    "cmake_controls": [
+      "TFLITE_ENABLE_GPU:BOOL=OFF",
+      "TFLITE_ENABLE_NNAPI:BOOL=OFF",
+      "TFLITE_ENABLE_RUY:BOOL=ON",
+      "TFLITE_ENABLE_XNNPACK:BOOL=OFF"
+    ]
+  },
+  "neon": {
+    "source_commit": "ad6d8cc177d0c868982e39e0823d0efbfb95f04c",
+    "bytes": 3262696,
+    "sha256": "fe4cc3911fd2e36d978815bf9ae3ecacedfd92dc661f0b4882ccc7994b0da266",
+    "compile_command_count": 760,
+    "conv_flags": [
+      "--sysroot=/home/serji/.local/sdk/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot -DCPUINFO_SUPPORTED_PLATFORM=1 -DEIGEN_MPL2_ONLY -DNOMINMAX=1 -DPTHREADPOOL_NO_DEPRECATED_API=1 -I/home/serji/gocr-tflite-20261009/source/third_party/xla/third_party/tsl -I/home/serji/gocr-tflite-20261009/source/third_party/xla -I/home/serji/gocr-tflite-20261009/source -I/home/serji/gocr-strict-runtime-20261009/neon/eigen -I/home/serji/gocr-strict-runtime-20261009/neon/abseil-cpp -I/home/serji/gocr-strict-runtime-20261009/neon/farmhash/src -I/home/serji/gocr-strict-runtime-20261009/neon/flatbuffers/include -I/home/serji/gocr-strict-runtime-20261009/neon/gemmlowp -I/home/serji/gocr-strict-runtime-20261009/neon/ml_dtypes -I/home/serji/gocr-strict-runtime-20261009/neon/ml_dtypes/ml_dtypes -I/home/serji/gocr-strict-runtime-20261009/neon/ruy -I/home/serji/gocr-strict-runtime-20261009/neon/cpuinfo/include -I/home/serji/gocr-strict-runtime-20261009/neon/pthreadpool-source/include -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=softfp -fno-fast-math -fno-unsafe-math-optimizations -fno-associative-math -fno-reciprocal-math -fno-finite-math-only -ffp-contract=off -DEIGEN_FAST_MATH=0 -O2 -DNDEBUG -std=gnu++17 -fPIC -DEIGEN_NEON_GEBP_NR=4 -DTFLITE_WITH_RUY -DTFL_STATIC_LIBRARY_BUILD -pthread"
+    ],
+    "unsafe_flag_commands": [],
+    "xnn_source_count": 0,
+    "cmake_controls": [
+      "TFLITE_ENABLE_GPU:BOOL=OFF",
+      "TFLITE_ENABLE_NNAPI:BOOL=OFF",
+      "TFLITE_ENABLE_RUY:BOOL=ON",
+      "TFLITE_ENABLE_XNNPACK:BOOL=OFF"
+    ]
+  },
+  "neon-eigen": {
+    "source_commit": "ad6d8cc177d0c868982e39e0823d0efbfb95f04c",
+    "bytes": 3767144,
+    "sha256": "1d8a3645e5985beccc1be455d3e2d3013ed3df29d5c4b865a563d21d43a0ddcd",
+    "compile_command_count": 760,
+    "conv_flags": [
+      "--sysroot=/home/serji/.local/sdk/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot -DCPUINFO_SUPPORTED_PLATFORM=1 -DEIGEN_MPL2_ONLY -DNOMINMAX=1 -DPTHREADPOOL_NO_DEPRECATED_API=1 -I/home/serji/gocr-tflite-20261009/source/third_party/xla/third_party/tsl -I/home/serji/gocr-tflite-20261009/source/third_party/xla -I/home/serji/gocr-tflite-20261009/source -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/eigen -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/abseil-cpp -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/farmhash/src -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/flatbuffers/include -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/gemmlowp -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/ml_dtypes -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/ml_dtypes/ml_dtypes -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/ruy -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/cpuinfo/include -I/home/serji/gocr-strict-runtime-20261009/neon-eigen/pthreadpool-source/include -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=softfp -fno-fast-math -fno-unsafe-math-optimizations -fno-associative-math -fno-reciprocal-math -fno-finite-math-only -ffp-contract=off -DEIGEN_FAST_MATH=0 -O2 -DNDEBUG -std=gnu++17 -fPIC -DEIGEN_NEON_GEBP_NR=4 -DTFL_STATIC_LIBRARY_BUILD -pthread"
+    ],
+    "unsafe_flag_commands": [],
+    "xnn_source_count": 0,
+    "cmake_controls": [
+      "TFLITE_ENABLE_GPU:BOOL=OFF",
+      "TFLITE_ENABLE_NNAPI:BOOL=OFF",
+      "TFLITE_ENABLE_RUY:BOOL=OFF",
+      "TFLITE_ENABLE_XNNPACK:BOOL=OFF"
+    ]
+  }
+}

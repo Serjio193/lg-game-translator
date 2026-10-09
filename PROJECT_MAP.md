@@ -16,6 +16,9 @@
   TV parity и прогретый A/B до получения текста.
 - `scripts/research-gocr-xnnpack-divergence.py`: отдельный numerical-path experiment.
 - `gocr_worker/execution_profile.py`: explicit STRICT/experimental FAST_XNNPACK selection.
+- `gocr_worker/model_operator_metadata.py`: untimed model node/tensor metadata for STRICT profiling.
+- `scripts/profile-gocr-strict-ops.py`: node-level native system TFLite timing and allocated shapes.
+- `scripts/build-gocr-strict-runtime.sh`, `scripts/benchmark-gocr-strict-runtimes.py`: isolated ARMv7 candidates and exact detector-runtime gate; never change production.
 - `gocr_worker/runner_config.py`: recovered runner decoder shared by CLI and runtime.
 - `gocr_worker/runner_diagnostics.py`, `scripts/benchmark-google-runner.py`:
   three-profile tensor/proposal/component/quad/crop/text evidence on saved frames.

@@ -1,0 +1,20 @@
+{
+  "host_regression_tests": 33,
+  "g5_regression_tests": 43,
+  "native_profiler_regression": "pass: reset, node/subgraph separation, count, median, percent",
+  "native_sdk_build": "pass: detector, standalone benchmark, optional kernel probe",
+  "final_diagnostic_detector_sha256": "67927906730e9e366bc76d6a1d62f2933e099dc29f42a00efc4e24d9ed9d7ead",
+  "recognizer_sha256_unchanged": "4c41c0577430ca85f51a68ffa69de9c43075b2739c2c8cbedf538c849065cf81",
+  "system_tflite_sha256_unchanged": "cace8a26cd74882b359fcdf1061c2f5e99dd6422a1e7455d4352b6bf68e70138",
+  "production_gocr_mode_config": "absent, unchanged",
+  "production_switched": false,
+  "xnnpack_used": false,
+  "capture_after_tests": {
+    "returnValue": true,
+    "isRunning": true,
+    "connected": true,
+    "elevated": true,
+    "framerate": 58.479418168776
+  },
+  "final_native_system_regression": "13/13 frames, 143/143 heads, every semantic line field and diagnostics exact against previous STRICT"
+}

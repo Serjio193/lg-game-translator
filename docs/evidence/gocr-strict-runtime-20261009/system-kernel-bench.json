@@ -1,0 +1,1 @@
+{"runtime_version":"2.17.0","threads":2,"explicit_xnnpack":false,"warmups":3,"iterations":5,"invoke_min_ms":1235.62,"invoke_median_ms":1314.3,"invoke_p95_ms":1349.13,"prepare_ms":26.1712,"decode_ms":0.72586,"postprocess_ms":14.4476,"raw_pieces":858,"raw_groups":77,"lines":21,"max_rss_kib":25828,"affinity":[0,1,2,3],"samples_ms":[1314.3,1235.62,1298.65,1324.61,1349.13]}

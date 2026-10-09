@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
+#include <dlfcn.h>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -157,6 +158,7 @@ API int gocr_detector_invoke(GocrDetector* d) {
         return -1;
     }
     d->stats.invoke_ms=elapsed(start);
+    if (d->profiler) d->profiler->invoked(d->stats.invoke_ms);
     d->invoked=true;
     return 0;
 }
@@ -206,5 +208,21 @@ API int gocr_detector_copy_proposals(GocrDetector* d,GocrProposal* output,int ca
     if (!d) return -1;
     int count=int(d->proposals.size());
     if (output && capacity>=count) std::copy(d->proposals.begin(),d->proposals.end(),output);
+    return count;
+}
+// Untimed diagnostic APIs: profiler warmup exclusion and allocated tensor shapes.
+API void gocr_detector_reset_profile(GocrDetector* d) {
+    if (d && d->profiler) d->profiler->reset();
+}
+API int gocr_detector_tensor_dims(GocrDetector* d,int index,int* output,int capacity) {
+    if (!d || index<0) return -1;
+    using GetTensor=void* (*)(const void*,int);
+    auto get=reinterpret_cast<GetTensor>(dlsym(d->api.handle,"TfLiteInterpreterGetTensor"));
+    if (!get) return -1;
+    auto* tensor=get(d->interpreter,index);
+    if (!tensor) return -1;
+    int count=d->api.TensorNumDims(tensor);
+    if (output && capacity>=count)
+        for (int i=0;i<count;++i) output[i]=d->api.TensorDim(tensor,i);
     return count;
 }

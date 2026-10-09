@@ -1,0 +1,991 @@
+{
+  "timing_scope": "native frame-to-text; no translation/OSD; diagnostics excluded",
+  "runs_per_frame": 5,
+  "warmups_per_frame": 1,
+  "detector_threads": 2,
+  "recognizer_threads": 2,
+  "xnnpack": false,
+  "candidates": {
+    "baseline": {
+      "frame_count": 2,
+      "median_ms": {
+        "system": {
+          "detector_tflite_invoke": 1317.94171,
+          "total": 1829.4470000000001
+        },
+        "baseline": {
+          "detector_tflite_invoke": 32700.81493,
+          "total": 33227.537500000006
+        }
+      },
+      "speedup": 0.04030302342070715,
+      "changed_heads": 22,
+      "utf8_text_equal_frames": 0,
+      "eligible_exact_frames": 0,
+      "frames": [
+        {
+          "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+          "reference_ms": {
+            "detector": 1330.4545200000002,
+            "detector_tflite_invoke": 1295.3655,
+            "recognizer": 444.579,
+            "crop_rectify": 40.469,
+            "total": 1825.743
+          },
+          "candidate_ms": {
+            "detector": 32448.02304,
+            "detector_tflite_invoke": 32414.86424,
+            "recognizer": 451.075,
+            "crop_rectify": 41.364,
+            "total": 32954.05
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 6.66923713684082,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 326,
+            "baseline": 323
+          },
+          "component_count": {
+            "system": 21,
+            "baseline": 21
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+          "reference_ms": {
+            "detector": 1369.5545,
+            "detector_tflite_invoke": 1340.51792,
+            "recognizer": 372.089,
+            "crop_rectify": 39.076,
+            "total": 1833.151
+          },
+          "candidate_ms": {
+            "detector": 33016.285039999995,
+            "detector_tflite_invoke": 32986.76562,
+            "recognizer": 419.589,
+            "crop_rectify": 38.163,
+            "total": 33501.025
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 5.699263334274292,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 267,
+            "baseline": 266
+          },
+          "component_count": {
+            "system": 18,
+            "baseline": 18
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        }
+      ]
+    },
+    "neon": {
+      "frame_count": 13,
+      "median_ms": {
+        "system": {
+          "detector_tflite_invoke": 1331.42856,
+          "total": 1523.788
+        },
+        "neon": {
+          "detector_tflite_invoke": 938.06322,
+          "total": 1145.91
+        }
+      },
+      "speedup": 1.4193377712858202,
+      "changed_heads": 143,
+      "utf8_text_equal_frames": 5,
+      "eligible_exact_frames": 0,
+      "frames": [
+        {
+          "frame": "fast-corpus/00-description-screen-20261006-capture.ppm",
+          "reference_ms": {
+            "detector": 1342.8475799999999,
+            "detector_tflite_invoke": 1319.23272,
+            "recognizer": 112.166,
+            "crop_rectify": 21.639,
+            "total": 1478.987
+          },
+          "candidate_ms": {
+            "detector": 931.3749399999999,
+            "detector_tflite_invoke": 910.03368,
+            "recognizer": 103.265,
+            "crop_rectify": 20.43,
+            "total": 1083.137
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 7.401833534240723,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 109,
+            "neon": 109
+          },
+          "component_count": {
+            "system": 3,
+            "neon": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/01-description-screen-20261006-current-full.ppm",
+          "reference_ms": {
+            "detector": 1326.8527199999999,
+            "detector_tflite_invoke": 1300.56618,
+            "recognizer": 332.748,
+            "crop_rectify": 30.911,
+            "total": 1690.619
+          },
+          "candidate_ms": {
+            "detector": 949.7125399999999,
+            "detector_tflite_invoke": 922.55098,
+            "recognizer": 352.796,
+            "crop_rectify": 30.659,
+            "total": 1326.973
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 8.800104141235352,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 234,
+            "neon": 230
+          },
+          "component_count": {
+            "system": 18,
+            "neon": 18
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/02-font-matching-20261007-source-frame.ppm",
+          "reference_ms": {
+            "detector": 1423.0564599999998,
+            "detector_tflite_invoke": 1402.72734,
+            "recognizer": 100.862,
+            "crop_rectify": 14.7,
+            "total": 1546.894
+          },
+          "candidate_ms": {
+            "detector": 1009.46472,
+            "detector_tflite_invoke": 988.0447,
+            "recognizer": 110.311,
+            "crop_rectify": 13.194,
+            "total": 1145.91
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 6.810750901699066,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 82,
+            "neon": 82
+          },
+          "component_count": {
+            "system": 3,
+            "neon": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/03-ocr-candidates-20261007-live-frame.ppm",
+          "reference_ms": {
+            "detector": 1403.34782,
+            "detector_tflite_invoke": 1382.34392,
+            "recognizer": 98.809,
+            "crop_rectify": 13.783,
+            "total": 1523.788
+          },
+          "candidate_ms": {
+            "detector": 962.20426,
+            "detector_tflite_invoke": 938.06322,
+            "recognizer": 138.801,
+            "crop_rectify": 13.737,
+            "total": 1164.572
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 6.78830623626709,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 82,
+            "neon": 83
+          },
+          "component_count": {
+            "system": 3,
+            "neon": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/04-ocr-fullscreen-discussion-20261005-screen.ppm",
+          "reference_ms": {
+            "detector": 1420.00986,
+            "detector_tflite_invoke": 1380.29022,
+            "recognizer": 434.701,
+            "crop_rectify": 46.514,
+            "total": 1910.884
+          },
+          "candidate_ms": {
+            "detector": 984.40712,
+            "detector_tflite_invoke": 945.96504,
+            "recognizer": 449.251,
+            "crop_rectify": 43.995,
+            "total": 1485.738
+          },
+          "changed_heads": 11,
+          "changed_elements": 441383,
+          "max_abs_diff": 21.029403686523438,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 369,
+            "neon": 370
+          },
+          "component_count": {
+            "system": 16,
+            "neon": 16
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/05-ocr-policy-live-20261005-frame.ppm",
+          "reference_ms": {
+            "detector": 1321.18342,
+            "detector_tflite_invoke": 1297.70296,
+            "recognizer": 107.959,
+            "crop_rectify": 19.884,
+            "total": 1456.131
+          },
+          "candidate_ms": {
+            "detector": 955.86324,
+            "detector_tflite_invoke": 933.239,
+            "recognizer": 110.76,
+            "crop_rectify": 20.109,
+            "total": 1090.233
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 11.611467242240906,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 99,
+            "neon": 102
+          },
+          "component_count": {
+            "system": 4,
+            "neon": 4
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/06-ppocr-only-live-20261007-frame.ppm",
+          "reference_ms": {
+            "detector": 1352.13844,
+            "detector_tflite_invoke": 1331.42856,
+            "recognizer": 91.153,
+            "crop_rectify": 9.77,
+            "total": 1461.702
+          },
+          "candidate_ms": {
+            "detector": 955.0511399999999,
+            "detector_tflite_invoke": 934.04284,
+            "recognizer": 86.263,
+            "crop_rectify": 9.526,
+            "total": 1071.451
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 7.699612140655518,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 82,
+            "neon": 79
+          },
+          "component_count": {
+            "system": 3,
+            "neon": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/07-text-detectors-video-only-input.ppm",
+          "reference_ms": {
+            "detector": 1342.6750800000002,
+            "detector_tflite_invoke": 1322.44488,
+            "recognizer": 0.0,
+            "crop_rectify": 0.0,
+            "total": 1348.653
+          },
+          "candidate_ms": {
+            "detector": 966.3345,
+            "detector_tflite_invoke": 945.41994,
+            "recognizer": 0.0,
+            "crop_rectify": 0.0,
+            "total": 972.066
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 8.652099296450615,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 0,
+            "neon": 0
+          },
+          "component_count": {
+            "system": 0,
+            "neon": 0
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": true,
+          "quads_crops_windows_text_equal": true
+        },
+        {
+          "frame": "fast-corpus/08-game-input.ppm",
+          "reference_ms": {
+            "detector": 1348.2791,
+            "detector_tflite_invoke": 1327.7917,
+            "recognizer": 58.831,
+            "crop_rectify": 10.218,
+            "total": 1416.77
+          },
+          "candidate_ms": {
+            "detector": 962.3599600000001,
+            "detector_tflite_invoke": 941.82178,
+            "recognizer": 65.733,
+            "crop_rectify": 10.029,
+            "total": 1043.041
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 6.296722888946533,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 56,
+            "neon": 55
+          },
+          "component_count": {
+            "system": 2,
+            "neon": 2
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/09-game-brothership-input.ppm",
+          "reference_ms": {
+            "detector": 1327.7025800000004,
+            "detector_tflite_invoke": 1305.79104,
+            "recognizer": 86.455,
+            "crop_rectify": 14.159,
+            "total": 1443.883
+          },
+          "candidate_ms": {
+            "detector": 982.72404,
+            "detector_tflite_invoke": 961.86326,
+            "recognizer": 112.578,
+            "crop_rectify": 14.243,
+            "total": 1124.329
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 7.753876686096191,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 99,
+            "neon": 99
+          },
+          "component_count": {
+            "system": 4,
+            "neon": 4
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/10-game-example-2-input.ppm",
+          "reference_ms": {
+            "detector": 1384.59852,
+            "detector_tflite_invoke": 1357.62268,
+            "recognizer": 284.643,
+            "crop_rectify": 31.806,
+            "total": 1714.415
+          },
+          "candidate_ms": {
+            "detector": 957.44882,
+            "detector_tflite_invoke": 930.74246,
+            "recognizer": 295.625,
+            "crop_rectify": 28.96,
+            "total": 1286.195
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 6.402291655540466,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 260,
+            "neon": 241
+          },
+          "component_count": {
+            "system": 16,
+            "neon": 14
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+          "reference_ms": {
+            "detector": 1367.9677600000002,
+            "detector_tflite_invoke": 1334.7171,
+            "recognizer": 466.772,
+            "crop_rectify": 41.142,
+            "total": 1901.673
+          },
+          "candidate_ms": {
+            "detector": 953.07578,
+            "detector_tflite_invoke": 916.80508,
+            "recognizer": 425.257,
+            "crop_rectify": 40.769,
+            "total": 1440.458
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 5.863457202911377,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 326,
+            "neon": 323
+          },
+          "component_count": {
+            "system": 21,
+            "neon": 21
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+          "reference_ms": {
+            "detector": 1371.28486,
+            "detector_tflite_invoke": 1338.9886,
+            "recognizer": 388.108,
+            "crop_rectify": 38.861,
+            "total": 1813.224
+          },
+          "candidate_ms": {
+            "detector": 1014.3902,
+            "detector_tflite_invoke": 985.87516,
+            "recognizer": 395.38,
+            "crop_rectify": 38.166,
+            "total": 1444.154
+          },
+          "changed_heads": 11,
+          "changed_elements": 441385,
+          "max_abs_diff": 5.9789042472839355,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 267,
+            "neon": 273
+          },
+          "component_count": {
+            "system": 18,
+            "neon": 18
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": false,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        }
+      ]
+    },
+    "neon_eigen": {
+      "frame_count": 13,
+      "median_ms": {
+        "system": {
+          "detector_tflite_invoke": 1312.4301,
+          "total": 1473.816
+        },
+        "neon_eigen": {
+          "detector_tflite_invoke": 1318.76194,
+          "total": 1477.561
+        }
+      },
+      "speedup": 0.9951986482109121,
+      "changed_heads": 143,
+      "utf8_text_equal_frames": 13,
+      "eligible_exact_frames": 0,
+      "frames": [
+        {
+          "frame": "fast-corpus/00-description-screen-20261006-capture.ppm",
+          "reference_ms": {
+            "detector": 1312.9526199999998,
+            "detector_tflite_invoke": 1290.41078,
+            "recognizer": 112.936,
+            "crop_rectify": 20.563,
+            "total": 1452.261
+          },
+          "candidate_ms": {
+            "detector": 1340.4771400000002,
+            "detector_tflite_invoke": 1318.76194,
+            "recognizer": 115.892,
+            "crop_rectify": 20.587,
+            "total": 1478.744
+          },
+          "changed_heads": 11,
+          "changed_elements": 343837,
+          "max_abs_diff": 5.7220458984375e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 109,
+            "neon_eigen": 109
+          },
+          "component_count": {
+            "system": 3,
+            "neon_eigen": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/01-description-screen-20261006-current-full.ppm",
+          "reference_ms": {
+            "detector": 1336.82112,
+            "detector_tflite_invoke": 1309.86852,
+            "recognizer": 331.12,
+            "crop_rectify": 30.81,
+            "total": 1693.421
+          },
+          "candidate_ms": {
+            "detector": 1331.8570000000002,
+            "detector_tflite_invoke": 1304.62284,
+            "recognizer": 361.559,
+            "crop_rectify": 30.687,
+            "total": 1763.883
+          },
+          "changed_heads": 11,
+          "changed_elements": 337614,
+          "max_abs_diff": 4.76837158203125e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 234,
+            "neon_eigen": 234
+          },
+          "component_count": {
+            "system": 18,
+            "neon_eigen": 18
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/02-font-matching-20261007-source-frame.ppm",
+          "reference_ms": {
+            "detector": 1324.0197,
+            "detector_tflite_invoke": 1302.4618,
+            "recognizer": 108.934,
+            "crop_rectify": 13.517,
+            "total": 1456.926
+          },
+          "candidate_ms": {
+            "detector": 1342.4911,
+            "detector_tflite_invoke": 1320.86734,
+            "recognizer": 114.076,
+            "crop_rectify": 13.866,
+            "total": 1477.561
+          },
+          "changed_heads": 11,
+          "changed_elements": 341584,
+          "max_abs_diff": 4.76837158203125e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 82,
+            "neon_eigen": 82
+          },
+          "component_count": {
+            "system": 3,
+            "neon_eigen": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/03-ocr-candidates-20261007-live-frame.ppm",
+          "reference_ms": {
+            "detector": 1333.44042,
+            "detector_tflite_invoke": 1312.4301,
+            "recognizer": 104.003,
+            "crop_rectify": 13.294,
+            "total": 1473.816
+          },
+          "candidate_ms": {
+            "detector": 1326.2317600000001,
+            "detector_tflite_invoke": 1305.6069,
+            "recognizer": 112.819,
+            "crop_rectify": 13.144,
+            "total": 1468.265
+          },
+          "changed_heads": 11,
+          "changed_elements": 342128,
+          "max_abs_diff": 3.814697265625e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 82,
+            "neon_eigen": 82
+          },
+          "component_count": {
+            "system": 3,
+            "neon_eigen": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/04-ocr-fullscreen-discussion-20261005-screen.ppm",
+          "reference_ms": {
+            "detector": 1371.7560999999998,
+            "detector_tflite_invoke": 1335.342,
+            "recognizer": 418.97,
+            "crop_rectify": 45.393,
+            "total": 1867.828
+          },
+          "candidate_ms": {
+            "detector": 1364.3879,
+            "detector_tflite_invoke": 1322.17374,
+            "recognizer": 423.025,
+            "crop_rectify": 43.546,
+            "total": 1850.165
+          },
+          "changed_heads": 11,
+          "changed_elements": 328687,
+          "max_abs_diff": 7.62939453125e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 369,
+            "neon_eigen": 369
+          },
+          "component_count": {
+            "system": 16,
+            "neon_eigen": 16
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/05-ocr-policy-live-20261005-frame.ppm",
+          "reference_ms": {
+            "detector": 1341.38486,
+            "detector_tflite_invoke": 1318.90242,
+            "recognizer": 115.305,
+            "crop_rectify": 20.038,
+            "total": 1492.02
+          },
+          "candidate_ms": {
+            "detector": 1306.9383800000003,
+            "detector_tflite_invoke": 1285.46078,
+            "recognizer": 108.949,
+            "crop_rectify": 19.432,
+            "total": 1469.949
+          },
+          "changed_heads": 11,
+          "changed_elements": 341242,
+          "max_abs_diff": 5.7220458984375e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 99,
+            "neon_eigen": 99
+          },
+          "component_count": {
+            "system": 4,
+            "neon_eigen": 4
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/06-ppocr-only-live-20261007-frame.ppm",
+          "reference_ms": {
+            "detector": 1335.7667800000002,
+            "detector_tflite_invoke": 1315.0777,
+            "recognizer": 98.29,
+            "crop_rectify": 9.851,
+            "total": 1444.407
+          },
+          "candidate_ms": {
+            "detector": 1331.55956,
+            "detector_tflite_invoke": 1307.8902,
+            "recognizer": 90.122,
+            "crop_rectify": 10.192,
+            "total": 1448.774
+          },
+          "changed_heads": 11,
+          "changed_elements": 342214,
+          "max_abs_diff": 3.814697265625e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 82,
+            "neon_eigen": 82
+          },
+          "component_count": {
+            "system": 3,
+            "neon_eigen": 3
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/07-text-detectors-video-only-input.ppm",
+          "reference_ms": {
+            "detector": 1366.7556200000001,
+            "detector_tflite_invoke": 1347.28312,
+            "recognizer": 0.0,
+            "crop_rectify": 0.0,
+            "total": 1372.109
+          },
+          "candidate_ms": {
+            "detector": 1345.7095,
+            "detector_tflite_invoke": 1325.36918,
+            "recognizer": 0.0,
+            "crop_rectify": 0.0,
+            "total": 1351.143
+          },
+          "changed_heads": 11,
+          "changed_elements": 338064,
+          "max_abs_diff": 4.76837158203125e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 0,
+            "neon_eigen": 0
+          },
+          "component_count": {
+            "system": 0,
+            "neon_eigen": 0
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": true,
+          "quads_crops_windows_text_equal": true
+        },
+        {
+          "frame": "fast-corpus/08-game-input.ppm",
+          "reference_ms": {
+            "detector": 1295.7930399999998,
+            "detector_tflite_invoke": 1275.15188,
+            "recognizer": 64.418,
+            "crop_rectify": 10.054,
+            "total": 1396.203
+          },
+          "candidate_ms": {
+            "detector": 1259.65346,
+            "detector_tflite_invoke": 1239.09576,
+            "recognizer": 53.221,
+            "crop_rectify": 10.424,
+            "total": 1329.439
+          },
+          "changed_heads": 11,
+          "changed_elements": 341272,
+          "max_abs_diff": 4.76837158203125e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 56,
+            "neon_eigen": 56
+          },
+          "component_count": {
+            "system": 2,
+            "neon_eigen": 2
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/09-game-brothership-input.ppm",
+          "reference_ms": {
+            "detector": 1297.1582,
+            "detector_tflite_invoke": 1275.80348,
+            "recognizer": 97.332,
+            "crop_rectify": 14.553,
+            "total": 1433.945
+          },
+          "candidate_ms": {
+            "detector": 1339.78888,
+            "detector_tflite_invoke": 1318.94236,
+            "recognizer": 110.778,
+            "crop_rectify": 14.421,
+            "total": 1474.594
+          },
+          "changed_heads": 11,
+          "changed_elements": 341341,
+          "max_abs_diff": 5.7220458984375e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 99,
+            "neon_eigen": 99
+          },
+          "component_count": {
+            "system": 4,
+            "neon_eigen": 4
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/10-game-example-2-input.ppm",
+          "reference_ms": {
+            "detector": 1327.42714,
+            "detector_tflite_invoke": 1301.47118,
+            "recognizer": 293.054,
+            "crop_rectify": 29.613,
+            "total": 1676.415
+          },
+          "candidate_ms": {
+            "detector": 1287.277,
+            "detector_tflite_invoke": 1260.56546,
+            "recognizer": 295.034,
+            "crop_rectify": 30.261,
+            "total": 1622.697
+          },
+          "changed_heads": 11,
+          "changed_elements": 339728,
+          "max_abs_diff": 5.7220458984375e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 260,
+            "neon_eigen": 260
+          },
+          "component_count": {
+            "system": 16,
+            "neon_eigen": 16
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+          "reference_ms": {
+            "detector": 1349.87746,
+            "detector_tflite_invoke": 1313.64636,
+            "recognizer": 439.235,
+            "crop_rectify": 40.281,
+            "total": 1842.828
+          },
+          "candidate_ms": {
+            "detector": 1363.67024,
+            "detector_tflite_invoke": 1329.40866,
+            "recognizer": 436.82,
+            "crop_rectify": 40.931,
+            "total": 1822.943
+          },
+          "changed_heads": 11,
+          "changed_elements": 335540,
+          "max_abs_diff": 3.814697265625e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 326,
+            "neon_eigen": 326
+          },
+          "component_count": {
+            "system": 21,
+            "neon_eigen": 21
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        },
+        {
+          "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+          "reference_ms": {
+            "detector": 1370.17128,
+            "detector_tflite_invoke": 1342.00126,
+            "recognizer": 359.636,
+            "crop_rectify": 38.357,
+            "total": 1772.524
+          },
+          "candidate_ms": {
+            "detector": 1349.53212,
+            "detector_tflite_invoke": 1320.5784,
+            "recognizer": 361.412,
+            "crop_rectify": 40.209,
+            "total": 1757.902
+          },
+          "changed_heads": 11,
+          "changed_elements": 337720,
+          "max_abs_diff": 3.814697265625e-06,
+          "input_hashes_equal": true,
+          "deduped_count": {
+            "system": 267,
+            "neon_eigen": 267
+          },
+          "component_count": {
+            "system": 18,
+            "neon_eigen": 18
+          },
+          "eligible_exact": false,
+          "utf8_text_equal": true,
+          "decoded_deduped_components_equal": false,
+          "quads_crops_windows_text_equal": false
+        }
+      ]
+    }
+  }
+}
