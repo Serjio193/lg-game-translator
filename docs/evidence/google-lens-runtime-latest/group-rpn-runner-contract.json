@@ -1,0 +1,34 @@
+{
+  "runner_type": "tflite_model_pooled_cached_runner_config",
+  "model_path": "./gocr_group_rpn_text_detection_model_2024_q4.tflite",
+  "num_inference_threads": null,
+  "interpreter_num_threads": 4,
+  "multiple_inputs": true,
+  "add_custom_ops": false,
+  "output_names": [
+    "Identity",
+    "Identity_1",
+    "Identity_2",
+    "Identity_3",
+    "Identity_4",
+    "Identity_5",
+    "Identity_6",
+    "Identity_7",
+    "Identity_8",
+    "Identity_9",
+    "Identity_10"
+  ],
+  "input_names": [
+    "input_features",
+    "input_features_1",
+    "input_features_2",
+    "input_features_3"
+  ],
+  "needs_custom_delegate": false,
+  "num_channels": null,
+  "batch_size": null,
+  "cache_max_size": 5,
+  "use_xnnpack_delegate": true,
+  "use_darwinn_delegate": false,
+  "darwinn_inference_priority": null
+}

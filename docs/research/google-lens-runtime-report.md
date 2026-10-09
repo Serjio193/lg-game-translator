@@ -2543,6 +2543,86 @@ Raw readelf/strings/disassembly evidence is uploaded as the workflow artifact an
     0x736340:	ldr	x8, [x21, #0x10]
     0x736344:	ldr	q1, [x19]
     
+    ### TfliteModelPooledCachedRunner::Init target 0x1342d0 xref 0x739f94 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3005236, 'outside_size': True}
+    0x739f54:	ldp	x30, x19, [sp], #0x10
+    0x739f58:	autiasp	
+    0x739f5c:	b	#0x11db070
+    0x739f60:	paciasp	
+    0x739f64:	stp	x29, x30, [sp, #-0x60]!
+    0x739f68:	stp	x28, x27, [sp, #0x10]
+    0x739f6c:	stp	x26, x25, [sp, #0x20]
+    0x739f70:	stp	x24, x23, [sp, #0x30]
+    0x739f74:	stp	x22, x21, [sp, #0x40]
+    0x739f78:	stp	x20, x19, [sp, #0x50]
+    0x739f7c:	sub	sp, sp, #0x250
+    0x739f80:	mrs	x24, tpidr_el0
+    0x739f84:	mov	x21, x1
+    0x739f88:	mov	x19, x0
+    0x739f8c:	ldr	x8, [x24, #0x28]
+    0x739f90:	adrp	x1, #0x134000
+    0x739f94:	add	x1, x1, #0x2d0
+    0x739f98:	add	x0, sp, #0x1a0
+    0x739f9c:	mov	x20, x2
+    0x739fa0:	str	x8, [sp, #0x248]
+    0x739fa4:	bl	#0x46086c
+    0x739fa8:	add	x0, sp, #0x1a0
+    0x739fac:	bl	#0x11b3440
+    0x739fb0:	ldr	w8, [x21, #0x1c]
+    0x739fb4:	cmp	w8, #7
+    0x739fb8:	b.eq	#0x73a018
+    0x739fbc:	adrp	x1, #0x9f000
+    0x739fc0:	add	x1, x1, #0xcad
+    0x739fc4:	adrp	x4, #0xeb000
+    0x739fc8:	add	x4, x4, #0x3cb
+    0x739fcc:	mov	w0, #9
+    0x739fd0:	mov	w2, #0xf
+    0x739fd4:	mov	w3, #0xe1
+    0x739fd8:	bl	#0x105e410
+    0x739fdc:	mov	x21, x0
+    0x739fe0:	ldr	x8, [x24, #0x28]
+    0x739fe4:	ldr	x9, [sp, #0x248]
+    0x739fe8:	cmp	x8, x9
+    
+    ### TfliteModelPooledCachedRunner::RunWithContext target 0xa83a2 xref 0x73b478 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3010584, 'outside_size': True}
+    0x73b438:	stp	xzr, xzr, [sp, #0x98]
+    0x73b43c:	str	xzr, [sp, #0x90]
+    0x73b440:	str	x8, [sp, #0xd0]
+    0x73b444:	bl	#0x4b6088
+    0x73b448:	b	#0x73b800
+    0x73b44c:	adrp	x1, #0x104000
+    0x73b450:	add	x1, x1, #0x18b
+    0x73b454:	bl	#0x73fd2c
+    0x73b458:	mov	w2, #0x14
+    0x73b45c:	mov	w3, #0x20d
+    0x73b460:	bl	#0x105e410
+    0x73b464:	str	x0, [x19]
+    0x73b468:	b	#0x73b800
+    0x73b46c:	ldrb	w8, [sp, #0x10]
+    0x73b470:	ldp	x13, x12, [sp, #0x18]
+    0x73b474:	adrp	x9, #0xa8000
+    0x73b478:	add	x9, x9, #0x3a2
+    0x73b47c:	mov	w10, #0x2e
+    0x73b480:	tst	w8, #1
+    0x73b484:	lsr	x8, x8, #1
+    0x73b488:	add	x11, sp, #0x10
+    0x73b48c:	stp	x9, x10, [sp, #0x90]
+    0x73b490:	csinc	x9, x12, x11, ne
+    0x73b494:	add	x0, sp, #0x90
+    0x73b498:	csel	x8, x13, x8, ne
+    0x73b49c:	add	x1, sp, #0xd0
+    0x73b4a0:	stp	x9, x8, [sp, #0xd0]
+    0x73b4a4:	add	x8, sp, #0x70
+    0x73b4a8:	bl	#0x1078984
+    0x73b4ac:	add	x0, sp, #0x70
+    0x73b4b0:	bl	#0x11b3440
+    0x73b4b4:	ldp	x23, x8, [sp, #0x28]
+    0x73b4b8:	mov	w9, #0x18
+    0x73b4bc:	sub	x8, x8, x23
+    0x73b4c0:	mov	x0, x23
+    0x73b4c4:	sdiv	x24, x8, x9
+    0x73b4c8:	add	x8, sp, #0x70
+    0x73b4cc:	mov	x1, x24
+    
     ### TfliteModelPooledXNNPackCached::InsertInterpreter target 0xe34e3 xref 0x73b574 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3010836, 'outside_size': True}
     0x73b534:	adrp	x8, #0x12d9000
     0x73b538:	ldr	w1, [x8, #0xd48]
@@ -2622,6 +2702,46 @@ Raw readelf/strings/disassembly evidence is uploaded as the workflow artifact an
     0x73bd10:	mov	x2, x22
     0x73bd14:	ldr	x0, [x8]
     0x73bd18:	bl	#0xfb1810
+    
+    ### InterpreterFactoryCallbackXNNPack target 0xfaac5 xref 0x73f40c adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3026860, 'outside_size': True}
+    0x73f3cc:	mov	x0, x19
+    0x73f3d0:	mov	w1, #0x30
+    0x73f3d4:	bl	#0x11db070
+    0x73f3d8:	ldp	x30, x19, [sp, #0x10]
+    0x73f3dc:	add	sp, sp, #0x20
+    0x73f3e0:	autiasp	
+    0x73f3e4:	ret	
+    0x73f3e8:	paciasp	
+    0x73f3ec:	str	x29, [sp, #-0x40]!
+    0x73f3f0:	stp	x30, x23, [sp, #0x10]
+    0x73f3f4:	stp	x22, x21, [sp, #0x20]
+    0x73f3f8:	stp	x20, x19, [sp, #0x30]
+    0x73f3fc:	sub	sp, sp, #0x1c0
+    0x73f400:	mov	x20, x0
+    0x73f404:	ldr	x22, [x0, #8]
+    0x73f408:	adrp	x1, #0xfa000
+    0x73f40c:	add	x1, x1, #0xac5
+    0x73f410:	add	x0, sp, #0x40
+    0x73f414:	mov	x19, x8
+    0x73f418:	bl	#0x46086c
+    0x73f41c:	add	x0, sp, #0x40
+    0x73f420:	bl	#0x11b3440
+    0x73f424:	add	x0, sp, #0x108
+    0x73f428:	bl	#0xc1c11c
+    0x73f42c:	ldr	w8, [x22, #0x7c]
+    0x73f430:	str	xzr, [sp, #0x1c8]
+    0x73f434:	cmp	w8, #1
+    0x73f438:	b.lt	#0x73f464
+    0x73f43c:	ldr	x1, [x22, #0xe0]
+    0x73f440:	add	x0, sp, #0x40
+    0x73f444:	add	x2, sp, #0x108
+    0x73f448:	mov	x3, xzr
+    0x73f44c:	bl	#0xfa9f3c
+    0x73f450:	ldr	w2, [x22, #0x7c]
+    0x73f454:	add	x0, sp, #0x40
+    0x73f458:	add	x1, sp, #0x1c8
+    0x73f45c:	bl	#0xfaa4b8
+    0x73f460:	b	#0x73f484
     
     ### Failed to modify graph with XNNPack delegate. target 0x7ed47 xref 0x73f6a8 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3027528, 'outside_size': True}
     0x73f668:	add	x1, x1, #0xd21
@@ -3022,126 +3142,6 @@ Raw readelf/strings/disassembly evidence is uploaded as the workflow artifact an
     0x75d730:	ldp	d9, d8, [sp, #0xb0]
     0x75d734:	ldp	d11, d10, [sp, #0xa0]
     0x75d738:	ldp	d13, d12, [sp, #0x90]
-    
-    ### ocr/google_ocr/detection/group_rpn_detector_utils.cc target 0x7690e xref 0x75e514 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3154100, 'outside_size': True}
-    0x75e4d4:	bl	#0x5086d4
-    0x75e4d8:	ldr	x0, [sp, #8]
-    0x75e4dc:	b	#0x75e43c
-    0x75e4e0:	adrp	x8, #0x12d9000
-    0x75e4e4:	ldr	w1, [x8, #0xfd0]
-    0x75e4e8:	cmp	w1, #1
-    0x75e4ec:	b.ge	#0x75e6d0
-    0x75e4f0:	ldr	x8, [x19]
-    0x75e4f4:	mov	x0, x19
-    0x75e4f8:	mov	x1, x23
-    0x75e4fc:	str	x8, [x19, #8]
-    0x75e500:	bl	#0x57099c
-    0x75e504:	mov	x28, xzr
-    0x75e508:	adrp	x21, #0x12d9000
-    0x75e50c:	add	x21, x21, #0xfe0
-    0x75e510:	adrp	x22, #0x76000
-    0x75e514:	add	x22, x22, #0x90e
-    0x75e518:	adrp	x23, #0xe3000
-    0x75e51c:	add	x23, x23, #0x5f4
-    0x75e520:	adrp	x29, #0x12d9000
-    0x75e524:	adrp	x24, #0x75000
-    0x75e528:	add	x24, x24, #0xc48
-    0x75e52c:	mov	w26, #1
-    0x75e530:	adrp	x25, #0x154000
-    0x75e534:	add	x25, x25, #0x53a
-    0x75e538:	ldr	x0, [sp, #0x18]
-    0x75e53c:	cmp	x28, x27
-    0x75e540:	b.eq	#0x75e65c
-    0x75e544:	lsr	x8, x28, #6
-    0x75e548:	ldr	x8, [x0, x8, lsl #3]
-    0x75e54c:	lsr	x8, x8, x28
-    0x75e550:	tbz	w8, #0, #0x75e644
-    0x75e554:	ldr	w1, [x29, #0xfe8]
-    0x75e558:	cmp	w1, #1
-    0x75e55c:	b.lt	#0x75e654
-    0x75e560:	mov	x0, x21
-    0x75e564:	bl	#0x106d7e0
-    0x75e568:	tbz	w0, #0, #0x75e654
-    
-    ### ocr/google_ocr/detection/group_rpn_detector_utils.cc target 0x7690e xref 0x762598 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3170616, 'outside_size': True}
-    0x762558:	cbnz	x22, #0x76253c
-    0x76255c:	adrp	x8, #0x1305000
-    0x762560:	ldp	x22, x21, [sp, #0x30]
-    0x762564:	str	x19, [x8, #0xd28]
-    0x762568:	ldp	x20, x19, [sp, #0x40]
-    0x76256c:	ldr	x30, [sp, #0x20]
-    0x762570:	add	sp, sp, #0x50
-    0x762574:	autiasp	
-    0x762578:	ret	
-    0x76257c:	mov	x19, x3
-    0x762580:	mov	x23, x2
-    0x762584:	mov	x21, x1
-    0x762588:	mov	x20, x0
-    0x76258c:	cmp	x2, #2
-    0x762590:	ret	
-    0x762594:	adrp	x1, #0x76000
-    0x762598:	add	x1, x1, #0x90e
-    0x76259c:	ret	
-    0x7625a0:	mov	x0, x19
-    0x7625a4:	mov	x1, x26
-    0x7625a8:	mov	x2, x20
-    0x7625ac:	mov	x3, x24
-    0x7625b0:	mov	x4, x25
-    0x7625b4:	mov	x5, x21
-    0x7625b8:	mov	x6, x22
-    0x7625bc:	ret	
-    0x7625c0:	sub	x25, x23, x23, lsr #1
-    0x7625c4:	mov	x22, x4
-    0x7625c8:	mov	x21, x3
-    0x7625cc:	mov	x0, x19
-    0x7625d0:	madd	x26, x24, x8, x19
-    0x7625d4:	mov	x2, x24
-    0x7625d8:	cmp	x23, x4
-    0x7625dc:	ret	
-    0x7625e0:	lsr	x2, x23, #1
-    0x7625e4:	mov	x0, x20
-    0x7625e8:	mov	x3, x19
-    0x7625ec:	lsl	x8, x2, #2
-    
-    ### Invalid TensorFlowModelRunnerConfig. target 0x6a27c xref 0xb449e0 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 7243136, 'outside_size': True}
-    0xb449a0:	b	#0xb44ea8
-    0xb449a4:	cmp	w9, #0x64
-    0xb449a8:	b.ne	#0xb449d8
-    0xb449ac:	adrp	x9, #0x126000
-    0xb449b0:	add	x9, x9, #0xd4e
-    0xb449b4:	mov	w8, #0x1e
-    0xb449b8:	ldr	x10, [x9]
-    0xb449bc:	ldur	x9, [x9, #7]
-    0xb449c0:	stp	x0, x1, [sp, #0x20]
-    0xb449c4:	strb	w8, [sp, #0x58]
-    0xb449c8:	stur	x10, [sp, #0x59]
-    0xb449cc:	str	x9, [sp, #0x60]
-    0xb449d0:	strb	wzr, [sp, #0x68]
-    0xb449d4:	b	#0xb44ab4
-    0xb449d8:	bti	j
-    0xb449dc:	adrp	x1, #0x6a000
-    0xb449e0:	add	x1, x1, #0x27c
-    0xb449e4:	adrp	x4, #0x116000
-    0xb449e8:	add	x4, x4, #0x50
-    0xb449ec:	mov	w0, #0xd
-    0xb449f0:	mov	w2, #0x24
-    0xb449f4:	mov	w3, #0x32
-    0xb449f8:	b	#0xb44f0c
-    0xb449fc:	bti	j
-    0xb44a00:	stp	x0, x1, [sp, #0x20]
-    0xb44a04:	adrp	x1, #0xab000
-    0xb44a08:	add	x1, x1, #0x985
-    0xb44a0c:	add	x0, sp, #0x58
-    0xb44a10:	mov	w2, #0x1b
-    0xb44a14:	b	#0xb44ab0
-    0xb44a18:	bti	j
-    0xb44a1c:	stp	x0, x1, [sp, #0x20]
-    0xb44a20:	adrp	x1, #0x137000
-    0xb44a24:	add	x1, x1, #0x670
-    0xb44a28:	b	#0xb44a60
-    0xb44a2c:	bti	j
-    0xb44a30:	adrp	x8, #0x12ae000
-    0xb44a34:	add	x8, x8, #0xc50
     
 
 ## Recovered protobuf descriptors

@@ -598,6 +598,86 @@
 0x736340:	ldr	x8, [x21, #0x10]
 0x736344:	ldr	q1, [x19]
 
+### TfliteModelPooledCachedRunner::Init target 0x1342d0 xref 0x739f94 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3005236, 'outside_size': True}
+0x739f54:	ldp	x30, x19, [sp], #0x10
+0x739f58:	autiasp	
+0x739f5c:	b	#0x11db070
+0x739f60:	paciasp	
+0x739f64:	stp	x29, x30, [sp, #-0x60]!
+0x739f68:	stp	x28, x27, [sp, #0x10]
+0x739f6c:	stp	x26, x25, [sp, #0x20]
+0x739f70:	stp	x24, x23, [sp, #0x30]
+0x739f74:	stp	x22, x21, [sp, #0x40]
+0x739f78:	stp	x20, x19, [sp, #0x50]
+0x739f7c:	sub	sp, sp, #0x250
+0x739f80:	mrs	x24, tpidr_el0
+0x739f84:	mov	x21, x1
+0x739f88:	mov	x19, x0
+0x739f8c:	ldr	x8, [x24, #0x28]
+0x739f90:	adrp	x1, #0x134000
+0x739f94:	add	x1, x1, #0x2d0
+0x739f98:	add	x0, sp, #0x1a0
+0x739f9c:	mov	x20, x2
+0x739fa0:	str	x8, [sp, #0x248]
+0x739fa4:	bl	#0x46086c
+0x739fa8:	add	x0, sp, #0x1a0
+0x739fac:	bl	#0x11b3440
+0x739fb0:	ldr	w8, [x21, #0x1c]
+0x739fb4:	cmp	w8, #7
+0x739fb8:	b.eq	#0x73a018
+0x739fbc:	adrp	x1, #0x9f000
+0x739fc0:	add	x1, x1, #0xcad
+0x739fc4:	adrp	x4, #0xeb000
+0x739fc8:	add	x4, x4, #0x3cb
+0x739fcc:	mov	w0, #9
+0x739fd0:	mov	w2, #0xf
+0x739fd4:	mov	w3, #0xe1
+0x739fd8:	bl	#0x105e410
+0x739fdc:	mov	x21, x0
+0x739fe0:	ldr	x8, [x24, #0x28]
+0x739fe4:	ldr	x9, [sp, #0x248]
+0x739fe8:	cmp	x8, x9
+
+### TfliteModelPooledCachedRunner::RunWithContext target 0xa83a2 xref 0x73b478 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3010584, 'outside_size': True}
+0x73b438:	stp	xzr, xzr, [sp, #0x98]
+0x73b43c:	str	xzr, [sp, #0x90]
+0x73b440:	str	x8, [sp, #0xd0]
+0x73b444:	bl	#0x4b6088
+0x73b448:	b	#0x73b800
+0x73b44c:	adrp	x1, #0x104000
+0x73b450:	add	x1, x1, #0x18b
+0x73b454:	bl	#0x73fd2c
+0x73b458:	mov	w2, #0x14
+0x73b45c:	mov	w3, #0x20d
+0x73b460:	bl	#0x105e410
+0x73b464:	str	x0, [x19]
+0x73b468:	b	#0x73b800
+0x73b46c:	ldrb	w8, [sp, #0x10]
+0x73b470:	ldp	x13, x12, [sp, #0x18]
+0x73b474:	adrp	x9, #0xa8000
+0x73b478:	add	x9, x9, #0x3a2
+0x73b47c:	mov	w10, #0x2e
+0x73b480:	tst	w8, #1
+0x73b484:	lsr	x8, x8, #1
+0x73b488:	add	x11, sp, #0x10
+0x73b48c:	stp	x9, x10, [sp, #0x90]
+0x73b490:	csinc	x9, x12, x11, ne
+0x73b494:	add	x0, sp, #0x90
+0x73b498:	csel	x8, x13, x8, ne
+0x73b49c:	add	x1, sp, #0xd0
+0x73b4a0:	stp	x9, x8, [sp, #0xd0]
+0x73b4a4:	add	x8, sp, #0x70
+0x73b4a8:	bl	#0x1078984
+0x73b4ac:	add	x0, sp, #0x70
+0x73b4b0:	bl	#0x11b3440
+0x73b4b4:	ldp	x23, x8, [sp, #0x28]
+0x73b4b8:	mov	w9, #0x18
+0x73b4bc:	sub	x8, x8, x23
+0x73b4c0:	mov	x0, x23
+0x73b4c4:	sdiv	x24, x8, x9
+0x73b4c8:	add	x8, sp, #0x70
+0x73b4cc:	mov	x1, x24
+
 ### TfliteModelPooledXNNPackCached::InsertInterpreter target 0xe34e3 xref 0x73b574 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3010836, 'outside_size': True}
 0x73b534:	adrp	x8, #0x12d9000
 0x73b538:	ldr	w1, [x8, #0xd48]
@@ -677,6 +757,46 @@
 0x73bd10:	mov	x2, x22
 0x73bd14:	ldr	x0, [x8]
 0x73bd18:	bl	#0xfb1810
+
+### InterpreterFactoryCallbackXNNPack target 0xfaac5 xref 0x73f40c adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3026860, 'outside_size': True}
+0x73f3cc:	mov	x0, x19
+0x73f3d0:	mov	w1, #0x30
+0x73f3d4:	bl	#0x11db070
+0x73f3d8:	ldp	x30, x19, [sp, #0x10]
+0x73f3dc:	add	sp, sp, #0x20
+0x73f3e0:	autiasp	
+0x73f3e4:	ret	
+0x73f3e8:	paciasp	
+0x73f3ec:	str	x29, [sp, #-0x40]!
+0x73f3f0:	stp	x30, x23, [sp, #0x10]
+0x73f3f4:	stp	x22, x21, [sp, #0x20]
+0x73f3f8:	stp	x20, x19, [sp, #0x30]
+0x73f3fc:	sub	sp, sp, #0x1c0
+0x73f400:	mov	x20, x0
+0x73f404:	ldr	x22, [x0, #8]
+0x73f408:	adrp	x1, #0xfa000
+0x73f40c:	add	x1, x1, #0xac5
+0x73f410:	add	x0, sp, #0x40
+0x73f414:	mov	x19, x8
+0x73f418:	bl	#0x46086c
+0x73f41c:	add	x0, sp, #0x40
+0x73f420:	bl	#0x11b3440
+0x73f424:	add	x0, sp, #0x108
+0x73f428:	bl	#0xc1c11c
+0x73f42c:	ldr	w8, [x22, #0x7c]
+0x73f430:	str	xzr, [sp, #0x1c8]
+0x73f434:	cmp	w8, #1
+0x73f438:	b.lt	#0x73f464
+0x73f43c:	ldr	x1, [x22, #0xe0]
+0x73f440:	add	x0, sp, #0x40
+0x73f444:	add	x2, sp, #0x108
+0x73f448:	mov	x3, xzr
+0x73f44c:	bl	#0xfa9f3c
+0x73f450:	ldr	w2, [x22, #0x7c]
+0x73f454:	add	x0, sp, #0x40
+0x73f458:	add	x1, sp, #0x1c8
+0x73f45c:	bl	#0xfaa4b8
+0x73f460:	b	#0x73f484
 
 ### Failed to modify graph with XNNPack delegate. target 0x7ed47 xref 0x73f6a8 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 3027528, 'outside_size': True}
 0x73f668:	add	x1, x1, #0xd21
@@ -1197,6 +1317,46 @@
 0xb44a2c:	bti	j
 0xb44a30:	adrp	x8, #0x12ae000
 0xb44a34:	add	x8, x8, #0xc50
+
+### InterpreterFactoryCallbackXNNPack target 0xfaac5 xref 0xb66270 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 7380496, 'outside_size': True}
+0xb66230:	add	x22, sp, #0x10
+0xb66234:	ldr	x8, [x8, #0x60]
+0xb66238:	blr	x8
+0xb6623c:	mov	x0, sp
+0xb66240:	str	x22, [sp]
+0xb66244:	bl	#0x500238
+0xb66248:	ldr	x0, [sp, #0x58]
+0xb6624c:	cbz	x0, #0xb66260
+0xb66250:	ldr	x8, [sp, #0x68]
+0xb66254:	str	x0, [sp, #0x60]
+0xb66258:	sub	x1, x8, x0
+0xb6625c:	bl	#0x11db070
+0xb66260:	ldr	x8, [sp, #0x70]
+0xb66264:	cmp	x8, #1
+0xb66268:	b.ne	#0xb66410
+0xb6626c:	adrp	x1, #0xfa000
+0xb66270:	add	x1, x1, #0xac5
+0xb66274:	add	x0, sp, #0x10
+0xb66278:	bl	#0x46086c
+0xb6627c:	ldrb	w8, [sp, #0x10]
+0xb66280:	tbz	w8, #0, #0xb66294
+0xb66284:	ldr	x8, [sp, #0x10]
+0xb66288:	ldr	x0, [sp, #0x20]
+0xb6628c:	and	x1, x8, #0xfffffffffffffffe
+0xb66290:	bl	#0x11db070
+0xb66294:	movi	v0.2d, #0000000000000000
+0xb66298:	mov	w8, #-1
+0xb6629c:	ldr	w10, [x20, #0x160]
+0xb662a0:	mov	w9, #3
+0xb662a4:	add	x0, sp, #0x10
+0xb662a8:	mov	x1, xzr
+0xb662ac:	stp	q0, q0, [sp, #0x20]
+0xb662b0:	str	w8, [sp, #0x38]
+0xb662b4:	ldr	x8, [x20, #0x260]
+0xb662b8:	str	q0, [sp, #0x10]
+0xb662bc:	str	q0, [sp, #0x40]
+0xb662c0:	str	w9, [sp, #0x18]
+0xb662c4:	str	w10, [sp, #0x10]
 
 ### Failed to modify graph with XNNPack delegate. target 0x7ed47 xref 0xb663c0 adrp+add {'name': 'Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler', 'start': 4572256, 'delta': 7380832, 'outside_size': True}
 0xb66380:	add	x0, sp, #0x10
