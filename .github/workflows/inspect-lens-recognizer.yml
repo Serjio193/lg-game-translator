@@ -29,4 +29,3 @@ jobs:
           name: lens-recognizer-inspection
           path: rec-inspect/
           retention-days: 7
-\n
