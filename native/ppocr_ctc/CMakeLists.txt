@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(ppocr_ctc LANGUAGES CXX)
+add_library(ppocr_ctc SHARED ctc.cpp)
+target_compile_features(ppocr_ctc PRIVATE cxx_std_11)
+target_compile_options(ppocr_ctc PRIVATE -O3 -Wall -Wextra -Werror -fno-fast-math -ffp-contract=off)

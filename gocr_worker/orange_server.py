@@ -44,14 +44,15 @@ def make_handler(worker, token):
             self.end_headers()
             self.wfile.write(raw)
 
-        def reject(self, status, reason):
+        def reject(self, status, reason, body_consumed=False):
             # Unread request bodies must not become a second persistent request.
             self.close_connection = True
             # Drain only tiny malformed bodies so closing TCP does not discard
             # the error response with a reset. Never buffer an untrusted frame.
             try:
                 length = int(self.headers.get("Content-Length", "0"))
-                if 0 < length <= 4096 and not self.headers.get("Transfer-Encoding"):
+                if (not body_consumed and 0 < length <= 4096
+                        and not self.headers.get("Transfer-Encoding")):
                     self.rfile.read(length)
             except (ValueError, OSError):
                 pass
@@ -70,14 +71,27 @@ def make_handler(worker, token):
                 return self.reject(401, "authentication required")
             if self.path != "/v1/ocr-frame":
                 return self.reject(404, "not found")
+            body_consumed = False
             try:
                 size = int(self.headers.get("Content-Length", "0"))
-                if (size != HEADER.size+WIDTH*HEIGHT*3
-                        or self.headers.get("Content-Type") != "application/x-gocr-frame"
+                expected_size = HEADER.size+WIDTH*HEIGHT*3
+                encoding = self.headers.get("Content-Encoding", "identity")
+                if encoding == "lz4-block":
+                    from .lz4_block import Lz4Block
+                    if not hasattr(self, "lz4_codec"):
+                        self.lz4_codec = Lz4Block()
+                    valid_size = 0 < size <= self.lz4_codec.bound
+                else:
+                    valid_size = encoding == "identity" and size == expected_size
+                if (not valid_size or self.headers.get("Content-Type") != "application/x-gocr-frame"
                         or self.headers.get("Transfer-Encoding")):
                     return self.reject(413, "invalid frame body contract")
                 payload = self.rfile.read(size)
+                body_consumed = True
                 started = time.perf_counter()
+                if encoding == "lz4-block":
+                    payload = self.lz4_codec.decompress(payload)
+                decompress_ms = (time.perf_counter()-started)*1000
                 image, sequence, captured = receive_frame(ByteStream(payload))
                 decode_ms = (time.perf_counter()-started)*1000
                 frame_hash = fingerprint(image)
@@ -85,11 +99,16 @@ def make_handler(worker, token):
                 result.update(sequence=sequence, capture_ts=captured, frame_sha256=frame_hash,
                               execution_location="orange", experimental=True)
                 result["timings_ms"].update(frame_decode=decode_ms,
+                    frame_decompress=decompress_ms,
                     orange_request=(time.perf_counter()-started)*1000)
+                completed = result["timings_ms"].get("detector_completed_monotonic_ms")
+                if completed is not None:
+                    result["timings_ms"]["after_detector_to_reply_ms"] = (
+                        time.perf_counter()*1000-completed)
                 self.send_json(200, result)
             except Exception:
                 logging.exception("Orange full-frame OCR failed")
-                self.reject(400, "full-frame OCR failed")
+                self.reject(400, "full-frame OCR failed", body_consumed)
 
         def log_message(self, *args):
             pass

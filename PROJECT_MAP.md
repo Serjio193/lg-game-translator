@@ -1,5 +1,10 @@
 # Project map
 
+- `native/ppocr_detector_replay/`, `scripts/ppocr_frame_replay.py`: isolated
+  ARM64 replay of existing PicCap detector/region code with installed Orange PP-OCR.
+- `scripts/benchmark-ppocr-full-orange.py`, `serve-ppocr-frame-probe.py`,
+  `benchmark-ppocr-frame-relay.py`: local and authenticated lossless frame-to-text
+  benchmarks and the selected full-frame service; deployment is explicit below.
 - `translator/`: существующий translation server и кэш; native OCR postprocess
   его модель, API и настройки не меняет.
 - `gocr_worker/`: Google assets validation, detector binarypb parser,
@@ -52,3 +57,30 @@ postprocess работает после tensor decode, не управляет c
 - `scripts/benchmark-gocr-strict-scheduling.py`, `analyze-gocr-strict-scheduling.py`: isolated system STRICT 2/2 affinity matrix, exact gates, traces and summaries.
 
 - `gocr_worker/scheduler_series.py`: persistent 10-minute corpus A/B series, cached strict references and one-time warmup; minute-by-minute results are summarized by the existing scheduling analyzer.
+
+- `deployment/ppocr-full/`: installed default Orange full-frame user service,
+  TV relay supervisor/startup, with source templates and rollback documented in
+  `docs/ppocr-full-default-osd.md`.
+- `gocr_worker/osd_publisher.py`, `scripts/install-ppocr-osd-feed.py`: optional
+  bridge from completed PP-OCR results to existing OSD admission/queue and feed selection.
+
+- `gocr_worker/capture_timing.py`: telemetry-only recovery of deployed ARM32
+  capture timestamps; live selected-frame detector latency methodology and
+  bounds in `docs/evidence/ppocr-detector-latency-20261009/README.md`.
+
+- `gocr_worker/lz4_block.py`, `scripts/probe-lz4-transfer.py`,
+  `benchmark-lz4-transfer.py`, `validate-lz4-block.py`: bounded native lossless
+  frame compression, isolated LAN benchmarks and exact input checks.
+
+- `scripts/ppocr_stage_profiler.py`, `profile-ppocr-stages.py`: opt-in original-call
+  stage timing and saved-frame equivalence, with live profiler normally disabled;
+  findings in `docs/evidence/ppocr-stage-profile-20261009/README.md`.
+
+- `native/rknn_bridge_experiment/`, `scripts/benchmark-ppocr-quality-gate.py`:
+  quality-first frozen-crop tests, original bridge per-call stage timings and
+  isolated output-preallocation experiment; not installed as production.
+
+- `native/ppocr_ctc/`, `scripts/ppocr_native_ctc.py`: exact class-major native
+  token selection; original label mapping/statistics.mean confidence retained.
+- `scripts/benchmark-ppocr-ctc.py`, `validate-ppocr-native-ctc.py`: quality/speed
+  gates for default opt-in native decoder; see `docs/evidence/ppocr-native-ctc-20261010/README.md`.

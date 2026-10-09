@@ -1,0 +1,111 @@
+--- a/src/utils.c
++++ b/src/utils.c
+@@ -8 +8 @@
+-    return tp.tv_sec * 1000000 + tp.tv_nsec / 1000;
++    return (uint64_t)tp.tv_sec * UINT64_C(1000000) + (uint64_t)tp.tv_nsec / 1000;
+--- a/unicapture/ocr_worker.h
++++ b/unicapture/ocr_worker.h
+@@ -7,0 +8 @@
++#include "ocr_frame_schedule.h"
+@@ -18,0 +20 @@
++    ocr_frame_schedule_t frame_schedule;
+--- a/unicapture/ocr_worker.c
++++ b/unicapture/ocr_worker.c
+@@ -247,0 +248 @@
++        ocr_frame_request_next(&worker->frame_schedule, &worker->has_frame);
+@@ -310,0 +312 @@
++    worker->frame_schedule.demand_only = gocr_selected_frame_enabled();
+@@ -359,3 +360,0 @@
+-    if (now - worker->last_submit_us < OCR_INTERVAL_US)
+-        return;
+-
+@@ -365,0 +365,4 @@
++    if (!ocr_frame_due(&worker->frame_schedule, now, worker->last_submit_us, OCR_INTERVAL_US)) {
++        pthread_mutex_unlock(&worker->mutex);
++        return;
++    }
+@@ -391,0 +395 @@
++    ocr_frame_submitted(&worker->frame_schedule);
+--- /dev/null
++++ b/unicapture/ocr_frame_schedule.h
+@@ -0,0 +1,29 @@
++#pragma once
++#include <stdbool.h>
++#include <stdint.h>
++
++/* Access only under the existing OCR frame mutex. No capture-side waiting. */
++typedef struct {
++    bool demand_only;
++    bool requested;
++} ocr_frame_schedule_t;
++
++static inline void ocr_frame_request_next(ocr_frame_schedule_t* schedule, bool* has_frame)
++{
++    if (schedule->demand_only) {
++        *has_frame = false;
++        schedule->requested = true;
++    }
++}
++
++static inline bool ocr_frame_due(const ocr_frame_schedule_t* schedule,
++    uint64_t now, uint64_t previous, uint64_t interval)
++{
++    return (!schedule->demand_only || schedule->requested)
++        && now >= previous && now - previous >= interval;
++}
++
++static inline void ocr_frame_submitted(ocr_frame_schedule_t* schedule)
++{
++    if (schedule->demand_only) schedule->requested = false;
++}
+--- /dev/null
++++ b/tests/ocr_frame_schedule_test.c
+@@ -0,0 +1,26 @@
++#include "ocr_frame_schedule.h"
++#include <assert.h>
++
++int main(void)
++{
++    ocr_frame_schedule_t demand = {.demand_only = true};
++    bool queued = true;
++    /* Busy OCR rejects frames even when the one-second deadline passed. */
++    assert(!ocr_frame_due(&demand, 9000000, 1000000, 1000000));
++    ocr_frame_request_next(&demand, &queued);
++    assert(!queued && demand.requested);
++    assert(!ocr_frame_due(&demand, 1500000, 1000000, 1000000));
++    assert(ocr_frame_due(&demand, 2000000, 1000000, 1000000));
++    ocr_frame_submitted(&demand);
++    assert(!ocr_frame_due(&demand, 9000000, 2000000, 1000000));
++    ocr_frame_request_next(&demand, &queued);
++    assert(ocr_frame_due(&demand, 9000000, 2000000, 1000000));
++    /* Legacy local OCR keeps its periodic producer/replacement behavior. */
++    ocr_frame_schedule_t legacy = {0};
++    queued = true;
++    ocr_frame_request_next(&legacy, &queued);
++    assert(queued);
++    assert(ocr_frame_due(&legacy, 2000000, 1000000, 1000000));
++    assert(!ocr_frame_due(&legacy, 500000, 1000000, 1000000));
++    return 0;
++}
+--- /dev/null
++++ b/tests/utils_time_test.c
+@@ -0,0 +1,19 @@
++#define _POSIX_C_SOURCE 200809L
++#include "utils.h"
++#include <assert.h>
++#include <time.h>
++
++/* Interpose clock_gettime in this standalone test executable only. */
++int clock_gettime(clockid_t clock, struct timespec* stamp)
++{
++    assert(clock == CLOCK_MONOTONIC);
++    stamp->tv_sec = 5000;
++    stamp->tv_nsec = 123456000;
++    return 0;
++}
++
++int main(void)
++{
++    assert(getticks_us() == UINT64_C(5000123456));
++    return 0;
++}

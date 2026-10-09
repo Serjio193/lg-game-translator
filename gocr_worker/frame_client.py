@@ -2,6 +2,7 @@
 import http.client
 import json
 import time
+import os
 from urllib.parse import urlsplit
 
 from .frame_transport import MAX_REPLY, encode_frame
@@ -23,6 +24,13 @@ class FrameClient:
         self.connection_type = (http.client.HTTPSConnection if parsed.scheme == "https"
                                 else http.client.HTTPConnection)
         self.token, self.timeout, self.connection = token, timeout, None
+        mode = os.environ.get("PP_OCR_FRAME_COMPRESSION", "raw")
+        if mode not in ("raw", "lz4"):
+            raise ValueError("PP_OCR_FRAME_COMPRESSION must be raw or lz4")
+        self.codec = None
+        if mode == "lz4":
+            from .lz4_block import Lz4Block
+            self.codec = Lz4Block(os.environ.get("PP_OCR_LZ4_LIBRARY", "liblz4.so.1"))
 
     def close(self):
         if self.connection:
@@ -34,8 +42,16 @@ class FrameClient:
         captured = 0 if capture_ts is None else capture_ts
         payload = encode_frame(image, sequence, captured)
         frame_hash = fingerprint(image)
+        encoding = "identity"
+        compress_ms = 0
+        if self.codec is not None:
+            tick = time.perf_counter()
+            compressed = self.codec.compress(payload)
+            compress_ms = (time.perf_counter()-tick)*1000
+            if len(compressed) < len(payload):
+                payload, encoding = compressed, "lz4-block"
         encode_ms = (time.perf_counter()-started)*1000
-        headers = {"Content-Type": "application/x-gocr-frame"}
+        headers = {"Content-Type": "application/x-gocr-frame", "Content-Encoding": encoding}
         if self.token:
             headers["Authorization"] = "Bearer " + self.token
         if self.connection is None:
@@ -61,8 +77,12 @@ class FrameClient:
             elapsed = (time.perf_counter()-started)*1000
             timings = result["timings_ms"]
             timings.update(frame_encode=encode_ms, frame_rpc=elapsed,
+                           frame_compress=compress_ms,
                            frame_network=max(0, elapsed-timings["orange_request"]),
                            frame_to_text=encode_ms+elapsed)
+            if "after_detector_to_reply_ms" in timings:
+                timings["relay_to_detector_upper_ms"] = max(
+                    0, encode_ms+elapsed-timings["after_detector_to_reply_ms"])
             return result, len(payload)
         except Exception:
             self.close()

@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(piccap_ocr_policy LANGUAGES C)
+set(PICCAP_UNICAPTURE "" CACHE PATH "Existing PicCap unicapture source directory")
+if(NOT EXISTS "${PICCAP_UNICAPTURE}/ocr_policy.c")
+    message(FATAL_ERROR "Provide the existing PicCap ocr_policy.c source")
+endif()
+add_library(piccap_ocr_policy SHARED "${PICCAP_UNICAPTURE}/ocr_policy.c")
+target_compile_options(piccap_ocr_policy PRIVATE -Wall -Wextra -Werror)

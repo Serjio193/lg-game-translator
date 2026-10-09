@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import socketserver
 import stat
+import time
 
 from .crop_client import CropClient
 from .frame_client import FrameClient
@@ -19,6 +20,7 @@ LOG = logging.getLogger("gocr-tv")
 class FrameServer(socketserver.UnixStreamServer):
     def __init__(self, path, pipeline):
         self.pipeline = pipeline
+        self.osd_publisher = None
         self.timeout = 1
         socket_path = Path(path)
         if socket_path.exists():
@@ -39,7 +41,18 @@ class FrameHandler(socketserver.BaseRequestHandler):
         self.request.settimeout(30)
         try:
             image, sequence, captured = receive_frame(self.request)
+            accepted_ms = time.monotonic()*1000
             result = self.server.pipeline.process(image, sequence, captured)
+            if "relay_to_detector_upper_ms" in result.get("timings_ms", {}):
+                from .capture_timing import capture_age_ms
+                age, source = capture_age_ms(captured, accepted_ms)
+                timing = result["timings_ms"]
+                timing["capture_clock_source"] = source
+                timing["capture_to_relay_ms"] = age
+                if age is not None:
+                    timing["capture_to_detector_upper_ms"] = age+timing["relay_to_detector_upper_ms"]
+            if self.server.osd_publisher is not None:
+                self.server.osd_publisher.publish(result)
         except Exception as error:
             LOG.exception("selected GOCR frame failed")
             result = {"schema": "gocr.worker.error.v1", "error": type(error).__name__}
@@ -76,6 +89,9 @@ def main():
                              detector_threads=args.detector_threads,recognizer_threads=args.recognizer_threads,
                              frame_client=frame_client)
     with FrameServer(args.socket, pipeline) as server:
+        if os.environ.get("PP_OCR_FULL_OSD") == "1":
+            from .osd_publisher import OsdPublisher
+            server.osd_publisher = OsdPublisher()
         try:
             server.serve_forever()
         finally:

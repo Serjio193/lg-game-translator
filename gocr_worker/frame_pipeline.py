@@ -54,6 +54,10 @@ class FramePipeline:
                 else:
                     result, sent = self.full.ocr(image), 0
                 for line in result["lines"]:
+                    if result.get("engine") == "ppocr" and line.get("translation_allowed") is not True:
+                        line["translation"] = {"translation": "", "bytes_sent": 0,
+                                               "request_ms": 0, "skipped": "translation_policy"}
+                        continue
                     line["translation"] = self.translator.translate(line["text"])
                     sent += line["translation"]["bytes_sent"]
             else:
