@@ -1,0 +1,52 @@
+{
+  "profile_version": 1,
+  "name": "gocr_tv_full",
+  "description": "LG runs Google GroupRPN detector and Google Latin/Cyrillic recognizer. Orange Pi receives UTF-8 text only.",
+  "capture": {
+    "source_width": 1280,
+    "source_height": 720,
+    "capture_interval_ms": 1000
+  },
+  "detector": {
+    "model": "gocr_group_rpn_text_detection_model_2024_q4.tflite",
+    "config": "gocr_group_rpn_text_detection_config_2024_q4.binarypb",
+    "profile": "lens_android_1280",
+    "max_dimension": 1280,
+    "score_threshold": 0.5,
+    "anchor_widths": [16, 64, 16, 64, 64, 64],
+    "anchor_heights": [16, 64, 16, 64, 64, 64],
+    "reference_widths": [1280, 1280, 1280, 1280, 1280, 1280],
+    "reference_heights": [1280, 1280, 1280, 1280, 1280, 1280],
+    "grouping_block_a": [1.75, 0.8, 30.0, 0.25, 0.1, 0.4, 0.3],
+    "grouping_block_b": [4.0, -4.0, 0.5, 0.5, 0.75, 0.75, 0.1, 0.75],
+    "immutable_google_parameters": true
+  },
+  "recognizer": {
+    "run_on": "tv",
+    "model": "recognizer_latn_vi_cyrl_lm_retrained.tflite",
+    "label_map": "recognizer_latn_vi_cyrl_label_map.pb",
+    "input_shape": [1, 32, 168, 1],
+    "input_dtype": "uint8",
+    "input_quantization": {
+      "scale": 0.00392117677256465,
+      "zero_point": 0
+    },
+    "ctc_blank_id": 1292,
+    "label_count": 1292,
+    "window_contract": {
+      "left_context_px": 16,
+      "useful_px": 136,
+      "right_context_px": 16,
+      "status": "from-production-config; boundary behavior still under parity validation"
+    },
+    "use_google_lm_fst_when_available": true,
+    "immutable_google_parameters": true
+  },
+  "transport": {
+    "payload": "text",
+    "fields": ["line_id", "utf8_text", "source_quad", "angle", "detector_confidence", "recognizer_confidence"]
+  },
+  "benchmark": {
+    "measure": ["detector_ms", "crop_rectify_ms", "recognizer_ms", "total_tv_ms", "bytes_sent"]
+  }
+}
