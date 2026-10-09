@@ -1,0 +1,4710 @@
+{
+  "scope": "different architectures/runtimes; no numerical parity claim",
+  "reference": "docs\\evidence\\gocr-strict-conv-20261009\\reference.json.gz",
+  "profiles": [
+    {
+      "report": "off-d2-r2.json.gz",
+      "runtime": "2.3.0",
+      "delegate": "off",
+      "detector_threads": 2,
+      "recognizer_threads": 2,
+      "initialization_ms": 45.2644950710237,
+      "frames": [
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 3,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9805840959374978,
+              "strict_text": "Willma",
+              "fast_text": "Willma",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9877166054705521,
+              "strict_text": "You gotta get to the Rumbla Dish.",
+              "fast_text": "You gotta get to the Rumbla Dish.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9931773352417292,
+              "strict_text": "It's sacred ground around here!",
+              "fast_text": "It's sacred ground around here!",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "00-description-screen-20261006-capture.png",
+          "orange_timings": {
+            "detector": {
+              "median": 367.233,
+              "min": 346.014,
+              "max": 389.629
+            },
+            "detector_tflite_invoke": {
+              "median": 342.791,
+              "min": 323.428,
+              "max": 364.697
+            },
+            "recognizer": {
+              "median": 28.735,
+              "min": 27.952,
+              "max": 42.819
+            },
+            "crop_rectify": {
+              "median": 4.292,
+              "min": 4.263,
+              "max": 4.367
+            },
+            "total": {
+              "median": 412.1,
+              "min": 379.056,
+              "max": 423.408
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1329.74616,
+            "detector_tflite_invoke": 1305.83428,
+            "recognizer": 99.029,
+            "crop_rectify": 22.932,
+            "total": 1464.354
+          }
+        },
+        {
+          "strict_lines": 18,
+          "fast_lines": 18,
+          "matched": 18,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 16,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9891098248950068,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9832234979831459,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Gamc",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9255117799966672,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.99159885930391,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.9890511897904039,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.8288801302481246,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9877986902240381,
+              "strict_text": "Basic Controls",
+              "fast_text": "Basic Controls",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9533426217451648,
+              "strict_text": "S",
+              "fast_text": "S",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9602143799261783,
+              "strict_text": "Items",
+              "fast_text": "Items",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9817674337976804,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9757873020159714,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Game",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9899878651418129,
+              "strict_text": "The Menu",
+              "fast_text": "The Menu",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9766557769069174,
+              "strict_text": "Hit the Save Block to save your game.",
+              "fast_text": "Hit the Save Block to save your game.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9809813861502408,
+              "strict_text": "Gear",
+              "fast_text": "Gear",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9857883173996066,
+              "strict_text": "The Big Cannon",
+              "fast_text": "The Big Cannon",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9520555164166183,
+              "strict_text": "1/4",
+              "fast_text": "1/4",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.9816861768594393,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.9356808785994085,
+              "strict_text": "в",
+              "fast_text": "В",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "01-description-screen-20261006-current-full.png",
+          "orange_timings": {
+            "detector": {
+              "median": 369.119,
+              "min": 367.225,
+              "max": 395.47
+            },
+            "detector_tflite_invoke": {
+              "median": 332.043,
+              "min": 330.826,
+              "max": 358.452
+            },
+            "recognizer": {
+              "median": 98.836,
+              "min": 95.9,
+              "max": 99.877
+            },
+            "crop_rectify": {
+              "median": 8.83,
+              "min": 8.41,
+              "max": 9.097
+            },
+            "total": {
+              "median": 479.757,
+              "min": 477.697,
+              "max": 508.05
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1339.9572199999998,
+            "detector_tflite_invoke": 1309.93582,
+            "recognizer": 326.371,
+            "crop_rectify": 34.124,
+            "total": 1710.492
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9822374495517757,
+              "strict_text": "Is this our next brave explorer?",
+              "fast_text": "Is this our next brave explorer?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9736667147915213,
+              "strict_text": "Ready to explore!",
+              "fast_text": "Ready to explore!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9845049630245819,
+              "strict_text": "Choose a different Yoshi.",
+              "fast_text": "Choose a different Yoshi",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "02-font-matching-20261007-source-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 342.884,
+              "min": 342.559,
+              "max": 346.207
+            },
+            "detector_tflite_invoke": {
+              "median": 325.653,
+              "min": 325.372,
+              "max": 328.829
+            },
+            "recognizer": {
+              "median": 27.874,
+              "min": 27.681,
+              "max": 28.144
+            },
+            "crop_rectify": {
+              "median": 2.931,
+              "min": 2.915,
+              "max": 2.941
+            },
+            "total": {
+              "median": 374.371,
+              "min": 374.145,
+              "max": 377.557
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1328.90742,
+            "detector_tflite_invoke": 1305.56556,
+            "recognizer": 98.132,
+            "crop_rectify": 15.308,
+            "total": 1449.407
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9877800021869476,
+              "strict_text": "ls this our next brave explorer?",
+              "fast_text": "Is this our next brave explorer?",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9941502897283454,
+              "strict_text": "Ready to explore!",
+              "fast_text": "Ready to explore!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9862954792914252,
+              "strict_text": "Choose a different Yoshi.",
+              "fast_text": "Choose a different Yoshi.",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "03-ocr-candidates-20261007-live-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 349.461,
+              "min": 341.434,
+              "max": 461.472
+            },
+            "detector_tflite_invoke": {
+              "median": 332.307,
+              "min": 324.346,
+              "max": 444.292
+            },
+            "recognizer": {
+              "median": 27.77,
+              "min": 27.455,
+              "max": 29.79
+            },
+            "crop_rectify": {
+              "median": 2.844,
+              "min": 2.835,
+              "max": 2.89
+            },
+            "total": {
+              "median": 380.876,
+              "min": 372.364,
+              "max": 492.342
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1357.93886,
+            "detector_tflite_invoke": 1333.81862,
+            "recognizer": 92.031,
+            "crop_rectify": 15.317,
+            "total": 1477.81
+          }
+        },
+        {
+          "strict_lines": 16,
+          "fast_lines": 16,
+          "matched": 16,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 15,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9839333432296999,
+              "strict_text": "Main Stor",
+              "fast_text": "Main Stor",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.994001428657963,
+              "strict_text": "The Split-Apart Land",
+              "fast_text": "The Split-Apart Land",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9952438052775259,
+              "strict_text": "Recommended Level",
+              "fast_text": "Recommended Level",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9800990936414706,
+              "strict_text": "Our Story So Far",
+              "fast_text": "Our Story So Far",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.9837576211359261,
+              "strict_text": "LV1",
+              "fast_text": "LV1",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9798382627943334,
+              "strict_text": "The Split-Apart Land",
+              "fast_text": "The Split-Apart Land",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9890976788370691,
+              "strict_text": "After Mario and Luigi reunite on",
+              "fast_text": "After Mario and Luigi reunite on",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9826641932984498,
+              "strict_text": "✓A Sudden Island Arrival",
+              "fast_text": "✓A Sudden Island Arrival",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9777117585553506,
+              "strict_text": "LV1",
+              "fast_text": "LV1",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9791981901897852,
+              "strict_text": "Shipshape Island, they join up with",
+              "fast_text": "Shipshape Island, they join up with",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9882429967244962,
+              "strict_text": "Snoutlet to help Concordia!",
+              "fast_text": "Snoutlet to help Concordia!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9877330511820408,
+              "strict_text": "Next Step",
+              "fast_text": "Next Step",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9952858685230901,
+              "strict_text": "Explore Shipshape Island with Luigi.",
+              "fast_text": "Explore Shipshape Island with Luigi.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9729077741839877,
+              "strict_text": "Follow Snoutlet's guidance.",
+              "fast_text": "Follow Snoutlet's guidance.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9773916461842953,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.8381197079788991,
+              "strict_text": "В",
+              "fast_text": "B",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "04-ocr-fullscreen-discussion-20261005-screen.png",
+          "orange_timings": {
+            "detector": {
+              "median": 383.116,
+              "min": 382.703,
+              "max": 407.604
+            },
+            "detector_tflite_invoke": {
+              "median": 331.398,
+              "min": 330.874,
+              "max": 355.722
+            },
+            "recognizer": {
+              "median": 127.476,
+              "min": 126.45,
+              "max": 133.743
+            },
+            "crop_rectify": {
+              "median": 11.206,
+              "min": 11.078,
+              "max": 11.669
+            },
+            "total": {
+              "median": 525.026,
+              "min": 524.088,
+              "max": 556.784
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1348.5457999999999,
+            "detector_tflite_invoke": 1306.76008,
+            "recognizer": 397.837,
+            "crop_rectify": 49.755,
+            "total": 1805.221
+          }
+        },
+        {
+          "strict_lines": 4,
+          "fast_lines": 4,
+          "matched": 4,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 4,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9824669198134621,
+              "strict_text": "Connie",
+              "fast_text": "Connie",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9902538731245369,
+              "strict_text": "I passed out... When I woke up,",
+              "fast_text": "I passed out... When I woke up,",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9909305278429271,
+              "strict_text": "I was here on Shipshape Island.",
+              "fast_text": "I was here on Shipshape Island.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.8885777973218048,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "05-ocr-policy-live-20261005-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 347.229,
+              "min": 346.954,
+              "max": 351.56
+            },
+            "detector_tflite_invoke": {
+              "median": 325.137,
+              "min": 324.86,
+              "max": 329.398
+            },
+            "recognizer": {
+              "median": 28.23,
+              "min": 27.996,
+              "max": 28.765
+            },
+            "crop_rectify": {
+              "median": 4.247,
+              "min": 4.227,
+              "max": 4.278
+            },
+            "total": {
+              "median": 380.696,
+              "min": 380.326,
+              "max": 385.407
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1318.43564,
+            "detector_tflite_invoke": 1294.43668,
+            "recognizer": 97.79,
+            "crop_rectify": 23.058,
+            "total": 1456.441
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9937492061243638,
+              "strict_text": "So! We'll need one brave volunteer!",
+              "fast_text": "So! We'll need one brave volunteer!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.8185677232007204,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.8531294144365997,
+              "strict_text": "M",
+              "fast_text": "A",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "06-ppocr-only-live-20261007-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 343.584,
+              "min": 342.95,
+              "max": 343.846
+            },
+            "detector_tflite_invoke": {
+              "median": 324.311,
+              "min": 323.676,
+              "max": 324.567
+            },
+            "recognizer": {
+              "median": 22.395,
+              "min": 22.109,
+              "max": 22.458
+            },
+            "crop_rectify": {
+              "median": 2.215,
+              "min": 2.208,
+              "max": 2.221
+            },
+            "total": {
+              "median": 368.69,
+              "min": 368.109,
+              "max": 369.116
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1323.12294,
+            "detector_tflite_invoke": 1299.65896,
+            "recognizer": 76.906,
+            "crop_rectify": 11.195,
+            "total": 1417.473
+          }
+        },
+        {
+          "strict_lines": 0,
+          "fast_lines": 0,
+          "matched": 0,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 0,
+          "character_distance": 0,
+          "pairs": [],
+          "frame": "07-text-detectors-video-only-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 333.818,
+              "min": 333.089,
+              "max": 339.029
+            },
+            "detector_tflite_invoke": {
+              "median": 324.231,
+              "min": 323.468,
+              "max": 329.353
+            },
+            "recognizer": {
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.0
+            },
+            "crop_rectify": {
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.0
+            },
+            "total": {
+              "median": 333.828,
+              "min": 333.099,
+              "max": 339.039
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1325.0345599999998,
+            "detector_tflite_invoke": 1303.2974,
+            "recognizer": 0.0,
+            "crop_rectify": 0.0,
+            "total": 1330.182
+          }
+        },
+        {
+          "strict_lines": 2,
+          "fast_lines": 2,
+          "matched": 2,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9940142368901921,
+              "strict_text": "That's much better. Thank you kindly!",
+              "fast_text": "That's much better. Thank you kindly!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.7423026494924367,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "08-game-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 339.887,
+              "min": 338.805,
+              "max": 349.449
+            },
+            "detector_tflite_invoke": {
+              "median": 324.649,
+              "min": 323.604,
+              "max": 333.976
+            },
+            "recognizer": {
+              "median": 14.34,
+              "min": 14.162,
+              "max": 15.117
+            },
+            "crop_rectify": {
+              "median": 2.201,
+              "min": 2.196,
+              "max": 2.261
+            },
+            "total": {
+              "median": 356.794,
+              "min": 355.745,
+              "max": 367.344
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1308.74744,
+            "detector_tflite_invoke": 1285.83182,
+            "recognizer": 46.967,
+            "crop_rectify": 11.649,
+            "total": 1372.977
+          }
+        },
+        {
+          "strict_lines": 4,
+          "fast_lines": 4,
+          "matched": 4,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 4,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9864408829898356,
+              "strict_text": "Connie",
+              "fast_text": "Connie",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.895599665230997,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9895760523252105,
+              "strict_text": "What's that? You want",
+              "fast_text": "What's that? You want",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9935303912412979,
+              "strict_text": "to know where you are?",
+              "fast_text": "to know where you are?",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "09-game-brothership-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 345.545,
+              "min": 342.442,
+              "max": 364.238
+            },
+            "detector_tflite_invoke": {
+              "median": 327.129,
+              "min": 324.313,
+              "max": 345.247
+            },
+            "recognizer": {
+              "median": 25.193,
+              "min": 24.918,
+              "max": 25.362
+            },
+            "crop_rectify": {
+              "median": 3.184,
+              "min": 3.18,
+              "max": 3.2
+            },
+            "total": {
+              "median": 374.624,
+              "min": 371.609,
+              "max": 393.053
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1320.37814,
+            "detector_tflite_invoke": 1296.98966,
+            "recognizer": 91.476,
+            "crop_rectify": 15.445,
+            "total": 1431.114
+          }
+        },
+        {
+          "strict_lines": 14,
+          "fast_lines": 14,
+          "matched": 8,
+          "missing_strict_indices": [
+            2,
+            4,
+            6,
+            7,
+            9,
+            10
+          ],
+          "extra_fast_indices": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8
+          ],
+          "exact_text_matches": 6,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9543582849914386,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9740424329399913,
+              "strict_text": "Chapter 1: Wildwoods",
+              "fast_text": "Chapter 1: Wildwoops",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 5,
+              "iou": 0.9644553395277033,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 9,
+              "iou": 0.8905948928465725,
+              "strict_text": "222",
+              "fast_text": "227",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 10,
+              "iou": 0.9305611013947677,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9819651920478298,
+              "strict_text": "May I ask you to take a close look at my",
+              "fast_text": "May I ask you to take a close look at my",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9845784129597672,
+              "strict_text": "contents and see if anything is amiss?",
+              "fast_text": "contents and see if anything is amiss?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9564896888562058,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "10-game-example-2-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 366.145,
+              "min": 364.096,
+              "max": 490.598
+            },
+            "detector_tflite_invoke": {
+              "median": 330.872,
+              "min": 329.026,
+              "max": 455.869
+            },
+            "recognizer": {
+              "median": 79.592,
+              "min": 77.134,
+              "max": 83.089
+            },
+            "crop_rectify": {
+              "median": 7.574,
+              "min": 7.256,
+              "max": 7.897
+            },
+            "total": {
+              "median": 458.901,
+              "min": 450.877,
+              "max": 584.443
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1318.34102,
+            "detector_tflite_invoke": 1287.98648,
+            "recognizer": 281.448,
+            "crop_rectify": 33.941,
+            "total": 1625.103
+          }
+        },
+        {
+          "strict_lines": 21,
+          "fast_lines": 21,
+          "matched": 21,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 21,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.973337693972194,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9750009993290002,
+              "strict_text": "Emergency Guard",
+              "fast_text": "Emergency Guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9782910361343405,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9800650120678241,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.8749241299302536,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9348005271422989,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9915780023851497,
+              "strict_text": "Luigi Can Fight Too!",
+              "fast_text": "Luigi Can Fight Too!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9829892614377956,
+              "strict_text": "First Strike",
+              "fast_text": "First Strike",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9730185550988857,
+              "strict_text": "Jump Attacks",
+              "fast_text": "Jump Attacks",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9815249974083682,
+              "strict_text": "Attack ComboS",
+              "fast_text": "Attack ComboS",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9224005585522853,
+              "strict_text": "X",
+              "fast_text": "X",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9882014046082109,
+              "strict_text": "Demo",
+              "fast_text": "Demo",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9861979926989153,
+              "strict_text": "Targeting Who?",
+              "fast_text": "Targeting Who?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.978306944189683,
+              "strict_text": "Hold R while an enemy attacks to guard",
+              "fast_text": "Hold R while an enemy attacks to guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9911203919320097,
+              "strict_text": "against it. This will decrease the amount",
+              "fast_text": "against it. This will decrease the amount",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9936861381056827,
+              "strict_text": "Emergency Guard",
+              "fast_text": "Emergency Guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.961451724278298,
+              "strict_text": "of damage you take.",
+              "fast_text": "of damage you take.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.995266835074536,
+              "strict_text": "Jump Counters",
+              "fast_text": "Jump Counters",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 18,
+              "fast_index": 18,
+              "iou": 0.978298963189186,
+              "strict_text": "1/2",
+              "fast_text": "1/2",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 19,
+              "fast_index": 19,
+              "iou": 0.9540572278976367,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 20,
+              "fast_index": 20,
+              "iou": 0.7620454770403458,
+              "strict_text": "B",
+              "fast_text": "B",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "11-gocr-native-postprocess-20261009-emergency-guard.png",
+          "orange_timings": {
+            "detector": {
+              "median": 380.448,
+              "min": 377.295,
+              "max": 409.093
+            },
+            "detector_tflite_invoke": {
+              "median": 331.56,
+              "min": 328.706,
+              "max": 360.301
+            },
+            "recognizer": {
+              "median": 134.547,
+              "min": 130.385,
+              "max": 136.693
+            },
+            "crop_rectify": {
+              "median": 11.644,
+              "min": 11.171,
+              "max": 11.823
+            },
+            "total": {
+              "median": 531.271,
+              "min": 522.937,
+              "max": 560.974
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1394.2691799999998,
+            "detector_tflite_invoke": 1353.6495,
+            "recognizer": 422.31,
+            "crop_rectify": 45.594,
+            "total": 1871.942
+          }
+        },
+        {
+          "strict_lines": 18,
+          "fast_lines": 18,
+          "matched": 17,
+          "missing_strict_indices": [
+            6
+          ],
+          "extra_fast_indices": [
+            6
+          ],
+          "exact_text_matches": 16,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9783476958687906,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9781869174398551,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 2,
+              "iou": 0.8719681316968823,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 3,
+              "iou": 0.9675364288408168,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 4,
+              "iou": 0.9920066339966463,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9766862499375782,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9778442533014144,
+              "strict_text": "Items",
+              "fast_text": "Items",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9434813938294915,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9916544875988386,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Game",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9851773222322476,
+              "strict_text": "The Menu",
+              "fast_text": "The Menu",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.989864807358453,
+              "strict_text": "Gear",
+              "fast_text": "Gear",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9511276901584709,
+              "strict_text": "Luigi automatically follows wherever Mario",
+              "fast_text": "Luigi automatically follows wherever Mario",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9868222999598644,
+              "strict_text": "goes. Make Luigi jump by pressing",
+              "fast_text": "goes. Make Luigi jump by pressing",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9848886093371841,
+              "strict_text": "The Big Cannon",
+              "fast_text": "The Big Cannon",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9624825519142762,
+              "strict_text": "Luigi Logic",
+              "fast_text": "Luigi Logic",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.9591208514479297,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.9095247733850303,
+              "strict_text": "В",
+              "fast_text": "B",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "12-gocr-native-postprocess-20261009-luigi.png",
+          "orange_timings": {
+            "detector": {
+              "median": 371.988,
+              "min": 363.114,
+              "max": 372.41
+            },
+            "detector_tflite_invoke": {
+              "median": 331.225,
+              "min": 325.566,
+              "max": 331.519
+            },
+            "recognizer": {
+              "median": 105.54,
+              "min": 102.865,
+              "max": 110.117
+            },
+            "crop_rectify": {
+              "median": 9.984,
+              "min": 9.628,
+              "max": 10.448
+            },
+            "total": {
+              "median": 490.487,
+              "min": 487.607,
+              "max": 491.609
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1343.9277999999997,
+            "detector_tflite_invoke": 1311.83298,
+            "recognizer": 334.219,
+            "crop_rectify": 41.704,
+            "total": 1748.591
+          }
+        }
+      ],
+      "matched": 102,
+      "exact_text_matches": 93,
+      "character_distance": 9,
+      "missing": 7,
+      "extra": 7,
+      "corpus_medians_ms": {
+        "detector": 349.461,
+        "detector_tflite_invoke": 330.872,
+        "recognizer": 28.23,
+        "crop_rectify": 4.247,
+        "total": 380.876
+      }
+    },
+    {
+      "report": "off-d4-r2.json.gz",
+      "runtime": "2.3.0",
+      "delegate": "off",
+      "detector_threads": 4,
+      "recognizer_threads": 2,
+      "initialization_ms": 44.92120398208499,
+      "frames": [
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 3,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9805840959374978,
+              "strict_text": "Willma",
+              "fast_text": "Willma",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9877166054705521,
+              "strict_text": "You gotta get to the Rumbla Dish.",
+              "fast_text": "You gotta get to the Rumbla Dish.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9931773352417292,
+              "strict_text": "It's sacred ground around here!",
+              "fast_text": "It's sacred ground around here!",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "00-description-screen-20261006-capture.png",
+          "orange_timings": {
+            "detector": {
+              "median": 294.884,
+              "min": 285.926,
+              "max": 319.114
+            },
+            "detector_tflite_invoke": {
+              "median": 273.025,
+              "min": 264.039,
+              "max": 295.167
+            },
+            "recognizer": {
+              "median": 28.517,
+              "min": 28.169,
+              "max": 28.618
+            },
+            "crop_rectify": {
+              "median": 4.298,
+              "min": 4.281,
+              "max": 4.308
+            },
+            "total": {
+              "median": 328.053,
+              "min": 319.293,
+              "max": 352.695
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1329.74616,
+            "detector_tflite_invoke": 1305.83428,
+            "recognizer": 99.029,
+            "crop_rectify": 22.932,
+            "total": 1464.354
+          }
+        },
+        {
+          "strict_lines": 18,
+          "fast_lines": 18,
+          "matched": 18,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 16,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9891098248950068,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9832234979831459,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Gamc",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9255117799966672,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.99159885930391,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.9890511897904039,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.8288801302481246,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9877986902240381,
+              "strict_text": "Basic Controls",
+              "fast_text": "Basic Controls",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9533426217451648,
+              "strict_text": "S",
+              "fast_text": "S",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9602143799261783,
+              "strict_text": "Items",
+              "fast_text": "Items",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9817674337976804,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9757873020159714,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Game",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9899878651418129,
+              "strict_text": "The Menu",
+              "fast_text": "The Menu",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9766557769069174,
+              "strict_text": "Hit the Save Block to save your game.",
+              "fast_text": "Hit the Save Block to save your game.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9809813861502408,
+              "strict_text": "Gear",
+              "fast_text": "Gear",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9857883173996066,
+              "strict_text": "The Big Cannon",
+              "fast_text": "The Big Cannon",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9520555164166183,
+              "strict_text": "1/4",
+              "fast_text": "1/4",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.9816861768594393,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.9356808785994085,
+              "strict_text": "в",
+              "fast_text": "В",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "01-description-screen-20261006-current-full.png",
+          "orange_timings": {
+            "detector": {
+              "median": 309.68,
+              "min": 308.72,
+              "max": 316.928
+            },
+            "detector_tflite_invoke": {
+              "median": 273.286,
+              "min": 272.541,
+              "max": 280.227
+            },
+            "recognizer": {
+              "median": 97.9,
+              "min": 95.105,
+              "max": 101.289
+            },
+            "crop_rectify": {
+              "median": 8.429,
+              "min": 8.29,
+              "max": 8.779
+            },
+            "total": {
+              "median": 418.977,
+              "min": 414.912,
+              "max": 430.311
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1339.9572199999998,
+            "detector_tflite_invoke": 1309.93582,
+            "recognizer": 326.371,
+            "crop_rectify": 34.124,
+            "total": 1710.492
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9822374495517757,
+              "strict_text": "Is this our next brave explorer?",
+              "fast_text": "Is this our next brave explorer?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9736667147915213,
+              "strict_text": "Ready to explore!",
+              "fast_text": "Ready to explore!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9845049630245819,
+              "strict_text": "Choose a different Yoshi.",
+              "fast_text": "Choose a different Yoshi",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "02-font-matching-20261007-source-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 282.706,
+              "min": 282.179,
+              "max": 291.395
+            },
+            "detector_tflite_invoke": {
+              "median": 265.771,
+              "min": 265.211,
+              "max": 274.377
+            },
+            "recognizer": {
+              "median": 28.394,
+              "min": 27.919,
+              "max": 29.033
+            },
+            "crop_rectify": {
+              "median": 2.963,
+              "min": 2.942,
+              "max": 3.013
+            },
+            "total": {
+              "median": 314.726,
+              "min": 313.897,
+              "max": 324.027
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1328.90742,
+            "detector_tflite_invoke": 1305.56556,
+            "recognizer": 98.132,
+            "crop_rectify": 15.308,
+            "total": 1449.407
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9877800021869476,
+              "strict_text": "ls this our next brave explorer?",
+              "fast_text": "Is this our next brave explorer?",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9941502897283454,
+              "strict_text": "Ready to explore!",
+              "fast_text": "Ready to explore!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9862954792914252,
+              "strict_text": "Choose a different Yoshi.",
+              "fast_text": "Choose a different Yoshi.",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "03-ocr-candidates-20261007-live-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 282.841,
+              "min": 281.613,
+              "max": 292.602
+            },
+            "detector_tflite_invoke": {
+              "median": 266.208,
+              "min": 265.0,
+              "max": 275.754
+            },
+            "recognizer": {
+              "median": 28.191,
+              "min": 27.992,
+              "max": 28.403
+            },
+            "crop_rectify": {
+              "median": 2.885,
+              "min": 2.878,
+              "max": 2.904
+            },
+            "total": {
+              "median": 314.287,
+              "min": 313.3,
+              "max": 324.469
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1357.93886,
+            "detector_tflite_invoke": 1333.81862,
+            "recognizer": 92.031,
+            "crop_rectify": 15.317,
+            "total": 1477.81
+          }
+        },
+        {
+          "strict_lines": 16,
+          "fast_lines": 16,
+          "matched": 16,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 15,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9839333432296999,
+              "strict_text": "Main Stor",
+              "fast_text": "Main Stor",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.994001428657963,
+              "strict_text": "The Split-Apart Land",
+              "fast_text": "The Split-Apart Land",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9952438052775259,
+              "strict_text": "Recommended Level",
+              "fast_text": "Recommended Level",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9800990936414706,
+              "strict_text": "Our Story So Far",
+              "fast_text": "Our Story So Far",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.9837576211359261,
+              "strict_text": "LV1",
+              "fast_text": "LV1",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9798382627943334,
+              "strict_text": "The Split-Apart Land",
+              "fast_text": "The Split-Apart Land",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9890976788370691,
+              "strict_text": "After Mario and Luigi reunite on",
+              "fast_text": "After Mario and Luigi reunite on",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9826641932984498,
+              "strict_text": "✓A Sudden Island Arrival",
+              "fast_text": "✓A Sudden Island Arrival",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9777117585553506,
+              "strict_text": "LV1",
+              "fast_text": "LV1",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9791981901897852,
+              "strict_text": "Shipshape Island, they join up with",
+              "fast_text": "Shipshape Island, they join up with",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9882429967244962,
+              "strict_text": "Snoutlet to help Concordia!",
+              "fast_text": "Snoutlet to help Concordia!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9877330511820408,
+              "strict_text": "Next Step",
+              "fast_text": "Next Step",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9952858685230901,
+              "strict_text": "Explore Shipshape Island with Luigi.",
+              "fast_text": "Explore Shipshape Island with Luigi.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9729077741839877,
+              "strict_text": "Follow Snoutlet's guidance.",
+              "fast_text": "Follow Snoutlet's guidance.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9773916461842953,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.8381197079788991,
+              "strict_text": "В",
+              "fast_text": "B",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "04-ocr-fullscreen-discussion-20261005-screen.png",
+          "orange_timings": {
+            "detector": {
+              "median": 326.733,
+              "min": 323.738,
+              "max": 335.144
+            },
+            "detector_tflite_invoke": {
+              "median": 274.37,
+              "min": 271.813,
+              "max": 282.528
+            },
+            "recognizer": {
+              "median": 131.093,
+              "min": 128.241,
+              "max": 133.759
+            },
+            "crop_rectify": {
+              "median": 11.431,
+              "min": 11.063,
+              "max": 11.596
+            },
+            "total": {
+              "median": 474.105,
+              "min": 467.386,
+              "max": 481.173
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1348.5457999999999,
+            "detector_tflite_invoke": 1306.76008,
+            "recognizer": 397.837,
+            "crop_rectify": 49.755,
+            "total": 1805.221
+          }
+        },
+        {
+          "strict_lines": 4,
+          "fast_lines": 4,
+          "matched": 4,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 4,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9824669198134621,
+              "strict_text": "Connie",
+              "fast_text": "Connie",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9902538731245369,
+              "strict_text": "I passed out... When I woke up,",
+              "fast_text": "I passed out... When I woke up,",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9909305278429271,
+              "strict_text": "I was here on Shipshape Island.",
+              "fast_text": "I was here on Shipshape Island.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.8885777973218048,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "05-ocr-policy-live-20261005-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 295.326,
+              "min": 293.79,
+              "max": 319.613
+            },
+            "detector_tflite_invoke": {
+              "median": 273.434,
+              "min": 271.702,
+              "max": 295.277
+            },
+            "recognizer": {
+              "median": 28.435,
+              "min": 28.308,
+              "max": 28.559
+            },
+            "crop_rectify": {
+              "median": 4.264,
+              "min": 4.241,
+              "max": 4.269
+            },
+            "total": {
+              "median": 328.731,
+              "min": 327.48,
+              "max": 353.285
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1318.43564,
+            "detector_tflite_invoke": 1294.43668,
+            "recognizer": 97.79,
+            "crop_rectify": 23.058,
+            "total": 1456.441
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9937492061243638,
+              "strict_text": "So! We'll need one brave volunteer!",
+              "fast_text": "So! We'll need one brave volunteer!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.8185677232007204,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.8531294144365997,
+              "strict_text": "M",
+              "fast_text": "A",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "06-ppocr-only-live-20261007-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 288.254,
+              "min": 284.956,
+              "max": 295.921
+            },
+            "detector_tflite_invoke": {
+              "median": 268.71,
+              "min": 265.857,
+              "max": 276.1
+            },
+            "recognizer": {
+              "median": 23.421,
+              "min": 22.36,
+              "max": 23.882
+            },
+            "crop_rectify": {
+              "median": 2.26,
+              "min": 2.221,
+              "max": 2.3
+            },
+            "total": {
+              "median": 314.848,
+              "min": 310.71,
+              "max": 322.841
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1323.12294,
+            "detector_tflite_invoke": 1299.65896,
+            "recognizer": 76.906,
+            "crop_rectify": 11.195,
+            "total": 1417.473
+          }
+        },
+        {
+          "strict_lines": 0,
+          "fast_lines": 0,
+          "matched": 0,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 0,
+          "character_distance": 0,
+          "pairs": [],
+          "frame": "07-text-detectors-video-only-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 275.139,
+              "min": 274.64,
+              "max": 275.35
+            },
+            "detector_tflite_invoke": {
+              "median": 265.764,
+              "min": 265.336,
+              "max": 266.081
+            },
+            "recognizer": {
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.0
+            },
+            "crop_rectify": {
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.0
+            },
+            "total": {
+              "median": 275.148,
+              "min": 274.65,
+              "max": 275.36
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1325.0345599999998,
+            "detector_tflite_invoke": 1303.2974,
+            "recognizer": 0.0,
+            "crop_rectify": 0.0,
+            "total": 1330.182
+          }
+        },
+        {
+          "strict_lines": 2,
+          "fast_lines": 2,
+          "matched": 2,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9940142368901921,
+              "strict_text": "That's much better. Thank you kindly!",
+              "fast_text": "That's much better. Thank you kindly!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.7423026494924367,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "08-game-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 281.133,
+              "min": 280.415,
+              "max": 282.865
+            },
+            "detector_tflite_invoke": {
+              "median": 266.091,
+              "min": 265.29,
+              "max": 267.65
+            },
+            "recognizer": {
+              "median": 14.315,
+              "min": 14.203,
+              "max": 14.419
+            },
+            "crop_rectify": {
+              "median": 2.213,
+              "min": 2.201,
+              "max": 2.224
+            },
+            "total": {
+              "median": 298.054,
+              "min": 297.432,
+              "max": 299.854
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1308.74744,
+            "detector_tflite_invoke": 1285.83182,
+            "recognizer": 46.967,
+            "crop_rectify": 11.649,
+            "total": 1372.977
+          }
+        },
+        {
+          "strict_lines": 4,
+          "fast_lines": 4,
+          "matched": 4,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 4,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9864408829898356,
+              "strict_text": "Connie",
+              "fast_text": "Connie",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.895599665230997,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9895760523252105,
+              "strict_text": "What's that? You want",
+              "fast_text": "What's that? You want",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9935303912412979,
+              "strict_text": "to know where you are?",
+              "fast_text": "to know where you are?",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "09-game-brothership-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 289.092,
+              "min": 283.396,
+              "max": 290.415
+            },
+            "detector_tflite_invoke": {
+              "median": 270.965,
+              "min": 265.416,
+              "max": 272.097
+            },
+            "recognizer": {
+              "median": 25.48,
+              "min": 25.174,
+              "max": 25.887
+            },
+            "crop_rectify": {
+              "median": 3.192,
+              "min": 3.172,
+              "max": 3.209
+            },
+            "total": {
+              "median": 318.419,
+              "min": 312.463,
+              "max": 320.225
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1320.37814,
+            "detector_tflite_invoke": 1296.98966,
+            "recognizer": 91.476,
+            "crop_rectify": 15.445,
+            "total": 1431.114
+          }
+        },
+        {
+          "strict_lines": 14,
+          "fast_lines": 14,
+          "matched": 8,
+          "missing_strict_indices": [
+            2,
+            4,
+            6,
+            7,
+            9,
+            10
+          ],
+          "extra_fast_indices": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8
+          ],
+          "exact_text_matches": 6,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9543582849914386,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9740424329399913,
+              "strict_text": "Chapter 1: Wildwoods",
+              "fast_text": "Chapter 1: Wildwoops",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 5,
+              "iou": 0.9644553395277033,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 9,
+              "iou": 0.8905948928465725,
+              "strict_text": "222",
+              "fast_text": "227",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 10,
+              "iou": 0.9305611013947677,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9819651920478298,
+              "strict_text": "May I ask you to take a close look at my",
+              "fast_text": "May I ask you to take a close look at my",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9845784129597672,
+              "strict_text": "contents and see if anything is amiss?",
+              "fast_text": "contents and see if anything is amiss?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9564896888562058,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "10-game-example-2-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 308.34,
+              "min": 305.097,
+              "max": 317.472
+            },
+            "detector_tflite_invoke": {
+              "median": 273.282,
+              "min": 270.719,
+              "max": 282.974
+            },
+            "recognizer": {
+              "median": 79.309,
+              "min": 77.251,
+              "max": 82.199
+            },
+            "crop_rectify": {
+              "median": 7.527,
+              "min": 7.277,
+              "max": 7.798
+            },
+            "total": {
+              "median": 400.476,
+              "min": 391.908,
+              "max": 407.932
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1318.34102,
+            "detector_tflite_invoke": 1287.98648,
+            "recognizer": 281.448,
+            "crop_rectify": 33.941,
+            "total": 1625.103
+          }
+        },
+        {
+          "strict_lines": 21,
+          "fast_lines": 21,
+          "matched": 21,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 21,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.973337693972194,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9750009993290002,
+              "strict_text": "Emergency Guard",
+              "fast_text": "Emergency Guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9782910361343405,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9800650120678241,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.8749241299302536,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9348005271422989,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9915780023851497,
+              "strict_text": "Luigi Can Fight Too!",
+              "fast_text": "Luigi Can Fight Too!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9829892614377956,
+              "strict_text": "First Strike",
+              "fast_text": "First Strike",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9730185550988857,
+              "strict_text": "Jump Attacks",
+              "fast_text": "Jump Attacks",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9815249974083682,
+              "strict_text": "Attack ComboS",
+              "fast_text": "Attack ComboS",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9224005585522853,
+              "strict_text": "X",
+              "fast_text": "X",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9882014046082109,
+              "strict_text": "Demo",
+              "fast_text": "Demo",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9861979926989153,
+              "strict_text": "Targeting Who?",
+              "fast_text": "Targeting Who?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.978306944189683,
+              "strict_text": "Hold R while an enemy attacks to guard",
+              "fast_text": "Hold R while an enemy attacks to guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9911203919320097,
+              "strict_text": "against it. This will decrease the amount",
+              "fast_text": "against it. This will decrease the amount",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9936861381056827,
+              "strict_text": "Emergency Guard",
+              "fast_text": "Emergency Guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.961451724278298,
+              "strict_text": "of damage you take.",
+              "fast_text": "of damage you take.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.995266835074536,
+              "strict_text": "Jump Counters",
+              "fast_text": "Jump Counters",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 18,
+              "fast_index": 18,
+              "iou": 0.978298963189186,
+              "strict_text": "1/2",
+              "fast_text": "1/2",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 19,
+              "fast_index": 19,
+              "iou": 0.9540572278976367,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 20,
+              "fast_index": 20,
+              "iou": 0.7620454770403458,
+              "strict_text": "B",
+              "fast_text": "B",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "11-gocr-native-postprocess-20261009-emergency-guard.png",
+          "orange_timings": {
+            "detector": {
+              "median": 321.642,
+              "min": 319.154,
+              "max": 326.185
+            },
+            "detector_tflite_invoke": {
+              "median": 272.988,
+              "min": 270.879,
+              "max": 277.842
+            },
+            "recognizer": {
+              "median": 134.045,
+              "min": 132.457,
+              "max": 136.549
+            },
+            "crop_rectify": {
+              "median": 11.505,
+              "min": 11.267,
+              "max": 11.676
+            },
+            "total": {
+              "median": 474.11,
+              "min": 466.872,
+              "max": 475.88
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1394.2691799999998,
+            "detector_tflite_invoke": 1353.6495,
+            "recognizer": 422.31,
+            "crop_rectify": 45.594,
+            "total": 1871.942
+          }
+        },
+        {
+          "strict_lines": 18,
+          "fast_lines": 18,
+          "matched": 17,
+          "missing_strict_indices": [
+            6
+          ],
+          "extra_fast_indices": [
+            6
+          ],
+          "exact_text_matches": 16,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9783476958687906,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9781869174398551,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 2,
+              "iou": 0.8719681316968823,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 3,
+              "iou": 0.9675364288408168,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 4,
+              "iou": 0.9920066339966463,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9766862499375782,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9778442533014144,
+              "strict_text": "Items",
+              "fast_text": "Items",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9434813938294915,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9916544875988386,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Game",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9851773222322476,
+              "strict_text": "The Menu",
+              "fast_text": "The Menu",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.989864807358453,
+              "strict_text": "Gear",
+              "fast_text": "Gear",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9511276901584709,
+              "strict_text": "Luigi automatically follows wherever Mario",
+              "fast_text": "Luigi automatically follows wherever Mario",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9868222999598644,
+              "strict_text": "goes. Make Luigi jump by pressing",
+              "fast_text": "goes. Make Luigi jump by pressing",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9848886093371841,
+              "strict_text": "The Big Cannon",
+              "fast_text": "The Big Cannon",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9624825519142762,
+              "strict_text": "Luigi Logic",
+              "fast_text": "Luigi Logic",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.9591208514479297,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.9095247733850303,
+              "strict_text": "В",
+              "fast_text": "B",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "12-gocr-native-postprocess-20261009-luigi.png",
+          "orange_timings": {
+            "detector": {
+              "median": 313.208,
+              "min": 311.869,
+              "max": 313.842
+            },
+            "detector_tflite_invoke": {
+              "median": 272.97,
+              "min": 271.159,
+              "max": 273.709
+            },
+            "recognizer": {
+              "median": 107.654,
+              "min": 105.1,
+              "max": 108.906
+            },
+            "crop_rectify": {
+              "median": 9.974,
+              "min": 9.804,
+              "max": 10.012
+            },
+            "total": {
+              "median": 433.119,
+              "min": 431.386,
+              "max": 436.412
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1343.9277999999997,
+            "detector_tflite_invoke": 1311.83298,
+            "recognizer": 334.219,
+            "crop_rectify": 41.704,
+            "total": 1748.591
+          }
+        }
+      ],
+      "matched": 102,
+      "exact_text_matches": 93,
+      "character_distance": 9,
+      "missing": 7,
+      "extra": 7,
+      "corpus_medians_ms": {
+        "detector": 294.884,
+        "detector_tflite_invoke": 272.97,
+        "recognizer": 28.435,
+        "crop_rectify": 4.264,
+        "total": 328.053
+      }
+    },
+    {
+      "report": "default-d4-r2.json.gz",
+      "runtime": "2.3.0",
+      "delegate": "default",
+      "detector_threads": 4,
+      "recognizer_threads": 2,
+      "initialization_ms": 51.15672806277871,
+      "frames": [
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 3,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9551329162441594,
+              "strict_text": "Willma",
+              "fast_text": "Willma",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9892188324180304,
+              "strict_text": "You gotta get to the Rumbla Dish.",
+              "fast_text": "You gotta get to the Rumbla Dish.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9905051998813087,
+              "strict_text": "It's sacred ground around here!",
+              "fast_text": "It's sacred ground around here!",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "00-description-screen-20261006-capture.png",
+          "orange_timings": {
+            "detector": {
+              "median": 101.948,
+              "min": 93.168,
+              "max": 110.484
+            },
+            "detector_tflite_invoke": {
+              "median": 76.652,
+              "min": 70.984,
+              "max": 83.956
+            },
+            "recognizer": {
+              "median": 20.06,
+              "min": 17.367,
+              "max": 23.998
+            },
+            "crop_rectify": {
+              "median": 4.365,
+              "min": 4.311,
+              "max": 4.571
+            },
+            "total": {
+              "median": 126.958,
+              "min": 115.593,
+              "max": 140.063
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1329.74616,
+            "detector_tflite_invoke": 1305.83428,
+            "recognizer": 99.029,
+            "crop_rectify": 22.932,
+            "total": 1464.354
+          }
+        },
+        {
+          "strict_lines": 18,
+          "fast_lines": 18,
+          "matched": 18,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 18,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9701179794077874,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9911718991817062,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Game",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.6828441465504231,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9887571778804549,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.9876585992417629,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.8298396752339601,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9830431632838216,
+              "strict_text": "Basic Controls",
+              "fast_text": "Basic Controls",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9639636347383118,
+              "strict_text": "S",
+              "fast_text": "S",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9869110440744798,
+              "strict_text": "Items",
+              "fast_text": "Items",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9692382964969021,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9832671292773076,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Game",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9835221846881324,
+              "strict_text": "The Menu",
+              "fast_text": "The Menu",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9707351943145545,
+              "strict_text": "Hit the Save Block to save your game.",
+              "fast_text": "Hit the Save Block to save your game.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9760827316060015,
+              "strict_text": "Gear",
+              "fast_text": "Gear",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.97866341389992,
+              "strict_text": "The Big Cannon",
+              "fast_text": "The Big Cannon",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9762881298430964,
+              "strict_text": "1/4",
+              "fast_text": "1/4",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.9721814466025708,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.9146061285632585,
+              "strict_text": "в",
+              "fast_text": "в",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "01-description-screen-20261006-current-full.png",
+          "orange_timings": {
+            "detector": {
+              "median": 106.65,
+              "min": 105.989,
+              "max": 120.169
+            },
+            "detector_tflite_invoke": {
+              "median": 71.85,
+              "min": 71.79,
+              "max": 83.209
+            },
+            "recognizer": {
+              "median": 60.053,
+              "min": 54.782,
+              "max": 67.289
+            },
+            "crop_rectify": {
+              "median": 8.263,
+              "min": 8.21,
+              "max": 9.092
+            },
+            "total": {
+              "median": 186.115,
+              "min": 177.255,
+              "max": 187.081
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1339.9572199999998,
+            "detector_tflite_invoke": 1309.93582,
+            "recognizer": 326.371,
+            "crop_rectify": 34.124,
+            "total": 1710.492
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 1,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9784980326110361,
+              "strict_text": "Is this our next brave explorer?",
+              "fast_text": "ls this our next brave explorer?",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.980203240819175,
+              "strict_text": "Ready to explore!",
+              "fast_text": "Ready to explore!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.98161470976279,
+              "strict_text": "Choose a different Yoshi.",
+              "fast_text": "Choose a different Yoshi",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "02-font-matching-20261007-source-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 89.399,
+              "min": 88.42,
+              "max": 90.326
+            },
+            "detector_tflite_invoke": {
+              "median": 72.146,
+              "min": 70.885,
+              "max": 72.768
+            },
+            "recognizer": {
+              "median": 16.734,
+              "min": 16.453,
+              "max": 17.009
+            },
+            "crop_rectify": {
+              "median": 2.975,
+              "min": 2.959,
+              "max": 3.004
+            },
+            "total": {
+              "median": 109.674,
+              "min": 109.153,
+              "max": 110.643
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1328.90742,
+            "detector_tflite_invoke": 1305.56556,
+            "recognizer": 98.132,
+            "crop_rectify": 15.308,
+            "total": 1449.407
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9901437099138247,
+              "strict_text": "ls this our next brave explorer?",
+              "fast_text": "Is this our next brave explorer?",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9928902093668291,
+              "strict_text": "Ready to explore!",
+              "fast_text": "Ready to explore!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9905388375288007,
+              "strict_text": "Choose a different Yoshi.",
+              "fast_text": "Choose a different Yoshi.",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "03-ocr-candidates-20261007-live-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 88.907,
+              "min": 88.819,
+              "max": 89.146
+            },
+            "detector_tflite_invoke": {
+              "median": 72.208,
+              "min": 72.068,
+              "max": 72.394
+            },
+            "recognizer": {
+              "median": 16.684,
+              "min": 16.492,
+              "max": 16.748
+            },
+            "crop_rectify": {
+              "median": 2.937,
+              "min": 2.92,
+              "max": 2.954
+            },
+            "total": {
+              "median": 109.095,
+              "min": 108.937,
+              "max": 109.435
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1357.93886,
+            "detector_tflite_invoke": 1333.81862,
+            "recognizer": 92.031,
+            "crop_rectify": 15.317,
+            "total": 1477.81
+          }
+        },
+        {
+          "strict_lines": 16,
+          "fast_lines": 16,
+          "matched": 16,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 14,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9769311055085853,
+              "strict_text": "Main Stor",
+              "fast_text": "Main Stor",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9834169384007379,
+              "strict_text": "The Split-Apart Land",
+              "fast_text": "The Split-Apart Land",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9854235902398366,
+              "strict_text": "Recommended Level",
+              "fast_text": "Recommended Level",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9718376308111907,
+              "strict_text": "Our Story So Far",
+              "fast_text": "Our Story So Far",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.9701798515636048,
+              "strict_text": "LV1",
+              "fast_text": "LV1",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9743497327306655,
+              "strict_text": "The Split-Apart Land",
+              "fast_text": "The Split-Apart Land",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9892483292627935,
+              "strict_text": "After Mario and Luigi reunite on",
+              "fast_text": "After Mario and Luigi reunite on",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9780201070000629,
+              "strict_text": "✓A Sudden Island Arrival",
+              "fast_text": "A Sudden Island Arrival",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9837343469370686,
+              "strict_text": "LV1",
+              "fast_text": "LV1",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9777792890913134,
+              "strict_text": "Shipshape Island, they join up with",
+              "fast_text": "Shipshape Island, they join up with",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9804040513404028,
+              "strict_text": "Snoutlet to help Concordia!",
+              "fast_text": "Snoutlet to help Concordia!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9841376184561871,
+              "strict_text": "Next Step",
+              "fast_text": "Next Step",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9758851984078993,
+              "strict_text": "Explore Shipshape Island with Luigi.",
+              "fast_text": "Explore Shipshape Island with Luigi.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9907651832496067,
+              "strict_text": "Follow Snoutlet's guidance.",
+              "fast_text": "Follow Snoutlet's guidance.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9889497648023995,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.8558348593312213,
+              "strict_text": "В",
+              "fast_text": "B",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "04-ocr-fullscreen-discussion-20261005-screen.png",
+          "orange_timings": {
+            "detector": {
+              "median": 132.775,
+              "min": 121.388,
+              "max": 133.733
+            },
+            "detector_tflite_invoke": {
+              "median": 80.712,
+              "min": 71.826,
+              "max": 81.248
+            },
+            "recognizer": {
+              "median": 78.853,
+              "min": 71.281,
+              "max": 85.69
+            },
+            "crop_rectify": {
+              "median": 11.321,
+              "min": 10.671,
+              "max": 11.933
+            },
+            "total": {
+              "median": 224.008,
+              "min": 217.858,
+              "max": 230.882
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1348.5457999999999,
+            "detector_tflite_invoke": 1306.76008,
+            "recognizer": 397.837,
+            "crop_rectify": 49.755,
+            "total": 1805.221
+          }
+        },
+        {
+          "strict_lines": 4,
+          "fast_lines": 5,
+          "matched": 4,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [
+            3
+          ],
+          "exact_text_matches": 4,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9696515136384627,
+              "strict_text": "Connie",
+              "fast_text": "Connie",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9831275300020016,
+              "strict_text": "I passed out... When I woke up,",
+              "fast_text": "I passed out... When I woke up,",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9957411310493632,
+              "strict_text": "I was here on Shipshape Island.",
+              "fast_text": "I was here on Shipshape Island.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 4,
+              "iou": 0.904168003036875,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "05-ocr-policy-live-20261005-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 94.252,
+              "min": 93.264,
+              "max": 95.805
+            },
+            "detector_tflite_invoke": {
+              "median": 71.239,
+              "min": 70.972,
+              "max": 72.895
+            },
+            "recognizer": {
+              "median": 18.934,
+              "min": 18.812,
+              "max": 19.022
+            },
+            "crop_rectify": {
+              "median": 5.53,
+              "min": 5.511,
+              "max": 5.555
+            },
+            "total": {
+              "median": 119.852,
+              "min": 118.681,
+              "max": 121.375
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1318.43564,
+            "detector_tflite_invoke": 1294.43668,
+            "recognizer": 97.79,
+            "crop_rectify": 23.058,
+            "total": 1456.441
+          }
+        },
+        {
+          "strict_lines": 3,
+          "fast_lines": 3,
+          "matched": 3,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9892620286502328,
+              "strict_text": "So! We'll need one brave volunteer!",
+              "fast_text": "So! We'll need one brave volunteer!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.8299930900233842,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9342770814020177,
+              "strict_text": "M",
+              "fast_text": "A",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "06-ppocr-only-live-20261007-frame.png",
+          "orange_timings": {
+            "detector": {
+              "median": 92.329,
+              "min": 92.037,
+              "max": 102.05
+            },
+            "detector_tflite_invoke": {
+              "median": 72.305,
+              "min": 72.005,
+              "max": 82.501
+            },
+            "recognizer": {
+              "median": 13.69,
+              "min": 13.627,
+              "max": 16.275
+            },
+            "crop_rectify": {
+              "median": 2.357,
+              "min": 2.316,
+              "max": 2.398
+            },
+            "total": {
+              "median": 109.533,
+              "min": 108.729,
+              "max": 120.772
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1323.12294,
+            "detector_tflite_invoke": 1299.65896,
+            "recognizer": 76.906,
+            "crop_rectify": 11.195,
+            "total": 1417.473
+          }
+        },
+        {
+          "strict_lines": 0,
+          "fast_lines": 0,
+          "matched": 0,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 0,
+          "character_distance": 0,
+          "pairs": [],
+          "frame": "07-text-detectors-video-only-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 81.734,
+              "min": 80.66,
+              "max": 82.418
+            },
+            "detector_tflite_invoke": {
+              "median": 72.04,
+              "min": 71.281,
+              "max": 73.083
+            },
+            "recognizer": {
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.0
+            },
+            "crop_rectify": {
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.0
+            },
+            "total": {
+              "median": 81.743,
+              "min": 80.67,
+              "max": 82.429
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1325.0345599999998,
+            "detector_tflite_invoke": 1303.2974,
+            "recognizer": 0.0,
+            "crop_rectify": 0.0,
+            "total": 1330.182
+          }
+        },
+        {
+          "strict_lines": 2,
+          "fast_lines": 2,
+          "matched": 2,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 2,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9967100071808956,
+              "strict_text": "That's much better. Thank you kindly!",
+              "fast_text": "That's much better. Thank you kindly!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.7242354583767737,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "08-game-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 86.333,
+              "min": 86.217,
+              "max": 86.829
+            },
+            "detector_tflite_invoke": {
+              "median": 71.085,
+              "min": 70.978,
+              "max": 71.425
+            },
+            "recognizer": {
+              "median": 10.041,
+              "min": 9.711,
+              "max": 10.202
+            },
+            "crop_rectify": {
+              "median": 2.229,
+              "min": 2.212,
+              "max": 2.238
+            },
+            "total": {
+              "median": 99.191,
+              "min": 98.631,
+              "max": 99.609
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1308.74744,
+            "detector_tflite_invoke": 1285.83182,
+            "recognizer": 46.967,
+            "crop_rectify": 11.649,
+            "total": 1372.977
+          }
+        },
+        {
+          "strict_lines": 4,
+          "fast_lines": 4,
+          "matched": 4,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 4,
+          "character_distance": 0,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.982610810377322,
+              "strict_text": "Connie",
+              "fast_text": "Connie",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.8658117743778319,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9874406965430718,
+              "strict_text": "What's that? You want",
+              "fast_text": "What's that? You want",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 3,
+              "iou": 0.9965765357015433,
+              "strict_text": "to know where you are?",
+              "fast_text": "to know where you are?",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "09-game-brothership-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 90.776,
+              "min": 88.985,
+              "max": 92.702
+            },
+            "detector_tflite_invoke": {
+              "median": 72.349,
+              "min": 71.064,
+              "max": 72.939
+            },
+            "recognizer": {
+              "median": 17.981,
+              "min": 17.852,
+              "max": 18.012
+            },
+            "crop_rectify": {
+              "median": 3.212,
+              "min": 3.185,
+              "max": 3.284
+            },
+            "total": {
+              "median": 112.705,
+              "min": 110.766,
+              "max": 114.785
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1320.37814,
+            "detector_tflite_invoke": 1296.98966,
+            "recognizer": 91.476,
+            "crop_rectify": 15.445,
+            "total": 1431.114
+          }
+        },
+        {
+          "strict_lines": 14,
+          "fast_lines": 14,
+          "matched": 8,
+          "missing_strict_indices": [
+            3,
+            4,
+            6,
+            7,
+            9,
+            10
+          ],
+          "extra_fast_indices": [
+            2,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "exact_text_matches": 6,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9750224793660595,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9857208448142397,
+              "strict_text": "Chapter 1: Wildwoods",
+              "fast_text": "Chapter 1: Wildwoops",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 3,
+              "iou": 0.5149832670734307,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 9,
+              "iou": 0.865663169832367,
+              "strict_text": "222",
+              "fast_text": "227",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 10,
+              "iou": 0.9306127018856686,
+              "strict_text": "",
+              "fast_text": "",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.9761218276235886,
+              "strict_text": "May I ask you to take a close look at my",
+              "fast_text": "May I ask you to take a close look at my",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.9795209618029931,
+              "strict_text": "contents and see if anything is amiss?",
+              "fast_text": "contents and see if anything is amiss?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9659822434243446,
+              "strict_text": "A",
+              "fast_text": "A",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "10-game-example-2-input.png",
+          "orange_timings": {
+            "detector": {
+              "median": 105.09,
+              "min": 104.63,
+              "max": 116.074
+            },
+            "detector_tflite_invoke": {
+              "median": 72.124,
+              "min": 71.861,
+              "max": 80.82
+            },
+            "recognizer": {
+              "median": 47.807,
+              "min": 46.872,
+              "max": 48.673
+            },
+            "crop_rectify": {
+              "median": 7.376,
+              "min": 7.362,
+              "max": 7.458
+            },
+            "total": {
+              "median": 163.578,
+              "min": 161.786,
+              "max": 173.924
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1318.34102,
+            "detector_tflite_invoke": 1287.98648,
+            "recognizer": 281.448,
+            "crop_rectify": 33.941,
+            "total": 1625.103
+          }
+        },
+        {
+          "strict_lines": 21,
+          "fast_lines": 21,
+          "matched": 21,
+          "missing_strict_indices": [],
+          "extra_fast_indices": [],
+          "exact_text_matches": 19,
+          "character_distance": 2,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9843799306516205,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9785014867416685,
+              "strict_text": "Emergency Guard",
+              "fast_text": "Emergency Guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 2,
+              "iou": 0.9932199439316985,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 3,
+              "iou": 0.978993871841648,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 4,
+              "iou": 0.8372357784220827,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.784129341614058,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 6,
+              "fast_index": 6,
+              "iou": 0.9867792614719376,
+              "strict_text": "Luigi Can Fight Too!",
+              "fast_text": "Luigi Can Fight Too!",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 7,
+              "iou": 0.9907654564526577,
+              "strict_text": "First Strike",
+              "fast_text": "First Strike",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 8,
+              "iou": 0.9877467811638534,
+              "strict_text": "Jump Attacks",
+              "fast_text": "Jump Attacks",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 9,
+              "iou": 0.9880794705711967,
+              "strict_text": "Attack ComboS",
+              "fast_text": "Attack Combos",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 10,
+              "iou": 0.9241836764339469,
+              "strict_text": "X",
+              "fast_text": "X",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 11,
+              "iou": 0.8983453120550187,
+              "strict_text": "Demo",
+              "fast_text": "Demd",
+              "exact_text": false,
+              "character_distance": 1
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 12,
+              "iou": 0.982500248879864,
+              "strict_text": "Targeting Who?",
+              "fast_text": "Targeting Who?",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 13,
+              "iou": 0.9829534386249987,
+              "strict_text": "Hold R while an enemy attacks to guard",
+              "fast_text": "Hold R while an enemy attacks to guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 14,
+              "iou": 0.9840509983359302,
+              "strict_text": "against it. This will decrease the amount",
+              "fast_text": "against it. This will decrease the amount",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 15,
+              "iou": 0.9866327762744547,
+              "strict_text": "Emergency Guard",
+              "fast_text": "Emergency Guard",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 16,
+              "iou": 0.9514465473689626,
+              "strict_text": "of damage you take.",
+              "fast_text": "of damage you take.",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 17,
+              "iou": 0.9911774135476967,
+              "strict_text": "Jump Counters",
+              "fast_text": "Jump Counters",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 18,
+              "fast_index": 18,
+              "iou": 0.9841235605858014,
+              "strict_text": "1/2",
+              "fast_text": "1/2",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 19,
+              "fast_index": 19,
+              "iou": 0.9586843955715245,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 20,
+              "fast_index": 20,
+              "iou": 0.7462984117009248,
+              "strict_text": "B",
+              "fast_text": "B",
+              "exact_text": true,
+              "character_distance": 0
+            }
+          ],
+          "frame": "11-gocr-native-postprocess-20261009-emergency-guard.png",
+          "orange_timings": {
+            "detector": {
+              "median": 125.25,
+              "min": 125.181,
+              "max": 127.382
+            },
+            "detector_tflite_invoke": {
+              "median": 76.804,
+              "min": 76.043,
+              "max": 78.368
+            },
+            "recognizer": {
+              "median": 82.819,
+              "min": 81.532,
+              "max": 86.671
+            },
+            "crop_rectify": {
+              "median": 11.692,
+              "min": 11.303,
+              "max": 12.178
+            },
+            "total": {
+              "median": 224.558,
+              "min": 223.181,
+              "max": 229.227
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1394.2691799999998,
+            "detector_tflite_invoke": 1353.6495,
+            "recognizer": 422.31,
+            "crop_rectify": 45.594,
+            "total": 1871.942
+          }
+        },
+        {
+          "strict_lines": 18,
+          "fast_lines": 17,
+          "matched": 17,
+          "missing_strict_indices": [
+            6
+          ],
+          "extra_fast_indices": [],
+          "exact_text_matches": 16,
+          "character_distance": 1,
+          "pairs": [
+            {
+              "strict_index": 0,
+              "fast_index": 0,
+              "iou": 0.9809702100541344,
+              "strict_text": "Snoutlet School",
+              "fast_text": "Snoutlet School",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 1,
+              "fast_index": 1,
+              "iou": 0.9844207054273733,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 2,
+              "fast_index": 2,
+              "iou": 0.9579423484863825,
+              "strict_text": "Field",
+              "fast_text": "Field",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 4,
+              "fast_index": 3,
+              "iou": 0.9499590021097024,
+              "strict_text": "L",
+              "fast_text": "L",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 3,
+              "fast_index": 4,
+              "iou": 0.9751148046894377,
+              "strict_text": "Battle",
+              "fast_text": "Battle",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 5,
+              "fast_index": 5,
+              "iou": 0.9278941845306309,
+              "strict_text": "R",
+              "fast_text": "R",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 7,
+              "fast_index": 6,
+              "iou": 0.9826048150175768,
+              "strict_text": "Items",
+              "fast_text": "Items",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 8,
+              "fast_index": 7,
+              "iou": 0.9609061557696346,
+              "strict_text": "Adventuring with Luigi",
+              "fast_text": "Adventuring with Luigi",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 9,
+              "fast_index": 8,
+              "iou": 0.987165600140526,
+              "strict_text": "Saving Your Game",
+              "fast_text": "Saving Your Game",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 10,
+              "fast_index": 9,
+              "iou": 0.9926705059703578,
+              "strict_text": "The Menu",
+              "fast_text": "The Menu",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 11,
+              "fast_index": 10,
+              "iou": 0.9780592608788546,
+              "strict_text": "Gear",
+              "fast_text": "Gear",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 12,
+              "fast_index": 11,
+              "iou": 0.9912436439630626,
+              "strict_text": "Luigi automatically follows wherever Mario",
+              "fast_text": "Luigi automatically follows wherever Mario",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 13,
+              "fast_index": 12,
+              "iou": 0.9898637581819664,
+              "strict_text": "goes. Make Luigi jump by pressing",
+              "fast_text": "goes. Make Luigi jump by pressing",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 14,
+              "fast_index": 13,
+              "iou": 0.9888642760581445,
+              "strict_text": "The Big Cannon",
+              "fast_text": "The Big Cannon",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 15,
+              "fast_index": 14,
+              "iou": 0.9874618998047354,
+              "strict_text": "Luigi Logic",
+              "fast_text": "Luigi Logic",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 16,
+              "fast_index": 15,
+              "iou": 0.9723463500602211,
+              "strict_text": "Back",
+              "fast_text": "Back",
+              "exact_text": true,
+              "character_distance": 0
+            },
+            {
+              "strict_index": 17,
+              "fast_index": 16,
+              "iou": 0.9340634200959029,
+              "strict_text": "В",
+              "fast_text": "в",
+              "exact_text": false,
+              "character_distance": 1
+            }
+          ],
+          "frame": "12-gocr-native-postprocess-20261009-luigi.png",
+          "orange_timings": {
+            "detector": {
+              "median": 117.261,
+              "min": 109.845,
+              "max": 122.649
+            },
+            "detector_tflite_invoke": {
+              "median": 76.999,
+              "min": 71.818,
+              "max": 81.126
+            },
+            "recognizer": {
+              "median": 64.072,
+              "min": 59.168,
+              "max": 71.774
+            },
+            "crop_rectify": {
+              "median": 9.574,
+              "min": 9.332,
+              "max": 10.221
+            },
+            "total": {
+              "median": 194.732,
+              "min": 183.725,
+              "max": 198.826
+            }
+          },
+          "repeat_identity": true,
+          "tv_medians": {
+            "detector": 1343.9277999999997,
+            "detector_tflite_invoke": 1311.83298,
+            "recognizer": 334.219,
+            "crop_rectify": 41.704,
+            "total": 1748.591
+          }
+        }
+      ],
+      "matched": 102,
+      "exact_text_matches": 91,
+      "character_distance": 11,
+      "missing": 7,
+      "extra": 7,
+      "corpus_medians_ms": {
+        "detector": 94.252,
+        "detector_tflite_invoke": 72.208,
+        "recognizer": 18.934,
+        "crop_rectify": 4.365,
+        "total": 119.852
+      }
+    }
+  ]
+}
