@@ -5,7 +5,8 @@ on:
   push:
     paths:
       - '.github/workflows/reverse-screenai-grouprpn.yml'
-      - 'scripts/recover-grouprpn-descriptor.py'\n      - 'scripts/recover-gocr-detector-descriptor.py'
+      - 'scripts/recover-grouprpn-descriptor.py'
+      - 'scripts/recover-gocr-detector-descriptor.py'
 
 jobs:
   reverse:
@@ -28,7 +29,7 @@ jobs:
           cp "$LIB" /tmp/rpn/out/libchromescreenai.so
           strings -a -t x "$LIB" > /tmp/rpn/out/strings-offsets.txt
           objdump -h "$LIB" > /tmp/rpn/out/sections.txt
-      - name: Recover descriptor
+      - name: Recover descriptors
         run: |
           cd /tmp/rpn/out
           rg -i 'GroupRpn|Pairwise|ClusterBoxes|TextFlow|Breadth gap|Height ratio|Norm dist|angle diff|group_rpn_detector|maximum_angle|maximum_breadth|GocrDetector' strings-offsets.txt > clues.txt || true
@@ -38,7 +39,8 @@ jobs:
             B=$((N+320))
             sed -n "${A},${B}p" strings-offsets.txt > descriptor-neighborhood.txt
           fi
-          python3 "$GITHUB_WORKSPACE/scripts/recover-grouprpn-descriptor.py" /tmp/rpn/out/libchromescreenai.so /tmp/rpn/out/grouprpn-descriptor\n          python3 "$GITHUB_WORKSPACE/scripts/recover-gocr-detector-descriptor.py" /tmp/rpn/out/libchromescreenai.so /tmp/rpn/out/gocr-detector-descriptor
+          python3 "$GITHUB_WORKSPACE/scripts/recover-grouprpn-descriptor.py" /tmp/rpn/out/libchromescreenai.so /tmp/rpn/out/grouprpn-descriptor
+          python3 "$GITHUB_WORKSPACE/scripts/recover-gocr-detector-descriptor.py" /tmp/rpn/out/libchromescreenai.so /tmp/rpn/out/gocr-detector-descriptor
       - name: Upload
         if: always()
         uses: actions/upload-artifact@v4
