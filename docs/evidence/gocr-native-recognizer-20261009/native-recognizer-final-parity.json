@@ -1,0 +1,2211 @@
+{
+  "scope": "current Python clean-room reference, not Google Lens",
+  "frames": [
+    {
+      "frame": "fixtures/emergency-guard.ppm",
+      "lines": [
+        {
+          "line_id": "0",
+          "reference": {
+            "text": "Snoutlet School",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              267,
+              32
+            ],
+            "invoke_ms": 29.004,
+            "total_ms": 33.405,
+            "diagnostic_logit_margin_q": 100.429,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "40ad55de666666985ec3bfd34b2b1b2815d6226a0435ed3553621642e957f879"
+          },
+          "native": {
+            "text": "Snoutlet School",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              267,
+              32
+            ],
+            "invoke_ms": 20.605,
+            "total_ms": 21.824,
+            "diagnostic_logit_margin_q": 100.429,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "40ad55de666666985ec3bfd34b2b1b2815d6226a0435ed3553621642e957f879",
+            "stages_ms": {
+              "prepare": 0.9401,
+              "invoke": 20.60518,
+              "decode": 0.23696000000000003
+            }
+          },
+          "crop_size": [
+            292,
+            35
+          ],
+          "crop_sha256": "9529487ad6cc1cfe195ab8378e2c9f80e22bf47dd242684f7a76bd8de58ce0d6",
+          "native_crop_sha256": "9529487ad6cc1cfe195ab8378e2c9f80e22bf47dd242684f7a76bd8de58ce0d6",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "1",
+          "reference": {
+            "text": "Emergency Guard",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              279,
+              32
+            ],
+            "invoke_ms": 33.164,
+            "total_ms": 37.731,
+            "diagnostic_logit_margin_q": 85.54,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d162b9e70e3509ee21cee58d86d1a5e3383a937157abd86d27fca3f739ec8a7f"
+          },
+          "native": {
+            "text": "Emergency Guard",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              279,
+              32
+            ],
+            "invoke_ms": 30.755,
+            "total_ms": 32.158,
+            "diagnostic_logit_margin_q": 85.54,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d162b9e70e3509ee21cee58d86d1a5e3383a937157abd86d27fca3f739ec8a7f",
+            "stages_ms": {
+              "prepare": 1.1065,
+              "invoke": 30.75488,
+              "decode": 0.28848
+            }
+          },
+          "crop_size": [
+            331,
+            38
+          ],
+          "crop_sha256": "4b17d723a54813b012adb113cdd6e92b2b958b2cda7a29bb638c9bb58a76ea17",
+          "native_crop_sha256": "4b17d723a54813b012adb113cdd6e92b2b958b2cda7a29bb638c9bb58a76ea17",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "2",
+          "reference": {
+            "text": "Field",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              93,
+              32
+            ],
+            "invoke_ms": 8.662,
+            "total_ms": 10.582,
+            "diagnostic_logit_margin_q": 89.19,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "358a79579db4e9dbffc5000730da2005c8b8881fd1bc5f69645a9509f8a3c08b"
+          },
+          "native": {
+            "text": "Field",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              93,
+              32
+            ],
+            "invoke_ms": 8.697,
+            "total_ms": 9.22,
+            "diagnostic_logit_margin_q": 89.19,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "358a79579db4e9dbffc5000730da2005c8b8881fd1bc5f69645a9509f8a3c08b",
+            "stages_ms": {
+              "prepare": 0.35328000000000004,
+              "invoke": 8.6971,
+              "decode": 0.1628
+            }
+          },
+          "crop_size": [
+            61,
+            21
+          ],
+          "crop_sha256": "a37a78c6b1674199529a19656e6f9fd0043038bbffca1a876944868a0a37baec",
+          "native_crop_sha256": "a37a78c6b1674199529a19656e6f9fd0043038bbffca1a876944868a0a37baec",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "3",
+          "reference": {
+            "text": "Battle",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              116,
+              32
+            ],
+            "invoke_ms": 8.244,
+            "total_ms": 10.377,
+            "diagnostic_logit_margin_q": 102.786,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "6a75348c352b78ee0b24dcc1aaa339497c33b728463742e18e497e0683821bd6"
+          },
+          "native": {
+            "text": "Battle",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              116,
+              32
+            ],
+            "invoke_ms": 10.06,
+            "total_ms": 10.694,
+            "diagnostic_logit_margin_q": 102.786,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "6a75348c352b78ee0b24dcc1aaa339497c33b728463742e18e497e0683821bd6",
+            "stages_ms": {
+              "prepare": 0.5091,
+              "invoke": 10.06014,
+              "decode": 0.1202
+            }
+          },
+          "crop_size": [
+            76,
+            21
+          ],
+          "crop_sha256": "9875a46b47fb718aa332af6e97e91facc104e15f6c87a5619a41f05aff82cd22",
+          "native_crop_sha256": "9875a46b47fb718aa332af6e97e91facc104e15f6c87a5619a41f05aff82cd22",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "4",
+          "reference": {
+            "text": "L",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              30,
+              32
+            ],
+            "invoke_ms": 10.902,
+            "total_ms": 12.571,
+            "diagnostic_logit_margin_q": 56.476,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "4a55586ff30c0b357014d4a1e3b161f817fd7d8b6ea4f8ba70e8b4e32c6c9402"
+          },
+          "native": {
+            "text": "L",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              30,
+              32
+            ],
+            "invoke_ms": 11.501,
+            "total_ms": 11.853,
+            "diagnostic_logit_margin_q": 56.476,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "4a55586ff30c0b357014d4a1e3b161f817fd7d8b6ea4f8ba70e8b4e32c6c9402",
+            "stages_ms": {
+              "prepare": 0.24036000000000002,
+              "invoke": 11.50128,
+              "decode": 0.10706
+            }
+          },
+          "crop_size": [
+            12,
+            13
+          ],
+          "crop_sha256": "9efc41f59c0ae8cde9987fa22d7c1f2bd832b3b6c20f6273c9b62be2143a2877",
+          "native_crop_sha256": "9efc41f59c0ae8cde9987fa22d7c1f2bd832b3b6c20f6273c9b62be2143a2877",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "5",
+          "reference": {
+            "text": "R",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              32,
+              32
+            ],
+            "invoke_ms": 11.374,
+            "total_ms": 12.801,
+            "diagnostic_logit_margin_q": 73.857,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "8e76071d88b3764716fd5299d34a0ae7d70043990da6e6f4434e672389c4a2b0"
+          },
+          "native": {
+            "text": "R",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              32,
+              32
+            ],
+            "invoke_ms": 8.445,
+            "total_ms": 8.747,
+            "diagnostic_logit_margin_q": 73.857,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "8e76071d88b3764716fd5299d34a0ae7d70043990da6e6f4434e672389c4a2b0",
+            "stages_ms": {
+              "prepare": 0.19036,
+              "invoke": 8.44478,
+              "decode": 0.10848
+            }
+          },
+          "crop_size": [
+            14,
+            14
+          ],
+          "crop_sha256": "9b476ceadd19c362aabfbf59d322b2838faafd4a53c0799937f28d61a0a07583",
+          "native_crop_sha256": "9b476ceadd19c362aabfbf59d322b2838faafd4a53c0799937f28d61a0a07583",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "6",
+          "reference": {
+            "text": "Luigi Can Fight Too!",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              332,
+              32
+            ],
+            "invoke_ms": 31.73,
+            "total_ms": 36.143,
+            "diagnostic_logit_margin_q": 103.167,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "a8facf99606d8d7753bffc9a8626cfdcb660820c22ae0ee27b460c812f7b224a"
+          },
+          "native": {
+            "text": "Luigi Can Fight Too!",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              332,
+              32
+            ],
+            "invoke_ms": 27.483,
+            "total_ms": 28.82,
+            "diagnostic_logit_margin_q": 103.167,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "a8facf99606d8d7753bffc9a8626cfdcb660820c22ae0ee27b460c812f7b224a",
+            "stages_ms": {
+              "prepare": 0.9884999999999999,
+              "invoke": 27.48276,
+              "decode": 0.3423
+            }
+          },
+          "crop_size": [
+            228,
+            22
+          ],
+          "crop_sha256": "7eb605d0399f75be87ffc76b1da58aa659bbd42de6701c183b571b3bf915bc8c",
+          "native_crop_sha256": "7eb605d0399f75be87ffc76b1da58aa659bbd42de6701c183b571b3bf915bc8c",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "7",
+          "reference": {
+            "text": "First Strike",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              205,
+              32
+            ],
+            "invoke_ms": 16.408,
+            "total_ms": 19.193,
+            "diagnostic_logit_margin_q": 94.345,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "00d6c8727760cdf770d0919e691f7e5dc2d8cd17242fdd3514faccb6159aa880"
+          },
+          "native": {
+            "text": "First Strike",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              205,
+              32
+            ],
+            "invoke_ms": 17.647,
+            "total_ms": 18.484,
+            "diagnostic_logit_margin_q": 94.345,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "00d6c8727760cdf770d0919e691f7e5dc2d8cd17242fdd3514faccb6159aa880",
+            "stages_ms": {
+              "prepare": 0.63578,
+              "invoke": 17.64668,
+              "decode": 0.19532000000000002
+            }
+          },
+          "crop_size": [
+            122,
+            19
+          ],
+          "crop_sha256": "e1aae6321ede9dafe4a526a6a9c67a7c9a24626ea8901e3e8390fdf2623ae00c",
+          "native_crop_sha256": "e1aae6321ede9dafe4a526a6a9c67a7c9a24626ea8901e3e8390fdf2623ae00c",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "8",
+          "reference": {
+            "text": "Jump Attacks",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              235,
+              32
+            ],
+            "invoke_ms": 18.463,
+            "total_ms": 21.788,
+            "diagnostic_logit_margin_q": 115.69,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "db199d65c2af42fedbcd193c5eaa629c234c23890c973aae8f376227c966c576"
+          },
+          "native": {
+            "text": "Jump Attacks",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              235,
+              32
+            ],
+            "invoke_ms": 24.335,
+            "total_ms": 25.375,
+            "diagnostic_logit_margin_q": 115.69,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "db199d65c2af42fedbcd193c5eaa629c234c23890c973aae8f376227c966c576",
+            "stages_ms": {
+              "prepare": 0.78996,
+              "invoke": 24.33512,
+              "decode": 0.24394
+            }
+          },
+          "crop_size": [
+            154,
+            21
+          ],
+          "crop_sha256": "239729ba13cce6d7259b9705082ccdaac3024f6317595d0a52291db34c54ba67",
+          "native_crop_sha256": "239729ba13cce6d7259b9705082ccdaac3024f6317595d0a52291db34c54ba67",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "9",
+          "reference": {
+            "text": "Attack ComboS",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              291,
+              32
+            ],
+            "invoke_ms": 61.548,
+            "total_ms": 68.246,
+            "diagnostic_logit_margin_q": 102.921,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "b3ce5cccbcc88e3a5311b7bbbb435ab7f616b163107ad72a18034bc23244b6db"
+          },
+          "native": {
+            "text": "Attack ComboS",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              291,
+              32
+            ],
+            "invoke_ms": 62.534,
+            "total_ms": 63.846,
+            "diagnostic_logit_margin_q": 102.921,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "b3ce5cccbcc88e3a5311b7bbbb435ab7f616b163107ad72a18034bc23244b6db",
+            "stages_ms": {
+              "prepare": 0.8851399999999999,
+              "invoke": 62.53388,
+              "decode": 0.42128
+            }
+          },
+          "crop_size": [
+            173,
+            19
+          ],
+          "crop_sha256": "142430e9cab81d07f04a7ad189abfd34ea8f785fba6f08ef9cd4820b701145a6",
+          "native_crop_sha256": "142430e9cab81d07f04a7ad189abfd34ea8f785fba6f08ef9cd4820b701145a6",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "10",
+          "reference": {
+            "text": "X",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              30,
+              32
+            ],
+            "invoke_ms": 43.645,
+            "total_ms": 45.847,
+            "diagnostic_logit_margin_q": 56.738,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "e36bfd9b745d74a151a8073001a33f52254c93882d3ef10af40578bce8aa2dcf"
+          },
+          "native": {
+            "text": "X",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              30,
+              32
+            ],
+            "invoke_ms": 14.467,
+            "total_ms": 15.47,
+            "diagnostic_logit_margin_q": 56.738,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "e36bfd9b745d74a151a8073001a33f52254c93882d3ef10af40578bce8aa2dcf",
+            "stages_ms": {
+              "prepare": 0.19069999999999998,
+              "invoke": 14.46714,
+              "decode": 0.8077000000000001
+            }
+          },
+          "crop_size": [
+            15,
+            16
+          ],
+          "crop_sha256": "2595c9b6b67d21e92e56cd5ae81aa2055f916daf97a27f90fae318b147cb98c6",
+          "native_crop_sha256": "2595c9b6b67d21e92e56cd5ae81aa2055f916daf97a27f90fae318b147cb98c6",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "11",
+          "reference": {
+            "text": "Demo",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              110,
+              32
+            ],
+            "invoke_ms": 10.259,
+            "total_ms": 12.579,
+            "diagnostic_logit_margin_q": 101.452,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "52a9b6daebe5d5d68e66ab1d48f921e836e2f135cf13c47bbd416688d849c9c3"
+          },
+          "native": {
+            "text": "Demo",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              110,
+              32
+            ],
+            "invoke_ms": 13.965,
+            "total_ms": 14.449,
+            "diagnostic_logit_margin_q": 101.452,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "52a9b6daebe5d5d68e66ab1d48f921e836e2f135cf13c47bbd416688d849c9c3",
+            "stages_ms": {
+              "prepare": 0.35104,
+              "invoke": 13.96484,
+              "decode": 0.12872
+            }
+          },
+          "crop_size": [
+            55,
+            16
+          ],
+          "crop_sha256": "c190fa078707d80c2a086913f3e22ef2556378cd6d767a41c6a150cc56b85de7",
+          "native_crop_sha256": "c190fa078707d80c2a086913f3e22ef2556378cd6d767a41c6a150cc56b85de7",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "12",
+          "reference": {
+            "text": "Targeting Who?",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              248,
+              32
+            ],
+            "invoke_ms": 24.639,
+            "total_ms": 28.245,
+            "diagnostic_logit_margin_q": 108.607,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "1d5301e5106820b33432e91ee783bfc2285727453f2b2f10557b1a7c29982c23"
+          },
+          "native": {
+            "text": "Targeting Who?",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              248,
+              32
+            ],
+            "invoke_ms": 23.879,
+            "total_ms": 24.823,
+            "diagnostic_logit_margin_q": 108.607,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "1d5301e5106820b33432e91ee783bfc2285727453f2b2f10557b1a7c29982c23",
+            "stages_ms": {
+              "prepare": 0.74142,
+              "invoke": 23.87882,
+              "decode": 0.19658
+            }
+          },
+          "crop_size": [
+            178,
+            23
+          ],
+          "crop_sha256": "d3c4f1f9434a830f8c5845ddfe7ee40500f9a6382bf11c2e4a519ffffe3559e3",
+          "native_crop_sha256": "d3c4f1f9434a830f8c5845ddfe7ee40500f9a6382bf11c2e4a519ffffe3559e3",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "13",
+          "reference": {
+            "text": "Hold R while an enemy attacks to guard",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              633,
+              32
+            ],
+            "invoke_ms": 57.276,
+            "total_ms": 65.208,
+            "diagnostic_logit_margin_q": 113.095,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "64e993136d5b9cd70cbcab5cbebd8610d23c9f1397d4299d2bda5d54f83de128"
+          },
+          "native": {
+            "text": "Hold R while an enemy attacks to guard",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              633,
+              32
+            ],
+            "invoke_ms": 48.309,
+            "total_ms": 51.059,
+            "diagnostic_logit_margin_q": 113.095,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "64e993136d5b9cd70cbcab5cbebd8610d23c9f1397d4299d2bda5d54f83de128",
+            "stages_ms": {
+              "prepare": 2.25532,
+              "invoke": 48.30862,
+              "decode": 0.48403999999999997
+            }
+          },
+          "crop_size": [
+            455,
+            23
+          ],
+          "crop_sha256": "dd43ba65181599c5bc096c5e3ffe212a318ff2225d63df703bf33136f6531451",
+          "native_crop_sha256": "dd43ba65181599c5bc096c5e3ffe212a318ff2225d63df703bf33136f6531451",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "14",
+          "reference": {
+            "text": "against it. This will decrease the amount",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              663,
+              32
+            ],
+            "invoke_ms": 71.405,
+            "total_ms": 80.654,
+            "diagnostic_logit_margin_q": 116.562,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "a855333ed3cd58e65d52fe95ff2aa41b0dc417e1ed5d7d61083fade1f457525e"
+          },
+          "native": {
+            "text": "against it. This will decrease the amount",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              663,
+              32
+            ],
+            "invoke_ms": 129.888,
+            "total_ms": 132.346,
+            "diagnostic_logit_margin_q": 116.562,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "a855333ed3cd58e65d52fe95ff2aa41b0dc417e1ed5d7d61083fade1f457525e",
+            "stages_ms": {
+              "prepare": 1.9392200000000002,
+              "invoke": 129.88792,
+              "decode": 0.50988
+            }
+          },
+          "crop_size": [
+            456,
+            22
+          ],
+          "crop_sha256": "d239f26254cf9d9b6d0ce2a050088c0a30c373a75a088b13d1c3c64e44f526ee",
+          "native_crop_sha256": "d239f26254cf9d9b6d0ce2a050088c0a30c373a75a088b13d1c3c64e44f526ee",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "15",
+          "reference": {
+            "text": "Emergency Guard",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              284,
+              32
+            ],
+            "invoke_ms": 36.59,
+            "total_ms": 41.068,
+            "diagnostic_logit_margin_q": 101.944,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "25971927f7d0dbf46107bbbc9ca4c6fab366f0c0e9fe88b6499688973141a29d"
+          },
+          "native": {
+            "text": "Emergency Guard",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              284,
+              32
+            ],
+            "invoke_ms": 47.559,
+            "total_ms": 48.765,
+            "diagnostic_logit_margin_q": 101.944,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "25971927f7d0dbf46107bbbc9ca4c6fab366f0c0e9fe88b6499688973141a29d",
+            "stages_ms": {
+              "prepare": 0.8903399999999999,
+              "invoke": 47.559259999999995,
+              "decode": 0.31006
+            }
+          },
+          "crop_size": [
+            204,
+            23
+          ],
+          "crop_sha256": "4d71b8ae4c98df4a61383eb51362819d909e1e1122f831e33708c360ee04f111",
+          "native_crop_sha256": "4d71b8ae4c98df4a61383eb51362819d909e1e1122f831e33708c360ee04f111",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "16",
+          "reference": {
+            "text": "of damage you take.",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              339,
+              32
+            ],
+            "invoke_ms": 32.636,
+            "total_ms": 38.005,
+            "diagnostic_logit_margin_q": 108.429,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "98f41ee31571e29e0d7372b9522ce4c6200997a3ac41572208ee58a10549e7dc"
+          },
+          "native": {
+            "text": "of damage you take.",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              339,
+              32
+            ],
+            "invoke_ms": 39.008,
+            "total_ms": 40.425,
+            "diagnostic_logit_margin_q": 108.429,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "98f41ee31571e29e0d7372b9522ce4c6200997a3ac41572208ee58a10549e7dc",
+            "stages_ms": {
+              "prepare": 1.1139000000000001,
+              "invoke": 39.00756,
+              "decode": 0.29732000000000003
+            }
+          },
+          "crop_size": [
+            233,
+            22
+          ],
+          "crop_sha256": "73c567c8dd1490b144f69acf6d20abf65272ded2a20f6a0889fc47782c773fb5",
+          "native_crop_sha256": "73c567c8dd1490b144f69acf6d20abf65272ded2a20f6a0889fc47782c773fb5",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "17",
+          "reference": {
+            "text": "Jump Counters",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              241,
+              32
+            ],
+            "invoke_ms": 25.359,
+            "total_ms": 29.413,
+            "diagnostic_logit_margin_q": 112.976,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "6ccf154a254ad30b943ae567d1bd49ef3e852052d408ed5937ef82fde5c4214f"
+          },
+          "native": {
+            "text": "Jump Counters",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              241,
+              32
+            ],
+            "invoke_ms": 22.043,
+            "total_ms": 23.079,
+            "diagnostic_logit_margin_q": 112.976,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "6ccf154a254ad30b943ae567d1bd49ef3e852052d408ed5937ef82fde5c4214f",
+            "stages_ms": {
+              "prepare": 0.7251,
+              "invoke": 22.043,
+              "decode": 0.3059
+            }
+          },
+          "crop_size": [
+            173,
+            23
+          ],
+          "crop_sha256": "531ac536c479af6f6dfe84b575da50b133ff35c1c2da3155d9cda0976525d5d3",
+          "native_crop_sha256": "531ac536c479af6f6dfe84b575da50b133ff35c1c2da3155d9cda0976525d5d3",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "18",
+          "reference": {
+            "text": "1/2",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              77,
+              32
+            ],
+            "invoke_ms": 20.635,
+            "total_ms": 22.271,
+            "diagnostic_logit_margin_q": 77.143,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "48dda639fd371ca1f5d8dff7698df5dbae625373f926c29803ab5d603faf2760"
+          },
+          "native": {
+            "text": "1/2",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              77,
+              32
+            ],
+            "invoke_ms": 20.745,
+            "total_ms": 21.383,
+            "diagnostic_logit_margin_q": 77.143,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "48dda639fd371ca1f5d8dff7698df5dbae625373f926c29803ab5d603faf2760",
+            "stages_ms": {
+              "prepare": 0.48686,
+              "invoke": 20.74538,
+              "decode": 0.1444
+            }
+          },
+          "crop_size": [
+            48,
+            20
+          ],
+          "crop_sha256": "b6649b15a4bd4943a9c6aa475a2c48ed72453e8af77304cdb7863e460fee1435",
+          "native_crop_sha256": "b6649b15a4bd4943a9c6aa475a2c48ed72453e8af77304cdb7863e460fee1435",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "19",
+          "reference": {
+            "text": "Back",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              81,
+              32
+            ],
+            "invoke_ms": 11.111,
+            "total_ms": 13.618,
+            "diagnostic_logit_margin_q": 83.31,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "9860a3d2e1329411cad37297fd0f69057b8728bfbad34c0ad62e78d597636703"
+          },
+          "native": {
+            "text": "Back",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              81,
+              32
+            ],
+            "invoke_ms": 12.47,
+            "total_ms": 12.902,
+            "diagnostic_logit_margin_q": 83.31,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "9860a3d2e1329411cad37297fd0f69057b8728bfbad34c0ad62e78d597636703",
+            "stages_ms": {
+              "prepare": 0.31636000000000003,
+              "invoke": 12.4699,
+              "decode": 0.11192
+            }
+          },
+          "crop_size": [
+            53,
+            21
+          ],
+          "crop_sha256": "461cbf7f2b26a2d3ad85944d4eace889e6961c8e6eb2def4e97f6011b5b138bf",
+          "native_crop_sha256": "461cbf7f2b26a2d3ad85944d4eace889e6961c8e6eb2def4e97f6011b5b138bf",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "20",
+          "reference": {
+            "text": "B",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              28,
+              32
+            ],
+            "invoke_ms": 14.983,
+            "total_ms": 16.43,
+            "diagnostic_logit_margin_q": 64.0,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "a1725139b6d9ebeeb3187e11d29c68f9a28a078ab3ef6e88c471bc773ca64303"
+          },
+          "native": {
+            "text": "B",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              28,
+              32
+            ],
+            "invoke_ms": 11.117,
+            "total_ms": 11.427,
+            "diagnostic_logit_margin_q": 64.0,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "a1725139b6d9ebeeb3187e11d29c68f9a28a078ab3ef6e88c471bc773ca64303",
+            "stages_ms": {
+              "prepare": 0.1876,
+              "invoke": 11.11672,
+              "decode": 0.118
+            }
+          },
+          "crop_size": [
+            14,
+            16
+          ],
+          "crop_sha256": "8d5238159d1b95460aa5ff098eaa1f0154292a1cda0f0e9b6b637bad8921828e",
+          "native_crop_sha256": "8d5238159d1b95460aa5ff098eaa1f0154292a1cda0f0e9b6b637bad8921828e",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        }
+      ],
+      "full": [
+        {
+          "line_id": "0",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "1",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "2",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "3",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "4",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "5",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "6",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "7",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "8",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "9",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "10",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "11",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "12",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "13",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "14",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "15",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "16",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "17",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "18",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "19",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "20",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        }
+      ],
+      "parity": true,
+      "full_ms": 2004.1746,
+      "recognizer_ms": 517.84842,
+      "rectify_ms": 42.18095999999999
+    },
+    {
+      "frame": "fixtures/luigi.ppm",
+      "lines": [
+        {
+          "line_id": "0",
+          "reference": {
+            "text": "Snoutlet School",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              260,
+              32
+            ],
+            "invoke_ms": 36.664,
+            "total_ms": 41.344,
+            "diagnostic_logit_margin_q": 97.06,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "e0fbe9f2c9faa38a37a88631698fb337c1311529d9e5fb3a4216f9c98fdfda98"
+          },
+          "native": {
+            "text": "Snoutlet School",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              260,
+              32
+            ],
+            "invoke_ms": 17.774,
+            "total_ms": 18.933,
+            "diagnostic_logit_margin_q": 97.06,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "e0fbe9f2c9faa38a37a88631698fb337c1311529d9e5fb3a4216f9c98fdfda98",
+            "stages_ms": {
+              "prepare": 0.95628,
+              "invoke": 17.77364,
+              "decode": 0.19732
+            }
+          },
+          "crop_size": [
+            292,
+            36
+          ],
+          "crop_sha256": "51fcd074292b56f916a958bf8365c3e74633204c2f170f1b4ad0135da10fedde",
+          "native_crop_sha256": "51fcd074292b56f916a958bf8365c3e74633204c2f170f1b4ad0135da10fedde",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "1",
+          "reference": {
+            "text": "Adventuring with Luigi",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              370,
+              32
+            ],
+            "invoke_ms": 35.062,
+            "total_ms": 41.128,
+            "diagnostic_logit_margin_q": 106.587,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "ada035d85e72f9aaaad5749cfe26bc169fea3bf8e4dd4e37d2e91a5d61a99d09"
+          },
+          "native": {
+            "text": "Adventuring with Luigi",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              370,
+              32
+            ],
+            "invoke_ms": 29.283,
+            "total_ms": 30.951,
+            "diagnostic_logit_margin_q": 106.587,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "ada035d85e72f9aaaad5749cfe26bc169fea3bf8e4dd4e37d2e91a5d61a99d09",
+            "stages_ms": {
+              "prepare": 1.3683,
+              "invoke": 29.28318,
+              "decode": 0.29278
+            }
+          },
+          "crop_size": [
+            439,
+            38
+          ],
+          "crop_sha256": "93f89357f3ec3796e0e9c465e27542aa0857381f1d2b1a02b517f6c4fe99e491",
+          "native_crop_sha256": "93f89357f3ec3796e0e9c465e27542aa0857381f1d2b1a02b517f6c4fe99e491",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "2",
+          "reference": {
+            "text": "Field",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              90,
+              32
+            ],
+            "invoke_ms": 9.518,
+            "total_ms": 11.474,
+            "diagnostic_logit_margin_q": 85.69,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "416476e53032cab12fecba28bd1b260683d560a7f655a6a5b7c8044ee6c73047"
+          },
+          "native": {
+            "text": "Field",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              90,
+              32
+            ],
+            "invoke_ms": 16.97,
+            "total_ms": 17.431,
+            "diagnostic_logit_margin_q": 85.69,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "416476e53032cab12fecba28bd1b260683d560a7f655a6a5b7c8044ee6c73047",
+            "stages_ms": {
+              "prepare": 0.34618,
+              "invoke": 16.9695,
+              "decode": 0.1115
+            }
+          },
+          "crop_size": [
+            62,
+            22
+          ],
+          "crop_sha256": "e0d1c1c2aa239cff970c41cc89c2a706f1c06eb39050c1674d3c1ec25c6c2d43",
+          "native_crop_sha256": "e0d1c1c2aa239cff970c41cc89c2a706f1c06eb39050c1674d3c1ec25c6c2d43",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "3",
+          "reference": {
+            "text": "Battle",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              114,
+              32
+            ],
+            "invoke_ms": 9.989,
+            "total_ms": 11.895,
+            "diagnostic_logit_margin_q": 100.143,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "0e472cf4fb79bdc4ec4229d05f8488b1bcb4e8c0cf0a9d8a3a0fb730f0aee05e"
+          },
+          "native": {
+            "text": "Battle",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              114,
+              32
+            ],
+            "invoke_ms": 13.736,
+            "total_ms": 14.318,
+            "diagnostic_logit_margin_q": 100.143,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "0e472cf4fb79bdc4ec4229d05f8488b1bcb4e8c0cf0a9d8a3a0fb730f0aee05e",
+            "stages_ms": {
+              "prepare": 0.41722000000000004,
+              "invoke": 13.73574,
+              "decode": 0.16066000000000003
+            }
+          },
+          "crop_size": [
+            75,
+            21
+          ],
+          "crop_sha256": "f6bde8074d7c39fd2c15959a20f32a78faa7b23979c2d14665a47ec8948177ec",
+          "native_crop_sha256": "f6bde8074d7c39fd2c15959a20f32a78faa7b23979c2d14665a47ec8948177ec",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "4",
+          "reference": {
+            "text": "L",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              32,
+              32
+            ],
+            "invoke_ms": 8.252,
+            "total_ms": 9.818,
+            "diagnostic_logit_margin_q": 60.881,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "bcd1610a9540114646c0a419965dcc80cd20fdf845940e1a38285c44b9497fc1"
+          },
+          "native": {
+            "text": "L",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              32,
+              32
+            ],
+            "invoke_ms": 10.122,
+            "total_ms": 10.442,
+            "diagnostic_logit_margin_q": 60.881,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "bcd1610a9540114646c0a419965dcc80cd20fdf845940e1a38285c44b9497fc1",
+            "stages_ms": {
+              "prepare": 0.2121,
+              "invoke": 10.1218,
+              "decode": 0.10254
+            }
+          },
+          "crop_size": [
+            14,
+            14
+          ],
+          "crop_sha256": "06736da608365ec17907cce859ce12f0462fa50c641bb760d5a0c9a019fab37e",
+          "native_crop_sha256": "06736da608365ec17907cce859ce12f0462fa50c641bb760d5a0c9a019fab37e",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "5",
+          "reference": {
+            "text": "R",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              32,
+              32
+            ],
+            "invoke_ms": 10.923,
+            "total_ms": 12.634,
+            "diagnostic_logit_margin_q": 67.929,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "87ba0052afc25398b48ba4eafee94de694a0e64fd69046eaaf3ad3beb18aa0d1"
+          },
+          "native": {
+            "text": "R",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              32,
+              32
+            ],
+            "invoke_ms": 8.084,
+            "total_ms": 8.389,
+            "diagnostic_logit_margin_q": 67.929,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "87ba0052afc25398b48ba4eafee94de694a0e64fd69046eaaf3ad3beb18aa0d1",
+            "stages_ms": {
+              "prepare": 0.19422,
+              "invoke": 8.08442,
+              "decode": 0.10622000000000001
+            }
+          },
+          "crop_size": [
+            15,
+            15
+          ],
+          "crop_sha256": "98daa5e74b2b460357d51b514a417cb42299cf3755072a3a3d591b1443c96826",
+          "native_crop_sha256": "98daa5e74b2b460357d51b514a417cb42299cf3755072a3a3d591b1443c96826",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "6",
+          "reference": {
+            "text": "",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              43,
+              32
+            ],
+            "invoke_ms": 8.458,
+            "total_ms": 10.392,
+            "diagnostic_logit_margin_q": 54.548,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "373ca2f888e70402f1e926eaa7b2351e2345a8e005e6a9735e74b148c00ef6c8"
+          },
+          "native": {
+            "text": "",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              43,
+              32
+            ],
+            "invoke_ms": 9.509,
+            "total_ms": 10.394,
+            "diagnostic_logit_margin_q": 54.548,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "373ca2f888e70402f1e926eaa7b2351e2345a8e005e6a9735e74b148c00ef6c8",
+            "stages_ms": {
+              "prepare": 0.78188,
+              "invoke": 9.50854,
+              "decode": 0.09794
+            }
+          },
+          "crop_size": [
+            39,
+            29
+          ],
+          "crop_sha256": "28594657ea10462ce7232fa9955864cc66f49bf2ff53f56b9fbc62e92ab84c2e",
+          "native_crop_sha256": "28594657ea10462ce7232fa9955864cc66f49bf2ff53f56b9fbc62e92ab84c2e",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "7",
+          "reference": {
+            "text": "Items",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              105,
+              32
+            ],
+            "invoke_ms": 11.963,
+            "total_ms": 13.968,
+            "diagnostic_logit_margin_q": 96.619,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "cbca3b1bdadf478c23bf2188658ba9bcca1b64f494efe734ab7983fe6620f8d2"
+          },
+          "native": {
+            "text": "Items",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              105,
+              32
+            ],
+            "invoke_ms": 9.018,
+            "total_ms": 9.585,
+            "diagnostic_logit_margin_q": 96.619,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "cbca3b1bdadf478c23bf2188658ba9bcca1b64f494efe734ab7983fe6620f8d2",
+            "stages_ms": {
+              "prepare": 0.45418000000000003,
+              "invoke": 9.01762,
+              "decode": 0.10884
+            }
+          },
+          "crop_size": [
+            59,
+            18
+          ],
+          "crop_sha256": "0461e0f3efadc04cab552be1822e5d868a72e933c494f7ff79890301b0bdc8fc",
+          "native_crop_sha256": "0461e0f3efadc04cab552be1822e5d868a72e933c494f7ff79890301b0bdc8fc",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "8",
+          "reference": {
+            "text": "Adventuring with Luigi",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              353,
+              32
+            ],
+            "invoke_ms": 46.279,
+            "total_ms": 52.519,
+            "diagnostic_logit_margin_q": 105.103,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d06b34cc40a401c439ac15f7373d65672754586bec37de3b52d063a935961081"
+          },
+          "native": {
+            "text": "Adventuring with Luigi",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              353,
+              32
+            ],
+            "invoke_ms": 51.566,
+            "total_ms": 53.094,
+            "diagnostic_logit_margin_q": 105.103,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d06b34cc40a401c439ac15f7373d65672754586bec37de3b52d063a935961081",
+            "stages_ms": {
+              "prepare": 1.22378,
+              "invoke": 51.56606,
+              "decode": 0.29689999999999994
+            }
+          },
+          "crop_size": [
+            254,
+            23
+          ],
+          "crop_sha256": "365cfd407c8d435154aa6f8316fbdec0c293e093a4ffcc491976e71afc3c180f",
+          "native_crop_sha256": "365cfd407c8d435154aa6f8316fbdec0c293e093a4ffcc491976e71afc3c180f",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "9",
+          "reference": {
+            "text": "Saving Your Game",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              307,
+              32
+            ],
+            "invoke_ms": 29.668,
+            "total_ms": 36.831,
+            "diagnostic_logit_margin_q": 103.516,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "b062d3c9713f358be25b70af9c14701db67665b779cb92b50a4e54b67a9e6210"
+          },
+          "native": {
+            "text": "Saving Your Game",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 3,
+            "normalized_size": [
+              307,
+              32
+            ],
+            "invoke_ms": 33.896,
+            "total_ms": 35.346,
+            "diagnostic_logit_margin_q": 103.516,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "b062d3c9713f358be25b70af9c14701db67665b779cb92b50a4e54b67a9e6210",
+            "stages_ms": {
+              "prepare": 0.9659800000000001,
+              "invoke": 33.89614,
+              "decode": 0.4761
+            }
+          },
+          "crop_size": [
+            211,
+            22
+          ],
+          "crop_sha256": "8976a355dc9ed32174f47026e271e47374b6371d2fb37ce920324f131be9f5e9",
+          "native_crop_sha256": "8976a355dc9ed32174f47026e271e47374b6371d2fb37ce920324f131be9f5e9",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "10",
+          "reference": {
+            "text": "The Menu",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              185,
+              32
+            ],
+            "invoke_ms": 19.846,
+            "total_ms": 23.054,
+            "diagnostic_logit_margin_q": 89.048,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "95c38a34e7c0ba19987ccf6780a2813e1ea38d7f77029fc199ede524e0379748"
+          },
+          "native": {
+            "text": "The Menu",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              185,
+              32
+            ],
+            "invoke_ms": 29.633,
+            "total_ms": 30.466,
+            "diagnostic_logit_margin_q": 89.048,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "95c38a34e7c0ba19987ccf6780a2813e1ea38d7f77029fc199ede524e0379748",
+            "stages_ms": {
+              "prepare": 0.62078,
+              "invoke": 29.63322,
+              "decode": 0.20624
+            }
+          },
+          "crop_size": [
+            110,
+            19
+          ],
+          "crop_sha256": "8c69d718d453eee9429fe7b7b99e20ced4e0f3f8b754e1179b7c74281ee5f4fa",
+          "native_crop_sha256": "8c69d718d453eee9429fe7b7b99e20ced4e0f3f8b754e1179b7c74281ee5f4fa",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "11",
+          "reference": {
+            "text": "Gear",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              88,
+              32
+            ],
+            "invoke_ms": 11.065,
+            "total_ms": 12.427,
+            "diagnostic_logit_margin_q": 88.619,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "e2b8bb7eabdf9739ffed838dea063d481c337baab1e2eca8f59eff5d8a741010"
+          },
+          "native": {
+            "text": "Gear",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              88,
+              32
+            ],
+            "invoke_ms": 8.703,
+            "total_ms": 9.186,
+            "diagnostic_logit_margin_q": 88.619,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "e2b8bb7eabdf9739ffed838dea063d481c337baab1e2eca8f59eff5d8a741010",
+            "stages_ms": {
+              "prepare": 0.36396,
+              "invoke": 8.70254,
+              "decode": 0.11532
+            }
+          },
+          "crop_size": [
+            52,
+            19
+          ],
+          "crop_sha256": "5542e8706ad5f899a6b88563bc3321cc6f860974b49170df5935a73000642cf9",
+          "native_crop_sha256": "5542e8706ad5f899a6b88563bc3321cc6f860974b49170df5935a73000642cf9",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "12",
+          "reference": {
+            "text": "Luigi automatically follows wherever Mario",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              641,
+              32
+            ],
+            "invoke_ms": 60.561,
+            "total_ms": 69.955,
+            "diagnostic_logit_margin_q": 118.448,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "f0c8b996b867a1ec1200ce556ba6c62f7504afeca169e5531ee7448203953636"
+          },
+          "native": {
+            "text": "Luigi automatically follows wherever Mario",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              641,
+              32
+            ],
+            "invoke_ms": 52.203,
+            "total_ms": 54.797,
+            "diagnostic_logit_margin_q": 118.448,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "f0c8b996b867a1ec1200ce556ba6c62f7504afeca169e5531ee7448203953636",
+            "stages_ms": {
+              "prepare": 2.0547,
+              "invoke": 52.20336,
+              "decode": 0.5295799999999999
+            }
+          },
+          "crop_size": [
+            481,
+            24
+          ],
+          "crop_sha256": "22262406c942d0af0efcf56c844f705a8839df057952732a43463436f1c2aa26",
+          "native_crop_sha256": "22262406c942d0af0efcf56c844f705a8839df057952732a43463436f1c2aa26",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "13",
+          "reference": {
+            "text": "goes. Make Luigi jump by pressing",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              569,
+              32
+            ],
+            "invoke_ms": 54.756,
+            "total_ms": 63.046,
+            "diagnostic_logit_margin_q": 108.362,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d2edb2fa348ca0a77ef6d2c6e5672daed29d355e641992d456ea0b323a6a92c0"
+          },
+          "native": {
+            "text": "goes. Make Luigi jump by pressing",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 5,
+            "normalized_size": [
+              569,
+              32
+            ],
+            "invoke_ms": 59.026,
+            "total_ms": 62.274,
+            "diagnostic_logit_margin_q": 108.362,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d2edb2fa348ca0a77ef6d2c6e5672daed29d355e641992d456ea0b323a6a92c0",
+            "stages_ms": {
+              "prepare": 2.76652,
+              "invoke": 59.02604,
+              "decode": 0.47278
+            }
+          },
+          "crop_size": [
+            427,
+            24
+          ],
+          "crop_sha256": "e2aa432b52b9fa0ddc05fbdc0ef1d232ed4d135dcf8e599680bd235dbc09d124",
+          "native_crop_sha256": "e2aa432b52b9fa0ddc05fbdc0ef1d232ed4d135dcf8e599680bd235dbc09d124",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "14",
+          "reference": {
+            "text": "The Big Cannon",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              253,
+              32
+            ],
+            "invoke_ms": 49.138,
+            "total_ms": 57.041,
+            "diagnostic_logit_margin_q": 108.643,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "0f017fc88435a10002544860a6a3c92b198dc86d415a24e5466bedd0761e03f5"
+          },
+          "native": {
+            "text": "The Big Cannon",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              253,
+              32
+            ],
+            "invoke_ms": 27.385,
+            "total_ms": 29.813,
+            "diagnostic_logit_margin_q": 108.643,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "0f017fc88435a10002544860a6a3c92b198dc86d415a24e5466bedd0761e03f5",
+            "stages_ms": {
+              "prepare": 2.1079000000000003,
+              "invoke": 27.38526,
+              "decode": 0.3134
+            }
+          },
+          "crop_size": [
+            182,
+            23
+          ],
+          "crop_sha256": "3d04f1ae220a5c424a8309a3c805db2936a57112b7f92bf363274fe23555b3cc",
+          "native_crop_sha256": "3d04f1ae220a5c424a8309a3c805db2936a57112b7f92bf363274fe23555b3cc",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "15",
+          "reference": {
+            "text": "Luigi Logic",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              171,
+              32
+            ],
+            "invoke_ms": 23.101,
+            "total_ms": 27.352,
+            "diagnostic_logit_margin_q": 91.405,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "95da486bdbd5f6594fa30acfa7a1dcd3fad145009d40fb59c2f9a4fe5427397e"
+          },
+          "native": {
+            "text": "Luigi Logic",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 2,
+            "normalized_size": [
+              171,
+              32
+            ],
+            "invoke_ms": 26.653,
+            "total_ms": 27.544,
+            "diagnostic_logit_margin_q": 91.405,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "95da486bdbd5f6594fa30acfa7a1dcd3fad145009d40fb59c2f9a4fe5427397e",
+            "stages_ms": {
+              "prepare": 0.68278,
+              "invoke": 26.65312,
+              "decode": 0.2026
+            }
+          },
+          "crop_size": [
+            123,
+            23
+          ],
+          "crop_sha256": "271c22e344b74587581557f21407289c93fbcd1069af8c63f1229119dcf9f1c9",
+          "native_crop_sha256": "271c22e344b74587581557f21407289c93fbcd1069af8c63f1229119dcf9f1c9",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "16",
+          "reference": {
+            "text": "Back",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              88,
+              32
+            ],
+            "invoke_ms": 11.14,
+            "total_ms": 13.317,
+            "diagnostic_logit_margin_q": 89.905,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d760f02f2e94e2e5bfeb12e470528f933fa4f1950bc25061a704ade7ce8a3dfc"
+          },
+          "native": {
+            "text": "Back",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              88,
+              32
+            ],
+            "invoke_ms": 12.06,
+            "total_ms": 12.816,
+            "diagnostic_logit_margin_q": 89.905,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "d760f02f2e94e2e5bfeb12e470528f933fa4f1950bc25061a704ade7ce8a3dfc",
+            "stages_ms": {
+              "prepare": 0.62238,
+              "invoke": 12.05982,
+              "decode": 0.12774
+            }
+          },
+          "crop_size": [
+            52,
+            19
+          ],
+          "crop_sha256": "02cbc989f36415731875698a2c319007f89df79bc4a6def95b42552926cec236",
+          "native_crop_sha256": "02cbc989f36415731875698a2c319007f89df79bc4a6def95b42552926cec236",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        },
+        {
+          "line_id": "17",
+          "reference": {
+            "text": "В",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              26,
+              32
+            ],
+            "invoke_ms": 24.879,
+            "total_ms": 27.551,
+            "diagnostic_logit_margin_q": 63.0,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "03efa2473f99dae1f876f831bd9dd79d3e4103b5215b4769a1d9b10a3edf6148"
+          },
+          "native": {
+            "text": "В",
+            "decoder": "greedy_ctc",
+            "blank_id": 1292,
+            "windows": 1,
+            "normalized_size": [
+              26,
+              32
+            ],
+            "invoke_ms": 10.879,
+            "total_ms": 11.571,
+            "diagnostic_logit_margin_q": 63.0,
+            "production_lm_fst_applied": false,
+            "input_windows_sha256": "03efa2473f99dae1f876f831bd9dd79d3e4103b5215b4769a1d9b10a3edf6148",
+            "stages_ms": {
+              "prepare": 0.5847,
+              "invoke": 10.8786,
+              "decode": 0.10278
+            }
+          },
+          "crop_size": [
+            12,
+            15
+          ],
+          "crop_sha256": "76f70b3407e782c07dd7380348b3d620f8d675eafff7c6bd10b1ccd597b2a4c5",
+          "native_crop_sha256": "76f70b3407e782c07dd7380348b3d620f8d675eafff7c6bd10b1ccd597b2a4c5",
+          "crop_changed_bytes": 0,
+          "crop_max_error": 0,
+          "windows_export_hash_valid": true,
+          "windows_equal": true,
+          "text_equal": true,
+          "margin_equal": true
+        }
+      ],
+      "full": [
+        {
+          "line_id": "0",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "1",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "2",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "3",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "4",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "5",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "6",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "7",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "8",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "9",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "10",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "11",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "12",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "13",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "14",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "15",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "16",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        },
+        {
+          "line_id": "17",
+          "crop_equal": true,
+          "windows_equal": true,
+          "text_equal": true
+        }
+      ],
+      "parity": true,
+      "full_ms": 1901.52402,
+      "recognizer_ms": 407.17276,
+      "rectify_ms": 37.93260000000001
+    }
+  ]
+}

@@ -25,6 +25,8 @@ class GoogleConfiguredGroupRpnDetector(GoogleGroupRpnDetector):
         self.MIN_OVERLAP_OPTIMAL=self.launch.min_overlap_optimal
         self.DUP_HORIZONTAL_OVERLAP=self.launch.duplicate_horizontal_overlap
         self.DUP_VERTICAL_OVERLAP=self.launch.duplicate_vertical_overlap
+        from .native_postprocess import select_backend
+        self.native_postprocess=select_backend()
 
     def _decode_head(self,raw,stride,anchor,sx,sy,head):
         grid=raw[0]
@@ -48,13 +50,16 @@ class GoogleConfiguredGroupRpnDetector(GoogleGroupRpnDetector):
         return boxes
 
     def _run_network(self,image):
+        import time
+        started=time.perf_counter()
         tensors,scales=self._prepare(image)
+        prepared=time.perf_counter()
         for d,a in zip(self.inputs,tensors):
             self.interpreter.set_tensor(d["index"],a)
-        import time
         t=time.perf_counter(); self.interpreter.invoke()
         invoke_ms=(time.perf_counter()-t)*1000
         raw={d["name"]:self.interpreter.get_tensor(d["index"]) for d in self.interpreter.get_output_details()}
+        copied=time.perf_counter()
 
         anchors=list(self.launch.anchor_widths)
         if len(anchors)<6:
@@ -71,4 +76,9 @@ class GoogleConfiguredGroupRpnDetector(GoogleGroupRpnDetector):
         for idx,src,stride,anchor in heads:
             key="Identity" if idx==0 else f"Identity_{idx}"
             decoded[idx]=self._decode_head(raw[key],stride,anchor,*scales[src],idx)
+        finished=time.perf_counter()
+        self.network_timings={"pyramid_prepare_allocate":(prepared-started)*1000,
+            "tensor_input_copy":(t-prepared)*1000,"tflite_invoke":invoke_ms,
+            "tensor_output_copy":(copied-t)*1000-invoke_ms,
+            "decode_heads":(finished-copied)*1000}
         return decoded,invoke_ms

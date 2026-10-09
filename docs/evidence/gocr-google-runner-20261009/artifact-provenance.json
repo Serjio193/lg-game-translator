@@ -1,0 +1,7 @@
+{
+  "actions_run": 37907719847,
+  "library_sha256": "d9cfafb045a296708246727f3c0473895790bcd5ae61265713459bb5bd515203",
+  "library_bytes": 19906776,
+  "factory_message": "XNNPackDelegate",
+  "function_symbol_ownership": "stripped; nearest exported JNI symbol is outside_size and does not identify runner functions"
+}

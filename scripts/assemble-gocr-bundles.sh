@@ -38,6 +38,12 @@ cp "$DM" "$OUT/tv_crop/tv/models/$DET_MODEL"
 cp "$DC" "$OUT/tv_crop/tv/models/$DET_CONFIG"
 cp "$RM" "$OUT/tv_crop/orange_pi/models/$REC_MODEL"
 cp "$RL" "$OUT/tv_crop/orange_pi/models/$REC_LABELS"
+for name in recognizer_cyrl_config.pb recognizer_cyrl_lm.compact_fst.gz \
+    recognizer_cyrl_lm.syms recognizer_latn_vi_cyrl_prior.pb; do
+    source="$(find_one "$name")"
+    cp "$source" "$OUT/tv_full/models/$name"
+    cp "$source" "$OUT/tv_crop/orange_pi/models/$name"
+done
 
 echo "assembled:"
 echo "  $OUT/tv_full"

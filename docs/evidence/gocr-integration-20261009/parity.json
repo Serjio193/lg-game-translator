@@ -1,0 +1,353 @@
+[
+  {
+    "frame": "luigi",
+    "line_id": "0",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Snoutlet School",
+    "full_text": "Snoutlet School"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "1",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Adventuring with Luigi",
+    "full_text": "Adventuring with Luigi"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "2",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Field",
+    "full_text": "Field"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "3",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Battle",
+    "full_text": "Battle"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "4",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "L",
+    "full_text": "L"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "5",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "R",
+    "full_text": "R"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "6",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "",
+    "full_text": ""
+  },
+  {
+    "frame": "luigi",
+    "line_id": "7",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Items",
+    "full_text": "Items"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "8",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Adventuring with Luigi",
+    "full_text": "Adventuring with Luigi"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "9",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Saving Your Game",
+    "full_text": "Saving Your Game"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "10",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "The Menu",
+    "full_text": "The Menu"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "11",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Gear",
+    "full_text": "Gear"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "12",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Luigi automatically follows wherever Mario",
+    "full_text": "Luigi automatically follows wherever Mario"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "13",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "goes. Make Luigi jump by pressing",
+    "full_text": "goes. Make Luigi jump by pressing"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "14",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "The Big Cannon",
+    "full_text": "The Big Cannon"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "15",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Luigi Logic",
+    "full_text": "Luigi Logic"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "16",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Back",
+    "full_text": "Back"
+  },
+  {
+    "frame": "luigi",
+    "line_id": "17",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "B",
+    "full_text": "В"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "0",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Snoutlet School",
+    "full_text": "Snoutlet School"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "1",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Emergency Guard",
+    "full_text": "Emergency Guard"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "2",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Field",
+    "full_text": "Field"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "3",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Battle",
+    "full_text": "Battle"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "4",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "L",
+    "full_text": "L"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "5",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "R",
+    "full_text": "R"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "6",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Luigi Can Fight Too!",
+    "full_text": "Luigi Can Fight Too!"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "7",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "First Strike",
+    "full_text": "First Strike"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "8",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Jump Attacks",
+    "full_text": "Jump Attacks"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "9",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Attack Combos",
+    "full_text": "Attack ComboS"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "10",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "X",
+    "full_text": "X"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "11",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Demo",
+    "full_text": "Demo"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "12",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Targeting Who?",
+    "full_text": "Targeting Who?"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "13",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Hold R while an enemy attacks to guard",
+    "full_text": "Hold R while an enemy attacks to guard"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "14",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "against it. This will decrease the amount",
+    "full_text": "against it. This will decrease the amount"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "15",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Emergency Guard",
+    "full_text": "Emergency Guard"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "16",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "of damage you take.",
+    "full_text": "of damage you take."
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "17",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Jump Counters",
+    "full_text": "Jump Counters"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "18",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "1/2",
+    "full_text": "1/2"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "19",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "Back",
+    "full_text": "Back"
+  },
+  {
+    "frame": "emergency-guard",
+    "line_id": "20",
+    "same_quad": true,
+    "same_crop": true,
+    "same_recognizer_input": true,
+    "crop_text": "в",
+    "full_text": "B"
+  }
+]

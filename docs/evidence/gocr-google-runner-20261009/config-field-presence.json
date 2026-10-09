@@ -1,0 +1,13 @@
+{
+  "config_sha256": "45033fc42999a90e9fae90ef8303ee76e013f575ca1caa811d315a1e0107481c",
+  "cached_runner_encoded_field_numbers": [
+    1,
+    3,
+    6,
+    8,
+    12,
+    16,
+    17
+  ],
+  "warm_up_shapes_field_18_present": false
+}

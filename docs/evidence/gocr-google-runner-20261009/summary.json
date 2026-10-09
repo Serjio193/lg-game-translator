@@ -1,0 +1,64 @@
+{
+  "frames": 13,
+  "reference_is_ground_truth": false,
+  "profiles": {
+    "strict": {
+      "median_of_frame_median_total_ms": 1558.338,
+      "median_of_frame_median_invoke_ms": 1324.5398,
+      "sum_frame_median_total_ms": 20967.859
+    },
+    "fast_xnnpack": {
+      "median_of_frame_median_total_ms": 456.812,
+      "median_of_frame_median_invoke_ms": 284.76212,
+      "sum_frame_median_total_ms": 7262.932
+    },
+    "google_runner_experimental": {
+      "median_of_frame_median_total_ms": 591.963,
+      "median_of_frame_median_invoke_ms": 367.09032,
+      "sum_frame_median_total_ms": 8968.298999999999
+    }
+  },
+  "comparisons": {
+    "strict_vs_google_runner_experimental": {
+      "base_regions": 109,
+      "candidate_regions": 109,
+      "matched": 102,
+      "exact_text_matches": 93,
+      "unicode_levenshtein": 12,
+      "matched_base_characters": 1431,
+      "missing": 7,
+      "extra": 7,
+      "iou_mean": 0.9541132249524378,
+      "iou_median": 0.9798621205338227,
+      "iou_min": 0.5149832334506843,
+      "changed_tensor_heads": 143,
+      "inputs_equal_all_frames": true,
+      "tensor_elements": 5738005,
+      "changed_tensor_elements": 5738003,
+      "tensor_max_abs_diff": 21.064279556274414,
+      "tensor_weighted_mean_abs_diff": 0.19782567053077504
+    },
+    "fast_xnnpack_vs_google_runner_experimental": {
+      "base_regions": 109,
+      "candidate_regions": 109,
+      "matched": 109,
+      "exact_text_matches": 109,
+      "unicode_levenshtein": 0,
+      "matched_base_characters": 1452,
+      "missing": 0,
+      "extra": 0,
+      "iou_mean": 1.0,
+      "iou_median": 1.0,
+      "iou_min": 1.0,
+      "changed_tensor_heads": 0,
+      "inputs_equal_all_frames": true,
+      "tensor_elements": 5738005,
+      "changed_tensor_elements": 0,
+      "tensor_max_abs_diff": 0.0,
+      "tensor_weighted_mean_abs_diff": 0.0
+    }
+  },
+  "all_repeats_stable": true,
+  "strict_matches_previous_13_frame_corpus": true,
+  "fast_google_identical_diagnostics_all_frames": true
+}

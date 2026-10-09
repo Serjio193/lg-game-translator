@@ -1,0 +1,1383 @@
+{
+  "threads": 4,
+  "phases": [
+    {
+      "recognizer_loaded": false,
+      "invoke_only": {
+        "wall_ms": [
+          1382.1570000000065,
+          1422.579119999682,
+          1373.9661600002364,
+          1327.4397599998338,
+          1452.5505199999316,
+          1336.6035400003966,
+          1348.8555999992968,
+          1338.2834200001525,
+          1416.4967199994862,
+          1430.9543600002144
+        ],
+        "median_ms": 1378.0615800001215,
+        "before": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 363,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 780,
+              "involuntary": 4051,
+              "migrations": 17
+            },
+            "20883": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 217,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 517,
+              "involuntary": 2808,
+              "migrations": 33
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 220,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 508,
+              "involuntary": 2482,
+              "migrations": 20
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 218,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 497,
+              "involuntary": 2663,
+              "migrations": 30
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 35,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 62,
+              "involuntary": 418,
+              "migrations": 4
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 34,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 61,
+              "involuntary": 587,
+              "migrations": 2
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 34,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 54,
+              "involuntary": 408,
+              "migrations": 3
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 37,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 66,
+              "involuntary": 778,
+              "migrations": 5
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "19.72 19.96 19.34 1/1326 20898",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            817701,
+            0,
+            512374,
+            1379110,
+            1771,
+            0,
+            18506,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "49392 kB",
+            "VmRSS": "47188 kB"
+          }
+        },
+        "after": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 1063,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 2756,
+              "involuntary": 13104,
+              "migrations": 72
+            },
+            "20883": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 754,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 1752,
+              "involuntary": 9198,
+              "migrations": 116
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 760,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 1770,
+              "involuntary": 10282,
+              "migrations": 83
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 758,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 1737,
+              "involuntary": 9939,
+              "migrations": 94
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 118,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 194,
+              "involuntary": 1593,
+              "migrations": 16
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 130,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 215,
+              "involuntary": 2159,
+              "migrations": 7
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 125,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 199,
+              "involuntary": 1995,
+              "migrations": 10
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 125,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 204,
+              "involuntary": 2224,
+              "migrations": 13
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "20.05 20.03 19.37 3/1326 20925",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            821400,
+            0,
+            513296,
+            1379884,
+            1771,
+            0,
+            18540,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "49392 kB",
+            "VmRSS": "47200 kB"
+          }
+        },
+        "task_deltas": {
+          "20879": {
+            "cpu_ticks": 700,
+            "voluntary": 1976,
+            "involuntary": 9053,
+            "migrations": 55
+          },
+          "20883": {
+            "cpu_ticks": 537,
+            "voluntary": 1235,
+            "involuntary": 6390,
+            "migrations": 83
+          },
+          "20884": {
+            "cpu_ticks": 540,
+            "voluntary": 1262,
+            "involuntary": 7800,
+            "migrations": 63
+          },
+          "20885": {
+            "cpu_ticks": 540,
+            "voluntary": 1240,
+            "involuntary": 7276,
+            "migrations": 64
+          },
+          "20887": {
+            "cpu_ticks": 83,
+            "voluntary": 132,
+            "involuntary": 1175,
+            "migrations": 12
+          },
+          "20888": {
+            "cpu_ticks": 96,
+            "voluntary": 154,
+            "involuntary": 1572,
+            "migrations": 5
+          },
+          "20889": {
+            "cpu_ticks": 91,
+            "voluntary": 145,
+            "involuntary": 1587,
+            "migrations": 7
+          },
+          "20890": {
+            "cpu_ticks": 88,
+            "voluntary": 138,
+            "involuntary": 1446,
+            "migrations": 8
+          }
+        }
+      },
+      "prepare_invoke": {
+        "wall_ms": [
+          1530.8672399996794,
+          1467.1596999996837,
+          1623.4156800001074,
+          1401.4440999999351,
+          1526.6341800006558,
+          1333.355499999925,
+          1618.8569999994797,
+          1460.8777200000986,
+          1595.9975400000985,
+          1384.8471399996924
+        ],
+        "median_ms": 1496.8969400001697,
+        "before": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 1276,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 3286,
+              "involuntary": 15912,
+              "migrations": 86
+            },
+            "20883": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 919,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 2138,
+              "involuntary": 12090,
+              "migrations": 134
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 927,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 2202,
+              "involuntary": 12674,
+              "migrations": 103
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 923,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 2159,
+              "involuntary": 11889,
+              "migrations": 116
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 142,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 235,
+              "involuntary": 1904,
+              "migrations": 19
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 161,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 272,
+              "involuntary": 2529,
+              "migrations": 8
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 150,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 242,
+              "involuntary": 2374,
+              "migrations": 12
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 152,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 247,
+              "involuntary": 2777,
+              "migrations": 15
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "20.13 20.04 19.38 2/1327 20961",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            822818,
+            0,
+            513636,
+            1380111,
+            1772,
+            0,
+            18562,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "51744 kB",
+            "VmRSS": "47200 kB"
+          }
+        },
+        "after": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 1998,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5196,
+              "involuntary": 25162,
+              "migrations": 140
+            },
+            "20883": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 1465,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 3444,
+              "involuntary": 20055,
+              "migrations": 189
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 1473,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 3475,
+              "involuntary": 19496,
+              "migrations": 167
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 1465,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 3407,
+              "involuntary": 19051,
+              "migrations": 182
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 233,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 384,
+              "involuntary": 3382,
+              "migrations": 29
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 254,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 417,
+              "involuntary": 4128,
+              "migrations": 19
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 240,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 381,
+              "involuntary": 3838,
+              "migrations": 19
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 238,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 388,
+              "involuntary": 4071,
+              "migrations": 25
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "21.88 20.43 19.52 3/1327 21039",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            826834,
+            0,
+            514685,
+            1380927,
+            1772,
+            0,
+            18608,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "51756 kB",
+            "VmRSS": "47208 kB"
+          }
+        },
+        "task_deltas": {
+          "20879": {
+            "cpu_ticks": 722,
+            "voluntary": 1910,
+            "involuntary": 9250,
+            "migrations": 54
+          },
+          "20883": {
+            "cpu_ticks": 546,
+            "voluntary": 1306,
+            "involuntary": 7965,
+            "migrations": 55
+          },
+          "20884": {
+            "cpu_ticks": 546,
+            "voluntary": 1273,
+            "involuntary": 6822,
+            "migrations": 64
+          },
+          "20885": {
+            "cpu_ticks": 542,
+            "voluntary": 1248,
+            "involuntary": 7162,
+            "migrations": 66
+          },
+          "20887": {
+            "cpu_ticks": 91,
+            "voluntary": 149,
+            "involuntary": 1478,
+            "migrations": 10
+          },
+          "20888": {
+            "cpu_ticks": 93,
+            "voluntary": 145,
+            "involuntary": 1599,
+            "migrations": 11
+          },
+          "20889": {
+            "cpu_ticks": 90,
+            "voluntary": 139,
+            "involuntary": 1464,
+            "migrations": 7
+          },
+          "20890": {
+            "cpu_ticks": 86,
+            "voluntary": 141,
+            "involuntary": 1294,
+            "migrations": 10
+          }
+        }
+      },
+      "last_detector_stats": {
+        "invoke_ms": 1350.01746,
+        "prepare_ms": 26.59914
+      }
+    },
+    {
+      "recognizer_loaded": true,
+      "invoke_only": {
+        "wall_ms": [
+          1465.036659999896,
+          1401.3149800002793,
+          1571.7959800003882,
+          1514.4455600002402,
+          1346.7290400003549,
+          1491.0012800000914,
+          1436.1535600000934,
+          1466.042600000037,
+          1531.762560000061,
+          1438.967660000344
+        ],
+        "median_ms": 1465.5396299999666,
+        "before": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 2216,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5832,
+              "involuntary": 28019,
+              "migrations": 154
+            },
+            "20883": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 1626,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 3792,
+              "involuntary": 22439,
+              "migrations": 202
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 1632,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 3805,
+              "involuntary": 21869,
+              "migrations": 182
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 1627,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 3772,
+              "involuntary": 21052,
+              "migrations": 193
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 261,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 426,
+              "involuntary": 3684,
+              "migrations": 32
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 281,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 465,
+              "involuntary": 4416,
+              "migrations": 26
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 268,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 419,
+              "involuntary": 4207,
+              "migrations": 19
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 264,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 431,
+              "involuntary": 4590,
+              "migrations": 30
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "21.81 20.44 19.53 2/1327 21048",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            828037,
+            0,
+            515001,
+            1381179,
+            1772,
+            0,
+            18623,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "51756 kB",
+            "VmRSS": "48780 kB"
+          }
+        },
+        "after": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 2913,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 7734,
+              "involuntary": 36994,
+              "migrations": 198
+            },
+            "20883": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2169,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5053,
+              "involuntary": 30201,
+              "migrations": 244
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2173,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5021,
+              "involuntary": 29253,
+              "migrations": 227
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2171,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5038,
+              "involuntary": 29383,
+              "migrations": 224
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 349,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 559,
+              "involuntary": 5130,
+              "migrations": 38
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 365,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 609,
+              "involuntary": 5652,
+              "migrations": 30
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 371,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 565,
+              "involuntary": 5943,
+              "migrations": 21
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 352,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 567,
+              "involuntary": 6017,
+              "migrations": 36
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "22.14 20.59 19.59 5/1327 21086",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            832085,
+            0,
+            515990,
+            1381899,
+            1774,
+            0,
+            18674,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "51756 kB",
+            "VmRSS": "48796 kB"
+          }
+        },
+        "task_deltas": {
+          "20879": {
+            "cpu_ticks": 697,
+            "voluntary": 1902,
+            "involuntary": 8975,
+            "migrations": 44
+          },
+          "20883": {
+            "cpu_ticks": 543,
+            "voluntary": 1261,
+            "involuntary": 7762,
+            "migrations": 42
+          },
+          "20884": {
+            "cpu_ticks": 541,
+            "voluntary": 1216,
+            "involuntary": 7384,
+            "migrations": 45
+          },
+          "20885": {
+            "cpu_ticks": 544,
+            "voluntary": 1266,
+            "involuntary": 8331,
+            "migrations": 31
+          },
+          "20887": {
+            "cpu_ticks": 88,
+            "voluntary": 133,
+            "involuntary": 1446,
+            "migrations": 6
+          },
+          "20888": {
+            "cpu_ticks": 84,
+            "voluntary": 144,
+            "involuntary": 1236,
+            "migrations": 4
+          },
+          "20889": {
+            "cpu_ticks": 103,
+            "voluntary": 146,
+            "involuntary": 1736,
+            "migrations": 2
+          },
+          "20890": {
+            "cpu_ticks": 88,
+            "voluntary": 136,
+            "involuntary": 1427,
+            "migrations": 6
+          }
+        }
+      },
+      "prepare_invoke": {
+        "wall_ms": [
+          1627.0054799997524,
+          1511.3277800001015,
+          1698.1595000006564,
+          1696.6259800001353,
+          1528.8279200003672,
+          1583.9943199998743,
+          1453.568240000095,
+          1495.802439999352,
+          1459.2805799993585,
+          1631.8670000000566
+        ],
+        "median_ms": 1556.4111200001207,
+        "before": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 3128,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 8276,
+              "involuntary": 39668,
+              "migrations": 220
+            },
+            "20883": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2334,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5458,
+              "involuntary": 32671,
+              "migrations": 260
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2337,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5425,
+              "involuntary": 31742,
+              "migrations": 249
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2338,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 5427,
+              "involuntary": 31698,
+              "migrations": 249
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 374,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 597,
+              "involuntary": 5507,
+              "migrations": 40
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 390,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 654,
+              "involuntary": 6039,
+              "migrations": 32
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 397,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 610,
+              "involuntary": 6419,
+              "migrations": 25
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 382,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 619,
+              "involuntary": 6447,
+              "migrations": 38
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "22.21 20.63 19.61 2/1327 21095",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            833312,
+            0,
+            516323,
+            1382144,
+            1774,
+            0,
+            18684,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "53308 kB",
+            "VmRSS": "48800 kB"
+          }
+        },
+        "after": {
+          "tasks": {
+            "20879": {
+              "name": "python3",
+              "state": "R",
+              "cpu_ticks": 3870,
+              "processor": 1,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 10328,
+              "involuntary": 49041,
+              "migrations": 257
+            },
+            "20883": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2890,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 6813,
+              "involuntary": 40626,
+              "migrations": 331
+            },
+            "20884": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2899,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 6899,
+              "involuntary": 38621,
+              "migrations": 311
+            },
+            "20885": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 2895,
+              "processor": 2,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 6775,
+              "involuntary": 39849,
+              "migrations": 285
+            },
+            "20887": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 469,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 734,
+              "involuntary": 6933,
+              "migrations": 46
+            },
+            "20888": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 481,
+              "processor": 0,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 794,
+              "involuntary": 7575,
+              "migrations": 38
+            },
+            "20889": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 479,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 752,
+              "involuntary": 7450,
+              "migrations": 33
+            },
+            "20890": {
+              "name": "python3",
+              "state": "S",
+              "cpu_ticks": 475,
+              "processor": 3,
+              "allowed_cpus": "0-3",
+              "priority": 20,
+              "nice": 0,
+              "policy": 0,
+              "voluntary": 754,
+              "involuntary": 8131,
+              "migrations": 51
+            }
+          },
+          "thread_count": 8,
+          "frequencies_khz": {
+            "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": "1400000",
+            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": "1400000"
+          },
+          "loadavg": "22.80 20.84 19.70 9/1357 21188",
+          "affinity": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "system_cpu_ticks": [
+            837548,
+            0,
+            517463,
+            1382936,
+            1775,
+            0,
+            18746,
+            0,
+            0,
+            0
+          ],
+          "memory": {
+            "VmHWM": "53368 kB",
+            "VmRSS": "48812 kB"
+          }
+        },
+        "task_deltas": {
+          "20879": {
+            "cpu_ticks": 742,
+            "voluntary": 2052,
+            "involuntary": 9373,
+            "migrations": 37
+          },
+          "20883": {
+            "cpu_ticks": 556,
+            "voluntary": 1355,
+            "involuntary": 7955,
+            "migrations": 71
+          },
+          "20884": {
+            "cpu_ticks": 562,
+            "voluntary": 1474,
+            "involuntary": 6879,
+            "migrations": 62
+          },
+          "20885": {
+            "cpu_ticks": 557,
+            "voluntary": 1348,
+            "involuntary": 8151,
+            "migrations": 36
+          },
+          "20887": {
+            "cpu_ticks": 95,
+            "voluntary": 137,
+            "involuntary": 1426,
+            "migrations": 6
+          },
+          "20888": {
+            "cpu_ticks": 91,
+            "voluntary": 140,
+            "involuntary": 1536,
+            "migrations": 6
+          },
+          "20889": {
+            "cpu_ticks": 82,
+            "voluntary": 142,
+            "involuntary": 1031,
+            "migrations": 8
+          },
+          "20890": {
+            "cpu_ticks": 93,
+            "voluntary": 135,
+            "involuntary": 1684,
+            "migrations": 13
+          }
+        }
+      },
+      "last_detector_stats": {
+        "invoke_ms": 1605.68518,
+        "prepare_ms": 19.54462
+      }
+    }
+  ]
+}

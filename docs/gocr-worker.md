@@ -1,5 +1,13 @@
 # GOCR worker
 
+TV_FULL native detector: [контракт, сборка, parity и runtime benchmark](gocr-native-detector.md).
+Для selected RGB 1280×720 `GOCR_DETECTOR=native` выбирает C++ path; debug —
+`GOCR_DETECTOR=python`. Runtime experiments не меняют OCR parameters.
+
+Native postprocess для LG G5: [сборка, backend, parity и замеры](gocr-native-postprocess.md).
+`GOCR_POSTPROCESS=native` предпочитает C++ ABI; `GOCR_POSTPROCESS=python` оставляет
+clean-room reference. Оригинальный binarypb и detector/recognizer параметры не меняются.
+
 Цель модуля: дать ему изображение или уже вырезанную Google-строку и получать стабильный структурированный результат с текстом и координатами исходной строки.
 
 ## Два режима проекта
@@ -231,3 +239,26 @@ Response содержит массив строк. Для каждой стро�
 - включение telemetry.
 
 Это позволяет честно сравнить скорость двух размещений, не меняя сам OCR.
+## Native TV_FULL recognizer
+
+Independent `--detector-threads` / `--recognizer-threads` execution controls are
+available in TV_FULL (legacy `--threads` remains their fallback). Defaults stay
+2/2. [Thread/runtime measurements](gocr-thread-runtime-report.md) explain why
+four-thread recognition is currently slower and why XNNPACK stays separate.
+
+For selected RGB 1280×720 frames, native rectification and recognizer now follow
+the native detector within one C ABI call. Build, selection, same-device parity
+and measured timings are documented in
+[gocr-native-recognizer.md](gocr-native-recognizer.md). Python remains the API and
+orchestration layer. Capture/production OCR selection is unchanged; XNNPACK
+remains disabled in the strict profile.
+
+`GOCR_PROFILE=strict` remains default. Explicit experimental
+`GOCR_PROFILE=fast_xnnpack` selects native TV_FULL detector XNNPACK, with the same
+Google assets/config and unchanged recognizer. It does not switch production.
+See [FAST profile comparison](gocr-fast-xnnpack.md).
+
+Explicit `GOCR_PROFILE=google_runner_experimental` validates the recovered Google
+runner config and uses XNNPACK detector 4 / unchanged recognizer 2, regardless of
+legacy `--threads`. It does not claim Google Android numeric/cache parity and
+does not switch production. See [three-profile experiment](gocr-google-runner-experimental.md).

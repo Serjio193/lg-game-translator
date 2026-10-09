@@ -45,7 +45,7 @@ def main():
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     for k, v in found.items():
         print(f"{k}: {v['bytes']} bytes {v['sha256']}")
-    if not {"gocr_group_rpn_text_detection_model_2024_q4.tflite", "recognizer_latn_vi_cyrl_lm_retrained.tflite", "recognizer_latn_vi_cyrl_label_map.pb"}.issubset(found):
+    if not WANTED.issubset(found):
         raise SystemExit("required GOCR assets are missing from this APK")
 
 

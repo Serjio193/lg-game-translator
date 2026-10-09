@@ -1,0 +1,1180 @@
+## cached_run_insert
+  73b100:	f90037e8 	str	x8, [sp, #104]
+  73b104:	9100e3e8 	add	x8, sp, #0x38
+  73b108:	91004115 	add	x21, x8, #0x10
+  73b10c:	a9007e9f 	stp	xzr, xzr, [x20]
+  73b110:	f9000a9f 	str	xzr, [x20, #16]
+  73b114:	eb17027f 	cmp	x19, x23
+  73b118:	540002e0 	b.eq	73b174 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded14>  // b.none
+  73b11c:	a9406e7a 	ldp	x26, x27, [x19]
+  73b120:	eb1b035f 	cmp	x26, x27
+  73b124:	54000240 	b.eq	73b16c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded0c>  // b.none
+  73b128:	b9400348 	ldr	w8, [x26]
+  73b12c:	7100051f 	cmp	w8, #0x1
+  73b130:	540001a0 	b.eq	73b164 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded04>  // b.none
+  73b134:	b9400340 	ldr	w0, [x26]
+  73b138:	aa1503e1 	mov	x1, x21
+  73b13c:	9424f06c 	bl	10772ec <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc1ae8c>
+  73b140:	eb150008 	subs	x8, x0, x21
+  73b144:	f9001ff5 	str	x21, [sp, #56]
+  73b148:	540002e4 	b.mi	73b1a4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded44>  // b.first
+  73b14c:	9100e3e1 	add	x1, sp, #0x38
+  73b150:	910023e2 	add	x2, sp, #0x8
+  73b154:	aa1403e0 	mov	x0, x20
+  73b158:	f90023e8 	str	x8, [sp, #64]
+  73b15c:	a900e7f8 	stp	x24, x25, [sp, #8]
+  73b160:	9424f726 	bl	1078df8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc1c998>
+  73b164:	9100135a 	add	x26, x26, #0x4
+  73b168:	17ffffee 	b	73b120 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2decc0>
+  73b16c:	91006273 	add	x19, x19, #0x18
+  73b170:	17ffffe9 	b	73b114 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2decb4>
+  73b174:	f94016c8 	ldr	x8, [x22, #40]
+  73b178:	f94037e9 	ldr	x9, [sp, #104]
+  73b17c:	eb09011f 	cmp	x8, x9
+  73b180:	54000141 	b.ne	73b1a8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded48>  // b.any
+  73b184:	a94b4ff4 	ldp	x20, x19, [sp, #176]
+  73b188:	a94a57f6 	ldp	x22, x21, [sp, #160]
+  73b18c:	a9495ff8 	ldp	x24, x23, [sp, #144]
+  73b190:	a94867fa 	ldp	x26, x25, [sp, #128]
+  73b194:	a9476ffe 	ldp	x30, x27, [sp, #112]
+  73b198:	910303ff 	add	sp, sp, #0xc0
+  73b19c:	d50323bf 	autiasp
+  73b1a0:	d65f03c0 	ret
+  73b1a4:	d4200020 	brk	#0x1
+  73b1a8:	942a9b4e 	bl	11e1ee0 <__stack_chk_fail@plt>
+  73b1ac:	d503233f 	paciasp
+  73b1b0:	a9bf4ffe 	stp	x30, x19, [sp, #-16]!
+  73b1b4:	aa0003f3 	mov	x19, x0
+  73b1b8:	f9400000 	ldr	x0, [x0]
+  73b1bc:	f100041f 	cmp	x0, #0x1
+  73b1c0:	540000e1 	b.ne	73b1dc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded7c>  // b.any
+  73b1c4:	91008260 	add	x0, x19, #0x20
+  73b1c8:	97f4862b 	bl	45ca74 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x614>
+  73b1cc:	91002260 	add	x0, x19, #0x8
+  73b1d0:	a8c14ffe 	ldp	x30, x19, [sp], #16
+  73b1d4:	d50323bf 	autiasp
+  73b1d8:	17f48627 	b	45ca74 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x614>
+  73b1dc:	36000080 	tbz	w0, #0, 73b1ec <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded8c>
+  73b1e0:	a8c14ffe 	ldp	x30, x19, [sp], #16
+  73b1e4:	d50323bf 	autiasp
+  73b1e8:	d65f03c0 	ret
+  73b1ec:	a8c14ffe 	ldp	x30, x19, [sp], #16
+  73b1f0:	d50323bf 	autiasp
+  73b1f4:	1424869b 	b	105cc60 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc00800>
+  73b1f8:	d503233f 	paciasp
+  73b1fc:	d100c3ff 	sub	sp, sp, #0x30
+  73b200:	a9024ffe 	stp	x30, x19, [sp, #32]
+  73b204:	aa0803f3 	mov	x19, x8
+  73b208:	b9400028 	ldr	w8, [x1]
+  73b20c:	90004969 	adrp	x9, 1067000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc0aba0>
+  73b210:	91317129 	add	x9, x9, #0xc5c
+  73b214:	f940004a 	ldr	x10, [x2]
+  73b218:	b0004961 	adrp	x1, 1068000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc0bba0>
+  73b21c:	9129d021 	add	x1, x1, #0xa74
+  73b220:	f90003e8 	str	x8, [sp]
+  73b224:	90004968 	adrp	x8, 1067000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc0aba0>
+  73b228:	91340108 	add	x8, x8, #0xd00
+  73b22c:	a9400c02 	ldp	x2, x3, [x0]
+  73b230:	910003e4 	mov	x4, sp
+  73b234:	aa1303e0 	mov	x0, x19
+  73b238:	52800045 	mov	w5, #0x2                   	// #2
+  73b23c:	a900abe9 	stp	x9, x10, [sp, #8]
+  73b240:	f9000fe8 	str	x8, [sp, #24]
+  73b244:	a900fe7f 	stp	xzr, xzr, [x19, #8]
+  73b248:	f900027f 	str	xzr, [x19]
+  73b24c:	9424b517 	bl	10686a8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc0c248>
+  73b250:	360000a0 	tbz	w0, #0, 73b264 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dee04>
+  73b254:	a9424ffe 	ldp	x30, x19, [sp, #32]
+  73b258:	9100c3ff 	add	sp, sp, #0x30
+  73b25c:	d50323bf 	autiasp
+  73b260:	d65f03c0 	ret
+  73b264:	aa1303e0 	mov	x0, x19
+  73b268:	97f90e5b 	bl	57ebd4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x122774>
+  73b26c:	17fffffa 	b	73b254 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dedf4>
+  73b270:	d503233f 	paciasp
+  73b274:	d105c3ff 	sub	sp, sp, #0x170
+  73b278:	a9117bfd 	stp	x29, x30, [sp, #272]
+  73b27c:	a9126ffc 	stp	x28, x27, [sp, #288]
+  73b280:	a91367fa 	stp	x26, x25, [sp, #304]
+  73b284:	a9145ff8 	stp	x24, x23, [sp, #320]
+  73b288:	a91557f6 	stp	x22, x21, [sp, #336]
+  73b28c:	a9164ff4 	stp	x20, x19, [sp, #352]
+  73b290:	d53bd059 	mrs	x25, tpidr_el0
+  73b294:	aa0803f3 	mov	x19, x8
+  73b298:	aa0103f6 	mov	x22, x1
+  73b29c:	f9401728 	ldr	x8, [x25, #40]
+  73b2a0:	aa0003f5 	mov	x21, x0
+  73b2a4:	f90087e8 	str	x8, [sp, #264]
+  73b2a8:	94194f97 	bl	d8f104 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x932ca4>
+  73b2ac:	9429dce5 	bl	11b2640 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd561e0>
+  73b2b0:	a94026c8 	ldp	x8, x9, [x22]
+  73b2b4:	eb09011f 	cmp	x8, x9
+  73b2b8:	54000b60 	b.eq	73b424 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2defc4>  // b.none
+  73b2bc:	3942a2aa 	ldrb	w10, [x21, #168]
+  73b2c0:	36000c6a 	tbz	w10, #0, 73b44c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2defec>
+  73b2c4:	cb080128 	sub	x8, x9, x8
+  73b2c8:	5280071b 	mov	w27, #0x38                  	// #56
+  73b2cc:	f90007e0 	str	x0, [sp, #8]
+  73b2d0:	9adb0d01 	sdiv	x1, x8, x27
+  73b2d4:	9100a3e0 	add	x0, sp, #0x28
+  73b2d8:	a902ffff 	stp	xzr, xzr, [sp, #40]
+  73b2dc:	f9001fff 	str	xzr, [sp, #56]
+  73b2e0:	9400023f 	bl	73bbdc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df77c>
+  73b2e4:	910243e8 	add	x8, sp, #0x90
+  73b2e8:	910143e9 	add	x9, sp, #0x50
+  73b2ec:	aa1f03fc 	mov	x28, xzr
+  73b2f0:	91004117 	add	x23, x8, #0x10
+  73b2f4:	b240013d 	orr	x29, x9, #0x1
+  73b2f8:	b0ffccba 	adrp	x26, d0000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x38c460>
+  73b2fc:	9136935a 	add	x26, x26, #0xda4
+  73b300:	52800034 	mov	w20, #0x1                   	// #1
+  73b304:	a9017fff 	stp	xzr, xzr, [sp, #16]
+  73b308:	f90013ff 	str	xzr, [sp, #32]
+  73b30c:	a94026c8 	ldp	x8, x9, [x22]
+  73b310:	cb080129 	sub	x9, x9, x8
+  73b314:	9adb0d29 	sdiv	x9, x9, x27
+  73b318:	eb1c013f 	cmp	x9, x28
+  73b31c:	54000a89 	b.ls	73b46c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df00c>  // b.plast
+  73b320:	9b1b2388 	madd	x8, x28, x27, x8
+  73b324:	a9077fff 	stp	xzr, xzr, [sp, #112]
+  73b328:	9101c3e0 	add	x0, sp, #0x70
+  73b32c:	f90043ff 	str	xzr, [sp, #128]
+  73b330:	a941a508 	ldp	x8, x9, [x8, #24]
+  73b334:	cb080128 	sub	x8, x9, x8
+  73b338:	93428501 	sbfx	x1, x8, #2, #32
+  73b33c:	97f54da5 	bl	48e9d0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x32570>
+  73b340:	aa1f03f8 	mov	x24, xzr
+  73b344:	f94002c8 	ldr	x8, [x22]
+  73b348:	d503201f 	nop
+  73b34c:	9b1b2380 	madd	x0, x28, x27, x8
+  73b350:	a941a009 	ldp	x9, x8, [x0, #24]
+  73b354:	cb090108 	sub	x8, x8, x9
+  73b358:	d342fd08 	lsr	x8, x8, #2
+  73b35c:	eb28c31f 	cmp	x24, w8, sxtw
+  73b360:	5400042a 	b.ge	73b3e4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2def84>  // b.tcont
+  73b364:	2a1803e1 	mov	w1, w24
+  73b368:	97f5cbc4 	bl	4ae278 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x51e18>
+  73b36c:	b90093e0 	str	w0, [sp, #144]
+  73b370:	9101c3e0 	add	x0, sp, #0x70
+  73b374:	910243e1 	add	x1, sp, #0x90
+  73b378:	97f4c362 	bl	46c100 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xfca0>
+  73b37c:	b500031c 	cbnz	x28, 73b3dc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2def7c>
+  73b380:	f9403be8 	ldr	x8, [sp, #112]
+  73b384:	aa1703e1 	mov	x1, x23
+  73b388:	b8787900 	ldr	w0, [x8, x24, lsl #2]
+  73b38c:	9424efd8 	bl	10772ec <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc1ae8c>
+  73b390:	eb170008 	subs	x8, x0, x23
+  73b394:	f9004bf7 	str	x23, [sp, #144]
+  73b398:	540014a4 	b.mi	73b62c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df1cc>  // b.first
+  73b39c:	f9004fe8 	str	x8, [sp, #152]
+  73b3a0:	910143e8 	add	x8, sp, #0x50
+  73b3a4:	910243e0 	add	x0, sp, #0x90
+  73b3a8:	910343e1 	add	x1, sp, #0xd0
+  73b3ac:	a90d53fa 	stp	x26, x20, [sp, #208]
+  73b3b0:	9424f575 	bl	1078984 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc1c524>
+  73b3b4:	394143e8 	ldrb	w8, [sp, #80]
+  73b3b8:	a945a7ea 	ldp	x10, x9, [sp, #88]
+  73b3bc:	910043e0 	add	x0, sp, #0x10
+  73b3c0:	d341fd0b 	lsr	x11, x8, #1
+  73b3c4:	7200011f 	tst	w8, #0x1
+  73b3c8:	9a9d1121 	csel	x1, x9, x29, ne	// ne = any
+  73b3cc:	9a8b1142 	csel	x2, x10, x11, ne	// ne = any
+  73b3d0:	9429e127 	bl	11b386c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd5740c>
+  73b3d4:	910143e0 	add	x0, sp, #0x50
+  73b3d8:	9429e01a 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73b3dc:	91000718 	add	x24, x24, #0x1
+  73b3e0:	17ffffd9 	b	73b344 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2deee4>
+  73b3e4:	a94323f8 	ldp	x24, x8, [sp, #48]
+  73b3e8:	eb08031f 	cmp	x24, x8
+  73b3ec:	540000c2 	b.cs	73b404 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2defa4>  // b.hs, b.nlast
+  73b3f0:	9101c3e1 	add	x1, sp, #0x70
+  73b3f4:	aa1803e0 	mov	x0, x24
+  73b3f8:	97f52138 	bl	4838d8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x27478>
+  73b3fc:	91006300 	add	x0, x24, #0x18
+  73b400:	14000004 	b	73b410 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2defb0>
+  73b404:	9100a3e0 	add	x0, sp, #0x28
+  73b408:	9101c3e1 	add	x1, sp, #0x70
+  73b40c:	94000329 	bl	73c0b0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfc50>
+  73b410:	f9001be0 	str	x0, [sp, #48]
+  73b414:	9101c3e0 	add	x0, sp, #0x70
+  73b418:	97f48597 	bl	45ca74 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x614>
+  73b41c:	9100079c 	add	x28, x28, #0x1
+  73b420:	17ffffbb 	b	73b30c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2deeac>
+  73b424:	52800028 	mov	w8, #0x1                   	// #1
+  73b428:	910343e0 	add	x0, sp, #0xd0
+  73b42c:	a9017e7f 	stp	xzr, xzr, [x19, #16]
+  73b430:	a9007e68 	stp	x8, xzr, [x19]
+  73b434:	910243e8 	add	x8, sp, #0x90
+  73b438:	a909ffff 	stp	xzr, xzr, [sp, #152]
+  73b43c:	f9004bff 	str	xzr, [sp, #144]
+  73b440:	f9006be8 	str	x8, [sp, #208]
+  73b444:	97f5eb11 	bl	4b6088 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x59c28>
+  73b448:	140000ee 	b	73b800 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df3a0>
+  73b44c:	b0ffce41 	adrp	x1, 104000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x358460>
+  73b450:	91062c21 	add	x1, x1, #0x18b
+  73b454:	94001236 	bl	73fd2c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38cc>
+  73b458:	52800282 	mov	w2, #0x14                  	// #20
+  73b45c:	528041a3 	mov	w3, #0x20d                 	// #525
+  73b460:	94248bec 	bl	105e410 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc01fb0>
+  73b464:	f9000260 	str	x0, [x19]
+  73b468:	140000e6 	b	73b800 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df3a0>
+  73b46c:	394043e8 	ldrb	w8, [sp, #16]
+  73b470:	a941b3ed 	ldp	x13, x12, [sp, #24]
+  73b474:	b0ffcb69 	adrp	x9, a8000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3b4460>
+  73b478:	910e8929 	add	x9, x9, #0x3a2
+  73b47c:	528005ca 	mov	w10, #0x2e                  	// #46
+  73b480:	7200011f 	tst	w8, #0x1
+  73b484:	d341fd08 	lsr	x8, x8, #1
+  73b488:	910043eb 	add	x11, sp, #0x10
+  73b48c:	a9092be9 	stp	x9, x10, [sp, #144]
+  73b490:	9a8b1589 	csinc	x9, x12, x11, ne	// ne = any
+  73b494:	910243e0 	add	x0, sp, #0x90
+  73b498:	9a8811a8 	csel	x8, x13, x8, ne	// ne = any
+  73b49c:	910343e1 	add	x1, sp, #0xd0
+  73b4a0:	a90d23e9 	stp	x9, x8, [sp, #208]
+  73b4a4:	9101c3e8 	add	x8, sp, #0x70
+  73b4a8:	9424f537 	bl	1078984 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc1c524>
+  73b4ac:	9101c3e0 	add	x0, sp, #0x70
+  73b4b0:	9429dfe4 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73b4b4:	a942a3f7 	ldp	x23, x8, [sp, #40]
+  73b4b8:	52800309 	mov	w9, #0x18                  	// #24
+  73b4bc:	cb170108 	sub	x8, x8, x23
+  73b4c0:	aa1703e0 	mov	x0, x23
+  73b4c4:	9ac90d18 	sdiv	x24, x8, x9
+  73b4c8:	9101c3e8 	add	x8, sp, #0x70
+  73b4cc:	aa1803e1 	mov	x1, x24
+  73b4d0:	97fffefc 	bl	73b0c0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dec60>
+  73b4d4:	d0005ce8 	adrp	x8, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73b4d8:	b94d0101 	ldr	w1, [x8, #3328]
+  73b4dc:	7100043f 	cmp	w1, #0x1
+  73b4e0:	5400258a 	b.ge	73b990 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df530>  // b.tcont
+  73b4e4:	f94012a0 	ldr	x0, [x21, #32]
+  73b4e8:	b4000260 	cbz	x0, 73b534 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df0d4>
+  73b4ec:	f9400008 	ldr	x8, [x0]
+  73b4f0:	9101c3e1 	add	x1, sp, #0x70
+  73b4f4:	f9402109 	ldr	x9, [x8, #64]
+  73b4f8:	910143e8 	add	x8, sp, #0x50
+  73b4fc:	d63f0120 	blr	x9
+  73b500:	394183e8 	ldrb	w8, [sp, #96]
+  73b504:	34000368 	cbz	w8, 73b570 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df110>
+  73b508:	f9402fe8 	ldr	x8, [sp, #88]
+  73b50c:	3dc017e0 	ldr	q0, [sp, #80]
+  73b510:	910343e9 	add	x9, sp, #0xd0
+  73b514:	3c808120 	stur	q0, [x9, #8]
+  73b518:	b4000088 	cbz	x8, 73b528 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df0c8>
+  73b51c:	91002101 	add	x1, x8, #0x8
+  73b520:	52800020 	mov	w0, #0x1                   	// #1
+  73b524:	942a8657 	bl	11dce80 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd80a20>
+  73b528:	52800028 	mov	w8, #0x1                   	// #1
+  73b52c:	f9006be8 	str	x8, [sp, #208]
+  73b530:	1400005f 	b	73b6ac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df24c>
+  73b534:	d0005ce8 	adrp	x8, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73b538:	b94d4901 	ldr	w1, [x8, #3400]
+  73b53c:	7100043f 	cmp	w1, #0x1
+  73b540:	5400258a 	b.ge	73b9f0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df590>  // b.tcont
+  73b544:	f94006a9 	ldr	x9, [x21, #8]
+  73b548:	b4000749 	cbz	x9, 73b630 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df1d0>
+  73b54c:	f9400aa8 	ldr	x8, [x21, #16]
+  73b550:	a90da3e9 	stp	x9, x8, [sp, #216]
+  73b554:	b4000088 	cbz	x8, 73b564 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df104>
+  73b558:	91002101 	add	x1, x8, #0x8
+  73b55c:	52800020 	mov	w0, #0x1                   	// #1
+  73b560:	942a8648 	bl	11dce80 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd80a20>
+  73b564:	52800037 	mov	w23, #0x1                   	// #1
+  73b568:	f9006bf7 	str	x23, [sp, #208]
+  73b56c:	14000055 	b	73b6c0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df260>
+  73b570:	90ffcd41 	adrp	x1, e3000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x379460>
+  73b574:	91138c21 	add	x1, x1, #0x4e3
+  73b578:	910243e0 	add	x0, sp, #0x90
+  73b57c:	910243f4 	add	x20, sp, #0x90
+  73b580:	97f494bb 	bl	46086c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x440c>
+  73b584:	910243e0 	add	x0, sp, #0x90
+  73b588:	9429dfae 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73b58c:	d0005ce8 	adrp	x8, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73b590:	b94d1901 	ldr	w1, [x8, #3352]
+  73b594:	7100043f 	cmp	w1, #0x1
+  73b598:	5400258a 	b.ge	73ba48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df5e8>  // b.tcont
+  73b59c:	910243e8 	add	x8, sp, #0x90
+  73b5a0:	aa1503e0 	mov	x0, x21
+  73b5a4:	52800021 	mov	w1, #0x1                   	// #1
+  73b5a8:	aa1703e2 	mov	x2, x23
+  73b5ac:	aa1803e3 	mov	x3, x24
+  73b5b0:	97fffd07 	bl	73a9cc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2de56c>
+  73b5b4:	52801400 	mov	w0, #0xa0                  	// #160
+  73b5b8:	942a99f8 	bl	11e1d98 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd85938>
+  73b5bc:	b0005628 	adrp	x8, 1200000 <pthread_rwlock_rdlock@plt+0x1c650>
+  73b5c0:	91170108 	add	x8, x8, #0x5c0
+  73b5c4:	aa0003f7 	mov	x23, x0
+  73b5c8:	a900fc1f 	stp	xzr, xzr, [x0, #8]
+  73b5cc:	b9402ab8 	ldr	w24, [x21, #40]
+  73b5d0:	9100801a 	add	x26, x0, #0x20
+  73b5d4:	f9000008 	str	x8, [x0]
+  73b5d8:	910343e0 	add	x0, sp, #0xd0
+  73b5dc:	910243e1 	add	x1, sp, #0x90
+  73b5e0:	9400030f 	bl	73c21c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfdbc>
+  73b5e4:	910082e0 	add	x0, x23, #0x20
+  73b5e8:	910343e3 	add	x3, sp, #0xd0
+  73b5ec:	2a1803e1 	mov	w1, w24
+  73b5f0:	2a1803e2 	mov	w2, w24
+  73b5f4:	9400032b 	bl	73c2a0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfe40>
+  73b5f8:	f94073e8 	ldr	x8, [sp, #224]
+  73b5fc:	910343e1 	add	x1, sp, #0xd0
+  73b600:	910343e2 	add	x2, sp, #0xd0
+  73b604:	2a1f03e0 	mov	w0, wzr
+  73b608:	d63f0100 	blr	x8
+  73b60c:	f9405be0 	ldr	x0, [sp, #176]
+  73b610:	a9045ffa 	stp	x26, x23, [sp, #64]
+  73b614:	eb14001f 	cmp	x0, x20
+  73b618:	540001e0 	b.eq	73b654 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df1f4>  // b.none
+  73b61c:	910343f4 	add	x20, sp, #0xd0
+  73b620:	b4000240 	cbz	x0, 73b668 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df208>
+  73b624:	52800508 	mov	w8, #0x28                  	// #40
+  73b628:	1400000d 	b	73b65c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df1fc>
+  73b62c:	d4200020 	brk	#0x1
+  73b630:	90ffcf81 	adrp	x1, 12b000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x331460>
+  73b634:	912db421 	add	x1, x1, #0xb6d
+  73b638:	940011bd 	bl	73fd2c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38cc>
+  73b63c:	52800942 	mov	w2, #0x4a                  	// #74
+  73b640:	52803f43 	mov	w3, #0x1fa                 	// #506
+  73b644:	94248b73 	bl	105e410 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc01fb0>
+  73b648:	aa0003f7 	mov	x23, x0
+  73b64c:	f9006be0 	str	x0, [sp, #208]
+  73b650:	1400001c 	b	73b6c0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df260>
+  73b654:	52800408 	mov	w8, #0x20                  	// #32
+  73b658:	910343f4 	add	x20, sp, #0xd0
+  73b65c:	f9400009 	ldr	x9, [x0]
+  73b660:	f8686928 	ldr	x8, [x9, x8]
+  73b664:	d63f0100 	blr	x8
+  73b668:	d0005ce8 	adrp	x8, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73b66c:	b94d3101 	ldr	w1, [x8, #3376]
+  73b670:	7100043f 	cmp	w1, #0x1
+  73b674:	5400232a 	b.ge	73bad8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df678>  // b.tcont
+  73b678:	f94012a0 	ldr	x0, [x21, #32]
+  73b67c:	9101c3e1 	add	x1, sp, #0x70
+  73b680:	910103e2 	add	x2, sp, #0x40
+  73b684:	f9400008 	ldr	x8, [x0]
+  73b688:	f9402508 	ldr	x8, [x8, #72]
+  73b68c:	d63f0100 	blr	x8
+  73b690:	3dc013e0 	ldr	q0, [sp, #64]
+  73b694:	52800028 	mov	w8, #0x1                   	// #1
+  73b698:	910103e0 	add	x0, sp, #0x40
+  73b69c:	a9047fff 	stp	xzr, xzr, [sp, #64]
+  73b6a0:	3c808280 	stur	q0, [x20, #8]
+  73b6a4:	f9006be8 	str	x8, [sp, #208]
+  73b6a8:	97f5ce54 	bl	4aeff8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x52b98>
+  73b6ac:	394183e8 	ldrb	w8, [sp, #96]
+  73b6b0:	34000068 	cbz	w8, 73b6bc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df25c>
+  73b6b4:	910143e0 	add	x0, sp, #0x50
+  73b6b8:	97f5ce50 	bl	4aeff8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x52b98>
+  73b6bc:	52800037 	mov	w23, #0x1                   	// #1
+  73b6c0:	9101c3e0 	add	x0, sp, #0x70
+  73b6c4:	9429df5f 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73b6c8:	f10006ff 	cmp	x23, #0x1
+  73b6cc:	54000541 	b.ne	73b774 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df314>  // b.any
+  73b6d0:	f9406ff7 	ldr	x23, [sp, #216]
+  73b6d4:	52800141 	mov	w1, #0xa                   	// #10
+  73b6d8:	aa1f03e2 	mov	x2, xzr
+  73b6dc:	aa1703e0 	mov	x0, x23
+  73b6e0:	97f7e1c1 	bl	533de4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd7984>
+  73b6e4:	b4000580 	cbz	x0, 73b794 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df334>
+  73b6e8:	aa0003f8 	mov	x24, x0
+  73b6ec:	a942a3e0 	ldp	x0, x8, [sp, #40]
+  73b6f0:	52800309 	mov	w9, #0x18                  	// #24
+  73b6f4:	aa1803e4 	mov	x4, x24
+  73b6f8:	cb000108 	sub	x8, x8, x0
+  73b6fc:	9ac90d01 	sdiv	x1, x8, x9
+  73b700:	a94b22a2 	ldp	x2, x8, [x21, #176]
+  73b704:	cb020108 	sub	x8, x8, x2
+  73b708:	9342fd03 	asr	x3, x8, #2
+  73b70c:	94000166 	bl	73bca4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df844>
+  73b710:	f100041f 	cmp	x0, #0x1
+  73b714:	54000621 	b.ne	73b7d8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df378>  // b.any
+  73b718:	aa1f03f4 	mov	x20, xzr
+  73b71c:	aa1f03fa 	mov	x26, xzr
+  73b720:	5280071b 	mov	w27, #0x38                  	// #56
+  73b724:	52800e1c 	mov	w28, #0x70                  	// #112
+  73b728:	a94026c8 	ldp	x8, x9, [x22]
+  73b72c:	cb080129 	sub	x9, x9, x8
+  73b730:	9adb0d29 	sdiv	x9, x9, x27
+  73b734:	eb1a013f 	cmp	x9, x26
+  73b738:	540003a9 	b.ls	73b7ac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df34c>  // b.plast
+  73b73c:	f9405aa9 	ldr	x9, [x21, #176]
+  73b740:	f9403b0a 	ldr	x10, [x24, #112]
+  73b744:	f8746901 	ldr	x1, [x8, x20]
+  73b748:	b87a7929 	ldr	w9, [x9, x26, lsl #2]
+  73b74c:	f940014a 	ldr	x10, [x10]
+  73b750:	f9401d4a 	ldr	x10, [x10, #56]
+  73b754:	d503201f 	nop
+  73b758:	9bbc2929 	umaddl	x9, w9, w28, x10
+  73b75c:	f9400520 	ldr	x0, [x9, #8]
+  73b760:	f9401522 	ldr	x2, [x9, #40]
+  73b764:	942a99e3 	bl	11e1ef0 <memcpy@plt>
+  73b768:	9100075a 	add	x26, x26, #0x1
+  73b76c:	9100e294 	add	x20, x20, #0x38
+  73b770:	17ffffee 	b	73b728 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df2c8>
+  73b774:	f9000277 	str	x23, [x19]
+  73b778:	37000397 	tbnz	w23, #0, 73b7e8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df388>
+  73b77c:	52800020 	mov	w0, #0x1                   	// #1
+  73b780:	aa1703e1 	mov	x1, x23
+  73b784:	942a859b 	bl	11dcdf0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd80990>
+  73b788:	aa1703e0 	mov	x0, x23
+  73b78c:	94248535 	bl	105cc60 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc00800>
+  73b790:	14000016 	b	73b7e8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df388>
+  73b794:	b0ffcb61 	adrp	x1, a8000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3b4460>
+  73b798:	910f4421 	add	x1, x1, #0x3d1
+  73b79c:	94001164 	bl	73fd2c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38cc>
+  73b7a0:	528003a2 	mov	w2, #0x1d                  	// #29
+  73b7a4:	528044c3 	mov	w3, #0x226                 	// #550
+  73b7a8:	1400000b 	b	73b7d4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df374>
+  73b7ac:	aa1803e0 	mov	x0, x24
+  73b7b0:	9421b64b 	bl	fa90dc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4cc7c>
+  73b7b4:	34000400 	cbz	w0, 73b834 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df3d4>
+  73b7b8:	f0ffcea1 	adrp	x1, 112000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x34a460>
+  73b7bc:	91038021 	add	x1, x1, #0xe0
+  73b7c0:	90ffcd84 	adrp	x4, eb000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x371460>
+  73b7c4:	910f2c84 	add	x4, x4, #0x3cb
+  73b7c8:	52800120 	mov	w0, #0x9                   	// #9
+  73b7cc:	52800222 	mov	w2, #0x11                  	// #17
+  73b7d0:	52804663 	mov	w3, #0x233                 	// #563
+  73b7d4:	94248b0f 	bl	105e410 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc01fb0>
+  73b7d8:	f9000260 	str	x0, [x19]
+  73b7dc:	910343e8 	add	x8, sp, #0xd0
+  73b7e0:	91002100 	add	x0, x8, #0x8
+  73b7e4:	97f5ce05 	bl	4aeff8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x52b98>
+  73b7e8:	910043e0 	add	x0, sp, #0x10
+  73b7ec:	9429df15 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73b7f0:	9100a3e8 	add	x8, sp, #0x28
+  73b7f4:	910243e0 	add	x0, sp, #0x90
+  73b7f8:	f9004be8 	str	x8, [sp, #144]
+  73b7fc:	97f7128f 	bl	500238 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xa3dd8>
+  73b800:	f9401728 	ldr	x8, [x25, #40]
+  73b804:	f94087e9 	ldr	x9, [sp, #264]
+  73b808:	eb09011f 	cmp	x8, x9
+  73b80c:	54001e61 	b.ne	73bbd8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df778>  // b.any
+  73b810:	a9564ff4 	ldp	x20, x19, [sp, #352]
+  73b814:	a95557f6 	ldp	x22, x21, [sp, #336]
+  73b818:	a9545ff8 	ldp	x24, x23, [sp, #320]
+  73b81c:	a95367fa 	ldp	x26, x25, [sp, #304]
+  73b820:	a9526ffc 	ldp	x28, x27, [sp, #288]
+  73b824:	a9517bfd 	ldp	x29, x30, [sp, #272]
+  73b828:	9105c3ff 	add	sp, sp, #0x170
+  73b82c:	d50323bf 	autiasp
+  73b830:	d65f03c0 	ret
+  73b834:	f9403b08 	ldr	x8, [x24, #112]
+  73b838:	9101c3e0 	add	x0, sp, #0x70
+  73b83c:	f9400108 	ldr	x8, [x8]
+  73b840:	a9077fff 	stp	xzr, xzr, [sp, #112]
+  73b844:	f90043ff 	str	xzr, [sp, #128]
+  73b848:	a9542508 	ldp	x8, x9, [x8, #320]
+  73b84c:	cb080128 	sub	x8, x9, x8
+  73b850:	93428501 	sbfx	x1, x8, #2, #32
+  73b854:	d342fd16 	lsr	x22, x8, #2
+  73b858:	97f68017 	bl	4db8b4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x7f454>
+  73b85c:	0ab67ed6 	bic	w22, w22, w22, asr #31
+  73b860:	aa1f03f4 	mov	x20, xzr
+  73b864:	910243fa 	add	x26, sp, #0x90
+  73b868:	5280007b 	mov	w27, #0x3                   	// #3
+  73b86c:	eb16029f 	cmp	x20, x22
+  73b870:	54000680 	b.eq	73b940 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df4e0>  // b.none
+  73b874:	f94066a8 	ldr	x8, [x21, #200]
+  73b878:	b8747908 	ldr	w8, [x8, x20, lsl #2]
+  73b87c:	37f80168 	tbnz	w8, #31, 73b8a8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df448>
+  73b880:	f9403b09 	ldr	x9, [x24, #112]
+  73b884:	f9400129 	ldr	x9, [x9]
+  73b888:	f940152a 	ldr	x10, [x9, #40]
+  73b88c:	eb08015f 	cmp	x10, x8
+  73b890:	540000c9 	b.ls	73b8a8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df448>  // b.plast
+  73b894:	52800e0a 	mov	w10, #0x70                  	// #112
+  73b898:	f9401d29 	ldr	x9, [x9, #56]
+  73b89c:	d503201f 	nop
+  73b8a0:	9baa251d 	umaddl	x29, w8, w10, x9
+  73b8a4:	14000002 	b	73b8ac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df44c>
+  73b8a8:	aa1f03fd 	mov	x29, xzr
+  73b8ac:	aa1f03fc 	mov	x28, xzr
+  73b8b0:	a9057fff 	stp	xzr, xzr, [sp, #80]
+  73b8b4:	f90033ff 	str	xzr, [sp, #96]
+  73b8b8:	f9400ba8 	ldr	x8, [x29, #16]
+  73b8bc:	b9800109 	ldrsw	x9, [x8]
+  73b8c0:	eb09039f 	cmp	x28, x9
+  73b8c4:	5400012a 	b.ge	73b8e8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df488>  // b.tcont
+  73b8c8:	8b1c0908 	add	x8, x8, x28, lsl #2
+  73b8cc:	910143e0 	add	x0, sp, #0x50
+  73b8d0:	910243e1 	add	x1, sp, #0x90
+  73b8d4:	b9400508 	ldr	w8, [x8, #4]
+  73b8d8:	b90093e8 	str	w8, [sp, #144]
+  73b8dc:	97f4c209 	bl	46c100 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xfca0>
+  73b8e0:	9100079c 	add	x28, x28, #0x1
+  73b8e4:	17fffff5 	b	73b8b8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df458>
+  73b8e8:	b94003a8 	ldr	w8, [x29]
+  73b8ec:	910243e0 	add	x0, sp, #0x90
+  73b8f0:	910143e2 	add	x2, sp, #0x50
+  73b8f4:	7100111f 	cmp	w8, #0x4
+  73b8f8:	1a9f0361 	csel	w1, w27, wzr, eq	// eq = none
+  73b8fc:	97f67822 	bl	4d9984 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x7d524>
+  73b900:	9101c3e0 	add	x0, sp, #0x70
+  73b904:	910243e1 	add	x1, sp, #0x90
+  73b908:	97f68329 	bl	4dc5ac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x8014c>
+  73b90c:	91006340 	add	x0, x26, #0x18
+  73b910:	97f48459 	bl	45ca74 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x614>
+  73b914:	910243e0 	add	x0, sp, #0x90
+  73b918:	97f64f7b 	bl	4cf704 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x732a4>
+  73b91c:	f9403fe8 	ldr	x8, [sp, #120]
+  73b920:	f94007a1 	ldr	x1, [x29, #8]
+  73b924:	f94017a2 	ldr	x2, [x29, #40]
+  73b928:	f85c8100 	ldur	x0, [x8, #-56]
+  73b92c:	942a9971 	bl	11e1ef0 <memcpy@plt>
+  73b930:	910143e0 	add	x0, sp, #0x50
+  73b934:	97f48450 	bl	45ca74 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x614>
+  73b938:	91000694 	add	x20, x20, #0x1
+  73b93c:	17ffffcc 	b	73b86c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df40c>
+  73b940:	aa1703e0 	mov	x0, x23
+  73b944:	aa1803e1 	mov	x1, x24
+  73b948:	97f7e270 	bl	534308 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd7ea8>
+  73b94c:	d0005ce8 	adrp	x8, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73b950:	b94d6101 	ldr	w1, [x8, #3424]
+  73b954:	7100043f 	cmp	w1, #0x1
+  73b958:	54000f0a 	b.ge	73bb38 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df6d8>  // b.tcont
+  73b95c:	f94043e8 	ldr	x8, [sp, #128]
+  73b960:	3dc01fe0 	ldr	q0, [sp, #112]
+  73b964:	910243e0 	add	x0, sp, #0x90
+  73b968:	a907ffff 	stp	xzr, xzr, [sp, #120]
+  73b96c:	f9000e68 	str	x8, [x19, #24]
+  73b970:	52800028 	mov	w8, #0x1                   	// #1
+  73b974:	f9000268 	str	x8, [x19]
+  73b978:	9101c3e8 	add	x8, sp, #0x70
+  73b97c:	3c808260 	stur	q0, [x19, #8]
+  73b980:	f9003bff 	str	xzr, [sp, #112]
+  73b984:	f9004be8 	str	x8, [sp, #144]
+  73b988:	97f5e9c0 	bl	4b6088 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x59c28>
+  73b98c:	17ffff94 	b	73b7dc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df37c>
+  73b990:	d0005ce0 	adrp	x0, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73b994:	9133e000 	add	x0, x0, #0xcf8
+  73b998:	9424c792 	bl	106d7e0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc11380>
+  73b99c:	3607da40 	tbz	w0, #0, 73b4e4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df084>
+  73b9a0:	940010ea 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73b9a4:	910243e0 	add	x0, sp, #0x90
+  73b9a8:	52803c02 	mov	w2, #0x1e0                 	// #480
+  73b9ac:	aa1f03e3 	mov	x3, xzr
+  73b9b0:	9424a96f 	bl	1065f6c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b0c>
+  73b9b4:	f9404fe8 	ldr	x8, [sp, #152]
+  73b9b8:	52800029 	mov	w9, #0x1                   	// #1
+  73b9bc:	f0ffcca1 	adrp	x1, d2000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x38a460>
+  73b9c0:	91017021 	add	x1, x1, #0x5c
+  73b9c4:	910243e0 	add	x0, sp, #0x90
+  73b9c8:	52800202 	mov	w2, #0x10                  	// #16
+  73b9cc:	b9002d09 	str	w9, [x8, #44]
+  73b9d0:	9424a848 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  73b9d4:	910243e0 	add	x0, sp, #0x90
+  73b9d8:	9101c3e1 	add	x1, sp, #0x70
+  73b9dc:	9424aa2f 	bl	1066298 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09e38>
+  73b9e0:	9424aa6d 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  73b9e4:	910243e0 	add	x0, sp, #0x90
+  73b9e8:	9424a96a 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  73b9ec:	17fffebe 	b	73b4e4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df084>
+  73b9f0:	d0005ce0 	adrp	x0, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73b9f4:	91350000 	add	x0, x0, #0xd40
+  73b9f8:	9424c77a 	bl	106d7e0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc11380>
+  73b9fc:	3607da40 	tbz	w0, #0, 73b544 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df0e4>
+  73ba00:	940010d2 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73ba04:	910243e0 	add	x0, sp, #0x90
+  73ba08:	52803f02 	mov	w2, #0x1f8                 	// #504
+  73ba0c:	aa1f03e3 	mov	x3, xzr
+  73ba10:	9424a957 	bl	1065f6c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b0c>
+  73ba14:	f9404fe8 	ldr	x8, [sp, #152]
+  73ba18:	52800029 	mov	w9, #0x1                   	// #1
+  73ba1c:	90ffcd81 	adrp	x1, eb000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x371460>
+  73ba20:	91103c21 	add	x1, x1, #0x40f
+  73ba24:	910243e0 	add	x0, sp, #0x90
+  73ba28:	528003c2 	mov	w2, #0x1e                  	// #30
+  73ba2c:	b9002d09 	str	w9, [x8, #44]
+  73ba30:	9424a830 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  73ba34:	910243e0 	add	x0, sp, #0x90
+  73ba38:	9424aa57 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  73ba3c:	910243e0 	add	x0, sp, #0x90
+  73ba40:	9424a954 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  73ba44:	17fffec0 	b	73b544 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df0e4>
+  73ba48:	d0005ce0 	adrp	x0, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73ba4c:	91344000 	add	x0, x0, #0xd10
+  73ba50:	9424c764 	bl	106d7e0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc11380>
+  73ba54:	3607da40 	tbz	w0, #0, 73b59c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df13c>
+  73ba58:	940010bc 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73ba5c:	910243e0 	add	x0, sp, #0x90
+  73ba60:	52803d42 	mov	w2, #0x1ea                 	// #490
+  73ba64:	aa1f03e3 	mov	x3, xzr
+  73ba68:	9424a941 	bl	1065f6c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b0c>
+  73ba6c:	f9404fe8 	ldr	x8, [sp, #152]
+  73ba70:	52800029 	mov	w9, #0x1                   	// #1
+  73ba74:	b0ffcbe1 	adrp	x1, b8000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3a4460>
+  73ba78:	91219021 	add	x1, x1, #0x864
+  73ba7c:	910243e0 	add	x0, sp, #0x90
+
+## allocate_model_tensors
+  73bca4:	d503233f 	paciasp
+  73bca8:	d10203ff 	sub	sp, sp, #0x80
+  73bcac:	a9055ffe 	stp	x30, x23, [sp, #80]
+  73bcb0:	a90657f6 	stp	x22, x21, [sp, #96]
+  73bcb4:	a9074ff4 	stp	x20, x19, [sp, #112]
+  73bcb8:	aa0103f4 	mov	x20, x1
+  73bcbc:	aa0003f6 	mov	x22, x0
+  73bcc0:	f0ffc901 	adrp	x1, 5e000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3fe460>
+  73bcc4:	91298821 	add	x1, x1, #0xa62
+  73bcc8:	910083e0 	add	x0, sp, #0x20
+  73bccc:	aa0403f3 	mov	x19, x4
+  73bcd0:	aa0303f7 	mov	x23, x3
+  73bcd4:	aa0203f5 	mov	x21, x2
+  73bcd8:	97f492e5 	bl	46086c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x440c>
+  73bcdc:	910083e0 	add	x0, sp, #0x20
+  73bce0:	9429ddd8 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73bce4:	f9403a68 	ldr	x8, [x19, #112]
+  73bce8:	eb17029f 	cmp	x20, x23
+  73bcec:	f9400108 	ldr	x8, [x8]
+  73bcf0:	a952a508 	ldp	x8, x9, [x8, #296]
+  73bcf4:	cb080128 	sub	x8, x9, x8
+  73bcf8:	9342fd08 	asr	x8, x8, #2
+  73bcfc:	fa540100 	ccmp	x8, x20, #0x0, eq	// eq = none
+  73bd00:	54000201 	b.ne	73bd40 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df8e0>  // b.any
+  73bd04:	b4000554 	cbz	x20, 73bdac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df94c>
+  73bd08:	f9403a68 	ldr	x8, [x19, #112]
+  73bd0c:	b84046a1 	ldr	w1, [x21], #4
+  73bd10:	aa1603e2 	mov	x2, x22
+  73bd14:	f9400100 	ldr	x0, [x8]
+  73bd18:	9421d6be 	bl	fb1810 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb553b0>
+  73bd1c:	910062d6 	add	x22, x22, #0x18
+  73bd20:	d1000694 	sub	x20, x20, #0x1
+  73bd24:	34ffff00 	cbz	w0, 73bd04 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df8a4>
+  73bd28:	f0ffc881 	adrp	x1, 4e000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x40e460>
+  73bd2c:	91004c21 	add	x1, x1, #0x13
+  73bd30:	94000fff 	bl	73fd2c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38cc>
+  73bd34:	528002a2 	mov	w2, #0x15                  	// #21
+  73bd38:	52800cc3 	mov	w3, #0x66                  	// #102
+  73bd3c:	1400002b 	b	73bde8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df988>
+  73bd40:	b0005c89 	adrp	x9, 12cc000 <pthread_rwlock_rdlock@plt+0xe8650>
+  73bd44:	b0004961 	adrp	x1, 1068000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc0bba0>
+  73bd48:	9129d021 	add	x1, x1, #0xa74
+  73bd4c:	f9434d29 	ldr	x9, [x9, #1688]
+  73bd50:	b0ffcba2 	adrp	x2, b0000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3ac460>
+  73bd54:	910dd842 	add	x2, x2, #0x376
+  73bd58:	910023e0 	add	x0, sp, #0x8
+  73bd5c:	910083e4 	add	x4, sp, #0x20
+  73bd60:	528008c3 	mov	w3, #0x46                  	// #70
+  73bd64:	52800065 	mov	w5, #0x3                   	// #3
+  73bd68:	a90227e8 	stp	x8, x9, [sp, #32]
+  73bd6c:	a90327f4 	stp	x20, x9, [sp, #48]
+  73bd70:	a90427f7 	stp	x23, x9, [sp, #64]
+  73bd74:	a900ffff 	stp	xzr, xzr, [sp, #8]
+  73bd78:	f9000fff 	str	xzr, [sp, #24]
+  73bd7c:	9424b24b 	bl	10686a8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc0c248>
+  73bd80:	36000460 	tbz	w0, #0, 73be0c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df9ac>
+  73bd84:	90ffcd83 	adrp	x3, eb000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x371460>
+  73bd88:	910f2c63 	add	x3, x3, #0x3cb
+  73bd8c:	910023e1 	add	x1, sp, #0x8
+  73bd90:	528006a0 	mov	w0, #0x35                  	// #53
+  73bd94:	52800ba2 	mov	w2, #0x5d                  	// #93
+  73bd98:	942489d3 	bl	105e4e4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc02084>
+  73bd9c:	aa0003f3 	mov	x19, x0
+  73bda0:	910023e0 	add	x0, sp, #0x8
+  73bda4:	9429dda7 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73bda8:	14000012 	b	73bdf0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df990>
+  73bdac:	aa1303e0 	mov	x0, x19
+  73bdb0:	9421b45d 	bl	fa8f24 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4cac4>
+  73bdb4:	7100041f 	cmp	w0, #0x1
+  73bdb8:	540000e0 	b.eq	73bdd4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df974>  // b.none
+  73bdbc:	f9403a68 	ldr	x8, [x19, #112]
+  73bdc0:	52800021 	mov	w1, #0x1                   	// #1
+  73bdc4:	52800033 	mov	w19, #0x1                   	// #1
+  73bdc8:	f9400100 	ldr	x0, [x8]
+  73bdcc:	9421d049 	bl	fafef0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb53a90>
+  73bdd0:	34000100 	cbz	w0, 73bdf0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df990>
+  73bdd4:	90ffd081 	adrp	x1, 14b000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x311460>
+  73bdd8:	91044c21 	add	x1, x1, #0x113
+  73bddc:	94000fd4 	bl	73fd2c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38cc>
+  73bde0:	52800302 	mov	w2, #0x18                  	// #24
+  73bde4:	52800d43 	mov	w3, #0x6a                  	// #106
+  73bde8:	9424898a 	bl	105e410 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc01fb0>
+  73bdec:	aa0003f3 	mov	x19, x0
+  73bdf0:	aa1303e0 	mov	x0, x19
+  73bdf4:	a9474ff4 	ldp	x20, x19, [sp, #112]
+  73bdf8:	a94657f6 	ldp	x22, x21, [sp, #96]
+  73bdfc:	a9455ffe 	ldp	x30, x23, [sp, #80]
+  73be00:	910203ff 	add	sp, sp, #0x80
+  73be04:	d50323bf 	autiasp
+  73be08:	d65f03c0 	ret
+  73be0c:	910023e0 	add	x0, sp, #0x8
+  73be10:	97f90b71 	bl	57ebd4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x122774>
+  73be14:	17ffffdc 	b	73bd84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df924>
+  73be18:	d503233f 	paciasp
+  73be1c:	d10283ff 	sub	sp, sp, #0xa0
+  73be20:	fd0013ea 	str	d10, [sp, #32]
+  73be24:	6d0323e9 	stp	d9, d8, [sp, #48]
+  73be28:	a9047bfd 	stp	x29, x30, [sp, #64]
+  73be2c:	a9056ffc 	stp	x28, x27, [sp, #80]
+  73be30:	a90667fa 	stp	x26, x25, [sp, #96]
+  73be34:	a9075ff8 	stp	x24, x23, [sp, #112]
+  73be38:	a90857f6 	stp	x22, x21, [sp, #128]
+  73be3c:	a9094ff4 	stp	x20, x19, [sp, #144]
+  73be40:	f9400014 	ldr	x20, [x0]
+  73be44:	aa0003f3 	mov	x19, x0
+  73be48:	aa0103f9 	mov	x25, x1
+  73be4c:	f27f129f 	tst	x20, #0x3e
+  73be50:	54000940 	b.eq	73bf78 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfb18>  // b.none
+  73be54:	f9400668 	ldr	x8, [x19, #8]
+  73be58:	f9800104 	prfm	pldl3keep, [x8]
+  73be5c:	f9400335 	ldr	x21, [x25]
+  73be60:	b4000ed5 	cbz	x21, 73c038 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfbd8>
+  73be64:	92800008 	mov	x8, #0xffffffffffffffff    	// #-1
+  73be68:	aa1503e0 	mov	x0, x21
+  73be6c:	9ad42116 	lsl	x22, x8, x20
+  73be70:	aa3603f7 	mvn	x23, x22
+  73be74:	942a980f 	bl	11e1eb0 <strlen@plt>
+  73be78:	aa0003e2 	mov	x2, x0
+  73be7c:	927a1280 	and	x0, x20, #0x7c0
+  73be80:	aa1503e1 	mov	x1, x21
+  73be84:	aa1f03e3 	mov	x3, xzr
+  73be88:	97f5d44a 	bl	4b0fb0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x54b50>
+  73be8c:	d379fc08 	lsr	x8, x0, #57
+  73be90:	f940067d 	ldr	x29, [x19, #8]
+  73be94:	0f04e409 	movi	v9.8b, #0x80
+  73be98:	aa0003fc 	mov	x28, x0
+  73be9c:	5280010a 	mov	w10, #0x8                   	// #8
+  73bea0:	0e010d08 	dup	v8.8b, w8
+  73bea4:	8b1703a8 	add	x8, x29, x23
+  73bea8:	91002109 	add	x9, x8, #0x8
+  73beac:	aa0003e8 	mov	x8, x0
+  73beb0:	8a360104 	bic	x4, x8, x22
+  73beb4:	fc646baa 	ldr	d10, [x29, x4]
+  73beb8:	d37be888 	lsl	x8, x4, #5
+  73bebc:	2e288d40 	cmeq	v0.8b, v10.8b, v8.8b
+  73bec0:	f8a86920 	prfm	pldl1keep, [x9, x8]
+  73bec4:	9e660008 	fmov	x8, d0
+  73bec8:	b40004c8 	cbz	x8, 73bf60 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfb00>
+  73becc:	aa0803f7 	mov	x23, x8
+  73bed0:	dac00108 	rbit	x8, x8
+  73bed4:	f90017ea 	str	x10, [sp, #40]
+  73bed8:	aa0903fb 	mov	x27, x9
+  73bedc:	f9400338 	ldr	x24, [x25]
+  73bee0:	f90007f3 	str	x19, [sp, #8]
+  73bee4:	dac01108 	clz	x8, x8
+  73bee8:	aa1603f3 	mov	x19, x22
+  73beec:	8b480c88 	add	x8, x4, x8, lsr #3
+  73bef0:	8a360108 	bic	x8, x8, x22
+  73bef4:	aa1903f6 	mov	x22, x25
+  73bef8:	8b081535 	add	x21, x9, x8, lsl #5
+  73befc:	94000f9c 	bl	73fd6c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e390c>
+  73bf00:	9a95153a 	csinc	x26, x9, x21, ne	// ne = any
+  73bf04:	9a8b1159 	csel	x25, x10, x11, ne	// ne = any
+  73bf08:	b40009b8 	cbz	x24, 73c03c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfbdc>
+  73bf0c:	aa1803e0 	mov	x0, x24
+  73bf10:	aa0403f4 	mov	x20, x4
+  73bf14:	942a97e7 	bl	11e1eb0 <strlen@plt>
+  73bf18:	eb00033f 	cmp	x25, x0
+  73bf1c:	540000e1 	b.ne	73bf38 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfad8>  // b.any
+  73bf20:	b4000679 	cbz	x25, 73bfec <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfb8c>
+  73bf24:	aa1a03e0 	mov	x0, x26
+  73bf28:	aa1803e1 	mov	x1, x24
+  73bf2c:	aa1903e2 	mov	x2, x25
+  73bf30:	942a97e8 	bl	11e1ed0 <memcmp@plt>
+  73bf34:	340005c0 	cbz	w0, 73bfec <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfb8c>
+  73bf38:	9201c2e8 	and	x8, x23, #0x8080808080808080
+  73bf3c:	aa1603f9 	mov	x25, x22
+  73bf40:	aa1303f6 	mov	x22, x19
+  73bf44:	d1020109 	sub	x9, x8, #0x80
+  73bf48:	f94007f3 	ldr	x19, [sp, #8]
+  73bf4c:	f94017ea 	ldr	x10, [sp, #40]
+  73bf50:	8a080128 	and	x8, x9, x8
+  73bf54:	aa1b03e9 	mov	x9, x27
+  73bf58:	aa1403e4 	mov	x4, x20
+  73bf5c:	b5fffb88 	cbnz	x8, 73becc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfa6c>
+  73bf60:	2e298d40 	cmeq	v0.8b, v10.8b, v9.8b
+  73bf64:	9e660003 	fmov	x3, d0
+  73bf68:	b50005c3 	cbnz	x3, 73c020 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfbc0>
+  73bf6c:	8b0a0088 	add	x8, x4, x10
+  73bf70:	9100214a 	add	x10, x10, #0x8
+  73bf74:	17ffffcf 	b	73beb0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfa50>
+  73bf78:	f160029f 	cmp	x20, #0x800, lsl #12
+  73bf7c:	54000223 	b.cc	73bfc0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2dfb60>  // b.lo, b.ul, b.last
+
+## factory_xnnpack
+  73f3e8:	d503233f 	paciasp
+  73f3ec:	f81c0ffd 	str	x29, [sp, #-64]!
+  73f3f0:	a9015ffe 	stp	x30, x23, [sp, #16]
+  73f3f4:	a90257f6 	stp	x22, x21, [sp, #32]
+  73f3f8:	a9034ff4 	stp	x20, x19, [sp, #48]
+  73f3fc:	d10703ff 	sub	sp, sp, #0x1c0
+  73f400:	aa0003f4 	mov	x20, x0
+  73f404:	f9400416 	ldr	x22, [x0, #8]
+  73f408:	f0ffcdc1 	adrp	x1, fa000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x362460>
+  73f40c:	912b1421 	add	x1, x1, #0xac5
+  73f410:	910103e0 	add	x0, sp, #0x40
+  73f414:	aa0803f3 	mov	x19, x8
+  73f418:	97f48515 	bl	46086c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x440c>
+  73f41c:	910103e0 	add	x0, sp, #0x40
+  73f420:	9429d008 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73f424:	910423e0 	add	x0, sp, #0x108
+  73f428:	9413733d 	bl	c1c11c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x7bfcbc>
+  73f42c:	b9407ec8 	ldr	w8, [x22, #124]
+  73f430:	f900e7ff 	str	xzr, [sp, #456]
+  73f434:	7100051f 	cmp	w8, #0x1
+  73f438:	5400016b 	b.lt	73f464 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3004>  // b.tstop
+  73f43c:	f94072c1 	ldr	x1, [x22, #224]
+  73f440:	910103e0 	add	x0, sp, #0x40
+  73f444:	910423e2 	add	x2, sp, #0x108
+  73f448:	aa1f03e3 	mov	x3, xzr
+  73f44c:	9421aabc 	bl	fa9f3c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4dadc>
+  73f450:	b9407ec2 	ldr	w2, [x22, #124]
+  73f454:	910103e0 	add	x0, sp, #0x40
+  73f458:	910723e1 	add	x1, sp, #0x1c8
+  73f45c:	9421ac17 	bl	faa4b8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4e058>
+  73f460:	14000009 	b	73f484 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3024>
+  73f464:	f94072c1 	ldr	x1, [x22, #224]
+  73f468:	910103e0 	add	x0, sp, #0x40
+  73f46c:	910423e2 	add	x2, sp, #0x108
+  73f470:	aa1f03e3 	mov	x3, xzr
+  73f474:	9421aab2 	bl	fa9f3c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4dadc>
+  73f478:	910103e0 	add	x0, sp, #0x40
+  73f47c:	910723e1 	add	x1, sp, #0x1c8
+  73f480:	9421ac2a 	bl	faa528 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4e0c8>
+  73f484:	2a0003f5 	mov	w21, w0
+  73f488:	910103e0 	add	x0, sp, #0x40
+  73f48c:	9421ab49 	bl	faa1b0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4dd50>
+  73f490:	35000e15 	cbnz	w21, 73f650 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e31f0>
+  73f494:	aa1603e8 	mov	x8, x22
+  73f498:	a902ffff 	stp	xzr, xzr, [sp, #40]
+  73f49c:	a9cb0901 	ldp	x1, x2, [x8, #176]!
+  73f4a0:	f9001fff 	str	xzr, [sp, #56]
+  73f4a4:	eb02003f 	cmp	x1, x2
+  73f4a8:	54000120 	b.eq	73f4cc <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e306c>  // b.none
+  73f4ac:	9100a3e9 	add	x9, sp, #0x28
+  73f4b0:	eb08013f 	cmp	x9, x8
+  73f4b4:	540002a0 	b.eq	73f508 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e30a8>  // b.none
+  73f4b8:	cb010048 	sub	x8, x2, x1
+  73f4bc:	9100a3e0 	add	x0, sp, #0x28
+  73f4c0:	9342fd03 	asr	x3, x8, #2
+  73f4c4:	97f4b2ba 	bl	46bfac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xfb4c>
+  73f4c8:	14000010 	b	73f508 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e30a8>
+  73f4cc:	f940e7e1 	ldr	x1, [sp, #456]
+  73f4d0:	910103e8 	add	x8, sp, #0x40
+  73f4d4:	9100c2c0 	add	x0, x22, #0x30
+  73f4d8:	910103f7 	add	x23, sp, #0x40
+  73f4dc:	97ffed7e 	bl	73aad4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2de674>
+  73f4e0:	f94023f5 	ldr	x21, [sp, #64]
+  73f4e4:	f10006bf 	cmp	x21, #0x1
+  73f4e8:	54000f41 	b.ne	73f6d0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3270>  // b.any
+  73f4ec:	9100a3e0 	add	x0, sp, #0x28
+  73f4f0:	910022e1 	add	x1, x23, #0x8
+  73f4f4:	97f4d628 	bl	474d94 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x18934>
+  73f4f8:	910103e0 	add	x0, sp, #0x40
+  73f4fc:	97ffef2c 	bl	73b1ac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2ded4c>
+  73f500:	f10006bf 	cmp	x21, #0x1
+  73f504:	54000801 	b.ne	73f604 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e31a4>  // b.any
+  73f508:	39404288 	ldrb	w8, [x20, #16]
+  73f50c:	34000228 	cbz	w8, 73f550 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e30f0>
+  73f510:	a941a280 	ldp	x0, x8, [x20, #24]
+  73f514:	eb08001f 	cmp	x0, x8
+  73f518:	540001c0 	b.eq	73f550 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e30f0>  // b.none
+  73f51c:	394242c9 	ldrb	w9, [x22, #144]
+  73f520:	37000189 	tbnz	w9, #0, 73f550 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e30f0>
+  73f524:	cb000108 	sub	x8, x8, x0
+  73f528:	52800309 	mov	w9, #0x18                  	// #24
+  73f52c:	f940e7e4 	ldr	x4, [sp, #456]
+  73f530:	9ac90d01 	sdiv	x1, x8, x9
+  73f534:	a942a3e2 	ldp	x2, x8, [sp, #40]
+  73f538:	cb020108 	sub	x8, x8, x2
+  73f53c:	9342fd03 	asr	x3, x8, #2
+  73f540:	97fff1d9 	bl	73bca4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2df844>
+  73f544:	f100041f 	cmp	x0, #0x1
+  73f548:	f9000fe0 	str	x0, [sp, #24]
+  73f54c:	54000e61 	b.ne	73f718 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e32b8>  // b.any
+  73f550:	39420ec8 	ldrb	w8, [x22, #131]
+  73f554:	34000528 	cbz	w8, 73f5f8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3198>
+  73f558:	90ffcfe1 	adrp	x1, 13b000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x321460>
+  73f55c:	913ebc21 	add	x1, x1, #0xfaf
+  73f560:	910103e0 	add	x0, sp, #0x40
+  73f564:	97f484c2 	bl	46086c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x440c>
+  73f568:	910103e0 	add	x0, sp, #0x40
+  73f56c:	9429cfb5 	bl	11b3440 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd56fe0>
+  73f570:	6f00e400 	movi	v0.2d, #0x0
+  73f574:	12800008 	mov	w8, #0xffffffff            	// #-1
+  73f578:	b9407ec9 	ldr	w9, [x22, #124]
+  73f57c:	ad0203e0 	stp	q0, q0, [sp, #64]
+  73f580:	ad0303e0 	stp	q0, q0, [sp, #96]
+  73f584:	b9006be8 	str	w8, [sp, #104]
+  73f588:	52800068 	mov	w8, #0x3                   	// #3
+  73f58c:	f9400eca 	ldr	x10, [x22, #24]
+  73f590:	b9004be8 	str	w8, [sp, #72]
+  73f594:	b90043e9 	str	w9, [sp, #64]
+  73f598:	b40000ea 	cbz	x10, 73f5b4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3154>
+  73f59c:	d0005cc8 	adrp	x8, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73f5a0:	b94ce901 	ldr	w1, [x8, #3304]
+  73f5a4:	7100043f 	cmp	w1, #0x1
+  73f5a8:	54000e0a 	b.ge	73f768 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3308>  // b.tcont
+  73f5ac:	f9400ec8 	ldr	x8, [x22, #24]
+  73f5b0:	f9002be8 	str	x8, [sp, #80]
+  73f5b4:	910103e0 	add	x0, sp, #0x40
+  73f5b8:	aa1f03e1 	mov	x1, xzr
+  73f5bc:	941a9e07 	bl	de6dd8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x98a978>
+  73f5c0:	b0005c69 	adrp	x9, 12cc000 <pthread_rwlock_rdlock@plt+0xe8650>
+  73f5c4:	910063e1 	add	x1, sp, #0x18
+  73f5c8:	f9437929 	ldr	x9, [x9, #1776]
+  73f5cc:	f940e7e8 	ldr	x8, [sp, #456]
+  73f5d0:	a901a7e0 	stp	x0, x9, [sp, #24]
+  73f5d4:	aa0803e0 	mov	x0, x8
+  73f5d8:	97f7d611 	bl	534e1c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd89bc>
+  73f5dc:	2a0003f4 	mov	w20, w0
+  73f5e0:	f9400fe0 	ldr	x0, [sp, #24]
+  73f5e4:	f9000fff 	str	xzr, [sp, #24]
+  73f5e8:	b4000060 	cbz	x0, 73f5f4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3194>
+  73f5ec:	f94013e8 	ldr	x8, [sp, #32]
+  73f5f0:	d63f0100 	blr	x8
+  73f5f4:	350004f4 	cbnz	w20, 73f690 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3230>
+  73f5f8:	f940e7e8 	ldr	x8, [sp, #456]
+  73f5fc:	f900e7ff 	str	xzr, [sp, #456]
+  73f600:	f9000268 	str	x8, [x19]
+  73f604:	9100a3e0 	add	x0, sp, #0x28
+  73f608:	97f4751b 	bl	45ca74 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x614>
+  73f60c:	f940e7f3 	ldr	x19, [sp, #456]
+  73f610:	f900e7ff 	str	xzr, [sp, #456]
+  73f614:	b40000d3 	cbz	x19, 73f62c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e31cc>
+  73f618:	aa1303e0 	mov	x0, x19
+  73f61c:	9421a58b 	bl	fa8c48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xb4c7e8>
+  73f620:	aa1303e0 	mov	x0, x19
+  73f624:	52803a01 	mov	w1, #0x1d0                 	// #464
+  73f628:	942a6e92 	bl	11db070 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd7ec10>
+  73f62c:	910423e0 	add	x0, sp, #0x108
+  73f630:	97f4f5a6 	bl	47ccc8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x20868>
+  73f634:	910703ff 	add	sp, sp, #0x1c0
+  73f638:	a9434ff4 	ldp	x20, x19, [sp, #48]
+  73f63c:	a94257f6 	ldp	x22, x21, [sp, #32]
+  73f640:	a9415ffe 	ldp	x30, x23, [sp, #16]
+  73f644:	f84407fd 	ldr	x29, [sp], #64
+  73f648:	d50323bf 	autiasp
+  73f64c:	d65f03c0 	ret
+  73f650:	940001be 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73f654:	910103e0 	add	x0, sp, #0x40
+  73f658:	52803262 	mov	w2, #0x193                 	// #403
+  73f65c:	aa1f03e3 	mov	x3, xzr
+  73f660:	94249a49 	bl	1065f84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b24>
+  73f664:	d0ffc9a1 	adrp	x1, 75000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3e7460>
+  73f668:	91348421 	add	x1, x1, #0xd21
+  73f66c:	910103e0 	add	x0, sp, #0x40
+  73f670:	528005a2 	mov	w2, #0x2d                  	// #45
+  73f674:	9424991f 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  73f678:	910103e0 	add	x0, sp, #0x40
+  73f67c:	94249b46 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  73f680:	910103e0 	add	x0, sp, #0x40
+  73f684:	94249a43 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  73f688:	f900027f 	str	xzr, [x19]
+  73f68c:	17ffffe0 	b	73f60c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e31ac>
+  73f690:	940001ae 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73f694:	910023e0 	add	x0, sp, #0x8
+  73f698:	52803822 	mov	w2, #0x1c1                 	// #449
+  73f69c:	aa1f03e3 	mov	x3, xzr
+  73f6a0:	94249a39 	bl	1065f84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b24>
+  73f6a4:	f0ffc9e1 	adrp	x1, 7e000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3de460>
+  73f6a8:	91351c21 	add	x1, x1, #0xd47
+  73f6ac:	910023e0 	add	x0, sp, #0x8
+  73f6b0:	528005a2 	mov	w2, #0x2d                  	// #45
+  73f6b4:	9424990f 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  73f6b8:	910023e0 	add	x0, sp, #0x8
+  73f6bc:	94249b36 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  73f6c0:	910023e0 	add	x0, sp, #0x8
+  73f6c4:	94249a33 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  73f6c8:	f900027f 	str	xzr, [x19]
+  73f6cc:	17ffffce 	b	73f604 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e31a4>
+  73f6d0:	9400019e 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73f6d4:	910063e0 	add	x0, sp, #0x18
+  73f6d8:	528033a2 	mov	w2, #0x19d                 	// #413
+  73f6dc:	aa1f03e3 	mov	x3, xzr
+  73f6e0:	94249a29 	bl	1065f84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b24>
+  73f6e4:	90ffc941 	adrp	x1, 67000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3f5460>
+  73f6e8:	91054c21 	add	x1, x1, #0x153
+  73f6ec:	910063e0 	add	x0, sp, #0x18
+  73f6f0:	52800482 	mov	w2, #0x24                  	// #36
+  73f6f4:	942498ff 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  73f6f8:	910063e0 	add	x0, sp, #0x18
+  73f6fc:	910103e1 	add	x1, sp, #0x40
+  73f700:	97f477c4 	bl	45d610 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x11b0>
+  73f704:	94249b24 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  73f708:	910063e0 	add	x0, sp, #0x18
+  73f70c:	94249a21 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  73f710:	f900027f 	str	xzr, [x19]
+  73f714:	17ffff79 	b	73f4f8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e3098>
+  73f718:	9400018c 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73f71c:	910103e0 	add	x0, sp, #0x40
+  73f720:	528035a2 	mov	w2, #0x1ad                 	// #429
+  73f724:	aa1f03e3 	mov	x3, xzr
+  73f728:	94249a17 	bl	1065f84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b24>
+  73f72c:	d0ffc961 	adrp	x1, 6d000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3ef460>
+  73f730:	913e9021 	add	x1, x1, #0xfa4
+  73f734:	910103e0 	add	x0, sp, #0x40
+  73f738:	52800442 	mov	w2, #0x22                  	// #34
+  73f73c:	942498ed 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  73f740:	910103e0 	add	x0, sp, #0x40
+  73f744:	910063e1 	add	x1, sp, #0x18
+  73f748:	97f477b2 	bl	45d610 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x11b0>
+  73f74c:	94249b12 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  73f750:	910103e0 	add	x0, sp, #0x40
+  73f754:	94249a0f 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  73f758:	f9400fe0 	ldr	x0, [sp, #24]
+  73f75c:	3707efa0 	tbnz	w0, #0, 73f550 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e30f0>
+  73f760:	94247540 	bl	105cc60 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc00800>
+  73f764:	17ffff7b 	b	73f550 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e30f0>
+  73f768:	d0005cc0 	adrp	x0, 12d9000 <pthread_rwlock_rdlock@plt+0xf5650>
+  73f76c:	91338000 	add	x0, x0, #0xce0
+  73f770:	9424b81c 	bl	106d7e0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc11380>
+  73f774:	3607f1c0 	tbz	w0, #0, 73f5ac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e314c>
+  73f778:	94000174 	bl	73fd48 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e38e8>
+  73f77c:	910063e0 	add	x0, sp, #0x18
+  73f780:	52803722 	mov	w2, #0x1b9                 	// #441
+  73f784:	aa1f03e3 	mov	x3, xzr
+  73f788:	942499f9 	bl	1065f6c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b0c>
+  73f78c:	f94013e8 	ldr	x8, [sp, #32]
+  73f790:	52800029 	mov	w9, #0x1                   	// #1
+  73f794:	f0ffce81 	adrp	x1, 112000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x34a460>
+  73f798:	9103c821 	add	x1, x1, #0xf2
+  73f79c:	910063e0 	add	x0, sp, #0x18
+  73f7a0:	528002e2 	mov	w2, #0x17                  	// #23
+  73f7a4:	b9002d09 	str	w9, [x8, #44]
+  73f7a8:	942498d2 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  73f7ac:	910063e0 	add	x0, sp, #0x18
+  73f7b0:	94249af9 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  73f7b4:	910063e0 	add	x0, sp, #0x18
+  73f7b8:	942499f6 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  73f7bc:	17ffff7c 	b	73f5ac <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x2e314c>
+  73f7c0:	d503245f 	bti	c
+  73f7c4:	f9400428 	ldr	x8, [x1, #8]
+  73f7c8:	90ffd329 	adrp	x9, 1a3000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x2b9460>
+  73f7cc:	910c5d29 	add	x9, x9, #0x317
+  73f7d0:	9100200a 	add	x10, x0, #0x8
+  73f7d4:	eb09011f 	cmp	x8, x9
+  73f7d8:	9a9f0140 	csel	x0, x10, xzr, eq	// eq = none
+  73f7dc:	d65f03c0 	ret
+  73f7e0:	d503245f 	bti	c
+  73f7e4:	b0005600 	adrp	x0, 1200000 <pthread_rwlock_rdlock@plt+0x1c650>
+  73f7e8:	912cc000 	add	x0, x0, #0xb30
+  73f7ec:	d65f03c0 	ret
+  73f7f0:	d503233f 	paciasp
+  73f7f4:	a9bd5ffe 	stp	x30, x23, [sp, #-48]!
+  73f7f8:	a90157f6 	stp	x22, x21, [sp, #16]
+  73f7fc:	a9024ff4 	stp	x20, x19, [sp, #32]
+
+## other_factory_unproven_gocr_ownership
+  b66260:	f9403be8 	ldr	x8, [sp, #112]
+  b66264:	f100051f 	cmp	x8, #0x1
+  b66268:	54000d41 	b.ne	b66410 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x709fb0>  // b.any
+  b6626c:	90ffaca1 	adrp	x1, fa000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x362460>
+  b66270:	912b1421 	add	x1, x1, #0xac5
+  b66274:	910043e0 	add	x0, sp, #0x10
+  b66278:	97e3e97d 	bl	46086c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x440c>
+  b6627c:	394043e8 	ldrb	w8, [sp, #16]
+  b66280:	360000a8 	tbz	w8, #0, b66294 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x709e34>
+  b66284:	f9400be8 	ldr	x8, [sp, #16]
+  b66288:	f94013e0 	ldr	x0, [sp, #32]
+  b6628c:	927ff901 	and	x1, x8, #0xfffffffffffffffe
+  b66290:	9419d378 	bl	11db070 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd7ec10>
+  b66294:	6f00e400 	movi	v0.2d, #0x0
+  b66298:	12800008 	mov	w8, #0xffffffff            	// #-1
+  b6629c:	b941628a 	ldr	w10, [x20, #352]
+  b662a0:	52800069 	mov	w9, #0x3                   	// #3
+  b662a4:	910043e0 	add	x0, sp, #0x10
+  b662a8:	aa1f03e1 	mov	x1, xzr
+  b662ac:	ad0103e0 	stp	q0, q0, [sp, #32]
+  b662b0:	b9003be8 	str	w8, [sp, #56]
+  b662b4:	f9413288 	ldr	x8, [x20, #608]
+  b662b8:	3d8007e0 	str	q0, [sp, #16]
+  b662bc:	3d8013e0 	str	q0, [sp, #64]
+  b662c0:	b9001be9 	str	w9, [sp, #24]
+  b662c4:	b90013ea 	str	w10, [sp, #16]
+  b662c8:	f90013e8 	str	x8, [sp, #32]
+  b662cc:	940a02c3 	bl	de6dd8 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x98a978>
+  b662d0:	b0003bc8 	adrp	x8, 12df000 <pthread_rwlock_rdlock@plt+0xfb650>
+  b662d4:	b9416901 	ldr	w1, [x8, #360]
+  b662d8:	7100043f 	cmp	w1, #0x1
+  b662dc:	54000d6a 	b.ge	b66488 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x70a028>  // b.tcont
+  b662e0:	d0003b29 	adrp	x9, 12cc000 <pthread_rwlock_rdlock@plt+0xe8650>
+  b662e4:	910163e1 	add	x1, sp, #0x58
+  b662e8:	f9437929 	ldr	x9, [x9, #1776]
+  b662ec:	f9410ea8 	ldr	x8, [x21, #536]
+  b662f0:	a905a7e0 	stp	x0, x9, [sp, #88]
+  b662f4:	aa0803e0 	mov	x0, x8
+  b662f8:	97e73ac9 	bl	534e1c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xd89bc>
+  b662fc:	2a0003f4 	mov	w20, w0
+  b66300:	f9402fe0 	ldr	x0, [sp, #88]
+  b66304:	f9002fff 	str	xzr, [sp, #88]
+  b66308:	b4000060 	cbz	x0, b66314 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x709eb4>
+  b6630c:	f94033e8 	ldr	x8, [sp, #96]
+  b66310:	d63f0100 	blr	x8
+  b66314:	35000494 	cbnz	w20, b663a4 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x709f44>
+  b66318:	f9000275 	str	x21, [x19]
+  b6631c:	9101e3e0 	add	x0, sp, #0x78
+  b66320:	94125a6c 	bl	ffccd0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xba0870>
+  b66324:	f9401708 	ldr	x8, [x24, #40]
+  b66328:	f94077e9 	ldr	x9, [sp, #232]
+  b6632c:	eb09011f 	cmp	x8, x9
+  b66330:	540006e1 	b.ne	b6640c <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x709fac>  // b.any
+  b66334:	a9534ff4 	ldp	x20, x19, [sp, #304]
+  b66338:	a95257f6 	ldp	x22, x21, [sp, #288]
+  b6633c:	a9515ff8 	ldp	x24, x23, [sp, #272]
+  b66340:	a95067fa 	ldp	x26, x25, [sp, #256]
+  b66344:	a94f7bfd 	ldp	x29, x30, [sp, #240]
+  b66348:	910503ff 	add	sp, sp, #0x140
+  b6634c:	d50323bf 	autiasp
+  b66350:	d65f03c0 	ret
+  b66354:	d0ffad01 	adrp	x1, 108000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x354460>
+  b66358:	913d0c21 	add	x1, x1, #0xf43
+  b6635c:	910043e0 	add	x0, sp, #0x10
+  b66360:	52801862 	mov	w2, #0xc3                  	// #195
+  b66364:	aa1f03e3 	mov	x3, xzr
+  b66368:	9413ff07 	bl	1065f84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b24>
+  b6636c:	f0ffa861 	adrp	x1, 75000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3e7460>
+  b66370:	91348421 	add	x1, x1, #0xd21
+  b66374:	910043e0 	add	x0, sp, #0x10
+  b66378:	528005a2 	mov	w2, #0x2d                  	// #45
+  b6637c:	9413fddd 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  b66380:	910043e0 	add	x0, sp, #0x10
+  b66384:	94140004 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  b66388:	910043e0 	add	x0, sp, #0x10
+  b6638c:	9413ff01 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  b66390:	f940d288 	ldr	x8, [x20, #416]
+  b66394:	2a1f03e1 	mov	w1, wzr
+  b66398:	f9400500 	ldr	x0, [x8, #8]
+  b6639c:	9401f06f 	bl	be2558 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x7860f8>
+  b663a0:	14000010 	b	b663e0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x709f80>
+  b663a4:	d0ffad01 	adrp	x1, 108000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x354460>
+  b663a8:	913d0c21 	add	x1, x1, #0xf43
+  b663ac:	910003e0 	mov	x0, sp
+  b663b0:	52801c82 	mov	w2, #0xe4                  	// #228
+  b663b4:	aa1f03e3 	mov	x3, xzr
+  b663b8:	9413fef3 	bl	1065f84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b24>
+  b663bc:	90ffa8c1 	adrp	x1, 7e000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3de460>
+  b663c0:	91351c21 	add	x1, x1, #0xd47
+  b663c4:	910003e0 	mov	x0, sp
+  b663c8:	528005a2 	mov	w2, #0x2d                  	// #45
+  b663cc:	9413fdc9 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  b663d0:	910003e0 	mov	x0, sp
+  b663d4:	9413fff0 	bl	1066394 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09f34>
+  b663d8:	910003e0 	mov	x0, sp
+  b663dc:	9413feed 	bl	1065f90 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b30>
+  b663e0:	f94002a8 	ldr	x8, [x21]
+  b663e4:	aa1503e0 	mov	x0, x21
+  b663e8:	f900027f 	str	xzr, [x19]
+  b663ec:	f9400508 	ldr	x8, [x8, #8]
+  b663f0:	d63f0100 	blr	x8
+  b663f4:	9101e3e0 	add	x0, sp, #0x78
+  b663f8:	94125a36 	bl	ffccd0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xba0870>
+  b663fc:	f9401708 	ldr	x8, [x24, #40]
+  b66400:	f94077e9 	ldr	x9, [sp, #232]
+  b66404:	eb09011f 	cmp	x8, x9
+  b66408:	54fff960 	b.eq	b66334 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0x709ed4>  // b.none
+  b6640c:	9419eeb5 	bl	11e1ee0 <__stack_chk_fail@plt>
+  b66410:	d0ffad01 	adrp	x1, 108000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x354460>
+  b66414:	913d0c21 	add	x1, x1, #0xf43
+  b66418:	910043e0 	add	x0, sp, #0x10
+  b6641c:	52801a22 	mov	w2, #0xd1                  	// #209
+  b66420:	aa1f03e3 	mov	x3, xzr
+  b66424:	9413fed8 	bl	1065f84 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09b24>
+  b66428:	f0ffa821 	adrp	x1, 6d000 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0-0x3ef460>
+  b6642c:	913e9021 	add	x1, x1, #0xfa4
+  b66430:	910043e0 	add	x0, sp, #0x10
+  b66434:	52800442 	mov	w2, #0x22                  	// #34
+  b66438:	9413fdae 	bl	1065af0 <Java_com_google_android_libraries_lens_ondevice_nativeapi_LodeSplitRegistry_initializePlayMlPackSplitHandler@@VERS_1.0+0xc09690>
+  b6643c:	910043e0 	add	x0, sp, #0x10

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import time
+import warnings
 from pathlib import Path
 
 import numpy as np
@@ -80,14 +81,14 @@ class GoogleGroupRpnDetector:
     OVERLAP_NOT_ALIGNED_VERTICAL=0.75
 
     CONFIDENCE_THRESHOLD=0.5
+    # Existing clean-room conditions; separate from parsed Google parameters.
+    REFERENCE_DUPLICATE_IOU=0.75
+    REFERENCE_GROUP_ACROSS_FACTOR=0.75
 
     def __init__(self, asset_root: Path, threads: int=2, max_side: int=1280):
-        try:
-            from ai_edge_litert.interpreter import Interpreter
-        except ImportError as exc:
-            raise RuntimeError("install ai-edge-litert to run GOCR detector") from exc
+        from .interpreter import create_interpreter
         self.model_path=locate(asset_root, DETECTOR_MODEL)
-        self.interpreter=Interpreter(model_path=str(self.model_path), num_threads=threads)
+        self.interpreter=create_interpreter(self.model_path, threads)
         self.inputs=self.interpreter.get_input_details()
         self.max_side=max_side
 
@@ -201,7 +202,7 @@ class GoogleGroupRpnDetector:
             for a in keep:
                 if _angle_diff_deg(a["angle"],b["angle"])>self.MAX_ANGLE_DIFF_DEG:
                     continue
-                if _iou_axis(a,b) >= 0.75:
+                if _iou_axis(a,b) >= self.REFERENCE_DUPLICATE_IOU:
                     duplicate=True; break
                 # small box substantially contained in same-oriented box
                 ax1,ay1,ax2,ay2=a["bbox"]; bx1,by1,bx2,by2=b["bbox"]
@@ -240,7 +241,10 @@ class GoogleGroupRpnDetector:
         }
 
     def _cluster_pieces(self,pieces):
+        started=time.perf_counter()
+        original=pieces
         pieces=self._dedupe(pieces)
+        deduped=time.perf_counter()
         n=len(pieces); parent=list(range(n))
         def find(i):
             while parent[i]!=i:
@@ -253,7 +257,21 @@ class GoogleGroupRpnDetector:
                     if a!=b: parent[b]=a
         groups={}
         for i in range(n): groups.setdefault(find(i),[]).append(pieces[i])
-        return [self._merge_component(v) for v in groups.values()]
+        self.component_membership=[-1]*len(original)
+        original_indices={}
+        for i,b in enumerate(original):
+            original_indices.setdefault(id(b),[]).append(i)
+        for k,v in enumerate(groups.values()):
+            for b in v:
+                self.component_membership[original_indices[id(b)].pop(0)]=k
+        connected=time.perf_counter()
+        result=[self._merge_component(v) for v in groups.values()]
+        self.cluster_timings={"piece_dedupe":(deduped-started)*1000,
+            "pairwise_connections":(connected-deduped)*1000,
+            "component_fit":(time.perf_counter()-connected)*1000}
+        self.cluster_counts={"pieces_after_dedupe":n,"pair_tests":n*(n-1)//2,
+                             "components":len(result)}
+        return result
 
     def _refine_with_group_heads(self,lines,groups):
         # Group heads are whole-line/whole-group proposals. Use only groups that
@@ -266,7 +284,7 @@ class GoogleGroupRpnDetector:
                     continue
                 delta=line["center"]-g["center"]
                 along=float(delta@gu); across=abs(float(delta@gn))
-                if abs(along) <= g["width"]/2 + line["width"]/2 and across <= g["height"]*0.75:
+                if abs(along) <= g["width"]/2 + line["width"]/2 and across <= g["height"]*self.REFERENCE_GROUP_ACROSS_FACTOR:
                     # overlap along group axis
                     members.append(idx)
             if len(members)<2: continue
@@ -278,13 +296,29 @@ class GoogleGroupRpnDetector:
             lines=[x for i,x in enumerate(lines) if i not in set(members)] + [merged]
         return self._dedupe(lines)
 
+    def _postprocess_python(self,pieces,groups):
+        lines=self._cluster_pieces(pieces)
+        refine_started=time.perf_counter()
+        lines=self._refine_with_group_heads(lines,self._dedupe(groups))
+        self.cluster_timings["group_refine_dedupe"]=(time.perf_counter()-refine_started)*1000
+        return lines
+
     def detect(self,image: Image.Image):
         started=time.perf_counter()
         decoded,invoke_ms=self._run_network(image)
         pieces=[b for i in range(6) for b in decoded[i]]
         groups=[b for i in range(6,11) for b in decoded[i]]
-        lines=self._cluster_pieces(pieces)
-        lines=self._refine_with_group_heads(lines,self._dedupe(groups))
+        backend=getattr(self,"native_postprocess",None)
+        if backend:
+            try:
+                lines=backend.run(self,pieces,groups)
+            except RuntimeError as exc:
+                warnings.warn(f"GOCR native failed; using Python reference: {exc}",RuntimeWarning)
+                self.native_postprocess=None
+                backend=None
+                lines=self._postprocess_python(pieces,groups)
+        else:
+            lines=self._postprocess_python(pieces,groups)
         out=[]
         for i,b in enumerate(sorted(lines,key=lambda x:(x["bbox"][1],x["bbox"][0]))):
             x1,y1,x2,y2=b["bbox"]
@@ -305,6 +339,9 @@ class GoogleGroupRpnDetector:
             "raw_piece_count":len(pieces),
             "raw_group_count":len(groups),
             "postprocess":"google_config_cleanroom_v1",
+            "backend":"native" if backend else "python",
+            "stages_ms":{**getattr(self,"network_timings",{}),**self.cluster_timings},
+            "counts":self.cluster_counts,
         }
 
 

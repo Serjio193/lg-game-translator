@@ -28,10 +28,10 @@ RECOGNIZER_LABELS = AssetSpec(
     "d41cea501ff409954bc29e7e83eb6992e475312cfa15040066cd222a98dc3192",
 )
 OPTIONAL_RECOGNIZER_FILES = (
-    AssetSpec("recognizer_cyrl_config.pb"),
-    AssetSpec("recognizer_cyrl_lm.compact_fst.gz"),
-    AssetSpec("recognizer_cyrl_lm.syms"),
-    AssetSpec("recognizer_latn_vi_cyrl_prior.pb"),
+    AssetSpec("recognizer_cyrl_config.pb", "8c94445f2cb706f983ecbcc7d939f3f97e5d48f7ca07df8a875f07efd4191b25"),
+    AssetSpec("recognizer_cyrl_lm.compact_fst.gz", "43783be2a70b75806ed2aa8d71b0094153b508106a9a7ecd85b87649c470bfbb"),
+    AssetSpec("recognizer_cyrl_lm.syms", "64adce4c1e99f42863dc5087374eed44a0ecb321b83cfec8a42a272a0d473fd3"),
+    AssetSpec("recognizer_latn_vi_cyrl_prior.pb", "5d00da2091c16b3b22311fe3446348438a68026c07ef5e6113614a3cb4a7e543"),
 )
 
 
@@ -59,12 +59,17 @@ def locate(root: Path, spec: AssetSpec, required: bool = True) -> Path | None:
     return path
 
 
-def verify_bundle(root: Path) -> dict:
+def verify_bundle(root: Path, role: str = "full", require_support_files: bool = False) -> dict:
+    if role not in ("full", "detector", "recognizer"):
+        raise ValueError("unknown GOCR asset role")
     out = {}
-    for spec in (DETECTOR_MODEL, DETECTOR_CONFIG, RECOGNIZER_MODEL, RECOGNIZER_LABELS):
+    required = ((DETECTOR_MODEL, DETECTOR_CONFIG) if role == "detector" else
+                (RECOGNIZER_MODEL, RECOGNIZER_LABELS) if role == "recognizer" else
+                (DETECTOR_MODEL, DETECTOR_CONFIG, RECOGNIZER_MODEL, RECOGNIZER_LABELS))
+    for spec in required:
         p = locate(root, spec)
         out[spec.filename] = {"path": str(p), "sha256": sha256(p)}
-    for spec in OPTIONAL_RECOGNIZER_FILES:
-        p = locate(root, spec, required=False)
+    for spec in OPTIONAL_RECOGNIZER_FILES if role != "detector" else ():
+        p = locate(root, spec, required=require_support_files)
         out[spec.filename] = None if p is None else {"path": str(p), "sha256": sha256(p)}
     return out

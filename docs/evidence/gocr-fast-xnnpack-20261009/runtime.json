@@ -1,0 +1,65 @@
+{
+  "machine": "aarch64",
+  "python": "3.12.6",
+  "libraries": {
+    "/usr/lib/libtensorflow-lite.so": {
+      "bytes": 5899324,
+      "sha256": "cace8a26cd74882b359fcdf1061c2f5e99dd6422a1e7455d4352b6bf68e70138"
+    },
+    "/media/developer/gocr-runtime/native/gocr_detector_native/libgocr_detector_native.so": {
+      "bytes": 79324,
+      "sha256": "1ccdeb3bf94561d9310360bc19423956727ccae2003dca1761ed869212d4a73e"
+    },
+    "/media/developer/gocr-runtime/native/gocr_recognizer_native/libgocr_recognizer_native.so": {
+      "bytes": 145644,
+      "sha256": "4c41c0577430ca85f51a68ffa69de9c43075b2739c2c8cbedf538c849065cf81"
+    }
+  },
+  "assets": {
+    "gocr_group_rpn_text_detection_model_2024_q4.tflite": {
+      "path": "/media/developer/gocr-runtime/assets/gocr_group_rpn_text_detection_model_2024_q4.tflite",
+      "sha256": "55ab1290b1b481d71c65636d93570f4e48ae0d2c0a748f773d93b9cd13126a51"
+    },
+    "gocr_group_rpn_text_detection_config_2024_q4.binarypb": {
+      "path": "/media/developer/gocr-runtime/assets/gocr_group_rpn_text_detection_config_2024_q4.binarypb",
+      "sha256": "45033fc42999a90e9fae90ef8303ee76e013f575ca1caa811d315a1e0107481c"
+    },
+    "recognizer_latn_vi_cyrl_lm_retrained.tflite": {
+      "path": "/media/developer/gocr-runtime/assets/recognizer_latn_vi_cyrl_lm_retrained.tflite",
+      "sha256": "23501a73630270f22ad7fc9b54a6daa566db4b492eb7addaa160b88afba6d002"
+    },
+    "recognizer_latn_vi_cyrl_label_map.pb": {
+      "path": "/media/developer/gocr-runtime/assets/recognizer_latn_vi_cyrl_label_map.pb",
+      "sha256": "d41cea501ff409954bc29e7e83eb6992e475312cfa15040066cd222a98dc3192"
+    },
+    "recognizer_cyrl_config.pb": {
+      "path": "/media/developer/gocr-runtime/assets/recognizer_cyrl_config.pb",
+      "sha256": "8c94445f2cb706f983ecbcc7d939f3f97e5d48f7ca07df8a875f07efd4191b25"
+    },
+    "recognizer_cyrl_lm.compact_fst.gz": {
+      "path": "/media/developer/gocr-runtime/assets/recognizer_cyrl_lm.compact_fst.gz",
+      "sha256": "43783be2a70b75806ed2aa8d71b0094153b508106a9a7ecd85b87649c470bfbb"
+    },
+    "recognizer_cyrl_lm.syms": {
+      "path": "/media/developer/gocr-runtime/assets/recognizer_cyrl_lm.syms",
+      "sha256": "64adce4c1e99f42863dc5087374eed44a0ecb321b83cfec8a42a272a0d473fd3"
+    },
+    "recognizer_latn_vi_cyrl_prior.pb": {
+      "path": "/media/developer/gocr-runtime/assets/recognizer_latn_vi_cyrl_prior.pb",
+      "sha256": "5d00da2091c16b3b22311fe3446348438a68026c07ef5e6113614a3cb4a7e543"
+    }
+  },
+  "capture": {
+    "returnValue": true,
+    "uiRunning": false,
+    "videoRunning": true,
+    "connected": true,
+    "version": "heads/main-0-g00c932f-dirty",
+    "isRunning": true,
+    "uiBackend": null,
+    "elevated": true,
+    "videoBackend": "libvtcapture_backend.so",
+    "framerate": 58.534586623871
+  },
+  "production_gocr_config_exists": false
+}

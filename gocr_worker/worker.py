@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import time
+import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -15,6 +16,8 @@ from PIL import Image
 from .assets import verify_bundle
 from .protocol import Line, OcrResult, Point, Quad
 from .recognizer import GocrLineRecognizer
+from .image_contract import fingerprint, quad_points
+from .http_security import authorized, read_token, require_private_bind
 
 LOG = logging.getLogger("gocr-worker")
 
@@ -22,21 +25,24 @@ LOG = logging.getLogger("gocr-worker")
 def _quad(value):
     if value is None:
         return None
-    if len(value) != 4:
-        raise ValueError("source_quad must contain four [x,y] points")
-    p = [Point(float(x), float(y)) for x, y in value]
+    p = [Point(x, y) for x, y in quad_points(value)]
     return Quad(*p)
 
 
 class GocrWorker:
-    def __init__(self, assets: Path, threads: int = 2):
+    def __init__(self, assets: Path, threads: int = 2, require_support_files: bool = False):
         self.assets = assets
-        self.asset_status = verify_bundle(assets)
+        self.asset_status = verify_bundle(assets, "recognizer", require_support_files)
         self.recognizer = GocrLineRecognizer(assets, threads=threads)
+        self._recognizer_lock = threading.Lock()
 
     def recognize_crop(self, image: Image.Image, meta: dict | None = None) -> dict:
         meta = meta or {}
-        r = self.recognizer.recognize(image)
+        crop_hash = fingerprint(image)
+        if meta.get("crop_sha256") and meta["crop_sha256"] != crop_hash:
+            raise ValueError("crop pixels changed in transport")
+        with self._recognizer_lock:
+            r = self.recognizer.recognize(image)
         line = Line(
             line_id=str(meta.get("line_id", "0")),
             text=r["text"],
@@ -45,6 +51,8 @@ class GocrWorker:
             detector_confidence=(None if meta.get("detector_confidence") is None else float(meta["detector_confidence"])),
             recognizer_confidence=None,
             timings_ms={"recognizer": r["total_ms"], "tflite_invoke": r["invoke_ms"]},
+            crop_sha256=crop_hash,
+            recognizer_input_sha256=r.get("input_windows_sha256"),
         )
         result = OcrResult(
             schema="gocr.worker.v1",
@@ -78,7 +86,7 @@ def _decode_image_b64(value: str) -> Image.Image:
     return image
 
 
-def make_handler(worker: GocrWorker):
+def make_handler(worker: GocrWorker, translator=None, token=None):
     class Handler(BaseHTTPRequestHandler):
         server_version = "GOCRWorker/0.1"
 
@@ -91,6 +99,8 @@ def make_handler(worker: GocrWorker):
             self.wfile.write(data)
 
         def do_GET(self):
+            if not authorized(self.headers, token):
+                return self._send(401, {"error": "authentication required"})
             if self.path == "/v1/health":
                 self._send(200, {"status": "ok", "schema": "gocr.worker.v1"})
             elif self.path == "/v1/assets":
@@ -99,7 +109,11 @@ def make_handler(worker: GocrWorker):
                 self._send(404, {"error": "not found"})
 
         def do_POST(self):
+            if not authorized(self.headers, token):
+                return self._send(401, {"error": "authentication required"})
             try:
+                if self.path not in ("/v1/recognize-crop", "/v1/recognize-translate", "/v1/ocr"):
+                    return self._send(404, {"error": "not found"})
                 n = int(self.headers.get("Content-Length", "0"))
                 if n <= 0 or n > 16 * 1024 * 1024:
                     return self._send(413, {"error": "body must be 1..16777216 bytes"})
@@ -107,6 +121,13 @@ def make_handler(worker: GocrWorker):
                 image = _decode_image_b64(body["image_b64"])
                 if self.path == "/v1/recognize-crop":
                     return self._send(200, worker.recognize_crop(image, body.get("meta")))
+                if self.path == "/v1/recognize-translate":
+                    if translator is None:
+                        return self._send(503, {"error": "translator is not configured"})
+                    result = worker.recognize_crop(image, body.get("meta"))
+                    line = result["lines"][0]
+                    line["translation"] = translator.translate(line["text"])
+                    return self._send(200, result)
                 if self.path == "/v1/ocr":
                     try:
                         return self._send(200, worker.recognize_image(image))
@@ -134,17 +155,23 @@ def main():
     s = sub.add_parser("serve")
     s.add_argument("--bind", default=os.environ.get("GOCR_BIND", "127.0.0.1"))
     s.add_argument("--port", type=int, default=int(os.environ.get("GOCR_PORT", "8770")))
+    s.add_argument("--token-file", type=Path)
+    s.add_argument("--translator", help="Existing translator base URL")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    worker = GocrWorker(args.assets, threads=args.threads)
+    worker = GocrWorker(args.assets, threads=args.threads, require_support_files=args.cmd == "serve")
     if args.cmd == "crop":
         meta = json.loads(args.meta_json) if args.meta_json else {}
         with Image.open(args.image) as image:
             result = worker.recognize_crop(image, meta)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return
-    server = ThreadingHTTPServer((args.bind, args.port), make_handler(worker))
+    from .translation_client import TranslationClient
+    token = read_token(args.token_file)
+    require_private_bind(args.bind, token)
+    translator = TranslationClient(args.translator) if args.translator else None
+    server = ThreadingHTTPServer((args.bind, args.port), make_handler(worker, translator, token))
     LOG.info("GOCR worker listening on %s:%d", args.bind, args.port)
     server.serve_forever()
 

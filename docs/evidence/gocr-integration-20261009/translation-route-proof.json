@@ -1,0 +1,54 @@
+{
+  "line_id": "1",
+  "text": "Emergency Guard",
+  "source_quad": {
+    "p0": {
+      "x": 783.967807796024,
+      "y": 53.798894513915414
+    },
+    "p1": {
+      "x": 1114.8449643068052,
+      "y": 52.67305753550538
+    },
+    "p2": {
+      "x": 1114.9745546401589,
+      "y": 90.75892772241794
+    },
+    "p3": {
+      "x": 784.0973981293777,
+      "y": 91.88476470082797
+    }
+  },
+  "angle": -0.003402569840400563,
+  "detector_confidence": 0.9963163637046462,
+  "recognizer_confidence": null,
+  "words": [],
+  "symbols": [],
+  "timings_ms": {
+    "recognizer": 13.7,
+    "tflite_invoke": 8.95,
+    "encode": 15.078295953571796,
+    "crop_rpc": 67.13818432763219,
+    "network": 25.264635692536828
+  },
+  "crop_sha256": "4b17d723a54813b012adb113cdd6e92b2b958b2cda7a29bb638c9bb58a76ea17",
+  "recognizer_input_sha256": "d162b9e70e3509ee21cee58d86d1a5e3383a937157abd86d27fca3f739ec8a7f",
+  "translation": {
+    "provider": "madlad",
+    "translation": "Аварийная охрана",
+    "latency_ms": 1.1,
+    "generated_tokens": 6,
+    "sentence_count": 1,
+    "model_load_ms": 3196.5,
+    "original_latency_ms": 3410.1,
+    "cache_hit": true,
+    "key_hash": "4b1f5fc512fe7890070542db345f1fe41e87e8f2666cd6095d431b5424b28436",
+    "normalization_version": 1,
+    "source_lang": "en",
+    "target_lang": "ru",
+    "text_type": "dialogue",
+    "model_version": "/home/orangepi/translator-test/madlad3b:2950208290:1791146022850041964:16629031:1791146026300030918:sentence-batch-v1:beam1:max128:default",
+    "request_ms": 28.173548635095358,
+    "bytes_sent": 49
+  }
+}

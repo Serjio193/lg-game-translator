@@ -1,0 +1,119 @@
+[
+  {
+    "file": "00-description-screen-20261006-capture.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\description-screen-20261006\\capture.png",
+    "rgb_sha256": "edf787b1b928177e0b2912b8ed3d47b6653a8c5f1d2c9d52492125caa02a9049",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/00-description-screen-20261006-capture.png"
+  },
+  {
+    "file": "01-description-screen-20261006-current-full.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\description-screen-20261006\\current-full.png",
+    "rgb_sha256": "e86aff1ca30fc4585038cebf8cc1eb252b98fe4c543a316dc5ed0ba9d7249575",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/01-description-screen-20261006-current-full.png"
+  },
+  {
+    "file": "02-font-matching-20261007-source-frame.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\font-matching-20261007\\source-frame.png",
+    "rgb_sha256": "291debbcb4e3751aea57c4fcdbab733103734aa1773bcc368d6765dcfc234b6e",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/02-font-matching-20261007-source-frame.png"
+  },
+  {
+    "file": "03-ocr-candidates-20261007-live-frame.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\ocr-candidates-20261007\\live-frame.png",
+    "rgb_sha256": "8aa5b05c5712c871436e9e3ff8a6b860efb7f2888881c73c6421cdc476f5db1a",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/03-ocr-candidates-20261007-live-frame.png"
+  },
+  {
+    "file": "04-ocr-fullscreen-discussion-20261005-screen.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\ocr-fullscreen-discussion-20261005\\screen.png",
+    "rgb_sha256": "bec08c71d2ac4adbb8b580c8793aa1885fe6a85f5ef95df4359ddbce7acfc60a",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/04-ocr-fullscreen-discussion-20261005-screen.png"
+  },
+  {
+    "file": "05-ocr-policy-live-20261005-frame.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\ocr-policy-live-20261005\\frame.png",
+    "rgb_sha256": "803165964667613120d1eec3ebed33f7862c791ffc0036d704de25b79a19389c",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/05-ocr-policy-live-20261005-frame.png"
+  },
+  {
+    "file": "06-ppocr-only-live-20261007-frame.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\ppocr-only-live-20261007\\frame.png",
+    "rgb_sha256": "6f66058518d16aeea4e1bf7b11814ff09093fe77140a3c9c291b990a34e4c3b4",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/06-ppocr-only-live-20261007-frame.png"
+  },
+  {
+    "file": "07-text-detectors-video-only-input.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\text-detectors\\video-only-input.png",
+    "rgb_sha256": "4f727234f6c432bf94a174e80e08c4b1d7f99cf0cbc3998f4652278288cd82ee",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_no_text_video_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/07-text-detectors-video-only-input.png"
+  },
+  {
+    "file": "08-game-input.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\text-detectors\\game\\input.png",
+    "rgb_sha256": "7e8fec0dbf44f09b58ef0d2a1a0c05edae64279388a6fb28a99451830608f16c",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_grayscale_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/08-game-input.png"
+  },
+  {
+    "file": "09-game-brothership-input.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\text-detectors\\game-brothership\\input.png",
+    "rgb_sha256": "9c83759bbf697afd6bbfea12945f7240886f25de37ffac9a258dc594789cd380",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_grayscale_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/09-game-brothership-input.png"
+  },
+  {
+    "file": "10-game-example-2-input.ppm",
+    "source": "E:\\Github\\lg-game-translator\\docs\\evidence\\text-detectors\\game-example-2\\input.png",
+    "rgb_sha256": "20d7d656d5af4fffd2f8194f6ecc6d54131f46e6c44d171f68b8fc163416985a",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_grayscale_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/10-game-example-2-input.png"
+  },
+  {
+    "file": "11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+    "source": "docs\\evidence\\gocr-native-postprocess-20261009\\emergency-guard.png",
+    "rgb_sha256": "928f2888546ac17803c57d2fceaa5fc5d0849ebd48562a6d09ff92a2e4a4ae41",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/11-gocr-native-postprocess-20261009-emergency-guard.png"
+  },
+  {
+    "file": "12-gocr-native-postprocess-20261009-luigi.ppm",
+    "source": "docs\\evidence\\gocr-native-postprocess-20261009\\luigi.png",
+    "rgb_sha256": "6801ebecb8116ce408936f858eeca47187a1101bdb5c77ad4a18e96ec5668cc1",
+    "width": 1280,
+    "height": 720,
+    "kind": "saved_color_game_frame",
+    "replay_path": "docs/evidence/gocr-google-runner-20261009/corpus/12-gocr-native-postprocess-20261009-luigi.png"
+  }
+]

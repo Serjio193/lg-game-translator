@@ -44,6 +44,8 @@ class Line:
     words: list[Word] = field(default_factory=list)
     symbols: list[Symbol] = field(default_factory=list)
     timings_ms: dict[str, float] = field(default_factory=dict)
+    crop_sha256: str | None = None
+    recognizer_input_sha256: str | None = None
 
 
 @dataclass
@@ -55,6 +57,7 @@ class OcrResult:
     lines: list[Line]
     timings_ms: dict[str, float] = field(default_factory=dict)
     parity: dict[str, Any] = field(default_factory=dict)
+    telemetry: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

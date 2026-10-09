@@ -1,0 +1,31 @@
+{
+  "frame_count": 13,
+  "repeats": 5,
+  "strict_median_ms": 1549.562,
+  "fast_median_ms": 471.055,
+  "aggregate_speedup": 2.9272640511403214,
+  "strict_lines": 109,
+  "fast_lines": 109,
+  "matched_lines": 102,
+  "exact_text": 93,
+  "character_edit_distance": 12,
+  "matched_strict_characters": 1431,
+  "missing": 7,
+  "extra": 7,
+  "iou_mean": 0.9541132249524378,
+  "iou_median": 0.9798621205338227,
+  "iou_min": 0.5149832334506843,
+  "all_repeats_stable": true,
+  "strict_regression_comparison": [
+    {
+      "frame": "fast-corpus/11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+      "lines": 21,
+      "matches_previous_strict": true
+    },
+    {
+      "frame": "fast-corpus/12-gocr-native-postprocess-20261009-luigi.ppm",
+      "lines": 18,
+      "matches_previous_strict": true
+    }
+  ]
+}

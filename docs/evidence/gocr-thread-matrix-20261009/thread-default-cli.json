@@ -1,0 +1,672 @@
+{
+  "schema": "gocr.worker.v1",
+  "width": 1280,
+  "height": 720,
+  "mode": "full",
+  "lines": [
+    {
+      "line_id": "0",
+      "text": "Snoutlet School",
+      "source_quad": {
+        "p0": {
+          "x": 29.18054655264099,
+          "y": 22.757067152744938
+        },
+        "p1": {
+          "x": 321.39423061773203,
+          "y": 22.354807075972065
+        },
+        "p2": {
+          "x": 321.4435552218384,
+          "y": 58.185666545331785
+        },
+        "p3": {
+          "x": 29.22987115674739,
+          "y": 58.58792662210466
+        }
+      },
+      "angle": -0.0013765947476545926,
+      "detector_confidence": 0.9883575843100203,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 148.823,
+        "tflite_invoke": 147.691,
+        "recognizer_prepare": 0.90264,
+        "recognizer_decode": 0.2215
+      },
+      "crop_sha256": "51fcd074292b56f916a958bf8365c3e74633204c2f170f1b4ad0135da10fedde",
+      "recognizer_input_sha256": "e0fbe9f2c9faa38a37a88631698fb337c1311529d9e5fb3a4216f9c98fdfda98"
+    },
+    {
+      "line_id": "1",
+      "text": "Adventuring with Luigi",
+      "source_quad": {
+        "p0": {
+          "x": 726.3552746042524,
+          "y": 53.35772420705226
+        },
+        "p1": {
+          "x": 1165.716274240692,
+          "y": 54.28449474781757
+        },
+        "p2": {
+          "x": 1165.6362350022225,
+          "y": 92.2292915202863
+        },
+        "p3": {
+          "x": 726.275235365783,
+          "y": 91.30252097952099
+        }
+      },
+      "angle": 0.0021093569229213077,
+      "detector_confidence": 0.9982117579617102,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 46.433,
+        "tflite_invoke": 44.726,
+        "recognizer_prepare": 1.39646,
+        "recognizer_decode": 0.30434
+      },
+      "crop_sha256": "93f89357f3ec3796e0e9c465e27542aa0857381f1d2b1a02b517f6c4fe99e491",
+      "recognizer_input_sha256": "ada035d85e72f9aaaad5749cfe26bc169fea3bf8e4dd4e37d2e91a5d61a99d09"
+    },
+    {
+      "line_id": "2",
+      "text": "Field",
+      "source_quad": {
+        "p0": {
+          "x": 204.51508217959602,
+          "y": 91.49248884699583
+        },
+        "p1": {
+          "x": 266.87140795291924,
+          "y": 91.48329470986394
+        },
+        "p2": {
+          "x": 266.87462826759474,
+          "y": 113.32405998456309
+        },
+        "p3": {
+          "x": 204.51830249427158,
+          "y": 113.33325412169498
+        }
+      },
+      "angle": -0.00014744513810335518,
+      "detector_confidence": 0.9902402592365168,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 22.012,
+        "tflite_invoke": 21.553,
+        "recognizer_prepare": 0.3426,
+        "recognizer_decode": 0.11288000000000001
+      },
+      "crop_sha256": "e0d1c1c2aa239cff970c41cc89c2a706f1c06eb39050c1674d3c1ec25c6c2d43",
+      "recognizer_input_sha256": "416476e53032cab12fecba28bd1b260683d560a7f655a6a5b7c8044ee6c73047"
+    },
+    {
+      "line_id": "3",
+      "text": "Battle",
+      "source_quad": {
+        "p0": {
+          "x": 398.16903396297505,
+          "y": 92.22041112541551
+        },
+        "p1": {
+          "x": 473.30705543019735,
+          "y": 92.1529792123285
+        },
+        "p2": {
+          "x": 473.3260889611807,
+          "y": 113.36165911104462
+        },
+        "p3": {
+          "x": 398.1880674939584,
+          "y": 113.42909102413162
+        }
+      },
+      "angle": -0.0008974403859332294,
+      "detector_confidence": 0.9824703403601527,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 17.053,
+        "tflite_invoke": 16.565,
+        "recognizer_prepare": 0.37388,
+        "recognizer_decode": 0.11104
+      },
+      "crop_sha256": "f6bde8074d7c39fd2c15959a20f32a78faa7b23979c2d14665a47ec8948177ec",
+      "recognizer_input_sha256": "0e472cf4fb79bdc4ec4229d05f8488b1bcb4e8c0cf0a9d8a3a0fb730f0aee05e"
+    },
+    {
+      "line_id": "4",
+      "text": "L",
+      "source_quad": {
+        "p0": {
+          "x": 106.12482436562725,
+          "y": 92.45531068632603
+        },
+        "p1": {
+          "x": 119.69248309728503,
+          "y": 92.45982003818855
+        },
+        "p2": {
+          "x": 119.68779457457407,
+          "y": 106.56656487364158
+        },
+        "p3": {
+          "x": 106.12013584291628,
+          "y": 106.56205552177906
+        }
+      },
+      "angle": 0.0003323603420216073,
+      "detector_confidence": 0.6999666388891691,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 20.384,
+        "tflite_invoke": 20.097,
+        "recognizer_prepare": 0.18044,
+        "recognizer_decode": 0.10436
+      },
+      "crop_sha256": "06736da608365ec17907cce859ce12f0462fa50c641bb760d5a0c9a019fab37e",
+      "recognizer_input_sha256": "bcd1610a9540114646c0a419965dcc80cd20fdf845940e1a38285c44b9497fc1"
+    },
+    {
+      "line_id": "5",
+      "text": "R",
+      "source_quad": {
+        "p0": {
+          "x": 552.4338652067021,
+          "y": 93.04146804251039
+        },
+        "p1": {
+          "x": 567.2035638280549,
+          "y": 93.04379773710606
+        },
+        "p2": {
+          "x": 567.2012230135546,
+          "y": 107.88399385689064
+        },
+        "p3": {
+          "x": 552.4315243922017,
+          "y": 107.88166416229497
+        }
+      },
+      "angle": 0.0001577347403007264,
+      "detector_confidence": 0.9773629879218713,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 16.704,
+        "tflite_invoke": 16.405,
+        "recognizer_prepare": 0.18146,
+        "recognizer_decode": 0.11402000000000001
+      },
+      "crop_sha256": "98daa5e74b2b460357d51b514a417cb42299cf3755072a3a3d591b1443c96826",
+      "recognizer_input_sha256": "87ba0052afc25398b48ba4eafee94de694a0e64fd69046eaaf3ad3beb18aa0d1"
+    },
+    {
+      "line_id": "6",
+      "text": "",
+      "source_quad": {
+        "p0": {
+          "x": 701.4044225396101,
+          "y": 172.52825975058568
+        },
+        "p1": {
+          "x": 740.1231054358431,
+          "y": 173.31384065898993
+        },
+        "p2": {
+          "x": 739.5425128866915,
+          "y": 201.92932578855542
+        },
+        "p3": {
+          "x": 700.8238299904585,
+          "y": 201.14374488015116
+        }
+      },
+      "angle": 0.020286669854280216,
+      "detector_confidence": 0.5464349643154259,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 10.825,
+        "tflite_invoke": 10.368,
+        "recognizer_prepare": 0.35312,
+        "recognizer_decode": 0.10017999999999999
+      },
+      "crop_sha256": "28594657ea10462ce7232fa9955864cc66f49bf2ff53f56b9fbc62e92ab84c2e",
+      "recognizer_input_sha256": "373ca2f888e70402f1e926eaa7b2351e2345a8e005e6a9735e74b148c00ef6c8"
+    },
+    {
+      "line_id": "7",
+      "text": "Items",
+      "source_quad": {
+        "p0": {
+          "x": 110.42862966890316,
+          "y": 181.899813128631
+        },
+        "p1": {
+          "x": 169.57307633451646,
+          "y": 181.86704819769074
+        },
+        "p2": {
+          "x": 169.58289507559667,
+          "y": 199.5909985151707
+        },
+        "p3": {
+          "x": 110.43844840998335,
+          "y": 199.62376344611096
+        }
+      },
+      "angle": -0.0005539814713919176,
+      "detector_confidence": 0.9823010011598682,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 9.711,
+        "tflite_invoke": 9.255,
+        "recognizer_prepare": 0.34978,
+        "recognizer_decode": 0.10284
+      },
+      "crop_sha256": "0461e0f3efadc04cab552be1822e5d868a72e933c494f7ff79890301b0bdc8fc",
+      "recognizer_input_sha256": "cbca3b1bdadf478c23bf2188658ba9bcca1b64f494efe734ab7983fe6620f8d2"
+    },
+    {
+      "line_id": "8",
+      "text": "Adventuring with Luigi",
+      "source_quad": {
+        "p0": {
+          "x": 108.9818326724369,
+          "y": 246.76333867718895
+        },
+        "p1": {
+          "x": 363.2060649136372,
+          "y": 246.68649161870127
+        },
+        "p2": {
+          "x": 363.2130673825774,
+          "y": 269.85194941419377
+        },
+        "p3": {
+          "x": 108.98883514137705,
+          "y": 269.9287964726814
+        }
+      },
+      "angle": -0.00030228061058390195,
+      "detector_confidence": 0.9964024479014585,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 39.075,
+        "tflite_invoke": 37.619,
+        "recognizer_prepare": 1.1166200000000002,
+        "recognizer_decode": 0.33464
+      },
+      "crop_sha256": "365cfd407c8d435154aa6f8316fbdec0c293e093a4ffcc491976e71afc3c180f",
+      "recognizer_input_sha256": "d06b34cc40a401c439ac15f7373d65672754586bec37de3b52d063a935961081"
+    },
+    {
+      "line_id": "9",
+      "text": "Saving Your Game",
+      "source_quad": {
+        "p0": {
+          "x": 110.30538945326919,
+          "y": 314.09935431287914
+        },
+        "p1": {
+          "x": 321.22036468170666,
+          "y": 313.65688509484636
+        },
+        "p2": {
+          "x": 321.26695322021743,
+          "y": 335.8645778460227
+        },
+        "p3": {
+          "x": 110.35197799177993,
+          "y": 336.3070470640555
+        }
+      },
+      "angle": -0.0020978527885609937,
+      "detector_confidence": 0.99951633823351,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 27.945,
+        "tflite_invoke": 26.675,
+        "recognizer_prepare": 0.9756,
+        "recognizer_decode": 0.28914
+      },
+      "crop_sha256": "8976a355dc9ed32174f47026e271e47374b6371d2fb37ce920324f131be9f5e9",
+      "recognizer_input_sha256": "b062d3c9713f358be25b70af9c14701db67665b779cb92b50a4e54b67a9e6210"
+    },
+    {
+      "line_id": "10",
+      "text": "The Menu",
+      "source_quad": {
+        "p0": {
+          "x": 110.31452021210822,
+          "y": 381.04229245323046
+        },
+        "p1": {
+          "x": 220.0029907808058,
+          "y": 381.0112655481159
+        },
+        "p2": {
+          "x": 220.00834225374837,
+          "y": 399.930164490585
+        },
+        "p3": {
+          "x": 110.31987168505079,
+          "y": 399.9611913956996
+        }
+      },
+      "angle": -0.0002828638609524289,
+      "detector_confidence": 0.9958337116630396,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 18.718,
+        "tflite_invoke": 17.822,
+        "recognizer_prepare": 0.6990200000000001,
+        "recognizer_decode": 0.19378
+      },
+      "crop_sha256": "8c69d718d453eee9429fe7b7b99e20ced4e0f3f8b754e1179b7c74281ee5f4fa",
+      "recognizer_input_sha256": "95c38a34e7c0ba19987ccf6780a2813e1ea38d7f77029fc199ede524e0379748"
+    },
+    {
+      "line_id": "11",
+      "text": "Gear",
+      "source_quad": {
+        "p0": {
+          "x": 111.50442679872413,
+          "y": 447.2716751874001
+        },
+        "p1": {
+          "x": 163.97616951511046,
+          "y": 447.27080214176925
+        },
+        "p2": {
+          "x": 163.9764881193756,
+          "y": 466.41953897708044
+        },
+        "p3": {
+          "x": 111.50474540298929,
+          "y": 466.4204120227113
+        }
+      },
+      "angle": -1.6638395935406242e-05,
+      "detector_confidence": 0.9691377687360515,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 9.347,
+        "tflite_invoke": 8.865,
+        "recognizer_prepare": 0.36936,
+        "recognizer_decode": 0.10776
+      },
+      "crop_sha256": "5542e8706ad5f899a6b88563bc3321cc6f860974b49170df5935a73000642cf9",
+      "recognizer_input_sha256": "e2b8bb7eabdf9739ffed838dea063d481c337baab1e2eca8f59eff5d8a741010"
+    },
+    {
+      "line_id": "12",
+      "text": "Luigi automatically follows wherever Mario",
+      "source_quad": {
+        "p0": {
+          "x": 705.7229834680714,
+          "y": 459.76572029193426
+        },
+        "p1": {
+          "x": 1186.241341342305,
+          "y": 459.50596127430674
+        },
+        "p2": {
+          "x": 1186.254356993544,
+          "y": 483.58312100889844
+        },
+        "p3": {
+          "x": 705.7359991193102,
+          "y": 483.84288002652596
+        }
+      },
+      "angle": -0.0005405807875348426,
+      "detector_confidence": 0.9644127625629553,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 53.362,
+        "tflite_invoke": 50.9,
+        "recognizer_prepare": 1.9814599999999998,
+        "recognizer_decode": 0.47362000000000004
+      },
+      "crop_sha256": "22262406c942d0af0efcf56c844f705a8839df057952732a43463436f1c2aa26",
+      "recognizer_input_sha256": "f0c8b996b867a1ec1200ce556ba6c62f7504afeca169e5531ee7448203953636"
+    },
+    {
+      "line_id": "13",
+      "text": "goes. Make Luigi jump by pressing",
+      "source_quad": {
+        "p0": {
+          "x": 705.1025267202367,
+          "y": 495.5414363142914
+        },
+        "p1": {
+          "x": 1131.9534247608765,
+          "y": 495.8319618024796
+        },
+        "p2": {
+          "x": 1131.9373191663447,
+          "y": 519.4949028143611
+        },
+        "p3": {
+          "x": 705.0864211257048,
+          "y": 519.204377326173
+        }
+      },
+      "angle": 0.0006806251191218484,
+      "detector_confidence": 0.9965169517598242,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 48.578,
+        "tflite_invoke": 46.422,
+        "recognizer_prepare": 1.65996,
+        "recognizer_decode": 0.48996
+      },
+      "crop_sha256": "e2aa432b52b9fa0ddc05fbdc0ef1d232ed4d135dcf8e599680bd235dbc09d124",
+      "recognizer_input_sha256": "d2edb2fa348ca0a77ef6d2c6e5672daed29d355e641992d456ea0b323a6a92c0"
+    },
+    {
+      "line_id": "14",
+      "text": "The Big Cannon",
+      "source_quad": {
+        "p0": {
+          "x": 110.07830687934123,
+          "y": 513.4429644154022
+        },
+        "p1": {
+          "x": 291.6378752719143,
+          "y": 513.4082051071364
+        },
+        "p2": {
+          "x": 291.6422080082499,
+          "y": 536.0395455535419
+        },
+        "p3": {
+          "x": 110.08263961567681,
+          "y": 536.0743048618077
+        }
+      },
+      "angle": -0.00019144850447140615,
+      "detector_confidence": 0.9886318830026896,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 19.31,
+        "tflite_invoke": 18.325,
+        "recognizer_prepare": 0.77918,
+        "recognizer_decode": 0.20163999999999999
+      },
+      "crop_sha256": "3d04f1ae220a5c424a8309a3c805db2936a57112b7f92bf363274fe23555b3cc",
+      "recognizer_input_sha256": "0f017fc88435a10002544860a6a3c92b198dc86d415a24e5466bedd0761e03f5"
+    },
+    {
+      "line_id": "15",
+      "text": "Luigi Logic",
+      "source_quad": {
+        "p0": {
+          "x": 110.23611329786513,
+          "y": 580.5514552243468
+        },
+        "p1": {
+          "x": 233.34823909725245,
+          "y": 580.5636196858372
+        },
+        "p2": {
+          "x": 233.34595173397392,
+          "y": 603.7131981454962
+        },
+        "p3": {
+          "x": 110.2338259345866,
+          "y": 603.7010336840058
+        }
+      },
+      "angle": 9.880798801875465e-05,
+      "detector_confidence": 0.8891412409092797,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 18.652,
+        "tflite_invoke": 17.845,
+        "recognizer_prepare": 0.60132,
+        "recognizer_decode": 0.20016
+      },
+      "crop_sha256": "271c22e344b74587581557f21407289c93fbcd1069af8c63f1229119dcf9f1c9",
+      "recognizer_input_sha256": "95da486bdbd5f6594fa30acfa7a1dcd3fad145009d40fb59c2f9a4fe5427397e"
+    },
+    {
+      "line_id": "16",
+      "text": "Back",
+      "source_quad": {
+        "p0": {
+          "x": 1203.9384758583262,
+          "y": 683.3404484370911
+        },
+        "p1": {
+          "x": 1256.265232671462,
+          "y": 682.9457347079825
+        },
+        "p2": {
+          "x": 1256.4121419038224,
+          "y": 702.4213270383793
+        },
+        "p3": {
+          "x": 1204.0853850906867,
+          "y": 702.816040767488
+        }
+      },
+      "angle": -0.007543105419112806,
+      "detector_confidence": 0.9956329081962736,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 9.433,
+        "tflite_invoke": 9.016,
+        "recognizer_prepare": 0.3099,
+        "recognizer_decode": 0.10352
+      },
+      "crop_sha256": "02cbc989f36415731875698a2c319007f89df79bc4a6def95b42552926cec236",
+      "recognizer_input_sha256": "d760f02f2e94e2e5bfeb12e470528f933fa4f1950bc25061a704ade7ce8a3dfc"
+    },
+    {
+      "line_id": "17",
+      "text": "В",
+      "source_quad": {
+        "p0": {
+          "x": 1167.6982290729889,
+          "y": 686.7298486821999
+        },
+        "p1": {
+          "x": 1179.6319088474822,
+          "y": 686.7235508200401
+        },
+        "p2": {
+          "x": 1179.6397631183263,
+          "y": 701.6064350015773
+        },
+        "p3": {
+          "x": 1167.706083343833,
+          "y": 701.612732863737
+        }
+      },
+      "angle": -0.0005277384422967009,
+      "detector_confidence": 0.9142967552140162,
+      "recognizer_confidence": null,
+      "words": [],
+      "symbols": [],
+      "timings_ms": {
+        "recognizer": 9.252,
+        "tflite_invoke": 8.975,
+        "recognizer_prepare": 0.16626000000000002,
+        "recognizer_decode": 0.10733999999999999
+      },
+      "crop_sha256": "76f70b3407e782c07dd7380348b3d620f8d675eafff7c6bd10b1ccd597b2a4c5",
+      "recognizer_input_sha256": "03efa2473f99dae1f876f831bd9dd79d3e4103b5215b4769a1d9b10a3edf6148"
+    }
+  ],
+  "timings_ms": {
+    "detector": 1397.11642,
+    "detector_tflite_invoke": 1363.41,
+    "recognizer": 545.617,
+    "crop_rectify": 39.22,
+    "total": 1992.212
+  },
+  "parity": {
+    "detector_model": "google_original",
+    "detector_config_values": "google_original",
+    "detector_postprocess": "google_config_cleanroom_v1",
+    "detector_native_parity": "validation_in_progress",
+    "recognizer_model": "google_original",
+    "recognizer_decoder": "greedy_ctc",
+    "production_lm_fst_applied": false,
+    "window_contract": "google_config_16_136_16"
+  },
+  "telemetry": {
+    "detector_backend": "native",
+    "ocr_execution": "native",
+    "detector_execution": "native",
+    "detector_stages_ms": {
+      "pyramid_prepare_allocate": 21.18986,
+      "decode_heads": 0.44514,
+      "native_total_postprocess": 12.07142
+    },
+    "detector_counts": {
+      "pieces_after_dedupe": 267,
+      "pair_tests": 35511,
+      "components": 18
+    },
+    "raw_piece_count": 676,
+    "raw_group_count": 59
+  }
+}

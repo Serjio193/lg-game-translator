@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import itertools
+import hashlib
 import math
 import time
 import unicodedata
@@ -74,15 +75,12 @@ class GocrLineRecognizer:
     RIGHT_CONTEXT = 16
 
     def __init__(self, asset_root: Path, threads: int = 2):
-        try:
-            from ai_edge_litert.interpreter import Interpreter
-        except ImportError as exc:
-            raise RuntimeError("install ai-edge-litert to run GOCR recognition") from exc
+        from .interpreter import create_interpreter
         self.model_path = locate(asset_root, RECOGNIZER_MODEL)
         self.labels_path = locate(asset_root, RECOGNIZER_LABELS)
         self.labels = load_label_map(self.labels_path)
         self.blank_id = len(self.labels)
-        self.interpreter = Interpreter(model_path=str(self.model_path), num_threads=threads)
+        self.interpreter = create_interpreter(self.model_path, threads)
         self.interpreter.allocate_tensors()
         self.input = self.interpreter.get_input_details()[0]
         if list(self.input["shape"])[1:] != [32, 168, 1]:
@@ -138,8 +136,10 @@ class GocrLineRecognizer:
         left_steps = self.LEFT_CONTEXT // 4
         useful_steps = self.USEFUL_WIDTH // 4
         windows = 0
+        input_hash = hashlib.sha256()
         for x in range(0, normalized_width, self.USEFUL_WIDTH):
             window = padded.crop((x, 0, x + self.INPUT_WIDTH, self.INPUT_HEIGHT))
+            input_hash.update(window.tobytes())
             ids, ms, margin = self._infer_window(window)
             remain = max(0, normalized_width - x)
             keep = min(useful_steps, math.ceil(remain / 4))
@@ -158,4 +158,5 @@ class GocrLineRecognizer:
             "total_ms": round((time.perf_counter() - started) * 1000.0, 3),
             "diagnostic_logit_margin_q": round(float(np.mean(margins)) if margins else 0.0, 3),
             "production_lm_fst_applied": False,
+            "input_windows_sha256": input_hash.hexdigest(),
         }
