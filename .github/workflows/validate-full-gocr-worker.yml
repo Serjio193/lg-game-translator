@@ -21,6 +21,23 @@ jobs:
           mkdir -p /tmp/fullgocr/assets /tmp/fullgocr/screen /tmp/fullgocr/bin
           curl -fL -A "Mozilla/5.0" "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest" -o /tmp/fullgocr/google.apk
           python3 scripts/extract-gocr-assets.py /tmp/fullgocr/google.apk /tmp/fullgocr/assets
+      - name: Verify original Google detector config
+        run: |
+          PYTHONPATH=. python3 - <<'PY'
+          from pathlib import Path
+          from gocr_worker.detector_config import parse_detector_binarypb
+          c=parse_detector_binarypb(Path("/tmp/fullgocr/assets/gocr_group_rpn_text_detection_config_2024_q4.binarypb"))
+          print(c)
+          assert abs(c.confidence_threshold-0.5)<1e-6
+          assert list(c.anchor_widths)==[16.0,64.0,16.0,64.0,64.0,64.0]
+          assert list(c.anchor_heights)==[16.0,64.0,16.0,64.0,64.0,64.0]
+          assert c.profile_max_dim==1280
+          assert abs(c.max_height_ratio-1.75)<1e-6
+          assert abs(c.search_radius_factor-0.8)<1e-5
+          assert abs(c.maximum_angle_difference-30.0)<1e-6
+          assert c.skip_level1_nms is True
+          assert c.version==2
+          PY
       - name: Export ScreenAI oracle
         run: |
           curl -fsSL "https://chrome-infra-packages.appspot.com/client?platform=linux-amd64&version=latest" -o /tmp/fullgocr/bin/cipd
