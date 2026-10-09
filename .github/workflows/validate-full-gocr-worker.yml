@@ -1,0 +1,40 @@
+name: Validate full GOCR worker
+
+on:
+  push:
+    paths:
+      - 'gocr_worker/**'
+      - 'scripts/validate-full-gocr-worker.py'
+      - '.github/workflows/validate-full-gocr-worker.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python deps
+        run: python3 -m pip install --quiet -r gocr_worker/requirements.txt protobuf
+      - name: Extract Google Android assets
+        run: |
+          mkdir -p /tmp/fullgocr/assets /tmp/fullgocr/screen /tmp/fullgocr/bin
+          curl -fL -A "Mozilla/5.0" "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest" -o /tmp/fullgocr/google.apk
+          python3 scripts/extract-gocr-assets.py /tmp/fullgocr/google.apk /tmp/fullgocr/assets
+      - name: Export ScreenAI oracle
+        run: |
+          curl -fsSL "https://chrome-infra-packages.appspot.com/client?platform=linux-amd64&version=latest" -o /tmp/fullgocr/bin/cipd
+          chmod +x /tmp/fullgocr/bin/cipd
+          printf 'chromium/third_party/screen-ai/linux latest\n' | /tmp/fullgocr/bin/cipd export -root /tmp/fullgocr/screen -ensure-file -
+      - name: Compare full OCR
+        run: |
+          PYTHONPATH=. python3 scripts/validate-full-gocr-worker.py /tmp/fullgocr/screen /tmp/fullgocr/assets /tmp/fullgocr/report.json
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-gocr-worker-validation
+          path: |
+            /tmp/fullgocr/report.json
+            /tmp/fullgocr/frame.png
+          retention-days: 7
