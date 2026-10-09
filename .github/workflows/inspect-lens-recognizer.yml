@@ -1,0 +1,31 @@
+name: Inspect Android Lens recognizer
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-lens-recognizer.yml'
+      - 'scripts/inspect-lens-recognizer.py'
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install
+        run: python3 -m pip install --quiet ai-edge-litert pillow numpy
+      - name: Download and inspect
+        run: |
+          mkdir -p rec-inspect
+          curl -fL -A "Mozilla/5.0" "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest" -o rec-inspect/google.apk
+          BASE="assets/lens_ondevice_text_stack_multiscript_omni/third_party/lens/line_recognition/v678672708"
+          unzip -p rec-inspect/google.apk "$BASE/recognizer_latn_vi_cyrl_lm_retrained.tflite" > rec-inspect/recognizer.tflite
+          unzip -p rec-inspect/google.apk "$BASE/recognizer_latn_vi_cyrl_label_map.pb" > rec-inspect/labels.pb
+          python3 scripts/inspect-lens-recognizer.py rec-inspect/recognizer.tflite rec-inspect/labels.pb rec-inspect/report.json
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: lens-recognizer-inspection
+          path: rec-inspect/
+          retention-days: 7
