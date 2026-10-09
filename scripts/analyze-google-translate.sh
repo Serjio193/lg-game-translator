@@ -122,5 +122,65 @@ for d in apk.get_all_dex():
         if rx.search(n): print(n)
 PY
 
+
+echo "[8] WordLens class/method dump"
+python3 - <<'PY' > out/wordlens-classdump.txt 2>&1 || true
+from androguard.core.apk import APK
+from androguard.core.dex import DEX
+apk=APK('out/apk/google-translate.apk')
+targets={
+'Lcom/google/android/libraries/wordlens/NativeLangMan;',
+'Lcom/google/android/libraries/wordlens/TranslateLibApi;',
+'Lcom/google/android/libraries/wordlens/WordLensSystem;'
+}
+for dexbytes in apk.get_all_dex():
+    dx=DEX(dexbytes)
+    for c in dx.get_classes():
+        if c.get_name() not in targets:
+            continue
+        print('\nCLASS', c.get_name())
+        for m in c.get_methods():
+            print('METHOD', m.get_name(), m.get_descriptor(), m.get_access_flags_string())
+            code=m.get_code()
+            if not code: continue
+            for ins in code.get_bc().get_instructions():
+                o=ins.get_output()
+                if any(k in o.lower() for k in ('lens','camera','translate','native','gdd','googlequicksearchbox','intent','system.load','library')):
+                    print(' ', ins.get_name(), o)
+
+# Find strings relevant to dynamic Lens packages / Google app delegation.
+needles=('GDD_LENS_','EVT_CAMERA_','WORDLENS','camera translation','googlequicksearchbox','com.google.android.googlequicksearchbox')
+for dexbytes in apk.get_all_dex():
+    dx=DEX(dexbytes)
+    for s in dx.get_strings():
+        val=s.get_value()
+        if any(n.lower() in val.lower() for n in needles):
+            print('STRING', repr(val))
+PY
+
+echo "[9] ELF exported JNI symbols"
+{
+  for so in out/unpacked/lib/arm64-v8a/*.so; do
+    echo "### $so"
+    readelf -Ws "$so" 2>/dev/null | grep -E 'Java_|JNI_OnLoad|Translate|WordLens|Lens|Camera|Text|OCR' | head -5000 || true
+  done
+} > out/elf-jni-symbols.txt
+
+echo "[10] TFLite FlatBuffer magic scan"
+python3 - <<'PY' > out/tflite-magic-scan.txt
+from pathlib import Path
+for p in Path('out/unpacked').rglob('*'):
+    if not p.is_file(): continue
+    try: b=p.read_bytes()
+    except: continue
+    hits=[]; pos=0
+    while True:
+        i=b.find(b'TFL3', pos)
+        if i<0: break
+        hits.append(i); pos=i+1
+    if hits:
+        print(p, len(hits), [hex(x) for x in hits[:50]])
+PY
+
 find out/unpacked -type f -printf '%s\t%p\n' | sort -nr | head -250 > out/largest-files.txt || true
 echo "Done."
