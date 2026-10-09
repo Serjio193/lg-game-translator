@@ -13,7 +13,8 @@ from pathlib import Path
 from PIL import Image
 
 from .assets import verify_bundle
-from .detector import GoogleGroupRpnDetector, rectify_crop
+from .detector import rectify_crop
+from .detector_runtime import GoogleConfiguredGroupRpnDetector
 from .protocol import Line, OcrResult, Point, Quad
 from .recognizer import GocrLineRecognizer
 
@@ -29,7 +30,7 @@ class FullGocrWorker:
     def __init__(self,assets:Path,threads:int=2):
         self.assets=assets
         self.asset_status=verify_bundle(assets)
-        self.detector=GoogleGroupRpnDetector(assets,threads=threads,max_side=1280)
+        self.detector=GoogleConfiguredGroupRpnDetector(assets,threads=threads)
         self.recognizer=GocrLineRecognizer(assets,threads=threads)
 
     def ocr(self,image:Image.Image)->dict:
