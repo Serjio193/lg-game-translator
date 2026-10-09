@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import ctypes
-import importlib.util
 import json
+import struct
 import os
 import sys
 from pathlib import Path
@@ -14,15 +14,11 @@ from gocr_worker.worker_full import FullGocrWorker
 
 screen_root=Path(sys.argv[1])
 android_assets=Path(sys.argv[2])
-proto_path=Path(sys.argv[3])
-out=Path(sys.argv[4])
+out=Path(sys.argv[3])
 
 resources=screen_root/"resources"
 lib=resources/"libchromescreenai.so"
 android_cfg=android_assets/"gocr_group_rpn_text_detection_config_2024_q4.binarypb"
-
-spec=importlib.util.spec_from_file_location("csai",proto_path)
-pb=importlib.util.module_from_spec(spec); spec.loader.exec_module(pb)
 
 # Build a 1280x720 game-like frame with separated lines.
 im=Image.new("RGBA",(1280,720),"white")
@@ -86,13 +82,47 @@ bm.fPixmap.fInfo.fDimensions.fWidth=1280; bm.fPixmap.fInfo.fDimensions.fHeight=7
 n=ctypes.c_uint32(0)
 ptr=so.PerformOCR(ctypes.byref(bm),ctypes.byref(n))
 blob=ctypes.string_at(ptr,n.value); so.FreeLibraryAllocatedCharArray(ptr)
-ann=pb.VisualAnnotation(); ann.ParseFromString(blob)
+def vi(data,pos):
+    v=0; sh=0
+    while True:
+        b=data[pos]; pos+=1; v|=(b&127)<<sh
+        if b<128: return v,pos
+        sh+=7
+
+def fields(data):
+    p=0
+    while p<len(data):
+        tag,p=vi(data,p); f,w=tag>>3,tag&7
+        if w==0:
+            v,p=vi(data,p)
+        elif w==2:
+            n,p=vi(data,p); v=data[p:p+n]; p+=n
+        elif w==5:
+            v=data[p:p+4]; p+=4
+        elif w==1:
+            v=data[p:p+8]; p+=8
+        else:
+            raise ValueError("unsupported wire")
+        yield f,w,v
+
+def rect(raw):
+    vals={"x":0,"y":0,"width":0,"height":0,"angle":0.0}
+    for f,w,v in fields(raw):
+        if f in (1,2,3,4) and w==0:
+            vals[{1:"x",2:"y",3:"width",4:"height"}[f]]=int(v)
+        elif f==5 and w==5:
+            vals["angle"]=struct.unpack("<f",v)[0]
+    return vals
 
 native=[]
-for line in ann.lines:
-    if not line.utf8_string.strip(): continue
-    b=line.bounding_box
-    native.append({"text":line.utf8_string,"bbox":[float(b.x),float(b.y),float(b.x+b.width),float(b.y+b.height)],"angle":float(b.angle)})
+for f,w,line_raw in fields(blob):
+    if f!=2 or w!=2: continue
+    txt=""; box=None
+    for lf,lw,lv in fields(line_raw):
+        if lf==2 and lw==2: box=rect(lv)
+        elif lf==3 and lw==2: txt=lv.decode("utf-8")
+    if txt.strip() and box:
+        native.append({"text":txt,"bbox":[float(box["x"]),float(box["y"]),float(box["x"]+box["width"]),float(box["y"]+box["height"])],"angle":float(box["angle"])})
 
 worker=FullGocrWorker(android_assets,threads=2)
 portable=worker.ocr(im.convert("RGB"))
