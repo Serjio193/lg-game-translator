@@ -1037,3 +1037,6 @@ Protobuf/config clues:
 
 Trace the GroupRPN model-runner constructor to the actual interpreter/delegate creation site. Detector and recognizer must be traced separately.
 Raw readelf/strings/disassembly evidence is uploaded as the workflow artifact and is not committed in full.
+
+## Recovered protobuf descriptors
+
