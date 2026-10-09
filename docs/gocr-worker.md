@@ -33,18 +33,33 @@ LG 1280x720 frame
 
 ## Что уже работает
 
-`gocr_worker` сейчас имеет рабочий crop-recognizer:
+Есть два рабочих entrypoint:
 
-- оригинальная Google модель `recognizer_latn_vi_cyrl_lm_retrained.tflite`;
-- оригинальный Google label map;
-- вход `uint8 [1,32,168,1]`;
-- CTC blank 1292;
-- production window constants `16 + 136 + 16` сохранены без ручного тюнинга;
-- Latin + Cyrillic в одной модели;
-- CLI и HTTP API;
-- geometry, пришедшая от TV detector, проходит через worker без потери координат.
+- `gocr_worker.worker` — Google crop -> UTF-8 text + сохранённая geometry;
+- `gocr_worker.worker_full` — полный кадр/photo -> GroupRPN -> line quads -> Google crops -> recognizer -> text + geometry.
 
-Полный portable GroupRPN detector пока **не объявлен готовым**: raw TFLite и production binarypb уже известны, но точный Google grouping/clustering ещё должен быть закрыт по parity с оригинальным ScreenAI/Lens. Endpoint `/v1/ocr` поэтому специально отвечает 501, а не использует приблизительный detector.
+Full worker использует:
+- оригинальный Google GroupRPN `.tflite`;
+- оригинальный Android Lens `gocr_group_rpn_text_detection_config_2024_q4.binarypb`;
+- параметры threshold/anchors/grouping/profile читаются из binarypb во время запуска;
+- оригинальную Google Latin/Cyrillic recognizer модель и label map.
+
+GroupRPN postprocess является clean-room реализацией по восстановленной protobuf-схеме и production-параметрам Google. Он не является копированием исходного C++ Google.
+
+Контрольная parity-проверка 1280x720 против оригинального `libchromescreenai.so`, которому был подан тот же Android Lens detector config:
+
+```text
+native lines:   3
+portable lines: 3
+exact text:     3 / 3
+mean bbox IoU:  0.9331705
+
+THE DOOR IS LOCKED  IoU 0.9699
+Привет мир          IoU 0.9563
+Press E to open     IoU 0.8733
+```
+
+Это подтверждает рабочий полный pipeline, но пока не доказывает 100% parity на всех наклонах, curved text и плотных UI.
 
 ## Оригинальные Google assets
 
@@ -103,7 +118,6 @@ POST /v1/recognize-crop
 POST /v1/ocr
 ```
 
-`/v1/ocr` пока возвращает HTTP 501 до закрытия detector parity.
 
 ## Формат запроса crop
 
@@ -162,18 +176,44 @@ POST /v1/ocr
 
 Важный момент: сейчас текстовый decoder — greedy CTC. Оригинальные Google FST/LM/prior файлы переносятся в bundle и не меняются, но production FST decoder ещё не подключён. Поэтому поле `production_lm_fst_applied` честно равно `false`.
 
-## Что будет на выходе после завершения detector parity
+## Полный кадр -> текст + координаты
 
-`POST /v1/ocr` будет принимать целый frame и возвращать массив строк:
+CLI:
 
-```text
-frame
- -> line 0: text + quad + angle + confidences
- -> line 1: text + quad + angle + confidences
- -> ...
+```bash
+PYTHONPATH=. /opt/gocr/venv/bin/python -m gocr_worker.worker_full \
+  --assets /opt/gocr/assets \
+  --threads 4 \
+  image frame.png
 ```
 
-То есть внешний интерфейс уже окончательный; при добавлении точного GroupRPN backend формат ответа не меняется.
+HTTP:
+
+```bash
+PYTHONPATH=. /opt/gocr/venv/bin/python -m gocr_worker.worker_full \
+  --assets /opt/gocr/assets \
+  --threads 4 \
+  serve --bind 0.0.0.0 --port 8771
+```
+
+Endpoint:
+
+```text
+POST /v1/ocr
+```
+
+Body:
+
+```json
+{"image_b64":"..."}
+```
+
+Response содержит массив строк. Для каждой строки возвращаются:
+- `text`;
+- `source_quad` — 4 точки в координатах исходного кадра;
+- `angle`;
+- `detector_confidence`;
+- timings.
 
 ## Как подключить к текущему pipeline
 
