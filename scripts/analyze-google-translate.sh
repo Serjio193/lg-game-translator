@@ -2,81 +2,96 @@
 set -euo pipefail
 
 VER="10.38.67.991942559.4-release"
-PAGE="https://www.apkmirror.com/apk/google-inc/translate/google-translate-10-38-67-991942559-4-release-release/google-translate-10-38-67-991942559-4-release-2-android-apk-download/"
 mkdir -p out/apk out/unpacked
-
 UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/140 Safari/537.36"
+APK=out/apk/google-translate.apk
 
-echo "[1] Fetching APKMirror variant page"
-curl -fsSL -A "$UA" "$PAGE" -o out/page.html
+is_apk() {
+  [[ -s "$1" ]] || return 1
+  python3 - "$1" <<'PY'
+import sys,zipfile
+p=sys.argv[1]
+try:
+    with zipfile.ZipFile(p) as z:
+        names=set(z.namelist())
+        ok=('AndroidManifest.xml' in names and 'classes.dex' in names)
+    raise SystemExit(0 if ok else 1)
+except Exception:
+    raise SystemExit(1)
+PY
+}
 
-DL_PATH=$(python3 - <<'PY'
+try_url() {
+  local url="$1"
+  echo "Trying: $url"
+  rm -f "$APK"
+  if curl -fL --retry 2 --connect-timeout 20 -A "$UA" "$url" -o "$APK"; then
+    if is_apk "$APK"; then
+      echo "Valid APK downloaded from $url"
+      return 0
+    fi
+  fi
+  rm -f "$APK"
+  return 1
+}
+
+echo "[1] Downloading latest Google Translate APK"
+try_url "https://d.apkpure.com/b/APK/com.google.android.apps.translate?version=latest" || try_url "https://d.apkpure.net/b/APK/com.google.android.apps.translate?version=latest" || {
+  PAGE="https://www.apkmirror.com/apk/google-inc/translate/google-translate-10-38-67-991942559-4-release-release/google-translate-10-38-67-991942559-4-release-2-android-apk-download/"
+  echo "APKPure CDN failed; trying APKMirror HTML flow"
+  curl -fsSL -A "$UA" "$PAGE" -o out/page.html
+  DL_PATH=$(python3 - <<'PY'
 import re
 s=open('out/page.html',encoding='utf-8',errors='ignore').read()
-m=re.search(r'href="([^"]*?/download/\?key=[^"]+)"', s)
-if not m:
-    m=re.search(r'href="([^"]*download\.php\?id=[^"]+)"', s)
+m=re.search(r'href="([^"]*?/download/\?key=[^"]+)"', s) or re.search(r'href="([^"]*download\.php\?id=[^"]+)"', s)
 print(m.group(1).replace('&amp;','&') if m else '')
 PY
 )
-
-if [[ -z "$DL_PATH" ]]; then
-  echo "Could not locate APKMirror intermediate download link" >&2
-  grep -oiE 'href="[^"]*(download|key)[^"]*"' out/page.html | head -100 > out/download-link-debug.txt || true
-  exit 2
-fi
-
-if [[ "$DL_PATH" == http* ]]; then
-  DL_PAGE="$DL_PATH"
-else
-  DL_PAGE="https://www.apkmirror.com$DL_PATH"
-fi
-
-echo "[2] Fetching intermediate page: $DL_PAGE"
-curl -fsSL -A "$UA" -e "$PAGE" "$DL_PAGE" -o out/download.html
-
-FINAL=$(python3 - <<'PY'
+  [[ -n "$DL_PATH" ]] || { echo "No APKMirror intermediate link"; exit 2; }
+  [[ "$DL_PATH" == http* ]] && DL_PAGE="$DL_PATH" || DL_PAGE="https://www.apkmirror.com$DL_PATH"
+  curl -fsSL -A "$UA" -e "$PAGE" "$DL_PAGE" -o out/download.html
+  FINAL=$(python3 - <<'PY'
 import re
 s=open('out/download.html',encoding='utf-8',errors='ignore').read()
-patterns=[
- r'href="([^"]*download\.php\?id=[^"]+)"',
- r'href="(https://download[^"]+)"',
- r'href="(https://downloadr[^"]+)"'
-]
-for p in patterns:
+for p in [r'href="([^"]*download\.php\?id=[^"]+)"',r'href="(https://download[^"]+)"',r'href="(https://downloadr[^"]+)"']:
     m=re.search(p,s)
     if m:
-        print(m.group(1).replace('&amp;','&'))
-        break
+        print(m.group(1).replace('&amp;','&')); break
 PY
 )
+  [[ -n "$FINAL" ]] || { echo "No APKMirror final link"; exit 3; }
+  [[ "$FINAL" == http* ]] || FINAL="https://www.apkmirror.com$FINAL"
+  try_url "$FINAL" || exit 4
+}
 
-if [[ -z "$FINAL" ]]; then
-  echo "Could not locate final APK URL" >&2
-  grep -oiE 'href="[^"]*(download|\.apk)[^"]*"' out/download.html | head -100 > out/final-link-debug.txt || true
-  exit 3
-fi
-if [[ "$FINAL" != http* ]]; then FINAL="https://www.apkmirror.com$FINAL"; fi
+echo "[2] Basic integrity"
+file "$APK" | tee out/file.txt
+sha256sum "$APK" | tee out/sha256.txt
+stat -c '%s bytes' "$APK" | tee out/size.txt
 
-echo "[3] Downloading APK"
-curl -fL --retry 3 -A "$UA" -e "$DL_PAGE" "$FINAL" -o out/apk/google-translate.apk
-
-echo "[4] Basic integrity"
-file out/apk/google-translate.apk | tee out/file.txt
-sha256sum out/apk/google-translate.apk | tee out/sha256.txt
-stat -c '%s bytes' out/apk/google-translate.apk | tee out/size.txt
-
-echo "[5] Unpacking"
-unzip -q out/apk/google-translate.apk -d out/unpacked
-
+echo "[3] Unpacking"
+unzip -q "$APK" -d out/unpacked
 find out/unpacked -type f | sort > out/file-list.txt
 find out/unpacked -type f \( -iname '*.tflite' -o -iname '*.lite' -o -iname '*.task' -o -iname '*.bin' -o -iname '*.model' -o -iname '*.pb' -o -iname '*.onnx' \) -printf '%p\t%s bytes\n' | sort > out/model-files.txt
 find out/unpacked -type f -name '*.so' -printf '%p\t%s bytes\n' | sort > out/native-libs.txt
 
-echo "[6] Strings of interest from APK and native libs"
+echo "[4] Manifest/package metadata"
+python3 - <<'PY' > out/apk-metadata.txt 2>&1
+from androguard.core.apk import APK
+a=APK('out/apk/google-translate.apk')
+print('package=',a.get_package())
+print('version_name=',a.get_androidversion_name())
+print('version_code=',a.get_androidversion_code())
+print('min_sdk=',a.get_min_sdk_version())
+print('target_sdk=',a.get_target_sdk_version())
+print('permissions:')
+for p in sorted(a.get_permissions()): print(' ',p)
+PY
+
+echo "[5] Strings of interest"
 {
   echo '=== APK strings ==='
-  strings -a out/apk/google-translate.apk | grep -iE 'lens|camera|ocr|text.?recogn|translate|inpaint|tflite|tensorflow|liteRT|region.?proposal|rpn|vision|segmentation|render|overlay' | sort -u | head -10000
+  strings -a "$APK" | grep -iE 'lens|camera|ocr|text.?recogn|translate|inpaint|tflite|tensorflow|liteRT|region.?proposal|rpn|vision|segmentation|render|overlay' | sort -u | head -10000 || true
   echo
   echo '=== Native library matches ==='
   while IFS= read -r so; do
@@ -85,7 +100,7 @@ echo "[6] Strings of interest from APK and native libs"
   done < <(find out/unpacked -type f -name '*.so' | sort)
 } > out/interesting-strings.txt
 
-echo "[7] ELF dependencies"
+echo "[6] ELF dependencies"
 {
   while IFS= read -r so; do
     echo "### $so"
@@ -93,22 +108,19 @@ echo "[7] ELF dependencies"
   done < <(find out/unpacked -type f -name '*.so' | sort)
 } > out/elf-deps.txt
 
-echo "[8] DEX class/string scan with androguard"
+echo "[7] DEX class scan"
 python3 - <<'PY' > out/dex-hits.txt 2>&1 || true
 from androguard.core.apk import APK
+from androguard.core.dex import DEX
 import re
 apk=APK('out/apk/google-translate.apk')
 rx=re.compile(r'(lens|camera|ocr|text.?recogn|translate|inpaint|tflite|tensorflow|litert|region.?proposal|rpn|vision|segmentation|overlay)',re.I)
 for d in apk.get_all_dex():
-    from androguard.core.dex import DEX
     dx=DEX(d)
     for c in dx.get_classes():
         n=c.get_name()
-        if rx.search(n):
-            print(n)
+        if rx.search(n): print(n)
 PY
 
-echo "[9] Largest files"
-find out/unpacked -type f -printf '%s\t%p\n' | sort -nr | head -200 > out/largest-files.txt
-
+find out/unpacked -type f -printf '%s\t%p\n' | sort -nr | head -250 > out/largest-files.txt
 echo "Done."
