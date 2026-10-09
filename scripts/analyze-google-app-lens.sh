@@ -10,7 +10,7 @@ import sys,zipfile
 try:
   z=zipfile.ZipFile(sys.argv[1]); n=set(z.namelist())
   raise SystemExit(0 if 'AndroidManifest.xml' in n and any(x.startswith('classes') and x.endswith('.dex') for x in n) else 1)
-except: raise SystemExit(1)
+except Exception: raise SystemExit(1)
 PY
 }
 
@@ -19,7 +19,7 @@ import sys,zipfile
 try:
  z=zipfile.ZipFile(sys.argv[1]); names=z.namelist()
  raise SystemExit(0 if any(x.lower().endswith('.apk') for x in names) else 1)
-except: raise SystemExit(1)
+except Exception: raise SystemExit(1)
 PY
 }
 
