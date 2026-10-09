@@ -23,17 +23,40 @@ except: raise SystemExit(1)
 PY
 }
 
-echo "[1] Download Google App"
-for url in  "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest"  "https://d.apkpure.com/b/APK/com.google.android.googlequicksearchbox?version=latest"; do
-  rm -f "$APK"
-  echo "Trying $url"
-  if curl -fL --retry 2 -A "$UA" "$url" -o "$APK" && is_apk "$APK"; then break; fi
-done
-is_apk "$APK" || { echo "Could not download valid Google App APK"; exit 2; }
+echo "[1] Download Google App package"
+BUNDLE="$OUT/google-app-download.bin"
+URL="https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest"
+rm -f "$BUNDLE"
+curl -fL --retry 2 -A "$UA" -D "$OUT/reports/download-headers.txt" "$URL" -o "$BUNDLE"
 
-file "$APK" | tee "$OUT/reports/file.txt"
-sha256sum "$APK" | tee "$OUT/reports/sha256.txt"
-stat -c '%s bytes' "$APK" | tee "$OUT/reports/size.txt"
+file "$BUNDLE" | tee "$OUT/reports/file.txt"
+sha256sum "$BUNDLE" | tee "$OUT/reports/sha256.txt"
+stat -c '%s bytes' "$BUNDLE" | tee "$OUT/reports/size.txt"
+xxd -l 64 "$BUNDLE" > "$OUT/reports/first64.txt" || true
+python3 - "$BUNDLE" > "$OUT/reports/container-list.txt" 2>&1 <<'PY'
+import sys,zipfile,os
+p=sys.argv[1]
+print('is_zip=',zipfile.is_zipfile(p))
+if zipfile.is_zipfile(p):
+    with zipfile.ZipFile(p) as z:
+        for i,n in enumerate(z.namelist()[:5000]):
+            info=z.getinfo(n)
+            print(info.file_size, n)
+PY
+
+mkdir -p "$OUT/package"
+if is_apk "$BUNDLE"; then
+  cp "$BUNDLE" "$APK"
+elif is_bundle "$BUNDLE"; then
+  unzip -q "$BUNDLE" -d "$OUT/package"
+  find "$OUT/package" -type f -iname '*.apk' -printf '%s\t%p\n' | sort -nr > "$OUT/reports/split-apks.txt"
+  BASE=$(find "$OUT/package" -type f \( -iname 'base.apk' -o -iname '*base*.apk' \) | head -1 || true)
+  if [[ -z "$BASE" ]]; then BASE=$(find "$OUT/package" -type f -iname '*.apk' -printf '%s\t%p\n' | sort -nr | head -1 | cut -f2-); fi
+  cp "$BASE" "$APK"
+else
+  echo "Package is neither direct APK nor zip bundle with APK files" | tee "$OUT/reports/package-error.txt"
+  exit 2
+fi
 
 python3 - <<'PY' > "$OUT/reports/apk-metadata.txt" 2>&1
 from androguard.core.apk import APK
