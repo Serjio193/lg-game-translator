@@ -7,6 +7,7 @@ on:
       - '.github/workflows/reverse-screenai-grouprpn.yml'
       - 'scripts/recover-grouprpn-descriptor.py'
       - 'scripts/recover-gocr-detector-descriptor.py'
+      - 'scripts/recover-proto-descriptor.py'
 
 jobs:
   reverse:
@@ -41,6 +42,7 @@ jobs:
           fi
           python3 "$GITHUB_WORKSPACE/scripts/recover-grouprpn-descriptor.py" /tmp/rpn/out/libchromescreenai.so /tmp/rpn/out/grouprpn-descriptor
           python3 "$GITHUB_WORKSPACE/scripts/recover-gocr-detector-descriptor.py" /tmp/rpn/out/libchromescreenai.so /tmp/rpn/out/gocr-detector-descriptor
+          python3 "$GITHUB_WORKSPACE/scripts/recover-proto-descriptor.py" /tmp/rpn/out/libchromescreenai.so group_rpn_text_detection_mutator_runtime_options.proto /tmp/rpn/out/grouprpn-runtime-options-descriptor
       - name: Upload
         if: always()
         uses: actions/upload-artifact@v4
