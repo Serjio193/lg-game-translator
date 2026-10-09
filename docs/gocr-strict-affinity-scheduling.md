@@ -263,3 +263,68 @@ load and preserve restoration/lifecycle boundaries. No realtime policy was used.
 
 Host and G5: 41 targeted unit/regression tests passed. Evidence is compressed
 losslessly as `.json.gz`; the analysis script reads both plain and gzip JSON.
+
+
+## Follow-up: persistent 10-minute corpus series
+
+Evidence: `docs/evidence/gocr-strict-scheduling-10min-20261009/series.json.gz`
+and `summary.json`. Uses all 13 saved test images, not newly captured TV frames.
+One system STRICT detector and recognizer remain alive throughout: 2/2 threads,
+XNNPACK off, unchanged model/config and original native binaries. Normal affinity
+0–3 is retained; only CFS nice values 0/-5 change on the five existing TIDs.
+
+All frame references are recorded once before the timed interval. Each frame has
+one warmup for each priority. Then repeat the corpus round-robin, balancing AB/BA
+order by frame and round. Check every call against its original frame reference;
+no new reference is substituted between rounds. External polling is disabled.
+Counter snapshots, hashes, postprocess comparison and checkpoint serialization
+are outside native Invoke/full-OCR timing, but included in the workload interval.
+
+```sh
+python3 -B scripts/benchmark-gocr-strict-scheduling.py \
+  --assets assets --variant nice_-5 --modes full --no-observer \
+  --duration-seconds 600 --output strict-scheduling-10min/series.json \
+  fast-corpus/*.ppm
+```
+
+Warmup is excluded from the 600-second timer. A complete pair is finished before
+stopping; the measured workload reached 603.09 s, or 605.19 s including the final
+checkpoint. There were 180 matched pairs / 360 full OCR calls; 13–14 pairs per
+frame. Persistent TID set and original priority/policy/affinity restoration pass.
+
+| Metric | nice=0 median / p95 ms | nice=-5 median / p95 ms | Median speedup |
+|---|---:|---:|---:|
+| invoke | 1323.34 / 1485.55 | 1246.96 / 1327.11 | 1.061x |
+| full | 1543.68 / 1921.94 | 1423.18 / 1773.19 | 1.085x |
+
+Minute buckets assign both calls of a pair to the minute of its first call.
+The final short overrun is part of the last pair, not a separate minute.
+
+| Minute | Pairs | nice=0 Invoke median ms | nice=-5 Invoke median ms |
+|---|---:|---:|---:|
+| 1 | 19 | 1345.20 | 1225.37 |
+| 2 | 18 | 1307.55 | 1285.76 |
+| 3 | 18 | 1309.47 | 1284.08 |
+| 4 | 18 | 1315.12 | 1292.71 |
+| 5 | 17 | 1330.44 | 1291.59 |
+| 6 | 18 | 1340.33 | 1227.00 |
+| 7 | 18 | 1323.82 | 1207.49 |
+| 8 | 18 | 1324.71 | 1201.52 |
+| 9 | 18 | 1325.81 | 1198.69 |
+| 10 | 18 | 1411.85 | 1232.04 |
+
+All four input hashes and eleven output hashes match in every observation.
+Decoded proposals, deduped pieces, component membership, source quads, crop SHA,
+recognizer window SHA and UTF-8 text also match the original per-frame references
+throughout. There are 1980 candidate output-hash comparisons; no mismatch.
+
+The long series confirms a gain, but not a fixed 10% reduction: median Invoke
+latency falls 5.8%, full OCR 7.8%. Minute-level median Invoke reductions range
+about 1.7–12.7%. The effect is workload-dependent and does not disappear at the
+end; the last minutes improve more than the middle. This does not establish a
+thermal cause. All exported core frequency samples remain 1400000 kHz; hardware
+temperature/throttling remains unobservable.
+
+Keep production unchanged. An opt-in nice=-5 experiment remains reasonable,
+but do not promise a universal speedup or attribute this to faster kernels.
+43 targeted tests pass on host and G5. No native library was rebuilt.

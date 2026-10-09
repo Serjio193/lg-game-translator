@@ -42,3 +42,5 @@ postprocess работает после tensor decode, не управляет c
 
 - `gocr_worker/scheduler_observation.py`, `scheduler_experiment.py`: read-only Linux thread evidence and test-process-only affinity/scheduler controls.
 - `scripts/benchmark-gocr-strict-scheduling.py`, `analyze-gocr-strict-scheduling.py`: isolated system STRICT 2/2 affinity matrix, exact gates, traces and summaries.
+
+- `gocr_worker/scheduler_series.py`: persistent 10-minute corpus A/B series, cached strict references and one-time warmup; minute-by-minute results are summarized by the existing scheduling analyzer.

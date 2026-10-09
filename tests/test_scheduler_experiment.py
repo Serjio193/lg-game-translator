@@ -5,6 +5,7 @@ from pathlib import Path
 from unittest.mock import patch
 from gocr_worker.scheduler_experiment import Placement
 from gocr_worker.scheduler_observation import delta, keyed_fields
+from gocr_worker.scheduler_series import pair_order, finished
 
 
 module_path = Path(__file__).resolve().parents[1] / "scripts/benchmark-gocr-strict-scheduling.py"
@@ -45,6 +46,16 @@ class SchedulingTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "new worker"):
                 obj.apply("pair_0_1")
             affinity.assert_not_called()
+
+    def test_duration_requires_elapsed_time_and_minimum_for_every_frame(self):
+        self.assertFalse(finished(599, 600, [12] * 13, 10))
+        self.assertFalse(finished(601, 600, [10] * 12 + [9], 10))
+        self.assertTrue(finished(601, 600, [10] * 13, 10))
+
+    def test_round_robin_order_balances_leading_priority(self):
+        self.assertEqual(pair_order(0, 0), ["baseline", "nice_-5"])
+        self.assertEqual(pair_order(0, 1), ["nice_-5", "baseline"])
+        self.assertEqual(pair_order(1, 0), ["nice_-5", "baseline"])
 
     def test_unapproved_priority_rejected_before_mutation(self):
         obj = self.controller()

@@ -1,0 +1,2086 @@
+[
+  {
+    "variant": "nice_-5",
+    "roles": {
+      "main": 4074,
+      "detector_owned": [
+        4079,
+        4080,
+        4081
+      ],
+      "recognizer_new": [
+        4087
+      ],
+      "import_background": []
+    },
+    "persistent_tid_set": true,
+    "restore_errors": [],
+    "unsupported": null,
+    "duration_series": {
+      "elapsed_seconds": 605.1926418399999,
+      "pairs": 180,
+      "calls": 360,
+      "per_frame": {
+        "00-description-screen-20261006-capture.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0725507155163942
+        },
+        "01-description-screen-20261006-current-full.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0300193004966558
+        },
+        "02-font-matching-20261007-source-frame.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0358944954927658
+        },
+        "03-ocr-candidates-20261007-live-frame.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0500834042884923
+        },
+        "04-ocr-fullscreen-discussion-20261005-screen.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0686216523736092
+        },
+        "05-ocr-policy-live-20261005-frame.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0993418807959356
+        },
+        "06-ppocr-only-live-20261007-frame.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.104509311912029
+        },
+        "07-text-detectors-video-only-input.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0924781413142954
+        },
+        "08-game-input.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0822545710637286
+        },
+        "09-game-brothership-input.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0778566499168831
+        },
+        "10-game-example-2-input.ppm": {
+          "pairs": 14,
+          "paired_invoke_speedup_median": 1.0729359929620417
+        },
+        "11-gocr-native-postprocess-20261009-emergency-guard.ppm": {
+          "pairs": 13,
+          "paired_invoke_speedup_median": 1.0908243654333931
+        },
+        "12-gocr-native-postprocess-20261009-luigi.ppm": {
+          "pairs": 13,
+          "paired_invoke_speedup_median": 1.0708586088719791
+        }
+      },
+      "pooled": {
+        "baseline": {
+          "invoke": {
+            "n": 180,
+            "median_ms": 1323.34185,
+            "p95_ms": 1485.55242
+          },
+          "full": {
+            "n": 180,
+            "median_ms": 1543.68081,
+            "p95_ms": 1921.939
+          }
+        },
+        "nice_-5": {
+          "invoke": {
+            "n": 180,
+            "median_ms": 1246.96127,
+            "p95_ms": 1327.11498
+          },
+          "full": {
+            "n": 180,
+            "median_ms": 1423.17846,
+            "p95_ms": 1773.1881
+          }
+        }
+      },
+      "minutes": {
+        "0": {
+          "baseline": {
+            "invoke": {
+              "n": 19,
+              "median_ms": 1345.20178,
+              "p95_ms": 1430.91858
+            },
+            "full": {
+              "n": 19,
+              "median_ms": 1547.40192,
+              "p95_ms": 2031.99754
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 19,
+              "median_ms": 1225.36668,
+              "p95_ms": 1407.91176
+            },
+            "full": {
+              "n": 19,
+              "median_ms": 1405.69662,
+              "p95_ms": 1887.03246
+            }
+          }
+        },
+        "1": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1307.55323,
+              "p95_ms": 1360.8062
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1457.0372499999999,
+              "p95_ms": 1903.57434
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1285.76144,
+              "p95_ms": 1327.19172
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1428.38088,
+              "p95_ms": 1753.2722
+            }
+          }
+        },
+        "2": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1309.47404,
+              "p95_ms": 1361.6852
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1471.71468,
+              "p95_ms": 1853.285
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1284.0842699999998,
+              "p95_ms": 1337.00288
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1470.7520800000002,
+              "p95_ms": 1784.15376
+            }
+          }
+        },
+        "3": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1315.1217299999998,
+              "p95_ms": 1466.26064
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1466.42652,
+              "p95_ms": 2008.04116
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1292.70755,
+              "p95_ms": 1324.33314
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1426.7985899999999,
+              "p95_ms": 1804.23944
+            }
+          }
+        },
+        "4": {
+          "baseline": {
+            "invoke": {
+              "n": 17,
+              "median_ms": 1330.4418,
+              "p95_ms": 2124.70824
+            },
+            "full": {
+              "n": 17,
+              "median_ms": 1536.7147,
+              "p95_ms": 2762.30464
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 17,
+              "median_ms": 1291.58688,
+              "p95_ms": 1381.12688
+            },
+            "full": {
+              "n": 17,
+              "median_ms": 1452.87552,
+              "p95_ms": 1867.81602
+            }
+          }
+        },
+        "5": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1340.32976,
+              "p95_ms": 1469.46202
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1561.51739,
+              "p95_ms": 1900.97804
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1227.0031199999999,
+              "p95_ms": 1356.2993
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1398.0356900000002,
+              "p95_ms": 1818.26528
+            }
+          }
+        },
+        "6": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1323.81588,
+              "p95_ms": 1570.5295
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1518.47431,
+              "p95_ms": 1966.67202
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1207.48625,
+              "p95_ms": 1245.75626
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1353.8865799999999,
+              "p95_ms": 1752.37548
+            }
+          }
+        },
+        "7": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1324.7089700000001,
+              "p95_ms": 1416.15488
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1518.59766,
+              "p95_ms": 1899.61714
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1201.52446,
+              "p95_ms": 1252.73112
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1404.08071,
+              "p95_ms": 1728.7704
+            }
+          }
+        },
+        "8": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1325.80501,
+              "p95_ms": 1515.54938
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1636.73226,
+              "p95_ms": 2051.35972
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1198.69056,
+              "p95_ms": 1411.46308
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1360.979,
+              "p95_ms": 1848.5421
+            }
+          }
+        },
+        "9": {
+          "baseline": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1411.8546099999999,
+              "p95_ms": 1579.04972
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1664.48431,
+              "p95_ms": 2033.37358
+            }
+          },
+          "nice_-5": {
+            "invoke": {
+              "n": 18,
+              "median_ms": 1232.03918,
+              "p95_ms": 1350.67842
+            },
+            "full": {
+              "n": 18,
+              "median_ms": 1375.67686,
+              "p95_ms": 1819.7381
+            }
+          }
+        }
+      }
+    },
+    "evidence_file": "docs\\evidence\\gocr-strict-scheduling-10min-20261009\\series.json.gz",
+    "frames": [
+      {
+        "frame": "00-description-screen-20261006-capture.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1332.20755,
+                "p95_ms": 1469.46202
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1491.51978,
+                "p95_ms": 1659.20502
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.5,
+                  "voluntary": 43.92857142857143,
+                  "involuntary": 933.2142857142857,
+                  "runtime_ns": 1180048614.2857144,
+                  "runqueue_ns": 105094775.35714285
+                },
+                "4079": {
+                  "migrations": 1.2142857142857142,
+                  "voluntary": 35.142857142857146,
+                  "involuntary": 997.8571428571429,
+                  "runtime_ns": 931243738.5714285,
+                  "runqueue_ns": 104796919.64285715
+                },
+                "4080": {
+                  "migrations": 0.7142857142857143,
+                  "voluntary": 7.928571428571429,
+                  "involuntary": 212.07142857142858,
+                  "runtime_ns": 183140502.5,
+                  "runqueue_ns": 35650397.85714286
+                },
+                "4081": {
+                  "migrations": 1,
+                  "voluntary": 7.642857142857143,
+                  "involuntary": 186.42857142857142,
+                  "runtime_ns": 182759961.42857143,
+                  "runqueue_ns": 37685892.85714286
+                },
+                "4087": {
+                  "migrations": 0.5,
+                  "voluntary": 10.071428571428571,
+                  "involuntary": 112.28571428571429,
+                  "runtime_ns": 95457432.14285715,
+                  "runqueue_ns": 22954256.42857143
+                },
+                "total": {
+                  "migrations": 4.928571428571429,
+                  "voluntary": 104.71428571428572,
+                  "involuntary": 2441.8571428571427,
+                  "runtime_ns": 2572650248.9285717,
+                  "runqueue_ns": 306182242.14285713
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1274.91779,
+                "p95_ms": 1350.67842
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1434.91066,
+                "p95_ms": 1493.7531
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.2142857142857142,
+                  "voluntary": 29.785714285714285,
+                  "involuntary": 820.4285714285714,
+                  "runtime_ns": 1156606003.5714285,
+                  "runqueue_ns": 59098371.428571425
+                },
+                "4079": {
+                  "migrations": 0.7857142857142857,
+                  "voluntary": 31.142857142857142,
+                  "involuntary": 810.0714285714286,
+                  "runtime_ns": 923436608.2142857,
+                  "runqueue_ns": 64319103.928571425
+                },
+                "4080": {
+                  "migrations": 0.5,
+                  "voluntary": 7.5,
+                  "involuntary": 183.5,
+                  "runtime_ns": 181221115.7142857,
+                  "runqueue_ns": 25542582.14285714
+                },
+                "4081": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 7.571428571428571,
+                  "involuntary": 192.64285714285714,
+                  "runtime_ns": 180700197.14285713,
+                  "runqueue_ns": 23085258.57142857
+                },
+                "4087": {
+                  "migrations": 0.2857142857142857,
+                  "voluntary": 6.357142857142857,
+                  "involuntary": 99.92857142857143,
+                  "runtime_ns": 88927456.42857143,
+                  "runqueue_ns": 13124362.142857144
+                },
+                "total": {
+                  "migrations": 3.142857142857143,
+                  "voluntary": 82.35714285714286,
+                  "involuntary": 2106.5714285714284,
+                  "runtime_ns": 2530891381.0714283,
+                  "runqueue_ns": 185169678.2142857
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "01-description-screen-20261006-current-full.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1331.26573,
+                "p95_ms": 1570.5295
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1722.46421,
+                "p95_ms": 2051.35972
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.2142857142857142,
+                  "voluntary": 50.57142857142857,
+                  "involuntary": 1171.857142857143,
+                  "runtime_ns": 1401043782.5,
+                  "runqueue_ns": 123569574.64285715
+                },
+                "4079": {
+                  "migrations": 1.2857142857142858,
+                  "voluntary": 35.57142857142857,
+                  "involuntary": 901.5714285714286,
+                  "runtime_ns": 928752283.2142857,
+                  "runqueue_ns": 107239988.21428572
+                },
+                "4080": {
+                  "migrations": 0.5,
+                  "voluntary": 7.214285714285714,
+                  "involuntary": 173.21428571428572,
+                  "runtime_ns": 183199918.92857143,
+                  "runqueue_ns": 100520313.57142857
+                },
+                "4081": {
+                  "migrations": 0.9285714285714286,
+                  "voluntary": 7.5,
+                  "involuntary": 223.85714285714286,
+                  "runtime_ns": 182300444.64285713,
+                  "runqueue_ns": 65237603.928571425
+                },
+                "4087": {
+                  "migrations": 0.7142857142857143,
+                  "voluntary": 30.714285714285715,
+                  "involuntary": 301.2142857142857,
+                  "runtime_ns": 302209546.78571427,
+                  "runqueue_ns": 43255250.35714286
+                },
+                "total": {
+                  "migrations": 4.642857142857143,
+                  "voluntary": 131.57142857142856,
+                  "involuntary": 2771.714285714286,
+                  "runtime_ns": 2997505976.071429,
+                  "runqueue_ns": 439822730.71428573
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1267.0115799999999,
+                "p95_ms": 1411.46308
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1647.03302,
+                "p95_ms": 1848.5421
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.7857142857142857,
+                  "voluntary": 29.571428571428573,
+                  "involuntary": 696.3571428571429,
+                  "runtime_ns": 1367597036.0714285,
+                  "runqueue_ns": 71834254.28571428
+                },
+                "4079": {
+                  "migrations": 0.42857142857142855,
+                  "voluntary": 30.285714285714285,
+                  "involuntary": 698.0714285714286,
+                  "runtime_ns": 916440936.4285715,
+                  "runqueue_ns": 58588146.071428575
+                },
+                "4080": {
+                  "migrations": 0.5,
+                  "voluntary": 7.714285714285714,
+                  "involuntary": 147.42857142857142,
+                  "runtime_ns": 175079295.7142857,
+                  "runqueue_ns": 38547184.64285714
+                },
+                "4081": {
+                  "migrations": 0.07142857142857142,
+                  "voluntary": 7.357142857142857,
+                  "involuntary": 163.35714285714286,
+                  "runtime_ns": 186280068.2142857,
+                  "runqueue_ns": 16454823.57142857
+                },
+                "4087": {
+                  "migrations": 0.8571428571428571,
+                  "voluntary": 23.071428571428573,
+                  "involuntary": 283.2142857142857,
+                  "runtime_ns": 288665047.85714287,
+                  "runqueue_ns": 26200035
+                },
+                "total": {
+                  "migrations": 2.642857142857143,
+                  "voluntary": 98.0,
+                  "involuntary": 1988.4285714285716,
+                  "runtime_ns": 2934062384.285714,
+                  "runqueue_ns": 211624443.57142857
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "02-font-matching-20261007-source-frame.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1321.96391,
+                "p95_ms": 1421.31822
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1463.08285,
+                "p95_ms": 1579.4112
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.8571428571428571,
+                  "voluntary": 38.92857142857143,
+                  "involuntary": 1004.2142857142857,
+                  "runtime_ns": 1159011852.857143,
+                  "runqueue_ns": 86571006.42857143
+                },
+                "4079": {
+                  "migrations": 1,
+                  "voluntary": 33.57142857142857,
+                  "involuntary": 983.2142857142857,
+                  "runtime_ns": 929237437.1428572,
+                  "runqueue_ns": 95867538.92857143
+                },
+                "4080": {
+                  "migrations": 0.5,
+                  "voluntary": 7.571428571428571,
+                  "involuntary": 248.5,
+                  "runtime_ns": 185627439.64285713,
+                  "runqueue_ns": 38364517.5
+                },
+                "4081": {
+                  "migrations": 1.2142857142857142,
+                  "voluntary": 7.428571428571429,
+                  "involuntary": 217.14285714285714,
+                  "runtime_ns": 180588221.42857143,
+                  "runqueue_ns": 62568826.78571428
+                },
+                "4087": {
+                  "migrations": 0.42857142857142855,
+                  "voluntary": 7,
+                  "involuntary": 139.07142857142858,
+                  "runtime_ns": 89856717.85714285,
+                  "runqueue_ns": 13100379.642857144
+                },
+                "total": {
+                  "migrations": 4.0,
+                  "voluntary": 94.5,
+                  "involuntary": 2592.142857142857,
+                  "runtime_ns": 2544321668.9285717,
+                  "runqueue_ns": 296472269.28571427
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1263.04908,
+                "p95_ms": 1327.19172
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1396.9241299999999,
+                "p95_ms": 1461.6272
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.7142857142857143,
+                  "voluntary": 27.214285714285715,
+                  "involuntary": 675.6428571428571,
+                  "runtime_ns": 1137690791.0714285,
+                  "runqueue_ns": 51316182.14285714
+                },
+                "4079": {
+                  "migrations": 1,
+                  "voluntary": 31.214285714285715,
+                  "involuntary": 620.5714285714286,
+                  "runtime_ns": 919666851.0714285,
+                  "runqueue_ns": 56067158.21428572
+                },
+                "4080": {
+                  "migrations": 0.2857142857142857,
+                  "voluntary": 7.5,
+                  "involuntary": 134.35714285714286,
+                  "runtime_ns": 184331568.57142857,
+                  "runqueue_ns": 17763875.35714286
+                },
+                "4081": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 7.642857142857143,
+                  "involuntary": 149.14285714285714,
+                  "runtime_ns": 178732441.7857143,
+                  "runqueue_ns": 32270283.57142857
+                },
+                "4087": {
+                  "migrations": 0.14285714285714285,
+                  "voluntary": 8.214285714285714,
+                  "involuntary": 81.5,
+                  "runtime_ns": 88359796.78571428,
+                  "runqueue_ns": 8158429.642857143
+                },
+                "total": {
+                  "migrations": 2.5,
+                  "voluntary": 81.78571428571429,
+                  "involuntary": 1661.2142857142858,
+                  "runtime_ns": 2508781449.285714,
+                  "runqueue_ns": 165575928.92857143
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "03-ocr-candidates-20261007-live-frame.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1318.79619,
+                "p95_ms": 1515.54938
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1455.03732,
+                "p95_ms": 1652.98968
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.2857142857142858,
+                  "voluntary": 44.57142857142857,
+                  "involuntary": 979.9285714285714,
+                  "runtime_ns": 1150217695.7142856,
+                  "runqueue_ns": 103002423.21428572
+                },
+                "4079": {
+                  "migrations": 1.0714285714285714,
+                  "voluntary": 34.785714285714285,
+                  "involuntary": 975.6428571428571,
+                  "runtime_ns": 924881961.7857143,
+                  "runqueue_ns": 114698568.92857143
+                },
+                "4080": {
+                  "migrations": 0.42857142857142855,
+                  "voluntary": 8,
+                  "involuntary": 282.35714285714283,
+                  "runtime_ns": 180419094.64285713,
+                  "runqueue_ns": 41590818.21428572
+                },
+                "4081": {
+                  "migrations": 0.9285714285714286,
+                  "voluntary": 7.357142857142857,
+                  "involuntary": 220.5,
+                  "runtime_ns": 186026980,
+                  "runqueue_ns": 36171591.78571428
+                },
+                "4087": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 7.071428571428571,
+                  "involuntary": 111.14285714285714,
+                  "runtime_ns": 80982019.64285715,
+                  "runqueue_ns": 15048884.285714285
+                },
+                "total": {
+                  "migrations": 4.285714285714286,
+                  "voluntary": 101.78571428571428,
+                  "involuntary": 2569.5714285714284,
+                  "runtime_ns": 2522527751.785714,
+                  "runqueue_ns": 310512286.42857146
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1267.49279,
+                "p95_ms": 1338.0046
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1389.8009499999998,
+                "p95_ms": 1475.87186
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 30.642857142857142,
+                  "involuntary": 713.6428571428571,
+                  "runtime_ns": 1126715017.857143,
+                  "runqueue_ns": 51162274.64285714
+                },
+                "4079": {
+                  "migrations": 0.6428571428571429,
+                  "voluntary": 28.714285714285715,
+                  "involuntary": 731.2857142857143,
+                  "runtime_ns": 915498317.5,
+                  "runqueue_ns": 69782642.85714285
+                },
+                "4080": {
+                  "migrations": 0.6428571428571429,
+                  "voluntary": 7.5,
+                  "involuntary": 176.64285714285714,
+                  "runtime_ns": 182296602.85714287,
+                  "runqueue_ns": 27015440
+                },
+                "4081": {
+                  "migrations": 0.7142857142857143,
+                  "voluntary": 7.071428571428571,
+                  "involuntary": 183.14285714285714,
+                  "runtime_ns": 179631647.14285713,
+                  "runqueue_ns": 49437890.35714286
+                },
+                "4087": {
+                  "migrations": 0.14285714285714285,
+                  "voluntary": 5.285714285714286,
+                  "involuntary": 72.64285714285714,
+                  "runtime_ns": 77143132.14285715,
+                  "runqueue_ns": 10345535
+                },
+                "total": {
+                  "migrations": 2.7142857142857144,
+                  "voluntary": 79.21428571428571,
+                  "involuntary": 1877.357142857143,
+                  "runtime_ns": 2481284717.5,
+                  "runqueue_ns": 207743782.85714287
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "04-ocr-fullscreen-discussion-20261005-screen.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1329.7149800000002,
+                "p95_ms": 2124.70824
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1848.13521,
+                "p95_ms": 2762.30464
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.2142857142857142,
+                  "voluntary": 54.142857142857146,
+                  "involuntary": 1280.642857142857,
+                  "runtime_ns": 1509012197.857143,
+                  "runqueue_ns": 158036395.7142857
+                },
+                "4079": {
+                  "migrations": 1.7857142857142858,
+                  "voluntary": 38.357142857142854,
+                  "involuntary": 1009.5714285714286,
+                  "runtime_ns": 926240880.3571428,
+                  "runqueue_ns": 129969691.78571428
+                },
+                "4080": {
+                  "migrations": 0.8571428571428571,
+                  "voluntary": 8.642857142857142,
+                  "involuntary": 218.71428571428572,
+                  "runtime_ns": 191093946.42857143,
+                  "runqueue_ns": 42654553.928571425
+                },
+                "4081": {
+                  "migrations": 0.9285714285714286,
+                  "voluntary": 7.071428571428571,
+                  "involuntary": 234.71428571428572,
+                  "runtime_ns": 174849174.2857143,
+                  "runqueue_ns": 64005939.64285714
+                },
+                "4087": {
+                  "migrations": 1,
+                  "voluntary": 30.071428571428573,
+                  "involuntary": 413.57142857142856,
+                  "runtime_ns": 379977831.78571427,
+                  "runqueue_ns": 52898346.428571425
+                },
+                "total": {
+                  "migrations": 5.785714285714286,
+                  "voluntary": 138.28571428571428,
+                  "involuntary": 3157.214285714286,
+                  "runtime_ns": 3181174030.714286,
+                  "runqueue_ns": 447564927.5
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1261.69978,
+                "p95_ms": 1381.12688
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1759.375,
+                "p95_ms": 1867.81602
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.5,
+                  "voluntary": 38.357142857142854,
+                  "involuntary": 900.5,
+                  "runtime_ns": 1476628117.857143,
+                  "runqueue_ns": 69226363.57142857
+                },
+                "4079": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 31.5,
+                  "involuntary": 703.2857142857143,
+                  "runtime_ns": 914604000,
+                  "runqueue_ns": 86844518.21428572
+                },
+                "4080": {
+                  "migrations": 0.21428571428571427,
+                  "voluntary": 7.5,
+                  "involuntary": 126.71428571428571,
+                  "runtime_ns": 185281276.7857143,
+                  "runqueue_ns": 19549188.57142857
+                },
+                "4081": {
+                  "migrations": 0.6428571428571429,
+                  "voluntary": 7.428571428571429,
+                  "involuntary": 240.35714285714286,
+                  "runtime_ns": 175462753.92857143,
+                  "runqueue_ns": 30849720.35714286
+                },
+                "4087": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 22.714285714285715,
+                  "involuntary": 366.2142857142857,
+                  "runtime_ns": 367156029.64285713,
+                  "runqueue_ns": 31969315
+                },
+                "total": {
+                  "migrations": 2.5,
+                  "voluntary": 107.5,
+                  "involuntary": 2337.0714285714284,
+                  "runtime_ns": 3119132178.214286,
+                  "runqueue_ns": 238439105.7142857
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "05-ocr-policy-live-20261005-frame.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1318.39788,
+                "p95_ms": 1483.28278
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1475.3265099999999,
+                "p95_ms": 1711.88114
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.4285714285714286,
+                  "voluntary": 46.857142857142854,
+                  "involuntary": 1018.4285714285714,
+                  "runtime_ns": 1164035078.9285715,
+                  "runqueue_ns": 117714427.14285715
+                },
+                "4079": {
+                  "migrations": 0.9285714285714286,
+                  "voluntary": 38.07142857142857,
+                  "involuntary": 894.9285714285714,
+                  "runtime_ns": 920998132.5,
+                  "runqueue_ns": 120396132.14285715
+                },
+                "4080": {
+                  "migrations": 0.5,
+                  "voluntary": 8.071428571428571,
+                  "involuntary": 208.71428571428572,
+                  "runtime_ns": 189438510.7142857,
+                  "runqueue_ns": 24483773.57142857
+                },
+                "4081": {
+                  "migrations": 1.0714285714285714,
+                  "voluntary": 6.714285714285714,
+                  "involuntary": 243.42857142857142,
+                  "runtime_ns": 173283991.42857143,
+                  "runqueue_ns": 35268677.5
+                },
+                "4087": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 8.214285714285714,
+                  "involuntary": 96.71428571428571,
+                  "runtime_ns": 91702409.28571428,
+                  "runqueue_ns": 18570967.5
+                },
+                "total": {
+                  "migrations": 4.285714285714286,
+                  "voluntary": 107.92857142857142,
+                  "involuntary": 2462.214285714286,
+                  "runtime_ns": 2539458122.857143,
+                  "runqueue_ns": 316433977.85714287
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1211.576,
+                "p95_ms": 1289.91174
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1373.19442,
+                "p95_ms": 1433.50692
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.7142857142857143,
+                  "voluntary": 27.214285714285715,
+                  "involuntary": 685.5714285714286,
+                  "runtime_ns": 1133047943.2142856,
+                  "runqueue_ns": 52344978.928571425
+                },
+                "4079": {
+                  "migrations": 0.42857142857142855,
+                  "voluntary": 29.642857142857142,
+                  "involuntary": 687.5,
+                  "runtime_ns": 907425147.5,
+                  "runqueue_ns": 50589387.85714286
+                },
+                "4080": {
+                  "migrations": 0.21428571428571427,
+                  "voluntary": 7.428571428571429,
+                  "involuntary": 148.64285714285714,
+                  "runtime_ns": 181381523.2142857,
+                  "runqueue_ns": 13369595
+                },
+                "4081": {
+                  "migrations": 0.6428571428571429,
+                  "voluntary": 7.642857142857143,
+                  "involuntary": 131.71428571428572,
+                  "runtime_ns": 176165226.42857143,
+                  "runqueue_ns": 50826471.071428575
+                },
+                "4087": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 7.071428571428571,
+                  "involuntary": 102.5,
+                  "runtime_ns": 88659380.35714285,
+                  "runqueue_ns": 14106282.142857144
+                },
+                "total": {
+                  "migrations": 2.5714285714285716,
+                  "voluntary": 79.0,
+                  "involuntary": 1755.9285714285713,
+                  "runtime_ns": 2486679220.7142854,
+                  "runqueue_ns": 181236715.0
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "06-ppocr-only-live-20261007-frame.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1337.6141,
+                "p95_ms": 1567.3281
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1456.39016,
+                "p95_ms": 1688.12526
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.5,
+                  "voluntary": 42.214285714285715,
+                  "involuntary": 1136.2857142857142,
+                  "runtime_ns": 1130281670,
+                  "runqueue_ns": 127403912.14285715
+                },
+                "4079": {
+                  "migrations": 1,
+                  "voluntary": 39.714285714285715,
+                  "involuntary": 1002.5714285714286,
+                  "runtime_ns": 924224361.4285715,
+                  "runqueue_ns": 122444724.28571428
+                },
+                "4080": {
+                  "migrations": 0.7857142857142857,
+                  "voluntary": 7.428571428571429,
+                  "involuntary": 192.92857142857142,
+                  "runtime_ns": 182848435.7142857,
+                  "runqueue_ns": 29327314.285714287
+                },
+                "4081": {
+                  "migrations": 0.7857142857142857,
+                  "voluntary": 7.714285714285714,
+                  "involuntary": 255.92857142857142,
+                  "runtime_ns": 179469069.2857143,
+                  "runqueue_ns": 40303318.21428572
+                },
+                "4087": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 5.142857142857143,
+                  "involuntary": 102.07142857142857,
+                  "runtime_ns": 72429211.07142857,
+                  "runqueue_ns": 10946563.214285715
+                },
+                "total": {
+                  "migrations": 4.428571428571429,
+                  "voluntary": 102.21428571428572,
+                  "involuntary": 2689.785714285714,
+                  "runtime_ns": 2489252747.5,
+                  "runqueue_ns": 330425832.14285713
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1215.02045,
+                "p95_ms": 1304.16616
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1323.04495,
+                "p95_ms": 1421.24656
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.42857142857142855,
+                  "voluntary": 25.5,
+                  "involuntary": 594,
+                  "runtime_ns": 1106956838.5714285,
+                  "runqueue_ns": 42944166.78571428
+                },
+                "4079": {
+                  "migrations": 0.9285714285714286,
+                  "voluntary": 28.071428571428573,
+                  "involuntary": 722.4285714285714,
+                  "runtime_ns": 908290556.0714285,
+                  "runqueue_ns": 55411475.35714286
+                },
+                "4080": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 7.357142857142857,
+                  "involuntary": 158.21428571428572,
+                  "runtime_ns": 177154643.92857143,
+                  "runqueue_ns": 23793879.64285714
+                },
+                "4081": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 7.214285714285714,
+                  "involuntary": 141.71428571428572,
+                  "runtime_ns": 181951324.2857143,
+                  "runqueue_ns": 47116881.071428575
+                },
+                "4087": {
+                  "migrations": 0.07142857142857142,
+                  "voluntary": 3.2857142857142856,
+                  "involuntary": 114.28571428571429,
+                  "runtime_ns": 68608541.42857143,
+                  "runqueue_ns": 6947280.357142857
+                },
+                "total": {
+                  "migrations": 2.571428571428571,
+                  "voluntary": 71.42857142857143,
+                  "involuntary": 1730.6428571428573,
+                  "runtime_ns": 2442961904.285714,
+                  "runqueue_ns": 176213683.2142857
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "07-text-detectors-video-only-input.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1318.80714,
+                "p95_ms": 1527.5309
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1338.44286,
+                "p95_ms": 1547.18822
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.6428571428571429,
+                  "voluntary": 37.785714285714285,
+                  "involuntary": 882.5,
+                  "runtime_ns": 1036152603.2142857,
+                  "runqueue_ns": 97619620
+                },
+                "4079": {
+                  "migrations": 1.6428571428571428,
+                  "voluntary": 38.357142857142854,
+                  "involuntary": 1031.2857142857142,
+                  "runtime_ns": 922783156.0714285,
+                  "runqueue_ns": 103614060
+                },
+                "4080": {
+                  "migrations": 1.1428571428571428,
+                  "voluntary": 7.642857142857143,
+                  "involuntary": 213.85714285714286,
+                  "runtime_ns": 182831015,
+                  "runqueue_ns": 31834647.85714286
+                },
+                "4081": {
+                  "migrations": 0.8571428571428571,
+                  "voluntary": 7.571428571428571,
+                  "involuntary": 258.2857142857143,
+                  "runtime_ns": 180153192.85714287,
+                  "runqueue_ns": 86730419.28571428
+                },
+                "4087": {
+                  "migrations": 0,
+                  "voluntary": 0,
+                  "involuntary": 0,
+                  "runtime_ns": 0,
+                  "runqueue_ns": 0
+                },
+                "total": {
+                  "migrations": 4.285714285714286,
+                  "voluntary": 91.35714285714285,
+                  "involuntary": 2385.9285714285716,
+                  "runtime_ns": 2321919967.142857,
+                  "runqueue_ns": 319798747.14285713
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1240.50332,
+                "p95_ms": 1308.4516
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1261.26402,
+                "p95_ms": 1330.18418
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 21.5,
+                  "involuntary": 569.0714285714286,
+                  "runtime_ns": 1020787269.2857143,
+                  "runqueue_ns": 46454322.5
+                },
+                "4079": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 28.214285714285715,
+                  "involuntary": 672,
+                  "runtime_ns": 909181870.3571428,
+                  "runqueue_ns": 56210225
+                },
+                "4080": {
+                  "migrations": 0.42857142857142855,
+                  "voluntary": 7.285714285714286,
+                  "involuntary": 136.5,
+                  "runtime_ns": 183030750.35714287,
+                  "runqueue_ns": 61844443.571428575
+                },
+                "4081": {
+                  "migrations": 0.5,
+                  "voluntary": 6.928571428571429,
+                  "involuntary": 181.35714285714286,
+                  "runtime_ns": 175352436.7857143,
+                  "runqueue_ns": 68090560.35714285
+                },
+                "4087": {
+                  "migrations": 0,
+                  "voluntary": 0,
+                  "involuntary": 0,
+                  "runtime_ns": 0,
+                  "runqueue_ns": 0
+                },
+                "total": {
+                  "migrations": 1.6428571428571428,
+                  "voluntary": 63.92857142857143,
+                  "involuntary": 1558.9285714285716,
+                  "runtime_ns": 2288352326.785714,
+                  "runqueue_ns": 232599551.42857143
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "08-game-input.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1325.68925,
+                "p95_ms": 1579.04972
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1421.09301,
+                "p95_ms": 1706.12718
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1,
+                  "voluntary": 50.642857142857146,
+                  "involuntary": 987.2857142857143,
+                  "runtime_ns": 1107536653.9285715,
+                  "runqueue_ns": 107395722.5
+                },
+                "4079": {
+                  "migrations": 1.7142857142857142,
+                  "voluntary": 35.642857142857146,
+                  "involuntary": 929.5,
+                  "runtime_ns": 920383145.7142857,
+                  "runqueue_ns": 133307412.14285715
+                },
+                "4080": {
+                  "migrations": 1.0714285714285714,
+                  "voluntary": 7.428571428571429,
+                  "involuntary": 227.57142857142858,
+                  "runtime_ns": 177469897.14285713,
+                  "runqueue_ns": 96060096.78571428
+                },
+                "4081": {
+                  "migrations": 0.5,
+                  "voluntary": 7.642857142857143,
+                  "involuntary": 221.64285714285714,
+                  "runtime_ns": 184363307.14285713,
+                  "runqueue_ns": 29481099.64285714
+                },
+                "4087": {
+                  "migrations": 0.21428571428571427,
+                  "voluntary": 4.285714285714286,
+                  "involuntary": 62.642857142857146,
+                  "runtime_ns": 46210584.64285714,
+                  "runqueue_ns": 12649807.142857144
+                },
+                "total": {
+                  "migrations": 4.5,
+                  "voluntary": 105.64285714285715,
+                  "involuntary": 2428.6428571428573,
+                  "runtime_ns": 2435963588.571429,
+                  "runqueue_ns": 378894138.21428573
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1236.50331,
+                "p95_ms": 1310.01864
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1336.57445,
+                "p95_ms": 1400.2873
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.1428571428571428,
+                  "voluntary": 24.714285714285715,
+                  "involuntary": 713.7142857142857,
+                  "runtime_ns": 1080291397.142857,
+                  "runqueue_ns": 51796896.78571428
+                },
+                "4079": {
+                  "migrations": 0.42857142857142855,
+                  "voluntary": 30.571428571428573,
+                  "involuntary": 616.6428571428571,
+                  "runtime_ns": 913338146.0714285,
+                  "runqueue_ns": 52609661.78571428
+                },
+                "4080": {
+                  "migrations": 1,
+                  "voluntary": 8.142857142857142,
+                  "involuntary": 189.92857142857142,
+                  "runtime_ns": 179011682.5,
+                  "runqueue_ns": 24768205.35714286
+                },
+                "4081": {
+                  "migrations": 0.2857142857142857,
+                  "voluntary": 6.857142857142857,
+                  "involuntary": 143.78571428571428,
+                  "runtime_ns": 182211648.57142857,
+                  "runqueue_ns": 17308265.35714286
+                },
+                "4087": {
+                  "migrations": 0.2857142857142857,
+                  "voluntary": 4.285714285714286,
+                  "involuntary": 58.214285714285715,
+                  "runtime_ns": 45234775.71428572,
+                  "runqueue_ns": 7550491.428571428
+                },
+                "total": {
+                  "migrations": 3.142857142857143,
+                  "voluntary": 74.57142857142857,
+                  "involuntary": 1722.2857142857142,
+                  "runtime_ns": 2400087650.0,
+                  "runqueue_ns": 154033520.7142857
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "09-game-brothership-input.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1319.635,
+                "p95_ms": 1458.59404
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1455.65678,
+                "p95_ms": 1830.59028
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.4285714285714286,
+                  "voluntary": 53.214285714285715,
+                  "involuntary": 1157.0714285714287,
+                  "runtime_ns": 1156012351.4285715,
+                  "runqueue_ns": 103306295.71428572
+                },
+                "4079": {
+                  "migrations": 1.3571428571428572,
+                  "voluntary": 38.214285714285715,
+                  "involuntary": 975.0714285714286,
+                  "runtime_ns": 925170217.1428572,
+                  "runqueue_ns": 109033641.78571428
+                },
+                "4080": {
+                  "migrations": 0.7142857142857143,
+                  "voluntary": 6.928571428571429,
+                  "involuntary": 212.92857142857142,
+                  "runtime_ns": 181871659.2857143,
+                  "runqueue_ns": 37227837.14285714
+                },
+                "4081": {
+                  "migrations": 1,
+                  "voluntary": 8.5,
+                  "involuntary": 290.7857142857143,
+                  "runtime_ns": 181605864.64285713,
+                  "runqueue_ns": 82402110.71428572
+                },
+                "4087": {
+                  "migrations": 0.9285714285714286,
+                  "voluntary": 16.214285714285715,
+                  "involuntary": 108.35714285714286,
+                  "runtime_ns": 91121242.5,
+                  "runqueue_ns": 23899054.285714287
+                },
+                "total": {
+                  "migrations": 5.428571428571429,
+                  "voluntary": 123.07142857142857,
+                  "involuntary": 2744.214285714286,
+                  "runtime_ns": 2535781335.0,
+                  "runqueue_ns": 355868939.64285713
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1265.75125,
+                "p95_ms": 1327.11498
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1397.7775000000001,
+                "p95_ms": 1466.27536
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 32.07142857142857,
+                  "involuntary": 693.2142857142857,
+                  "runtime_ns": 1125987996.0714285,
+                  "runqueue_ns": 51512575.35714286
+                },
+                "4079": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 29.142857142857142,
+                  "involuntary": 735.2857142857143,
+                  "runtime_ns": 913837225.3571428,
+                  "runqueue_ns": 59882020
+                },
+                "4080": {
+                  "migrations": 0.14285714285714285,
+                  "voluntary": 6.142857142857143,
+                  "involuntary": 177.92857142857142,
+                  "runtime_ns": 179366769.2857143,
+                  "runqueue_ns": 15421563.214285715
+                },
+                "4081": {
+                  "migrations": 0.7142857142857143,
+                  "voluntary": 8.428571428571429,
+                  "involuntary": 165.71428571428572,
+                  "runtime_ns": 180916668.92857143,
+                  "runqueue_ns": 22561132.85714286
+                },
+                "4087": {
+                  "migrations": 0.5,
+                  "voluntary": 6.285714285714286,
+                  "involuntary": 91.57142857142857,
+                  "runtime_ns": 79397362.85714285,
+                  "runqueue_ns": 15354137.5
+                },
+                "total": {
+                  "migrations": 2.0714285714285716,
+                  "voluntary": 82.07142857142857,
+                  "involuntary": 1863.7142857142858,
+                  "runtime_ns": 2479506022.5,
+                  "runqueue_ns": 164731428.92857143
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "10-game-example-2-input.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1315.8038299999998,
+                "p95_ms": 1455.76252
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1730.16147,
+                "p95_ms": 1856.50284
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 2.142857142857143,
+                  "voluntary": 51.142857142857146,
+                  "involuntary": 1369.0714285714287,
+                  "runtime_ns": 1347838642.857143,
+                  "runqueue_ns": 139262509.64285713
+                },
+                "4079": {
+                  "migrations": 1.1428571428571428,
+                  "voluntary": 37.42857142857143,
+                  "involuntary": 869.4285714285714,
+                  "runtime_ns": 919808799.2857143,
+                  "runqueue_ns": 119510659.64285715
+                },
+                "4080": {
+                  "migrations": 0.6428571428571429,
+                  "voluntary": 7.142857142857143,
+                  "involuntary": 231.92857142857142,
+                  "runtime_ns": 177950155.35714287,
+                  "runqueue_ns": 42229395.71428572
+                },
+                "4081": {
+                  "migrations": 0.8571428571428571,
+                  "voluntary": 7.785714285714286,
+                  "involuntary": 260.42857142857144,
+                  "runtime_ns": 183473232.14285713,
+                  "runqueue_ns": 29127092.14285714
+                },
+                "4087": {
+                  "migrations": 1.1428571428571428,
+                  "voluntary": 25.928571428571427,
+                  "involuntary": 282.7142857142857,
+                  "runtime_ns": 264443211.42857143,
+                  "runqueue_ns": 37770782.85714286
+                },
+                "total": {
+                  "migrations": 5.928571428571429,
+                  "voluntary": 129.42857142857144,
+                  "involuntary": 3013.571428571429,
+                  "runtime_ns": 2893514041.071429,
+                  "runqueue_ns": 367900440.0
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 14,
+                "median_ms": 1241.07063,
+                "p95_ms": 1342.91728
+              },
+              "full": {
+                "n": 14,
+                "median_ms": 1581.00019,
+                "p95_ms": 1741.1033
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.5,
+                  "voluntary": 31.285714285714285,
+                  "involuntary": 773.5,
+                  "runtime_ns": 1322390909.2857144,
+                  "runqueue_ns": 57266260
+                },
+                "4079": {
+                  "migrations": 0.35714285714285715,
+                  "voluntary": 30.071428571428573,
+                  "involuntary": 791.5714285714286,
+                  "runtime_ns": 910503813.5714285,
+                  "runqueue_ns": 53540326.071428575
+                },
+                "4080": {
+                  "migrations": 0.5714285714285714,
+                  "voluntary": 7.285714285714286,
+                  "involuntary": 213.5,
+                  "runtime_ns": 178927381.42857143,
+                  "runqueue_ns": 20798045
+                },
+                "4081": {
+                  "migrations": 0.5,
+                  "voluntary": 7.785714285714286,
+                  "involuntary": 153.92857142857142,
+                  "runtime_ns": 180772106.42857143,
+                  "runqueue_ns": 93088048.92857143
+                },
+                "4087": {
+                  "migrations": 0.5,
+                  "voluntary": 13.714285714285714,
+                  "involuntary": 207.07142857142858,
+                  "runtime_ns": 252227551.07142857,
+                  "runqueue_ns": 24253678.57142857
+                },
+                "total": {
+                  "migrations": 2.4285714285714284,
+                  "voluntary": 90.14285714285714,
+                  "involuntary": 2139.5714285714284,
+                  "runtime_ns": 2844821761.785714,
+                  "runqueue_ns": 248946358.57142857
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 13,
+                "median_ms": 1338.85116,
+                "p95_ms": 1536.15418
+              },
+              "full": {
+                "n": 13,
+                "median_ms": 1889.06106,
+                "p95_ms": 2061.02642
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.8461538461538463,
+                  "voluntary": 50.53846153846154,
+                  "involuntary": 1611.8461538461538,
+                  "runtime_ns": 1504857438.4615386,
+                  "runqueue_ns": 150357443.46153846
+                },
+                "4079": {
+                  "migrations": 1.2307692307692308,
+                  "voluntary": 38.61538461538461,
+                  "involuntary": 1005.6153846153846,
+                  "runtime_ns": 925745073.0769231,
+                  "runqueue_ns": 128964638.84615384
+                },
+                "4080": {
+                  "migrations": 0.7692307692307693,
+                  "voluntary": 7.3076923076923075,
+                  "involuntary": 231.84615384615384,
+                  "runtime_ns": 179327230.3846154,
+                  "runqueue_ns": 112531379.61538461
+                },
+                "4081": {
+                  "migrations": 0.7692307692307693,
+                  "voluntary": 7.769230769230769,
+                  "involuntary": 256.2307692307692,
+                  "runtime_ns": 184533766.92307693,
+                  "runqueue_ns": 26535356.153846152
+                },
+                "4087": {
+                  "migrations": 0.6923076923076923,
+                  "voluntary": 31.923076923076923,
+                  "involuntary": 407.53846153846155,
+                  "runtime_ns": 394172195,
+                  "runqueue_ns": 44697145
+                },
+                "total": {
+                  "migrations": 5.307692307692308,
+                  "voluntary": 136.15384615384616,
+                  "involuntary": 3513.076923076923,
+                  "runtime_ns": 3188635703.8461537,
+                  "runqueue_ns": 463085963.0769231
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 13,
+                "median_ms": 1237.37098,
+                "p95_ms": 1407.91176
+              },
+              "full": {
+                "n": 13,
+                "median_ms": 1730.89238,
+                "p95_ms": 1887.03246
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.5384615384615384,
+                  "voluntary": 29.846153846153847,
+                  "involuntary": 881.2307692307693,
+                  "runtime_ns": 1472971165.3846154,
+                  "runqueue_ns": 62280067.692307696
+                },
+                "4079": {
+                  "migrations": 0.6923076923076923,
+                  "voluntary": 30.692307692307693,
+                  "involuntary": 807.2307692307693,
+                  "runtime_ns": 912628000.3846154,
+                  "runqueue_ns": 64788033.461538464
+                },
+                "4080": {
+                  "migrations": 0.6923076923076923,
+                  "voluntary": 7.3076923076923075,
+                  "involuntary": 154.23076923076923,
+                  "runtime_ns": 177586162.69230768,
+                  "runqueue_ns": 91741014.23076923
+                },
+                "4081": {
+                  "migrations": 0.46153846153846156,
+                  "voluntary": 7.615384615384615,
+                  "involuntary": 168.15384615384616,
+                  "runtime_ns": 184567368.46153846,
+                  "runqueue_ns": 19188245.384615384
+                },
+                "4087": {
+                  "migrations": 0.3076923076923077,
+                  "voluntary": 23.23076923076923,
+                  "involuntary": 325.3076923076923,
+                  "runtime_ns": 378956383.46153843,
+                  "runqueue_ns": 22793803.076923076
+                },
+                "total": {
+                  "migrations": 2.6923076923076925,
+                  "voluntary": 98.6923076923077,
+                  "involuntary": 2336.153846153846,
+                  "runtime_ns": 3126709080.3846154,
+                  "runqueue_ns": 260791163.84615386
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      },
+      {
+        "frame": "12-gocr-native-postprocess-20261009-luigi.ppm",
+        "parity": true,
+        "modes": {
+          "full": {
+            "baseline": {
+              "invoke": {
+                "n": 13,
+                "median_ms": 1305.86206,
+                "p95_ms": 1548.69042
+              },
+              "full": {
+                "n": 13,
+                "median_ms": 1722.977,
+                "p95_ms": 2033.37358
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 1.3076923076923077,
+                  "voluntary": 44.30769230769231,
+                  "involuntary": 1291.4615384615386,
+                  "runtime_ns": 1416881760,
+                  "runqueue_ns": 110325009.61538461
+                },
+                "4079": {
+                  "migrations": 1.6923076923076923,
+                  "voluntary": 36.30769230769231,
+                  "involuntary": 987,
+                  "runtime_ns": 920042133.4615384,
+                  "runqueue_ns": 109068467.3076923
+                },
+                "4080": {
+                  "migrations": 0.46153846153846156,
+                  "voluntary": 7.769230769230769,
+                  "involuntary": 216.84615384615384,
+                  "runtime_ns": 185720191.53846154,
+                  "runqueue_ns": 104794465.76923077
+                },
+                "4081": {
+                  "migrations": 1,
+                  "voluntary": 7.461538461538462,
+                  "involuntary": 238.07692307692307,
+                  "runtime_ns": 177738156.53846154,
+                  "runqueue_ns": 30333377.307692308
+                },
+                "4087": {
+                  "migrations": 0,
+                  "voluntary": 22.76923076923077,
+                  "involuntary": 339,
+                  "runtime_ns": 321939735.38461536,
+                  "runqueue_ns": 26142870.384615384
+                },
+                "total": {
+                  "migrations": 4.461538461538462,
+                  "voluntary": 118.61538461538461,
+                  "involuntary": 3072.3846153846157,
+                  "runtime_ns": 3022321976.9230766,
+                  "runqueue_ns": 380664190.38461536
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            },
+            "nice_-5": {
+              "invoke": {
+                "n": 13,
+                "median_ms": 1230.59676,
+                "p95_ms": 1296.30262
+              },
+              "full": {
+                "n": 13,
+                "median_ms": 1623.3806,
+                "p95_ms": 1713.34808
+              },
+              "counters_per_observation": {
+                "4074": {
+                  "migrations": 0.46153846153846156,
+                  "voluntary": 28.76923076923077,
+                  "involuntary": 691.3846153846154,
+                  "runtime_ns": 1390648174.6153846,
+                  "runqueue_ns": 49120081.538461536
+                },
+                "4079": {
+                  "migrations": 0.46153846153846156,
+                  "voluntary": 28.615384615384617,
+                  "involuntary": 633.3846153846154,
+                  "runtime_ns": 918312568.8461539,
+                  "runqueue_ns": 49700477.692307696
+                },
+                "4080": {
+                  "migrations": 0.38461538461538464,
+                  "voluntary": 7.384615384615385,
+                  "involuntary": 161.30769230769232,
+                  "runtime_ns": 180117472.30769232,
+                  "runqueue_ns": 19475535.769230768
+                },
+                "4081": {
+                  "migrations": 0.6153846153846154,
+                  "voluntary": 7.3076923076923075,
+                  "involuntary": 161.53846153846155,
+                  "runtime_ns": 183608224.6153846,
+                  "runqueue_ns": 47781293.84615385
+                },
+                "4087": {
+                  "migrations": 0.23076923076923078,
+                  "voluntary": 21,
+                  "involuntary": 218.3846153846154,
+                  "runtime_ns": 306253484.2307692,
+                  "runqueue_ns": 17983591.153846152
+                },
+                "total": {
+                  "migrations": 2.153846153846154,
+                  "voluntary": 93.07692307692308,
+                  "involuntary": 1866.0,
+                  "runtime_ns": 2978939924.6153846,
+                  "runqueue_ns": 184060980.0
+                }
+              },
+              "affinity_unchanged_during_invoke": true,
+              "frequencies_khz": [
+                "1400000"
+              ],
+              "tensor_exact": true,
+              "semantic_exact": true
+            }
+          }
+        }
+      }
+    ]
+  }
+]

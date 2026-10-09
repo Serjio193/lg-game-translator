@@ -70,9 +70,42 @@ def load(path):
         return json.load(file)
 
 
+def series_summary(data):
+    names = ("baseline", "nice_-5")
+    pooled = {name: [] for name in names}
+    minute_rows = {}
+    frame_ratios = {}
+    pairs = 0
+    start = data["series_start_monotonic"]
+    for frame in data["frames"]:
+        telemetry = frame["modes"]["full"]["telemetry"]
+        event_times = {(e["repeat"], e["variant"]): e["start"] for e in frame["events"]}
+        ratios = []
+        for index, (baseline, candidate) in enumerate(zip(telemetry["baseline"], telemetry["nice_-5"])):
+            minute = int((min(event_times[index, name] for name in names) - start) // 60)
+            bucket = minute_rows.setdefault(minute, {name: [] for name in names})
+            for name, sample in zip(names, (baseline, candidate)):
+                item = {"invoke": sample["detector_invoke_ms"],
+                        "full": frame["modes"]["full"]["timing"][name]["samples_ms"][index]}
+                bucket[name].append(item)
+                pooled[name].append(item)
+            ratios.append(baseline["detector_invoke_ms"] / candidate["detector_invoke_ms"])
+            pairs += 1
+        frame_ratios[Path(frame["frame"]).name] = {
+            "pairs": len(ratios), "paired_invoke_speedup_median": statistics.median(ratios)}
+    def aggregate(group):
+        return {name: {metric: timing([r[metric] for r in group[name]]) for metric in ("invoke", "full")}
+                for name in names}
+    return {"elapsed_seconds": data.get("series_end_monotonic", start + data["series_elapsed_seconds"]) - start,
+            "pairs": pairs, "calls": 2 * pairs, "per_frame": frame_ratios,
+            "pooled": aggregate(pooled), "minutes": {str(m): aggregate(rows) for m, rows in minute_rows.items()}}
+
+
 def analyze(path):
     data = load(path)
     result = {k: data.get(k) for k in ("variant", "roles", "persistent_tid_set", "restore_errors", "unsupported")}
+    if "series_start_monotonic" in data:
+        result["duration_series"] = series_summary(data)
     result["evidence_file"] = str(path)
     result["frames"] = []
     events = []

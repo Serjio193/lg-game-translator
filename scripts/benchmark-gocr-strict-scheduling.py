@@ -91,66 +91,70 @@ def single(args):
         if args.variant != "baseline":
             placement.apply(name)
     try:
-        for frame_index, (path, image) in enumerate(images):
-            configure("baseline")
-            reference_rows, _ = full.run(image)
-            reference = tensor_hashes(detector)
-            reference_diagnostics = snapshot(detector, args.assets, post)
-            row = {"frame": str(path), "reference_tensors": reference,
-                   "reference_lines": reference_rows, "reference_diagnostics": reference_diagnostics,
-                   "modes": {}, "events": [], "parity": True}
-            for mode in args.modes.split(","):
-                conditions = [args.variant] if args.fixed_placement else ["baseline", args.variant]
-                values = {name: [] for name in conditions}
-                telemetry = {name: [] for name in values}
-                for name in values:
-                    configure(name)
-                    full.run(image) if mode == "full" else detector.detect(image)
-                for repeat in range(args.repeats):
-                    order = list(values)
-                    if (frame_index + repeat) % 2:
-                        order.reverse()
-                    for name in order:
+        if args.duration_seconds:
+            from gocr_worker.scheduler_series import run_series
+            run_series(args, images, detector, full, post, placement, report, semantic, summary)
+        else:
+            for frame_index, (path, image) in enumerate(images):
+                configure("baseline")
+                reference_rows, _ = full.run(image)
+                reference = tensor_hashes(detector)
+                reference_diagnostics = snapshot(detector, args.assets, post)
+                row = {"frame": str(path), "reference_tensors": reference,
+                       "reference_lines": reference_rows, "reference_diagnostics": reference_diagnostics,
+                       "modes": {}, "events": [], "parity": True}
+                for mode in args.modes.split(","):
+                    conditions = [args.variant] if args.fixed_placement else ["baseline", args.variant]
+                    values = {name: [] for name in conditions}
+                    telemetry = {name: [] for name in values}
+                    for name in values:
                         configure(name)
-                        before = tasks(os.getpid())
-                        started = time.monotonic()
-                        if mode == "invoke":
-                            if detector.lib.gocr_detector_invoke(detector.context):
-                                raise RuntimeError("strict Invoke failed")
-                            ms = (time.monotonic() - started) * 1000
-                            lines = None
-                        else:
-                            lines, stats = full.run(image)
-                            ms = stats.total_ms
-                        ended = time.monotonic()
-                        after = tasks(os.getpid())
-                        observed = tensor_hashes(detector)
-                        tensor_equal = observed == reference
-                        line_equal = lines is None or semantic(lines) == semantic(reference_rows)
-                        row["parity"] &= tensor_equal and line_equal
-                        values[name].append(ms)
-                        telemetry[name].append({"before": before, "after": after, "delta": delta(before, after),
-                                                "environment": environment(), "tensors": observed,
-                                                "tensor_equal": tensor_equal, "semantic_lines_equal": line_equal,
-                                                "detector_invoke_ms": None if mode == "invoke" else stats.detector.invoke_ms,
-                                                "postprocess_exact": snapshot(detector, args.assets, post) == reference_diagnostics if mode == "full" else None})
-                        if mode == "full":
-                            row["parity"] &= telemetry[name][-1]["postprocess_exact"]
-                        row["events"].append({"mode": mode, "variant": name, "repeat": repeat,
-                                              "start": started, "end": ended})
-                if mode == "invoke":
-                    if detector.lib.gocr_detector_finish(detector.context, detector.output, len(detector.output), C.byref(detector.stats)) < 0:
-                        raise RuntimeError("strict detector finish failed")
-                diagnostics = snapshot(detector, args.assets, post)
-                row["parity"] &= diagnostics == reference_diagnostics
-                row["modes"][mode] = {"timing": {name: summary(samples) for name, samples in values.items()},
-                                      "telemetry": telemetry, "final_diagnostics_equal": diagnostics == reference_diagnostics}
-            row["final_lines"] = lines
-            row["final_diagnostics"] = diagnostics
-            report["frames"].append(row)
-            args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-            print(json.dumps({"variant": args.variant, "frame": str(path), "parity": row["parity"],
-                              "timings": {m: v["timing"] for m, v in row["modes"].items()}}), flush=True)
+                        full.run(image) if mode == "full" else detector.detect(image)
+                    for repeat in range(args.repeats):
+                        order = list(values)
+                        if (frame_index + repeat) % 2:
+                            order.reverse()
+                        for name in order:
+                            configure(name)
+                            before = tasks(os.getpid())
+                            started = time.monotonic()
+                            if mode == "invoke":
+                                if detector.lib.gocr_detector_invoke(detector.context):
+                                    raise RuntimeError("strict Invoke failed")
+                                ms = (time.monotonic() - started) * 1000
+                                lines = None
+                            else:
+                                lines, stats = full.run(image)
+                                ms = stats.total_ms
+                            ended = time.monotonic()
+                            after = tasks(os.getpid())
+                            observed = tensor_hashes(detector)
+                            tensor_equal = observed == reference
+                            line_equal = lines is None or semantic(lines) == semantic(reference_rows)
+                            row["parity"] &= tensor_equal and line_equal
+                            values[name].append(ms)
+                            telemetry[name].append({"before": before, "after": after, "delta": delta(before, after),
+                                                    "environment": environment(), "tensors": observed,
+                                                    "tensor_equal": tensor_equal, "semantic_lines_equal": line_equal,
+                                                    "detector_invoke_ms": None if mode == "invoke" else stats.detector.invoke_ms,
+                                                    "postprocess_exact": snapshot(detector, args.assets, post) == reference_diagnostics if mode == "full" else None})
+                            if mode == "full":
+                                row["parity"] &= telemetry[name][-1]["postprocess_exact"]
+                            row["events"].append({"mode": mode, "variant": name, "repeat": repeat,
+                                                  "start": started, "end": ended})
+                    if mode == "invoke":
+                        if detector.lib.gocr_detector_finish(detector.context, detector.output, len(detector.output), C.byref(detector.stats)) < 0:
+                            raise RuntimeError("strict detector finish failed")
+                    diagnostics = snapshot(detector, args.assets, post)
+                    row["parity"] &= diagnostics == reference_diagnostics
+                    row["modes"][mode] = {"timing": {name: summary(samples) for name, samples in values.items()},
+                                          "telemetry": telemetry, "final_diagnostics_equal": diagnostics == reference_diagnostics}
+                row["final_lines"] = lines
+                row["final_diagnostics"] = diagnostics
+                report["frames"].append(row)
+                args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+                print(json.dumps({"variant": args.variant, "frame": str(path), "parity": row["parity"],
+                                  "timings": {m: v["timing"] for m, v in row["modes"].items()}}), flush=True)
     except OSError as exc:
         report["unsupported"] = repr(exc)
         raise
@@ -179,6 +183,7 @@ def main():
     parser.add_argument("--variants", help="comma-separated variants")
     parser.add_argument("--modes", default="invoke,full", choices=("invoke", "full", "invoke,full"))
     parser.add_argument("--repeats", type=int, default=10)
+    parser.add_argument("--duration-seconds", type=float, default=0)
     parser.add_argument("--observe", type=int)
     parser.add_argument("--stop", type=Path)
     parser.add_argument("--interval", type=float, default=.05)
@@ -187,6 +192,10 @@ def main():
     parser.add_argument("--no-observer", action="store_true", help="validate latency without polling overhead")
     parser.add_argument("frames", nargs="*", type=Path)
     args = parser.parse_args()
+    if not math.isfinite(args.duration_seconds) or args.duration_seconds < 0:
+        parser.error("duration must be finite and nonnegative")
+    if args.duration_seconds and not args.variant:
+        parser.error("duration is supported only by a single persistent nice_-5 series")
     if args.observe:
         observe(args)
     elif args.topology:
@@ -194,6 +203,10 @@ def main():
     elif args.variant:
         if not args.assets or not args.frames or args.repeats < 10:
             parser.error("assets, frames and ten repeats required")
+        if args.duration_seconds and (args.variant != "nice_-5" or args.modes != "full"
+                                      or args.fixed_placement or not args.no_observer
+                                      or args.duration_seconds < 0):
+            parser.error("duration series requires nice_-5, full, no-observer and positive duration")
         if not single(args):
             raise SystemExit(2)
     else:
