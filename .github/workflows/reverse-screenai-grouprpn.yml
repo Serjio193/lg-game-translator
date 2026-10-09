@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Tools
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq binutils ripgrep
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq binutils ripgrep && python3 -m pip install --quiet protobuf
       - name: Export ScreenAI
         run: |
           mkdir -p /tmp/rpn/bin /tmp/rpn/pkg /tmp/rpn/out
@@ -34,7 +34,80 @@ jobs:
           rg -i 'GroupRpn|Pairwise|ClusterBoxes|TextFlow|Breadth gap|Height ratio|Norm dist|angle diff|group_rpn_detector|ProcessPackedImagePyramid|anchor_heights|maximum_angle|maximum_breadth|GocrDetector' strings-offsets.txt > clues.txt || true
           rg -i 'GroupRpn|group_rpn|DetectorHac|Pairwise|ClusterBoxes' nm-aC.txt readelf-ws.txt nm-DC.txt > symbols.txt || true
           cat clues.txt
-          cat symbols.txt\n          N=$(grep -n 'GocrDetectorLevel1GroupingConfig' strings-offsets.txt | tail -1 | cut -d: -f1); if [ -n \"$N\" ]; then A=$((N-80)); [ $A -lt 1 ] && A=1; B=$((N+260)); sed -n \"${A},${B}p\" strings-offsets.txt > descriptor-neighborhood.txt; cat descriptor-neighborhood.txt; fi
+          cat symbols.txt
+          N=$(grep -n 'GocrDetectorLevel1GroupingConfig' strings-offsets.txt | tail -1 | cut -d: -f1)
+          if [ -n "$N" ]; then
+            A=$((N-80)); [ $A -lt 1 ] && A=1
+            B=$((N+260))
+            sed -n "${A},${B}p" strings-offsets.txt > descriptor-neighborhood.txt
+            cat descriptor-neighborhood.txt
+          fi
+          python3 - <<'PY'
+          from pathlib import Path
+          from google.protobuf import descriptor_pb2, text_format
+          data=Path(Path("libpath.txt").read_text().strip()).read_bytes()
+          needles=[]
+          pos=0
+          while True:
+              i=data.find(b".proto",pos)
+              if i<0: break
+              a=max(0,i-220)
+              chunk=data[a:i+6]
+              if b"group_rpn" in chunk or b"google_ocr/detection" in chunk:
+                  j=chunk.rfind(b"ocr/")
+                  if j<0: j=chunk.rfind(b"google_ocr")
+                  if j>=0:
+                      name=chunk[j:].split(b"\x00",1)[0]
+                      needles.append((a+j,name))
+              pos=i+6
+          print("PROTO_NEEDLES", needles[:30])
+          def vi(buf,p):
+              v=0;sh=0
+              for _ in range(10):
+                  if p>=len(buf): raise ValueError
+                  b=buf[p];p+=1;v|=(b&127)<<sh
+                  if b<128:return v,p
+                  sh+=7
+              raise ValueError
+          for off,name in needles:
+              for back in range(1,8):
+                  st=off-back
+                  try:
+                      tag,p=vi(data,st)
+                      if tag!=10: continue
+                      n,p2=vi(data,p)
+                      if p2!=off or n!=len(name): continue
+                  except Exception: continue
+                  # walk top-level protobuf fields until invalid; test prefixes as FileDescriptorProto
+                  p=st
+                  ends=[]
+                  for _ in range(5000):
+                      try:
+                          tag,q=vi(data,p); w=tag&7
+                          if tag==0 or w in (3,4) or (tag>>3)>1000: break
+                          p=q
+                          if w==0: _,p=vi(data,p)
+                          elif w==1: p+=8
+                          elif w==2:
+                              n,p=vi(data,p); p+=n
+                          elif w==5: p+=4
+                          else: break
+                          if p>len(data): break
+                          ends.append(p)
+                      except Exception: break
+                  for end in reversed(ends):
+                      fd=descriptor_pb2.FileDescriptorProto()
+                      try:
+                          fd.ParseFromString(data[st:end])
+                      except Exception:
+                          continue
+                      if fd.name.encode()==name and any("GocrDetector" in m.name or "GroupRpn" in m.name for m in fd.message_type):
+                          Path("grouprpn-descriptor.pb").write_bytes(data[st:end])
+                          Path("grouprpn-descriptor.txt").write_text(text_format.MessageToString(fd))
+                          print(text_format.MessageToString(fd))
+                          raise SystemExit
+          raise SystemExit("GroupRPN FileDescriptorProto not recovered")
+          PY
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
