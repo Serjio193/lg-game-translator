@@ -1,0 +1,43 @@
+name: Reverse ScreenAI GroupRPN
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/reverse-screenai-grouprpn.yml'
+
+jobs:
+  reverse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq binutils ripgrep
+      - name: Export ScreenAI
+        run: |
+          mkdir -p /tmp/rpn/bin /tmp/rpn/pkg /tmp/rpn/out
+          curl -fsSL "https://chrome-infra-packages.appspot.com/client?platform=linux-amd64&version=latest" -o /tmp/rpn/bin/cipd
+          chmod +x /tmp/rpn/bin/cipd
+          printf 'chromium/third_party/screen-ai/linux latest\n' | /tmp/rpn/bin/cipd export -root /tmp/rpn/pkg -ensure-file -
+          LIB=$(find /tmp/rpn/pkg -name libchromescreenai.so -print -quit)
+          echo "$LIB" > /tmp/rpn/out/libpath.txt
+          file "$LIB" > /tmp/rpn/out/file.txt
+          readelf -Ws "$LIB" > /tmp/rpn/out/readelf-ws.txt || true
+          nm -aC "$LIB" > /tmp/rpn/out/nm-aC.txt || true
+          nm -DC "$LIB" > /tmp/rpn/out/nm-DC.txt || true
+          strings -a -t x "$LIB" > /tmp/rpn/out/strings-offsets.txt
+          objdump -h "$LIB" > /tmp/rpn/out/sections.txt
+      - name: Extract GroupRPN clues
+        run: |
+          cd /tmp/rpn/out
+          rg -i 'GroupRpn|Pairwise|ClusterBoxes|TextFlow|Breadth gap|Height ratio|Norm dist|angle diff|group_rpn_detector|ProcessPackedImagePyramid|anchor_heights|maximum_angle|maximum_breadth|GocrDetector' strings-offsets.txt > clues.txt || true
+          rg -i 'GroupRpn|group_rpn|DetectorHac|Pairwise|ClusterBoxes' nm-aC.txt readelf-ws.txt nm-DC.txt > symbols.txt || true
+          cat clues.txt
+          cat symbols.txt
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenai-grouprpn-reverse
+          path: /tmp/rpn/out
+          retention-days: 7
