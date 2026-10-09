@@ -1,0 +1,415 @@
+{
+  "topology": {
+    "cpuinfo": "processor\t: 0\nBogoMIPS\t: 100.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x1\nCPU part\t: 0xd41\nCPU revision\t: 2\n\nprocessor\t: 1\nBogoMIPS\t: 100.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x1\nCPU part\t: 0xd41\nCPU revision\t: 2\n\nprocessor\t: 2\nBogoMIPS\t: 100.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x1\nCPU part\t: 0xd41\nCPU revision\t: 2\n\nprocessor\t: 3\nBogoMIPS\t: 100.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x1\nCPU part\t: 0xd41\nCPU revision\t: 2",
+    "online": "0-3",
+    "allowed": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "policies": {
+      "policy0": {
+        "affected_cpus": "0 1 2 3",
+        "related_cpus": "0 1 2 3",
+        "scaling_driver": "cpufreq-dt",
+        "scaling_governor": "schedutil",
+        "scaling_available_governors": "conservative ondemand userspace powersave performance schedutil",
+        "scaling_available_frequencies": "1400000",
+        "scaling_min_freq": "1400000",
+        "scaling_max_freq": "1400000",
+        "cpuinfo_min_freq": "1400000",
+        "cpuinfo_max_freq": "1400000",
+        "cpuinfo_cur_freq": "1200000"
+      }
+    },
+    "cores": {
+      "cpu3": {
+        "capacity": "1024",
+        "topology": {
+          "cluster_cpus": "8",
+          "cluster_cpus_list": "3",
+          "physical_package_id": "0",
+          "core_cpus_list": "3",
+          "core_siblings": "f",
+          "cluster_id": "-1",
+          "core_siblings_list": "0-3",
+          "package_cpus": "f",
+          "package_cpus_list": "0-3",
+          "thread_siblings_list": "3",
+          "core_id": "3",
+          "core_cpus": "8",
+          "thread_siblings": "8"
+        },
+        "caches": [
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "8",
+            "shared_cpu_list": "3",
+            "type": "Unified",
+            "size": "256K",
+            "level": "2",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "8"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "3",
+            "type": "Data",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "8"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "32",
+            "shared_cpu_list": "0-3",
+            "type": "Unified",
+            "size": "1024K",
+            "level": "3",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "f"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "3",
+            "type": "Instruction",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "8"
+          }
+        ]
+      },
+      "cpu1": {
+        "capacity": "1024",
+        "topology": {
+          "cluster_cpus": "2",
+          "cluster_cpus_list": "1",
+          "physical_package_id": "0",
+          "core_cpus_list": "1",
+          "core_siblings": "f",
+          "cluster_id": "-1",
+          "core_siblings_list": "0-3",
+          "package_cpus": "f",
+          "package_cpus_list": "0-3",
+          "thread_siblings_list": "1",
+          "core_id": "1",
+          "core_cpus": "2",
+          "thread_siblings": "2"
+        },
+        "caches": [
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "8",
+            "shared_cpu_list": "1",
+            "type": "Unified",
+            "size": "256K",
+            "level": "2",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "2"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "1",
+            "type": "Data",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "2"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "32",
+            "shared_cpu_list": "0-3",
+            "type": "Unified",
+            "size": "1024K",
+            "level": "3",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "f"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "1",
+            "type": "Instruction",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "2"
+          }
+        ]
+      },
+      "cpu2": {
+        "capacity": "1024",
+        "topology": {
+          "cluster_cpus": "4",
+          "cluster_cpus_list": "2",
+          "physical_package_id": "0",
+          "core_cpus_list": "2",
+          "core_siblings": "f",
+          "cluster_id": "-1",
+          "core_siblings_list": "0-3",
+          "package_cpus": "f",
+          "package_cpus_list": "0-3",
+          "thread_siblings_list": "2",
+          "core_id": "2",
+          "core_cpus": "4",
+          "thread_siblings": "4"
+        },
+        "caches": [
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "8",
+            "shared_cpu_list": "2",
+            "type": "Unified",
+            "size": "256K",
+            "level": "2",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "4"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "2",
+            "type": "Data",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "4"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "32",
+            "shared_cpu_list": "0-3",
+            "type": "Unified",
+            "size": "1024K",
+            "level": "3",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "f"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "2",
+            "type": "Instruction",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "4"
+          }
+        ]
+      },
+      "cpu0": {
+        "capacity": "1024",
+        "topology": {
+          "cluster_cpus": "1",
+          "cluster_cpus_list": "0",
+          "physical_package_id": "0",
+          "core_cpus_list": "0",
+          "core_siblings": "f",
+          "cluster_id": "-1",
+          "core_siblings_list": "0-3",
+          "package_cpus": "f",
+          "package_cpus_list": "0-3",
+          "thread_siblings_list": "0",
+          "core_id": "0",
+          "core_cpus": "1",
+          "thread_siblings": "1"
+        },
+        "caches": [
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "8",
+            "shared_cpu_list": "0",
+            "type": "Unified",
+            "size": "256K",
+            "level": "2",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "1"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "0",
+            "type": "Data",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "1"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "512",
+            "ways_of_associativity": "32",
+            "shared_cpu_list": "0-3",
+            "type": "Unified",
+            "size": "1024K",
+            "level": "3",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "f"
+          },
+          {
+            "uevent": "",
+            "number_of_sets": "256",
+            "ways_of_associativity": "4",
+            "shared_cpu_list": "0",
+            "type": "Instruction",
+            "size": "64K",
+            "level": "1",
+            "coherency_line_size": "64",
+            "shared_cpu_map": "1"
+          }
+        ]
+      }
+    },
+    "environment": {
+      "frequency_khz": {
+        "cpu3": "1400000",
+        "cpu1": "1400000",
+        "cpu2": "1400000",
+        "cpu0": "1400000"
+      },
+      "thermal_zones": {},
+      "cooling": {},
+      "hwmon_temp": {},
+      "loadavg": "18.24 18.40 18.56 13/1350 24290"
+    },
+    "clock_ticks": 100
+  },
+  "system_load": {
+    "seconds": 2,
+    "core_busy_percent": {
+      "cpu": 41.19897959183673,
+      "cpu0": 42.56410256410256,
+      "cpu1": 38.46153846153846,
+      "cpu2": 40.104166666666664,
+      "cpu3": 42.5
+    },
+    "top_processes": [
+      {
+        "pid": "6346",
+        "name": "hyperion-webos",
+        "ticks": 1000152,
+        "last_core": 1,
+        "delta_ticks": 108
+      },
+      {
+        "pid": "11279",
+        "name": "hyperhdr",
+        "ticks": 258316,
+        "last_core": 2,
+        "delta_ticks": 102
+      },
+      {
+        "pid": "2652",
+        "name": "pqcontroller",
+        "ticks": 253033,
+        "last_core": 3,
+        "delta_ticks": 29
+      },
+      {
+        "pid": "7111",
+        "name": "WebAppMgr",
+        "ticks": 311947,
+        "last_core": 0,
+        "delta_ticks": 29
+      },
+      {
+        "pid": "2512",
+        "name": "kworker/u18:0+npu_run_1",
+        "ticks": 120086,
+        "last_core": 3,
+        "delta_ticks": 12
+      },
+      {
+        "pid": "2534",
+        "name": "kworker/u18:1+npu_run_0",
+        "ticks": 86806,
+        "last_core": 0,
+        "delta_ticks": 11
+      },
+      {
+        "pid": "24290",
+        "name": "python3",
+        "ticks": 37,
+        "last_core": 1,
+        "delta_ticks": 7
+      },
+      {
+        "pid": "1",
+        "name": "systemd",
+        "ticks": 70902,
+        "last_core": 0,
+        "delta_ticks": 6
+      },
+      {
+        "pid": "4076",
+        "name": "lginput2",
+        "ticks": 38390,
+        "last_core": 0,
+        "delta_ticks": 4
+      },
+      {
+        "pid": "5219",
+        "name": "captureservice",
+        "ticks": 8918,
+        "last_core": 0,
+        "delta_ticks": 3
+      },
+      {
+        "pid": "1942",
+        "name": "ls-hubd",
+        "ticks": 11562,
+        "last_core": 3,
+        "delta_ticks": 2
+      },
+      {
+        "pid": "2040",
+        "name": "PmLogDaemon",
+        "ticks": 24879,
+        "last_core": 0,
+        "delta_ticks": 2
+      },
+      {
+        "pid": "2151",
+        "name": "kadpd",
+        "ticks": 16049,
+        "last_core": 1,
+        "delta_ticks": 2
+      },
+      {
+        "pid": "4642",
+        "name": "WebAppMgr",
+        "ticks": 22169,
+        "last_core": 0,
+        "delta_ticks": 2
+      },
+      {
+        "pid": "5326",
+        "name": "universal-contr",
+        "ticks": 25994,
+        "last_core": 0,
+        "delta_ticks": 2
+      }
+    ]
+  }
+}

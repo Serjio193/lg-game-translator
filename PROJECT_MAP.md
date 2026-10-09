@@ -39,3 +39,6 @@
 
 PicCap frame capture живёт в отдельном `hyperion-webos` repository. Native
 postprocess работает после tensor decode, не управляет capture scheduler/settings.
+
+- `gocr_worker/scheduler_observation.py`, `scheduler_experiment.py`: read-only Linux thread evidence and test-process-only affinity/scheduler controls.
+- `scripts/benchmark-gocr-strict-scheduling.py`, `analyze-gocr-strict-scheduling.py`: isolated system STRICT 2/2 affinity matrix, exact gates, traces and summaries.
