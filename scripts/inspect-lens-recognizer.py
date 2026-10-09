@@ -36,8 +36,10 @@ def clean(d):
     out={}
     for k in ('name','index','shape','shape_signature','dtype','quantization'):
         v=d[k]
-        if hasattr(v,'tolist'): v=v.tolist()
-        elif k=='dtype': v=str(v)
+        if k=='dtype':
+            v=str(v)
+        elif hasattr(v,'tolist'):
+            v=v.tolist()
         out[k]=v
     return out
 
