@@ -14,6 +14,15 @@ except: raise SystemExit(1)
 PY
 }
 
+is_bundle(){ python3 - "$1" <<'PY'
+import sys,zipfile
+try:
+ z=zipfile.ZipFile(sys.argv[1]); names=z.namelist()
+ raise SystemExit(0 if any(x.lower().endswith('.apk') for x in names) else 1)
+except: raise SystemExit(1)
+PY
+}
+
 echo "[1] Download Google App"
 for url in  "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest"  "https://d.apkpure.com/b/APK/com.google.android.googlequicksearchbox?version=latest"; do
   rm -f "$APK"
@@ -36,8 +45,15 @@ print('min_sdk=',a.get_min_sdk_version())
 print('target_sdk=',a.get_target_sdk_version())
 PY
 
-echo "[2] Unpack"
-unzip -q "$APK" -d "$OUT/unpacked"
+echo "[2] Unpack base + all feature splits"
+mkdir -p "$OUT/unpacked/base"
+unzip -q "$APK" -d "$OUT/unpacked/base"
+if compgen -G "$OUT/package/*.apk" >/dev/null || find "$OUT/package" -type f -name '*.apk' | grep -q .; then
+  i=0
+  while IFS= read -r ap; do
+    i=$((i+1)); d="$OUT/unpacked/split-$i"; mkdir -p "$d"; unzip -q "$ap" -d "$d" || true
+  done < <(find "$OUT/package" -type f -name '*.apk' | sort)
+fi
 find "$OUT/unpacked" -type f | sort > "$OUT/reports/file-list.txt"
 find "$OUT/unpacked" -type f \( -iname '*.tflite' -o -iname '*.lite' -o -iname '*.task' -o -iname '*.bin' -o -iname '*.model' -o -iname '*.pb' -o -iname '*.onnx' -o -iname '*.mlmodel*' \) -printf '%s\t%p\n' | sort -nr > "$OUT/reports/model-files.txt"
 find "$OUT/unpacked" -type f -name '*.so' -printf '%s\t%p\n' | sort -nr > "$OUT/reports/native-libs.txt"
@@ -79,7 +95,9 @@ curl -fL "$JURL" -o "$OUT/jadx.zip"
 unzip -q "$OUT/jadx.zip" -d "$OUT/jadx-bin"
 
 echo "[6] Decompile targeted sources"
-"$OUT/jadx-bin/bin/jadx" --no-res --no-imports -d "$OUT/jadx" "$APK" >/dev/null 2>"$OUT/reports/jadx-errors.txt" || true
+JINPUTS=("$APK")
+while IFS= read -r ap; do JINPUTS+=("$ap"); done < <(find "$OUT/package" -type f -name '*.apk' | sort)
+"$OUT/jadx-bin/bin/jadx" --no-res --no-imports -d "$OUT/jadx" "${JINPUTS[@]}" >/dev/null 2>"$OUT/reports/jadx-errors.txt" || true
 grep -R -n -E 'GDD_LENS_(OFFLINE_TEXT|TEXT|INPAINTING|SEGMENTATION|TEXT_CLASSIFIER)|LENS_OFFLINE_TEXT' "$OUT/jadx/sources" > "$OUT/reports/jadx-gdd-hits.txt" || true
 
 python3 - <<'PY'
