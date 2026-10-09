@@ -1,0 +1,30 @@
+name: Validate Lens RPN channels
+
+on:
+  push:
+    paths:
+      - '.github/workflows/validate-lens-rpn.yml'
+      - 'scripts/validate-lens-rpn.py'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install runtime
+        run: python3 -m pip install --quiet ai-edge-litert pillow numpy
+      - name: Download Google App and extract model
+        run: |
+          mkdir -p validate-rpn
+          curl -fL -A "Mozilla/5.0" "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest" -o validate-rpn/google.apk
+          unzip -p validate-rpn/google.apk "assets/lens_ondevice_text_stack_multiscript_omni/third_party/lens/line_detector/v688492737/gocr_group_rpn_text_detection_model_2024_q4.tflite" > validate-rpn/detector.tflite
+      - name: Validate channels
+        run: python3 scripts/validate-lens-rpn.py validate-rpn/detector.tflite validate-rpn/report.txt
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: lens-rpn-channel-validation
+          path: validate-rpn/
+          retention-days: 7
