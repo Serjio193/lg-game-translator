@@ -105,6 +105,8 @@ class Pipeline:
         return result
 
     def ocr(self, image):
+        stats = getattr(self.engines, "cache_stats", None)
+        cache_before = stats() if stats is not None else None
         start = time.perf_counter()
         gray = gray_frame(image)
         converted = time.perf_counter()
@@ -121,9 +123,15 @@ class Pipeline:
             regions.append({"box": box.box(), "score": box.score, "lines": lines,
                             "text": " ".join(row["text"] for row in lines if row["text"])})
         finished = time.perf_counter()
-        return {"regions": regions, "timings_ms": {
+        result = {"regions": regions, "timings_ms": {
             "detector_completed_monotonic_ms": detected*1000,
             "gray": (converted - start) * 1000,
             "detector": (detected - converted) * 1000,
             "lines_crop_recognition": (finished - detected) * 1000,
             "full_ocr": (finished - start) * 1000}}
+        if cache_before is not None:
+            cache_after = stats()
+            result["crop_cache"] = {**cache_after, "frame": {
+                k: cache_after[k]-cache_before[k]
+                for k in ("hits", "misses", "recognize_calls", "evictions")}}
+        return result

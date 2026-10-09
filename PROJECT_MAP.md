@@ -84,3 +84,7 @@ postprocess работает после tensor decode, не управляет c
   token selection; original label mapping/statistics.mean confidence retained.
 - `scripts/benchmark-ppocr-ctc.py`, `validate-ppocr-native-ctc.py`: quality/speed
   gates for default opt-in native decoder; see `docs/evidence/ppocr-native-ctc-20261010/README.md`.
+
+- `scripts/ppocr_crop_cache.py`, `benchmark-ppocr-crop-cache.py`: bounded exact
+  OCR-input RAM reuse and unchanged/one-pixel quality gates; selected explicitly
+  by PP_OCR_EXACT_CROP_CACHE, independent of the translation database cache.

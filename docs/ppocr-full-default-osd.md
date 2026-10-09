@@ -51,3 +51,10 @@ is unchanged. Exact corpus and complete saved-frame response gates passed:
 User accepted native class-major CTC as the default. Keep original RKNN models/bridge and reference Python decoder for rollback. Acceptance gates: 18-crop exact text/confidence, adversarial semantics tests and three complete saved-frame response comparisons. Preallocated RKNN output experiment remains research-only. Future performance changes must repeat the frozen quality gate; known clipped/glyph errors are not hidden from the corpus.
 
 Capture-side patch is archived as patches/piccap-ocr/fresh-frame-demand.patch. Apply only against the documented current PicCap source snapshot with LF-normalized files, using git apply --unidiff-zero; patch reverse-check passed on that snapshot. It does not snapshot or commit unrelated changes in the external PicCap checkout.
+
+2026-10-10: default PP_OCR_EXACT_CROP_CACHE=1 enables bounded exact-grayscale
+crop RAM cache (16 MiB payload, 256 entries). Text/confidence/TSV reused only
+when mode, shape, loaded model identity and ALL input bytes match. New pixels,
+empty/error responses and appearance/policy updates follow normal processing.
+Rollback: remove setting and restart Orange unit. Gates/live evidence:
+`docs/evidence/ppocr-crop-cache-20261010/README.md`.

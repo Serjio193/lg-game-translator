@@ -80,7 +80,11 @@ def main():
     if os.environ.get("PP_OCR_POLICY_LIBRARY"):
         from ppocr_translation_policy import TranslationPolicy
         policy = TranslationPolicy(os.environ["PP_OCR_POLICY_LIBRARY"])
-    worker = Worker(Pipeline(detector, Engines(args.runtime / "assets")), policy)
+    engines = Engines(args.runtime / "assets")
+    if os.environ.get("PP_OCR_EXACT_CROP_CACHE") == "1":
+        from ppocr_crop_cache import ExactCropCache
+        engines = ExactCropCache(engines)
+    worker = Worker(Pipeline(detector, engines), policy)
     try:
         with ThreadingHTTPServer((args.bind, args.port), make_handler(worker, token)) as server:
             server.serve_forever()
