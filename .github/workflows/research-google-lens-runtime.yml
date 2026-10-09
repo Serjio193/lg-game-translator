@@ -8,6 +8,7 @@ on:
       - 'scripts/recover-proto-message-descriptor.py'
       - 'scripts/research-google-runner-neighborhood.py'
       - 'scripts/research-arm64-string-xrefs.py'
+      - 'scripts/decode-gocr-runner-config.py'
       - '.github/workflows/research-google-lens-runtime.yml'
 
 permissions:
@@ -31,6 +32,9 @@ jobs:
       - name: Analyze native runtime
         run: |
           python3 scripts/research-google-lens-runtime.py /tmp/google-runtime/google.apk /tmp/google-runtime/out
+      - name: Verify Android GroupRPN runner contract
+        run: |
+          python3 scripts/decode-gocr-runner-config.py             /tmp/google-runtime/out/assets/gocr_group_rpn_text_detection_config_2024_q4.binarypb             --assert-current-android-contract | tee /tmp/google-runtime/out/group-rpn-runner-contract.json
       - name: Recover runner/config protobuf descriptors
         run: |
           LIB=/tmp/google-runtime/out/libs/liblens_ondevice_engine_play_ml.so
@@ -70,6 +74,7 @@ jobs:
           cp /tmp/google-runtime/out/runner-neighborhood.txt docs/evidence/google-lens-runtime-latest/
           cp /tmp/google-runtime/out/runner-xrefs.txt docs/evidence/google-lens-runtime-latest/
           cp /tmp/google-runtime/out/runner-xrefs.json docs/evidence/google-lens-runtime-latest/
+          cp /tmp/google-runtime/out/group-rpn-runner-contract.json docs/evidence/google-lens-runtime-latest/
           for f in /tmp/google-runtime/out/descriptors/*.txt; do
             [ -e "$f" ] || continue
             cp "$f" docs/evidence/google-lens-runtime-latest/
