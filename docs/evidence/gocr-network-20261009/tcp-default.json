@@ -1,0 +1,179 @@
+{
+  "scope": "TV encode and HTTP upload+small response; no OCR",
+  "frames": [
+    {
+      "frame": "11-gocr-native-postprocess-20261009-emergency-guard.ppm",
+      "size": [
+        1280,
+        720
+      ],
+      "encoding": {
+        "png": {
+          "median_ms": 418.1648400044651,
+          "min_ms": 415.91047999827424,
+          "max_ms": 425.1191799994558,
+          "p95_ms": 425.1191799994558
+        },
+        "jpeg_q90": {
+          "median_ms": 18.387939999229275,
+          "min_ms": 18.111119999957737,
+          "max_ms": 18.95667999633588,
+          "p95_ms": 18.95667999633588
+        }
+      },
+      "transfers": [
+        {
+          "format": "raw_rgb",
+          "bytes": 2764800,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 155.20977999767638,
+            "min_ms": 152.35843999835197,
+            "max_ms": 164.32601999986218,
+            "p95_ms": 164.32601999986218
+          }
+        },
+        {
+          "format": "raw_gray",
+          "bytes": 921600,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 83.26775999739766,
+            "min_ms": 79.90281999809667,
+            "max_ms": 85.49939999647904,
+            "p95_ms": 85.49939999647904
+          }
+        },
+        {
+          "format": "png",
+          "bytes": 568820,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 74.24492000063765,
+            "min_ms": 69.95743999868864,
+            "max_ms": 78.36463999410626,
+            "p95_ms": 78.36463999410626
+          },
+          "encode_plus_http_median_ms": 492.4097600051027
+        },
+        {
+          "format": "jpeg_q90",
+          "bytes": 181904,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 59.590400000161026,
+            "min_ms": 51.86934000084875,
+            "max_ms": 60.613640001975,
+            "p95_ms": 60.613640001975
+          },
+          "encode_plus_http_median_ms": 77.9783399993903
+        },
+        {
+          "format": "jpeg_q90_base64_json",
+          "bytes": 242557,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 56.03558999791858,
+            "min_ms": 55.36625999957323,
+            "max_ms": 61.16638000094099,
+            "p95_ms": 61.16638000094099
+          },
+          "encode_plus_http_median_ms": 79.62300999861327
+        }
+      ],
+      "jpeg_json_pack_ms": 5.1994800014654174
+    },
+    {
+      "frame": "12-gocr-native-postprocess-20261009-luigi.ppm",
+      "size": [
+        1280,
+        720
+      ],
+      "encoding": {
+        "png": {
+          "median_ms": 438.9463600018644,
+          "min_ms": 434.25962000037543,
+          "max_ms": 459.3539999987115,
+          "p95_ms": 459.3539999987115
+        },
+        "jpeg_q90": {
+          "median_ms": 18.508460001612548,
+          "min_ms": 18.277600000146776,
+          "max_ms": 18.780539998260792,
+          "p95_ms": 18.780539998260792
+        }
+      },
+      "transfers": [
+        {
+          "format": "raw_rgb",
+          "bytes": 2764800,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 155.20575999835273,
+            "min_ms": 151.21884000109276,
+            "max_ms": 160.07766000257106,
+            "p95_ms": 160.07766000257106
+          }
+        },
+        {
+          "format": "raw_gray",
+          "bytes": 921600,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 87.37266999742133,
+            "min_ms": 83.79479999712203,
+            "max_ms": 88.20916000695433,
+            "p95_ms": 88.20916000695433
+          }
+        },
+        {
+          "format": "png",
+          "bytes": 601168,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 75.83140000133426,
+            "min_ms": 71.50905999878887,
+            "max_ms": 76.73051999881864,
+            "p95_ms": 76.73051999881864
+          },
+          "encode_plus_http_median_ms": 514.7777600031986
+        },
+        {
+          "format": "jpeg_q90",
+          "bytes": 190146,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 58.26335999881849,
+            "min_ms": 55.48842000280274,
+            "max_ms": 60.33857999864267,
+            "p95_ms": 60.33857999864267
+          },
+          "encode_plus_http_median_ms": 76.77182000043103
+        },
+        {
+          "format": "jpeg_q90_base64_json",
+          "bytes": 253545,
+          "warmups": 3,
+          "repeats": 10,
+          "http_upload_and_response": {
+            "median_ms": 59.5757400005823,
+            "min_ms": 55.20686000090791,
+            "max_ms": 60.682960000121966,
+            "p95_ms": 60.682960000121966
+          },
+          "encode_plus_http_median_ms": 82.92228000209434
+        }
+      ],
+      "jpeg_json_pack_ms": 4.838079999899492
+    }
+  ]
+}
