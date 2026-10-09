@@ -1,0 +1,24 @@
+name: Fast Lens detector scan
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fast-lens-scan.yml'
+      - 'scripts/fast-lens-scan.sh'
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan
+        run: bash scripts/fast-lens-scan.sh
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fast-lens-detector-scan
+          path: fast-out/
+          retention-days: 7
