@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'scripts/research-google-lens-runtime.py'
+      - 'scripts/recover-proto-message-descriptor.py'
       - '.github/workflows/research-google-lens-runtime.yml'
 
 permissions:
@@ -13,26 +14,51 @@ permissions:
 jobs:
   research:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Install analysis tools
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq binutils binutils-aarch64-linux-gnu unzip
+          python3 -m pip install --quiet protobuf
       - name: Download current Google App APK
         run: |
           mkdir -p /tmp/google-runtime
-          curl -fL -A "Mozilla/5.0"             "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest"             -o /tmp/google-runtime/google.apk
+          curl -fL -A "Mozilla/5.0" "https://d.apkpure.net/b/APK/com.google.android.googlequicksearchbox?version=latest" -o /tmp/google-runtime/google.apk
       - name: Analyze native runtime
         run: |
-          python3 scripts/research-google-lens-runtime.py             /tmp/google-runtime/google.apk             /tmp/google-runtime/out
+          python3 scripts/research-google-lens-runtime.py /tmp/google-runtime/google.apk /tmp/google-runtime/out
+      - name: Recover runner/config protobuf descriptors
+        run: |
+          LIB=/tmp/google-runtime/out/libs/liblens_ondevice_engine_play_ml.so
+          mkdir -p /tmp/google-runtime/out/descriptors
+          python3 scripts/recover-proto-message-descriptor.py "$LIB" TensorFlowModelRunnerConfig /tmp/google-runtime/out/descriptors/tensorflow-model-runner || true
+          python3 scripts/recover-proto-message-descriptor.py "$LIB" GocrDetectorGpuConfig /tmp/google-runtime/out/descriptors/gocr-detector-gpu || true
+          {
+            echo
+            echo "## Recovered protobuf descriptors"
+            echo
+            for f in /tmp/google-runtime/out/descriptors/*.txt; do
+              [ -e "$f" ] || continue
+              echo "### $(basename "$f")"
+              echo
+              echo '    ---'
+              sed 's/^/    /' "$f"
+              echo '    ---'
+              echo
+            done
+          } >> /tmp/google-runtime/out/report.md
       - name: Publish compact report into repository
         run: |
           mkdir -p docs/research docs/evidence/google-lens-runtime-latest
           cp /tmp/google-runtime/out/report.md docs/research/google-lens-runtime-report.md
           cp /tmp/google-runtime/out/summary.json docs/evidence/google-lens-runtime-latest/summary.json
           cp /tmp/google-runtime/out/manifest.json docs/evidence/google-lens-runtime-latest/manifest.json
+          for f in /tmp/google-runtime/out/descriptors/*.txt; do
+            [ -e "$f" ] || continue
+            cp "$f" docs/evidence/google-lens-runtime-latest/
+          done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/research/google-lens-runtime-report.md docs/evidence/google-lens-runtime-latest/
