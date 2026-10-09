@@ -122,5 +122,5 @@ for d in apk.get_all_dex():
         if rx.search(n): print(n)
 PY
 
-find out/unpacked -type f -printf '%s\t%p\n' | sort -nr | head -250 > out/largest-files.txt
+find out/unpacked -type f -printf '%s\t%p\n' | sort -nr | head -250 > out/largest-files.txt || true
 echo "Done."
