@@ -34,7 +34,7 @@ jobs:
           rg -i 'GroupRpn|Pairwise|ClusterBoxes|TextFlow|Breadth gap|Height ratio|Norm dist|angle diff|group_rpn_detector|ProcessPackedImagePyramid|anchor_heights|maximum_angle|maximum_breadth|GocrDetector' strings-offsets.txt > clues.txt || true
           rg -i 'GroupRpn|group_rpn|DetectorHac|Pairwise|ClusterBoxes' nm-aC.txt readelf-ws.txt nm-DC.txt > symbols.txt || true
           cat clues.txt
-          cat symbols.txt
+          cat symbols.txt\n          N=$(grep -n 'GocrDetectorLevel1GroupingConfig' strings-offsets.txt | tail -1 | cut -d: -f1); if [ -n \"$N\" ]; then A=$((N-80)); [ $A -lt 1 ] && A=1; B=$((N+260)); sed -n \"${A},${B}p\" strings-offsets.txt > descriptor-neighborhood.txt; cat descriptor-neighborhood.txt; fi
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
