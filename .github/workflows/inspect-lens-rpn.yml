@@ -1,0 +1,23 @@
+name: Inspect current Lens RPN TFLite
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-lens-rpn.yml'
+      - 'scripts/inspect-lens-rpn.sh'
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect model
+        run: bash scripts/inspect-lens-rpn.sh
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lens-rpn-model-report
+          path: lens-rpn-report/
+          retention-days: 7
