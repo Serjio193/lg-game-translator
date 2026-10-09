@@ -25,7 +25,8 @@ bool gocr_selected_frame_enabled(void)
     bool read = fgets(mode, sizeof(mode), file) != NULL;
     fclose(file);
     mode[strcspn(mode, "\r\n")] = 0;
-    return read && (!strcmp(mode, "TV_CROP") || !strcmp(mode, "TV_FULL"));
+    return read && (!strcmp(mode, "TV_CROP") || !strcmp(mode, "TV_FULL")
+        || !strcmp(mode, "ORANGE_FULL"));
 }
 
 static void number(uint8_t* output, uint64_t value, int bytes)

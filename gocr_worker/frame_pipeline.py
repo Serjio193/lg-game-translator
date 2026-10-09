@@ -13,13 +13,20 @@ from .execution_profile import execution_profile
 
 class FramePipeline:
     def __init__(self, assets: Path, mode, threads=2, crop_client=None, translator=None,
-                 *,detector_threads=None,recognizer_threads=None):
-        if mode not in ("TV_CROP", "TV_FULL"):
+                 *,detector_threads=None,recognizer_threads=None,frame_client=None):
+        if mode not in ("TV_CROP", "TV_FULL", "ORANGE_FULL"):
             raise ValueError("unknown GOCR execution mode")
         self.mode = mode
         self.crop_client, self.translator = crop_client, translator
         self.lock = threading.Lock()
-        if mode == "TV_CROP":
+        if mode == "ORANGE_FULL":
+            if frame_client is None or translator is None:
+                raise ValueError("ORANGE_FULL needs frame and translation clients")
+            if detector_threads is not None or recognizer_threads is not None:
+                raise ValueError("ORANGE_FULL thread counts belong to the Orange server")
+            self.frame_client = frame_client
+            self.asset_status = {"execution_location": "orange", "experimental": True}
+        elif mode == "TV_CROP":
             if execution_profile()!="strict":
                 raise ValueError("FAST_XNNPACK is currently supported only in TV_FULL")
             if recognizer_threads is not None:
@@ -41,9 +48,11 @@ class FramePipeline:
             raise ValueError("GOCR needs the existing selected RGB 1280x720 frame")
         started = time.perf_counter()
         with self.lock:
-            if self.mode == "TV_FULL":
-                result = self.full.ocr(image)
-                sent = 0
+            if self.mode in ("TV_FULL", "ORANGE_FULL"):
+                if self.mode == "ORANGE_FULL":
+                    result, sent = self.frame_client.ocr(image, sequence, capture_ts)
+                else:
+                    result, sent = self.full.ocr(image), 0
                 for line in result["lines"]:
                     line["translation"] = self.translator.translate(line["text"])
                     sent += line["translation"]["bytes_sent"]
@@ -71,7 +80,7 @@ class FramePipeline:
                               "raw_group_count":det.get("raw_group_count")}}
         stages = result["timings_ms"]
         stages.update({"recognizer": sum(line["timings_ms"].get("recognizer", 0) for line in result["lines"]),
-                       "network": sum(line["timings_ms"].get("network", 0) + max(0,
+                       "network": stages.get("frame_network", 0)+sum(line["timings_ms"].get("network", 0) + max(0,
                            line.get("translation", {}).get("request_ms", 0) -
                            line.get("translation", {}).get("latency_ms", 0)) for line in result["lines"]),
                        "translation": sum(line.get("translation", {}).get("latency_ms",

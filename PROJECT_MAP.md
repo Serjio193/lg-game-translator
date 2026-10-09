@@ -4,6 +4,8 @@
   его модель, API и настройки не меняет.
 - `gocr_worker/`: Google assets validation, detector binarypb parser,
   TFLite execution и head decode, recognizer, TV_CROP/TV_FULL orchestration.
+- `gocr_worker/frame_client.py`, `orange_server.py`: explicit experimental
+  ORANGE_FULL, lossless full-frame relay and authenticated persistent Orange OCR.
 - `gocr_worker/detector.py`: Python clean-room reference grouping.
 - `gocr_worker/native_postprocess.py`: один ctypes ABI вызов на весь массив proposals.
 - `native/gocr_postprocess/`: самостоятельная C++ shared library и публичный ABI.

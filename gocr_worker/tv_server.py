@@ -7,6 +7,7 @@ import socketserver
 import stat
 
 from .crop_client import CropClient
+from .frame_client import FrameClient
 from .frame_pipeline import FramePipeline
 from .frame_transport import receive_frame, send_result
 from .http_security import read_token
@@ -48,12 +49,13 @@ class FrameHandler(socketserver.BaseRequestHandler):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--assets", required=True, type=Path)
-    parser.add_argument("--mode", required=True, choices=("TV_CROP", "TV_FULL"))
+    parser.add_argument("--mode", required=True, choices=("TV_CROP", "TV_FULL", "ORANGE_FULL"))
     parser.add_argument("--threads", type=int, default=2)
     parser.add_argument("--detector-threads",type=int,choices=range(1,5))
     parser.add_argument("--recognizer-threads",type=int,choices=range(1,5),help="TV_FULL only")
     parser.add_argument("--socket", default="/tmp/gocr-frame.sock")
     parser.add_argument("--recognizer", help="Orange crop worker base URL (TV_CROP)")
+    parser.add_argument("--frame-worker", help="Orange full-frame worker base URL (ORANGE_FULL)")
     parser.add_argument("--token-file", type=Path)
     parser.add_argument("--translator", help="Existing translator base URL (TV_FULL)")
     args = parser.parse_args()
@@ -62,12 +64,17 @@ def main():
     logging.basicConfig(level=logging.INFO)
     if args.mode == "TV_CROP" and not args.recognizer:
         parser.error("TV_CROP requires --recognizer")
-    if args.mode == "TV_FULL" and not args.translator:
-        parser.error("TV_FULL requires --translator")
+    if args.mode in ("TV_FULL", "ORANGE_FULL") and not args.translator:
+        parser.error("full-frame modes require --translator")
+    if args.mode == "ORANGE_FULL" and not args.frame_worker:
+        parser.error("ORANGE_FULL requires --frame-worker")
     crop_client = CropClient(args.recognizer, read_token(args.token_file)) if args.mode == "TV_CROP" else None
-    translator = TranslationClient(args.translator) if args.mode == "TV_FULL" else None
+    translator = TranslationClient(args.translator) if args.mode in ("TV_FULL", "ORANGE_FULL") else None
+    frame_client = (FrameClient(args.frame_worker, read_token(args.token_file))
+                    if args.mode == "ORANGE_FULL" else None)
     pipeline = FramePipeline(args.assets,args.mode,args.threads,crop_client,translator,
-                             detector_threads=args.detector_threads,recognizer_threads=args.recognizer_threads)
+                             detector_threads=args.detector_threads,recognizer_threads=args.recognizer_threads,
+                             frame_client=frame_client)
     with FrameServer(args.socket, pipeline) as server:
         try:
             server.serve_forever()

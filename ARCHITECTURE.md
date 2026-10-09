@@ -3,6 +3,15 @@
 Existing PicCap selects the RGB 1280×720 frame. Capture scheduler/settings/API
 belong to the separate hyperion-webos repository and are not replaced by GOCR.
 
+Experimental `ORANGE_FULL` relays that same RGB buffer via the existing GFR1
+frame header in an authenticated HTTP body. Orange reconstructs the original
+RGB pixels, runs the configured detector / native postprocess / rectification /
+recognizer, and returns text + original source quads and the frame fingerprint.
+The TV checks frame identity, then reuses the existing translation client and
+result publication. Capture and OSD are unchanged; no TV OCR models are created
+in this mode. It is not numerically equivalent to TV system STRICT and is never
+selected automatically. Its Orange LiteRT default delegates are explicitly off.
+
 TV_FULL's selected-frame detector path:
 
 ```text

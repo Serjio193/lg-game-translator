@@ -4,6 +4,11 @@ from pathlib import Path
 import shutil
 
 
+def copy_transport(target, sources):
+    for name in ("gocr_frame_transport.c", "gocr_frame_transport.h"):
+        shutil.copy2(sources / name, target / "unicapture" / name)
+
+
 def install(target, sources):
     worker = target / "unicapture/ocr_worker.c"
     cmake = target / "unicapture/CMakeLists.txt"
@@ -12,6 +17,7 @@ def install(target, sources):
     if "ocr_color_snapshot(worker, &local_rgb, &color_capacity);" not in text:
         raise ValueError("selected RGB snapshot API is missing; use the current PicCap checkout")
     if "gocr_submit_selected_rgb" in text:
+        copy_transport(target, sources)
         return
     producer = text[text.index("void ocr_worker_submit("):]
     modified = text.replace('#include "ocr_worker.h"',
@@ -44,8 +50,7 @@ def install(target, sources):
     if '        ocr_worker.c' not in build:
         raise ValueError("OCR source list is missing")
     build = build.replace('        ocr_worker.c', '        gocr_frame_transport.c\n        ocr_worker.c', 1)
-    for name in ("gocr_frame_transport.c", "gocr_frame_transport.h"):
-        shutil.copy2(sources / name, target / "unicapture" / name)
+    copy_transport(target, sources)
     worker.write_text(modified, encoding="utf-8")
     cmake.write_text(build, encoding="utf-8")
 

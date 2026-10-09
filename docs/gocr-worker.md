@@ -1,6 +1,10 @@
 # GOCR worker
 
 TV_FULL native detector: [контракт, сборка, parity и runtime benchmark](gocr-native-detector.md).
+
+Experimental [ORANGE_FULL](gocr-orange-full.md) sends the selected lossless RGB
+frame to Orange for complete OCR; it is not equivalent to TV system STRICT and
+does not change production selection automatically.
 Для selected RGB 1280×720 `GOCR_DETECTOR=native` выбирает C++ path; debug —
 `GOCR_DETECTOR=python`. Runtime experiments не меняют OCR parameters.
 

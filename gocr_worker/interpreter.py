@@ -6,10 +6,16 @@ import numpy as np
 
 def create_interpreter(model_path, num_threads):
     try:
-        from ai_edge_litert.interpreter import Interpreter
+        from ai_edge_litert.interpreter import Interpreter, OpResolverType
     except ImportError:
         return CInterpreter(model_path, num_threads)
-    return Interpreter(model_path=str(model_path), num_threads=num_threads)
+    options = {}
+    delegates = os.environ.get("GOCR_LITERT_DELEGATES", "default")
+    if delegates not in ("off", "default"):
+        raise ValueError("GOCR_LITERT_DELEGATES must be off or default")
+    if delegates == "off":
+        options["experimental_op_resolver_type"] = OpResolverType.BUILTIN_WITHOUT_DEFAULT_DELEGATES
+    return Interpreter(model_path=str(model_path), num_threads=num_threads, **options)
 
 
 class Quantization(C.Structure):

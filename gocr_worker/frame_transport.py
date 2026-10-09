@@ -1,4 +1,4 @@
-"""Local selected-frame protocol. Full frames never use the Orange LAN link."""
+"""Lossless selected-frame protocol for local capture and explicit Orange relay."""
 import json
 import struct
 from PIL import Image
@@ -6,6 +6,13 @@ from PIL import Image
 HEADER = struct.Struct("!4sHHQQI")
 WIDTH, HEIGHT = 1280, 720
 MAX_REPLY = 4 * 1024 * 1024
+
+
+def encode_frame(image, sequence=0, captured=0):
+    if image.mode != "RGB" or image.size != (WIDTH, HEIGHT):
+        raise ValueError("invalid selected-frame pixels")
+    pixels = image.tobytes()
+    return HEADER.pack(b"GFR1", WIDTH, HEIGHT, sequence, captured, len(pixels))+pixels
 
 
 def read_exact(stream, size):
