@@ -72,6 +72,16 @@ def make_handler(worker, token):
             if self.path != "/v1/ocr-frame":
                 return self.reject(404, "not found")
             body_consumed = False
+            streaming = False
+            stream_bytes = 0
+            def event(value):
+                nonlocal stream_bytes
+                raw = json.dumps(value, ensure_ascii=False, allow_nan=False).encode()+b"\n"
+                stream_bytes += len(raw)
+                if stream_bytes > MAX_REPLY:
+                    raise ValueError("region stream exceeds reply budget")
+                self.wfile.write(f"{len(raw):x}\r\n".encode()+raw+b"\r\n")
+                self.wfile.flush()
             try:
                 size = int(self.headers.get("Content-Length", "0"))
                 expected_size = HEADER.size+WIDTH*HEIGHT*3
@@ -95,7 +105,19 @@ def make_handler(worker, token):
                 image, sequence, captured = receive_frame(ByteStream(payload))
                 decode_ms = (time.perf_counter()-started)*1000
                 frame_hash = fingerprint(image)
-                result = worker.ocr(image)
+                context = {"sequence": sequence, "capture_ts": captured, "frame_sha256": frame_hash}
+                if self.headers.get("Accept") == "application/x-ndjson":
+                    if not getattr(worker, "supports_region_events", False):
+                        return self.reject(400, "region events unsupported", True)
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/x-ndjson; charset=utf-8")
+                    self.send_header("Transfer-Encoding", "chunked")
+                    self.end_headers()
+                    streaming = True
+                    result = worker.ocr(image, on_region=lambda line: event(
+                        {"event": "region", **context, "line": line}))
+                else:
+                    result = worker.ocr(image)
                 result.update(sequence=sequence, capture_ts=captured, frame_sha256=frame_hash,
                               execution_location="orange", experimental=True)
                 result["timings_ms"].update(frame_decode=decode_ms,
@@ -105,10 +127,24 @@ def make_handler(worker, token):
                 if completed is not None:
                     result["timings_ms"]["after_detector_to_reply_ms"] = (
                         time.perf_counter()*1000-completed)
-                self.send_json(200, result)
+                if streaming:
+                    event({"event": "final", **context, "result": result})
+                    self.wfile.write(b"0\r\n\r\n")
+                    self.wfile.flush()
+                else:
+                    self.send_json(200, result)
             except Exception:
                 logging.exception("Orange full-frame OCR failed")
-                self.reject(400, "full-frame OCR failed", body_consumed)
+                if streaming:
+                    self.close_connection = True
+                    try:
+                        event({"event": "error", "error": "full-frame OCR failed"})
+                        self.wfile.write(b"0\r\n\r\n")
+                        self.wfile.flush()
+                    except (OSError, ValueError):
+                        pass
+                else:
+                    self.reject(400, "full-frame OCR failed", body_consumed)
 
         def log_message(self, *args):
             pass

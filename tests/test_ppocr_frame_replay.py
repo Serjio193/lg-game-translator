@@ -15,6 +15,33 @@ spec.loader.exec_module(module)
 
 
 class FrameContractTests(unittest.TestCase):
+    def test_joined_regions_are_scheduled_first_but_output_order_is_original(self):
+        from concurrent.futures import Future
+        class Detector:
+            def detect(self, gray):
+                return [module.Region(0, 0, 1, 1, 1, 0), module.Region(1, 0, 1, 2, 1, 0)]
+            def lines(self, box):
+                return [module.Region(box.x, y, 1, 1, 1, 0) for y in range(box.height)]
+        class Engine:
+            def recognize(self, mode, pixels, width, height):
+                return 0, "header\n5\t1\t1\t1\t1\t1\t0\t0\t1\t1\t95\tword\n"
+        class Pool:
+            def submit(self, function, row, gray):
+                order.append((row.x, row.y))
+                future = Future()
+                future.set_result(function(row, gray))
+                return future
+            def worker_stats(self):
+                return {}
+        order, callbacks = [], []
+        import numpy as np
+        with patch.object(module, "gray_frame", return_value=np.zeros((2, 2), dtype=np.uint8)):
+            result = module.Pipeline(Detector(), Engine(), Pool()).ocr(None,
+                on_region=lambda index, region: callbacks.append(index))
+        self.assertEqual(order, [(1, 0), (1, 1), (0, 0)])
+        self.assertEqual([r["box"]["x"] for r in result["regions"]], [0, 1])
+        self.assertEqual(set(callbacks), {0, 1})
+
     def test_queue_covers_separate_regions_and_preserves_output_order(self):
         sys.path.insert(0, str(source.parent))
         from ppocr_recognizer_pool import RecognizerPool

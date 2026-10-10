@@ -1,6 +1,6 @@
 """Isolated full-frame replay using existing PicCap detector and Orange engines."""
 import ctypes as C
-from concurrent.futures import wait
+from concurrent.futures import as_completed, wait
 import time
 from pathlib import Path
 
@@ -105,7 +105,7 @@ class Pipeline:
             self.profiler.add("tsv_assembly", (time.perf_counter()-started)*1000)
         return result
 
-    def ocr(self, image):
+    def ocr(self, image, on_region=None):
         stats = getattr(self.engines, "cache_stats", None)
         cache_before = stats() if stats is not None else None
         start = time.perf_counter()
@@ -113,20 +113,41 @@ class Pipeline:
         converted = time.perf_counter()
         boxes = self.detector.detect(gray)
         detected = time.perf_counter()
-        regions = []
+        regions = [None]*len(boxes)
         rows_by_box = [self.detector.lines(box) for box in boxes]
         # Enqueue all regions before waiting; one-line regions can run concurrently too.
-        jobs = None
+        def completed(index, lines):
+            box = boxes[index]
+            region = {"box": box.box(), "score": box.score, "lines": lines,
+                      "text": " ".join(row["text"] for row in lines if row["text"])}
+            regions[index] = region
+            if on_region is not None:
+                on_region(index, region)
+
+        order = sorted(range(len(boxes)), key=lambda i: (
+            -int(len(rows_by_box[i]) > 1), -boxes[i].width*boxes[i].height, i))
         if self.pool is not None:
-            jobs = [[self.pool.submit(self.recognize_line, row, gray) for row in rows]
-                    for rows in rows_by_box]
-            # Drain the entire frame even if one crop fails, before the next frame starts.
-            wait([job for region_jobs in jobs for job in region_jobs])
-        for index, (box, rows) in enumerate(zip(boxes, rows_by_box)):
-            lines = ([self.recognize_line(row, gray) for row in rows] if jobs is None
-                     else [job.result() for job in jobs[index]])
-            regions.append({"box": box.box(), "score": box.score, "lines": lines,
-                            "text": " ".join(row["text"] for row in lines if row["text"])})
+            jobs = {}
+            lines_by_box = [[None]*len(rows) for rows in rows_by_box]
+            remaining = [len(rows) for rows in rows_by_box]
+            for index in order:
+                if not remaining[index]:
+                    completed(index, [])
+                for row_index, row in enumerate(rows_by_box[index]):
+                    job = self.pool.submit(self.recognize_line, row, gray)
+                    jobs[job] = index, row_index
+            try:
+                for job in as_completed(jobs):
+                    index, row_index = jobs[job]
+                    lines_by_box[index][row_index] = job.result()
+                    remaining[index] -= 1
+                    if not remaining[index]:
+                        completed(index, lines_by_box[index])
+            finally:
+                wait(jobs)  # Failed crops/callbacks still drain before another frame starts.
+        else:
+            for index in order:
+                completed(index, [self.recognize_line(row, gray) for row in rows_by_box[index]])
         finished = time.perf_counter()
         result = {"regions": regions, "timings_ms": {
             "detector_completed_monotonic_ms": detected*1000,

@@ -74,3 +74,12 @@ ordered results are joined before another frame is admitted. Shared exact crop
 cache coalesces identical in-flight inputs. Detector geometry, appearance,
 classification and TV translation/OSD orchestration follow the existing path.
 The separate GOCR profiles above retain their own runtime contracts.
+
+PP-OCR schedules joined/multiline blocks first and optionally emits completed,
+policy-approved body regions as bounded authenticated chunked events on the same
+frame HTTP request. TV validates identity and schedules two existing translation
+API calls while OCR finishes. Final whole-frame policy/source comparison precedes
+normal OSD publication; headings wait for their panel body. Translator uses two
+shared-weight CTranslate2 workers and a per-cache-key in-flight registry. Distinct
+blocks can generate independently, identical keys share a result. Database
+transactions never encompass generation; cache schema/model identity retained.

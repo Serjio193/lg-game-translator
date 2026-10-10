@@ -8,9 +8,12 @@ import numpy as np
 import os
 
 from ppocr_frame_replay import Detector, Pipeline
+from ppocr_region_events import region_line
 
 
 class Worker:
+    supports_region_events = True
+
     def __init__(self, pipeline, policy=None):
         self.pipeline = pipeline
         self.policy = policy
@@ -20,33 +23,23 @@ class Worker:
             from ppocr_stage_profiler import StageProfiler
             self.profiler = StageProfiler(pipeline)
 
-    def ocr(self, image):
+    def ocr(self, image, on_region=None):
+        rgb = np.asarray(image)
+        ready = {}
+        def completed(index, region):
+            line = region_line(index, region, rgb)
+            ready[index] = line
+            if self.policy is not None:
+                self.policy.apply([line])
+            if on_region is not None and line.get("translation_allowed") is True:
+                on_region(line)
         with self.lock:
             if self.profiler:
                 self.profiler.begin()
-            result = self.pipeline.ocr(image)
+            result = self.pipeline.ocr(image, completed)
             if self.profiler:
                 result["ocr_stage_profile"] = self.profiler.snapshot()
-        lines = []
-        rgb = np.asarray(image)
-        for i, region in enumerate(result["regions"]):
-            b = region["box"]
-            points = [(b["x"], b["y"]), (b["x"] + b["width"], b["y"]),
-                      (b["x"] + b["width"], b["y"] + b["height"]),
-                      (b["x"], b["y"] + b["height"])]
-            crop = rgb[b["y"]:b["y"]+b["height"], b["x"]:b["x"]+b["width"]]
-            edges = np.concatenate((crop[0], crop[-1], crop[:, 0], crop[:, -1]))
-            bg = np.median(edges, axis=0)
-            reliable = np.percentile(np.max(np.abs(edges.astype(float)-bg), axis=1), 90) < 20
-            appearance = {"frame_width": 1280, "frame_height": 720, "box": b,
-                          "lines": max(1, min(12, len(region["lines"]))),
-                          "background_reliable": bool(reliable), "background": bg.astype(int).tolist(),
-                          "foreground": [255, 255, 255] if bg.mean() < 128 else [0, 0, 0]}
-            lines.append({"line_id": str(i), "text": region["text"], "appearance": appearance,
-                          "recognition_lines": region["lines"],
-                          "timings_ms": {},
-                          "source_quad": {f"p{k}": {"x": x, "y": y}
-                                          for k, (x, y) in enumerate(points)}})
+        lines = [ready[i] for i in range(len(result["regions"]))]
         if self.policy is not None:
             self.policy.apply(lines)
         # Reuse the project's validated wire envelope, identifying PP-OCR explicitly.

@@ -66,3 +66,11 @@ the original unchanged bridge. Raw-output/TSV and complete endpoint gates pass;
 uncached saved-frame OCR improves 1.76–2.03x. Rollback: workers=1 and restart.
 Build, memory, timings and deployment evidence:
 `docs/evidence/ppocr-three-workers-20261010/README.md`.
+
+2026-10-10: joined/multiline regions lead the OCR queue. Optional bounded chunked
+region events let TV start SQLite-backed translations before the rest of OCR
+finishes (PP_OCR_EARLY_TRANSLATION=1). Final source/policy and existing OSD
+stabilization still gate display. API drop-in selects two MADLAD workers x two
+CPU threads with shared weights; identical cache misses coalesce. No demonstrated
+twofold model throughput improvement; saved cold-body overlap 265–434 ms.
+Evidence/rollback: `docs/evidence/ppocr-priority-translation-20261010/README.md`.

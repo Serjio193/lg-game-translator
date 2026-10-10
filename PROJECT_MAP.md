@@ -95,3 +95,13 @@ postprocess работает после tensor decode, не управляет c
 - `scripts/benchmark-ppocr-parallel.py`: frozen raw-output/TSV and alternating
   sequential/three-worker full-frame parity/speed gate; evidence in
   `docs/evidence/ppocr-three-workers-20261010/README.md`.
+
+- `scripts/ppocr_region_events.py`: shared unchanged appearance/envelope for
+  early completed bodies and final frame; original policy gates both.
+- `gocr_worker/frame_client.py`, `orange_server.py`, `frame_pipeline.py`: opt-in
+  bounded chunked region events, frame/source validation and two TV-owned API
+  jobs overlapping OCR; final result/OSD stabilization retained.
+- `translator/`: current deployed cache/schema/settings/icon/name/progressive
+  implementation, with per-key generation sharing and two MADLAD worker slots.
+  `deployment/ppocr-full/translator-workers.conf` explicitly selects 2x2 CPU;
+  `scripts/benchmark-madlad-workers.py` supplies uncached full-block comparisons.

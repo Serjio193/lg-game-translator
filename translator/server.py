@@ -13,6 +13,14 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from sentences import split_sentences
+from translation_cache import TranslationCache
+from translation_settings import read_settings, save_settings
+from control_icons import translate_around_icons, translate_preserving_icons
+from cache_identity import identity, NORMALIZATION_VERSION
+from abbreviated_names import has_abbreviated_names, translate_preserving_names
+from progressive import results as progressive_results
+from bergamot import translate as translate_bergamot
 
 
 LOG = logging.getLogger("lg-game-translator")
@@ -20,6 +28,8 @@ MODEL_PATH = Path(os.environ.get(
     "TRANSLATOR_MODEL", "/home/orangepi/translator-test/madlad3b"
 ))
 THREADS = max(1, int(os.environ.get("TRANSLATOR_THREADS", "4")))
+MODEL_WORKERS = max(1, min(2, int(os.environ.get("TRANSLATOR_WORKERS", "1"))))
+_inference_slots = threading.BoundedSemaphore(MODEL_WORKERS)
 MAX_BODY_BYTES = 64 * 1024
 MAX_TEXT_CHARS = 4000
 
@@ -27,6 +37,57 @@ _model_lock = threading.Lock()
 _model = None
 _tokenizer = None
 _model_load_ms = None
+_cache = None
+_cache_lock = threading.Lock()
+
+
+def _cache_config(text: str, provider: str, metadata):
+    global _cache
+    with _cache_lock:
+        if _cache is None:
+            _cache = TranslationCache(os.environ.get("TRANSLATOR_CACHE",
+                str(Path.home() / ".local/share/lg-game-translator/translations.sqlite3")))
+    if provider == "madlad":
+        model = MODEL_PATH / "model.bin"
+        tokenizer = MODEL_PATH / "tokenizer.json"
+        # Replacement model/tokenizer files invalidate old results; explicit
+        # revision also permits intentional invalidation after model changes.
+        identity = ":".join(f"{path.stat().st_size}:{path.stat().st_mtime_ns}"
+                            for path in (model, tokenizer))
+        revision = f"{MODEL_PATH.resolve()}:{identity}:sentence-batch-v1:beam1:max128"
+        revision += ":" + os.environ.get("TRANSLATOR_MODEL_REVISION", "default")
+        translator = _translate_madlad
+    else:
+        revision = "google-nmt-v2:whole-reply-v1"
+        translator = lambda source: _translate_google(source,
+            metadata.get("source_lang", "en"), metadata.get("target_lang", "ru"))
+    if "[button]" in text:
+        revision += (":preserved-control-icons-markers-v2" if provider == "madlad"
+                     else ":preserved-control-icons-v1")
+    if has_abbreviated_names(text):
+        revision += ":abbreviated-names-v1"
+    return revision, translator
+
+
+def _cached_translate(text: str, provider: str, **metadata) -> dict:
+    revision, translator = _cache_config(text, provider, metadata)
+    icons = translate_preserving_icons if provider == "madlad" else translate_around_icons
+    return _cache.translate(text, provider, revision,
+        lambda source: icons(source,
+            lambda part: translate_preserving_names(part, translator)), **metadata)
+
+
+def _lookup_madlad(text, metadata):
+    revision, _ = _cache_config(text, "madlad", metadata)
+    key, normalized = identity(text, "madlad", revision, metadata["source_lang"],
+        metadata["target_lang"], metadata["text_type"], metadata["normalization_version"],
+        metadata["expected_hash"])
+    return _cache.lookup(key, normalized, time.perf_counter())
+
+
+def _preview(text):
+    return translate_around_icons(text,
+        lambda part: translate_preserving_names(part, translate_bergamot))
 
 
 def _json_bytes(value: dict) -> bytes:
@@ -49,7 +110,7 @@ def _load_local_model():
             raise FileNotFoundError("MADLAD model or tokenizer files are missing")
         tokenizer = Tokenizer.from_file(str(tokenizer_path))
         model = ctranslate2.Translator(
-            str(MODEL_PATH), device="cpu", inter_threads=1, intra_threads=THREADS
+            str(MODEL_PATH), device="cpu", inter_threads=MODEL_WORKERS, intra_threads=THREADS
         )
         _model_load_ms = round((time.perf_counter() - started) * 1000, 1)
         _tokenizer = tokenizer
@@ -59,31 +120,42 @@ def _load_local_model():
 
 def _translate_madlad(text: str) -> dict:
     _load_local_model()
-    with _model_lock:
-        pieces = _tokenizer.encode(f"<2ru> {text}").tokens
+    with _inference_slots:
+        sentences = split_sentences(text)
+        pieces = [_tokenizer.encode(f"<2ru> {sentence}").tokens for sentence in sentences]
         started = time.perf_counter()
-        hypotheses = _model.translate_batch(
-            [pieces], beam_size=1, max_decoding_length=128
-        )[0].hypotheses[0]
+        results = _model.translate_batch(pieces, beam_size=1, max_decoding_length=128)
         latency_ms = round((time.perf_counter() - started) * 1000, 1)
-        token_ids = [_tokenizer.token_to_id(piece) for piece in hypotheses]
-        if any(token_id is None for token_id in token_ids):
-            raise ValueError("MADLAD returned a token absent from its tokenizer")
-        translation = _tokenizer.decode(token_ids, skip_special_tokens=True)
+        translations = []
+        generated_tokens = 0
+        if len(results) != len(sentences):
+            raise ValueError("MADLAD returned an incomplete sentence batch")
+        for result in results:
+            hypotheses = result.hypotheses[0]
+            token_ids = [_tokenizer.token_to_id(piece) for piece in hypotheses]
+            if any(token_id is None for token_id in token_ids):
+                raise ValueError("MADLAD returned a token absent from its tokenizer")
+            translated = _tokenizer.decode(token_ids, skip_special_tokens=True).strip()
+            if not translated:
+                raise ValueError("MADLAD returned an empty sentence")
+            translations.append(translated)
+            generated_tokens += len(hypotheses)
+        translation = " ".join(translations)
     return {
         "provider": "madlad",
         "translation": translation,
         "latency_ms": latency_ms,
-        "generated_tokens": len(hypotheses),
+        "generated_tokens": generated_tokens,
+        "sentence_count": len(sentences),
         "model_load_ms": _model_load_ms,
     }
 
 
-def _translate_google(text: str) -> dict:
+def _translate_google(text: str, source_lang="en", target_lang="ru") -> dict:
     key = os.environ.get("GOOGLE_API_KEY")
     if not key:
         raise RuntimeError("Google provider is not configured on Orange Pi")
-    body = _json_bytes({"q": text, "source": "en", "target": "ru", "format": "text"})
+    body = _json_bytes({"q": text, "source": source_lang, "target": target_lang, "format": "text"})
     request = Request(
         "https://translation.googleapis.com/language/translate/v2",
         data=body,
@@ -136,6 +208,12 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        if self.path == "/api/settings":
+            try:
+                self._send_json(200, read_settings())
+            except (ValueError, OSError):
+                self._send_json(503, {"error": "Settings unavailable"})
+            return
         if self.path == "/api/health":
             self._send_json(200, {"status": "ok"})
             return
@@ -153,7 +231,7 @@ class Handler(BaseHTTPRequestHandler):
         self._send_json(404, {"error": "Not found"})
 
     def do_POST(self):
-        if self.path != "/api/translate":
+        if self.path not in ("/api/translate", "/api/translate-progressive", "/api/settings"):
             self._send_json(404, {"error": "Not found"})
             return
         try:
@@ -162,18 +240,41 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_json(413, {"error": "Request body must be 1–65536 bytes"})
                 return
             data = json.loads(self.rfile.read(length).decode("utf-8"))
+            if self.path == "/api/settings":
+                try:
+                    self._send_json(200, save_settings(data))
+                except ValueError as error:
+                    self._send_json(400, {"error": str(error)})
+                return
             text = data.get("text")
             provider = data.get("provider")
             if not isinstance(text, str) or not text.strip() or len(text) > MAX_TEXT_CHARS:
                 self._send_json(400, {"error": "Text must contain 1–4000 characters"})
                 return
-            if provider == "madlad":
-                result = _translate_madlad(text.strip())
-            elif provider == "google":
-                result = _translate_google(text.strip())
-            else:
+            if provider not in ("madlad", "google"):
                 self._send_json(400, {"error": "Provider must be madlad or google"})
                 return
+            metadata = {"source_lang": data.get("source_lang", "en"),
+                "target_lang": data.get("target_lang", "ru"),
+                "text_type": data.get("text_type", "dialogue"),
+                "normalization_version": data.get("normalization_version", NORMALIZATION_VERSION),
+                "expected_hash": data.get("hash")}
+            try:
+                identity(text, provider, "server-managed", metadata["source_lang"],
+                    metadata["target_lang"], metadata["text_type"],
+                    metadata["normalization_version"], metadata["expected_hash"])
+                if metadata["source_lang"] not in ("en", "ja", "zh") or metadata["target_lang"] != "ru":
+                    raise ValueError("Supported language routes: en/ja/zh to ru")
+            except ValueError as error:
+                self._send_json(400, {"error": str(error)})
+                return
+            if self.path == "/api/translate-progressive" or data.get("progressive") is True:
+                if provider != "madlad" or metadata["source_lang"] != "en":
+                    self._send_json(400, {"error": "Progressive route requires English to Russian MADLAD"})
+                    return
+                self._send_progressive(text, metadata)
+                return
+            result = _cached_translate(text, provider, **metadata)
             self._send_json(200, result)
         except RuntimeError as error:
             self._send_json(503, {"error": str(error)})
@@ -185,6 +286,33 @@ class Handler(BaseHTTPRequestHandler):
 
     def log_message(self, format_string, *args):
         LOG.info("%s %s", self.address_string(), format_string % args)
+
+    def _send_progressive(self, text, metadata):
+        stream = progressive_results(text, lambda: _lookup_madlad(text, metadata),
+            lambda: _cached_translate(text, "madlad", **metadata), _preview)
+        # Resolve the first event before committing HTTP success headers.
+        first = next(stream)
+        self.send_response(200)
+        self._headers("application/x-ndjson; charset=utf-8")
+        self.send_header("Connection", "close")
+        self.end_headers()
+        self.close_connection = True
+        def send(event):
+            self.wfile.write(json.dumps(event, ensure_ascii=False,
+                separators=(",", ":")).encode("utf-8") + b"\n")
+            self.wfile.flush()
+        try:
+            send(first)
+            for event in stream:
+                send(event)
+        except (BrokenPipeError, ConnectionResetError):
+            LOG.info("Progressive client disconnected")
+        except Exception:
+            LOG.exception("Final progressive translation failed")
+            try:
+                send({"stage": "error", "error": "Final translation failed"})
+            except (BrokenPipeError, ConnectionResetError):
+                pass
 
 
 def main():

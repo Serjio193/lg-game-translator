@@ -24,6 +24,7 @@ class FrameClient:
         self.connection_type = (http.client.HTTPSConnection if parsed.scheme == "https"
                                 else http.client.HTTPConnection)
         self.token, self.timeout, self.connection = token, timeout, None
+        self.early_translation = os.environ.get("PP_OCR_EARLY_TRANSLATION") == "1"
         mode = os.environ.get("PP_OCR_FRAME_COMPRESSION", "raw")
         if mode not in ("raw", "lz4"):
             raise ValueError("PP_OCR_FRAME_COMPRESSION must be raw or lz4")
@@ -37,7 +38,7 @@ class FrameClient:
             self.connection.close()
             self.connection = None
 
-    def ocr(self, image, sequence=0, capture_ts=None):
+    def ocr(self, image, sequence=0, capture_ts=None, on_region=None):
         started = time.perf_counter()
         captured = 0 if capture_ts is None else capture_ts
         payload = encode_frame(image, sequence, captured)
@@ -52,6 +53,8 @@ class FrameClient:
                 payload, encoding = compressed, "lz4-block"
         encode_ms = (time.perf_counter()-started)*1000
         headers = {"Content-Type": "application/x-gocr-frame", "Content-Encoding": encoding}
+        if on_region is not None:
+            headers["Accept"] = "application/x-ndjson"
         if self.token:
             headers["Authorization"] = "Bearer " + self.token
         if self.connection is None:
@@ -60,10 +63,15 @@ class FrameClient:
         try:
             self.connection.request("POST", "/v1/ocr-frame", body=payload, headers=headers)
             response = self.connection.getresponse()
-            raw = response.read(MAX_REPLY+1)
-            if response.status != 200 or len(raw) > MAX_REPLY:
+            if response.status != 200:
                 raise ValueError("Orange frame worker failed or exceeded response budget")
-            result = json.loads(raw, parse_constant=reject_nonfinite)
+            if on_region is not None:
+                result = self.read_events(response, sequence, captured, frame_hash, on_region)
+            else:
+                raw = response.read(MAX_REPLY+1)
+                if len(raw) > MAX_REPLY:
+                    raise ValueError("Orange exceeded response budget")
+                result = json.loads(raw, parse_constant=reject_nonfinite)
             if (result.get("schema") != "gocr.worker.v1"
                     or (result.get("width"), result.get("height")) != image.size
                     or result.get("sequence") != sequence or result.get("capture_ts") != captured
@@ -87,3 +95,36 @@ class FrameClient:
         except Exception:
             self.close()
             raise
+
+    def read_events(self, response, sequence, captured, frame_hash, on_region):
+        if response.getheader("Content-Type", "").split(";", 1)[0] != "application/x-ndjson":
+            raise ValueError("Orange did not supply region events")
+        used, final = 0, None
+        seen = set()
+        while True:
+            raw = response.readline(MAX_REPLY+1-used)
+            if not raw:
+                break
+            used += len(raw)
+            if used > MAX_REPLY or not raw.endswith(b"\n") or final is not None:
+                raise ValueError("Invalid region stream framing/budget")
+            value = json.loads(raw, parse_constant=reject_nonfinite)
+            if any(value.get(k) != expected for k, expected in (
+                ("sequence", sequence), ("capture_ts", captured), ("frame_sha256", frame_hash))):
+                raise ValueError("Region event changed frame identity")
+            if value.get("event") == "region":
+                line = value["line"]
+                if (not isinstance(line.get("line_id"), str) or line["line_id"] in seen
+                        or not isinstance(line.get("text"), str)
+                        or line.get("translation_allowed") is not True):
+                    raise ValueError("Invalid/duplicate early region")
+                quad_points(line["source_quad"])
+                seen.add(line["line_id"])
+                on_region(line)
+            elif value.get("event") == "final":
+                final = value["result"]
+            else:
+                raise ValueError("Failed/unknown region stream event")
+        if final is None:
+            raise ValueError("Missing final OCR frame")
+        return final

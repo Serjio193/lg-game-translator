@@ -96,6 +96,7 @@ def main():
             server.serve_forever()
         finally:
             Path(args.socket).unlink(missing_ok=True)
+            pipeline.close()
 
 
 if __name__ == "__main__":
