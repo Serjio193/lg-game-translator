@@ -105,3 +105,7 @@ postprocess работает после tensor decode, не управляет c
   implementation, with per-key generation sharing and two MADLAD worker slots.
   `deployment/ppocr-full/translator-workers.conf` explicitly selects 2x2 CPU;
   `scripts/benchmark-madlad-workers.py` supplies uncached full-block comparisons.
+
+- `docs/Логика системы.md`: обсуждаемая целевая цепочка с TYPEWRITER, готовностью
+  OCR, двумя переводчиками и предложением русского языкового контроля;
+  явно отделяет уже установленные функции от планируемых.
