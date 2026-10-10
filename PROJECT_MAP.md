@@ -132,3 +132,5 @@ postprocess работает после tensor decode, не управляет c
 - `overlay/orange-state.js`: owner-only cached Orange settings/budget for OFF; controller and menu background polling stay local. `menu/menu.test.js` and OFF/source-admission regressions cover network silence and late results.
 
 - `overlay/tv-power.js`, `luna-json-stream.js`: bounded Luna power subscription; controller boot/sleep/wake invalidates manual ON. TV/phone gates and stale-command regressions require a new user ON after every power boundary.
+
+- `gocr_worker/live_translation.py`: latest-frame bounded preview/final queues, source confirmation before final, current-session provider and asynchronous OSD. `translator/test_preview_api.py` covers the reused cache/Bergamot endpoint; see `docs/live-two-stage-translation.md`.

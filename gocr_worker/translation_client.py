@@ -14,12 +14,19 @@ class TranslationClient:
         self.provider = provider
         self.timeout = timeout
 
-    def translate(self, text):
+    def translate(self, text, **metadata):
+        return self._request(text, "translate", metadata)
+
+    def preview(self, text, **metadata):
+        return self._request(text, "translate-preview", metadata)
+
+    def _request(self, text, route, metadata):
         if not text.strip():
             return {"translation": "", "request_ms": 0.0, "bytes_sent": 0}
-        payload = json.dumps({"text": text, "provider": self.provider}, ensure_ascii=False).encode()
+        payload = json.dumps({**metadata, "text": text, "provider": self.provider}, ensure_ascii=False).encode()
         started = time.perf_counter()
-        request = Request(self.address, data=payload, method="POST",
+        address = self.address.rsplit("/", 1)[0] + "/" + route
+        request = Request(address, data=payload, method="POST",
                           headers={"Content-Type": "application/json"})
         with urlopen(request, timeout=self.timeout) as response:
             if response.status != 200:
@@ -30,5 +37,7 @@ class TranslationClient:
         result = json.loads(raw)
         if not isinstance(result.get("translation"), str):
             raise ValueError("translator returned no translation")
+        if result.get("provider") != self.provider:
+            raise ValueError("translator changed the requested provider")
         return {**result, "request_ms": (time.perf_counter()-started)*1000,
                 "bytes_sent": len(payload)}

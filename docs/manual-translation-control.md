@@ -41,16 +41,19 @@ TV/phone меню читают локальные snapshots и показыва�
 Ввод ключа/сохранение provider — явные действия пользователя, отдельно от polling.
 Проверка ключа на телефоне требует PIN-session/Origin и отдельного явного POST.
 
-Независимый OCR_DONE, supervisor и выгрузка ещё не реализованы. В целевом режиме
+В live PP-OCR режиме 0.1.8 OCR возвращается без ожидания переводов; отдельные
+ограниченные очереди занимаются preview/final и независимой публикацией.
+Supervisor и выгрузка ещё не реализованы. В целевом режиме
 до истечения пяти минут повторный ON использует тёплые модели.
 
 В Google-профиле предварительный Bergamot остаётся: Google отправляется после
 его этапа и трёх совпадений исходного текста одной области в свежих кадрах.
 Только окончательный Google-ответ попадает в Google cache. Одинаковые переводы
 Bergamot/Google не вызывают повторную перерисовку OSD. Подключение этой цепочки
-также ожидает отдельного этапа; текущий relay имеет фиксированный provider madlad.
+реализовано для live relay 0.1.8, с provider/address из current session;
+legacy benchmark путь оставлен прежним. См. `live-two-stage-translation.md`.
 
-Пакет: settings 0.1.7 и mobile-osd-controller-0.1.7.tar.gz. Установка прежняя:
+Пакет: settings 0.1.8 и mobile-osd-controller-0.1.8.tar.gz. Установка прежняя:
 `install-mobile.sh` после IPK, сохранить приватный provider config отдельно.
 Capture/PicCap и Orange production не переключались. Host-тесты проверяют
 manual OFF/ON, отсутствие запуска по спискам/языку и source invalidation.

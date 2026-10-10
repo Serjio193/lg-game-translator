@@ -14,6 +14,18 @@ def result(sequence, text="Emergency Guard", x=20):
 
 
 class PublisherTests(unittest.TestCase):
+    def test_restart_sequence_with_new_capture_clock_resets_instead_of_freezing(self):
+        with tempfile.TemporaryDirectory() as folder:
+            publisher=OsdPublisher(Path(folder),lambda:1000)
+            for sequence in (100,101,102):
+                item=result(sequence);item['capture_ts']=sequence*1000;publisher.publish(item)
+            old=publisher.tracks[0]['id']
+            item=result(1);item['capture_ts']=103000;publisher.publish(item)
+            self.assertEqual(publisher.tracks[0]['count'],1)
+            self.assertNotEqual(publisher.tracks[0]['id'],old)
+            publisher.publish(item)
+            self.assertEqual(publisher.tracks[0]['count'],1,'Duplicate packet is not fresh')
+
     def test_source_switch_resets_observations_and_placement(self):
         with tempfile.TemporaryDirectory() as folder:
             publisher = OsdPublisher(Path(folder), lambda: 1000)

@@ -101,7 +101,7 @@ cache coalesces identical in-flight inputs. Detector geometry, appearance,
 classification and TV translation/OSD orchestration follow the existing path.
 The separate GOCR profiles above retain their own runtime contracts.
 
-PP-OCR schedules joined/multiline blocks first and optionally emits completed,
+The legacy early/benchmark path schedules joined/multiline blocks first and emits completed,
 policy-approved body regions as bounded authenticated chunked events on the same
 frame HTTP request. TV validates identity and schedules two existing translation
 API calls while OCR finishes. Final whole-frame policy/source comparison precedes
@@ -109,3 +109,12 @@ normal OSD publication; headings wait for their panel body. Translator uses two
 shared-weight CTranslate2 workers and a per-cache-key in-flight registry. Distinct
 blocks can generate independently, identical keys share a result. Database
 transactions never encompass generation; cache schema/model identity retained.
+
+The prepared live OSD path in 0.1.8 returns complete validated PP-OCR text before
+translation. `LiveTranslations` advances source tracks independently, uses the
+current session's provider/address, and maintains two bounded preview and two
+final HTTP slots. Pending groups contain only the latest frame. Bergamot is an
+uncached preliminary stage; selected Google/MADLAD final is requested only after
+three real source observations. Identical groups share requests; each region
+retains its own final gate. Cached finals also keep that source gate. The existing
+Google budget/vault/cache are reused. See `docs/live-two-stage-translation.md`.

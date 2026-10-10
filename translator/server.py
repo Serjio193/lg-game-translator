@@ -79,8 +79,12 @@ def _cached_translate(text: str, provider: str, **metadata) -> dict:
 
 
 def _lookup_madlad(text, metadata):
-    revision, _ = _cache_config(text, "madlad", metadata)
-    key, normalized = identity(text, "madlad", revision, metadata["source_lang"],
+    return _lookup_provider(text, "madlad", metadata)
+
+
+def _lookup_provider(text, provider, metadata):
+    revision, _ = _cache_config(text, provider, metadata)
+    key, normalized = identity(text, provider, revision, metadata["source_lang"],
         metadata["target_lang"], metadata["text_type"], metadata["normalization_version"],
         metadata["expected_hash"])
     return _cache.lookup(key, normalized, time.perf_counter())
@@ -238,7 +242,7 @@ class Handler(BaseHTTPRequestHandler):
         self._send_json(404, {"error": "Not found"})
 
     def do_POST(self):
-        if self.path not in ("/api/translate", "/api/translate-progressive", "/api/settings", "/api/google-control"):
+        if self.path not in ("/api/translate", "/api/translate-preview", "/api/translate-progressive", "/api/settings", "/api/google-control"):
             self._send_json(404, {"error": "Not found"})
             return
         try:
@@ -283,6 +287,17 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("Supported language routes: en/ja/zh to ru")
             except ValueError as error:
                 self._send_json(400, {"error": str(error)})
+                return
+            if self.path == "/api/translate-preview":
+                if metadata["source_lang"] != "en":
+                    self._send_json(400, {"error": "Bergamot preview requires English source"})
+                    return
+                cached = _lookup_provider(text, provider, metadata)
+                if cached is not None:
+                    self._send_json(200, {**cached, "stage": "final", "engine": provider})
+                else:
+                    self._send_json(200, {**_preview(text), "provider": provider,
+                        "engine": "bergamot", "stage": "preliminary", "cache_hit": False})
                 return
             if self.path == "/api/translate-progressive" or data.get("progressive") is True:
                 if provider != "madlad" or metadata["source_lang"] != "en":

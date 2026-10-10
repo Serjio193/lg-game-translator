@@ -46,12 +46,16 @@ class FramePipeline:
             self.full = FullGocrWorker(assets,threads,detector_threads=detector_threads,
                                       recognizer_threads=recognizer_threads)
 
-    def process(self, image, sequence=0, capture_ts=None):
+    def process(self, image, sequence=0, capture_ts=None, *, ocr_only=False):
         if image.size != (1280, 720) or image.mode != "RGB":
             raise ValueError("GOCR needs the existing selected RGB 1280x720 frame")
         started = time.perf_counter()
         with self.lock:
-            if self.mode in ("TV_FULL", "ORANGE_FULL"):
+            if ocr_only:
+                if self.mode != "ORANGE_FULL":
+                    raise ValueError("Deferred translations require ORANGE_FULL")
+                result, sent = self.frame_client.ocr(image, sequence, capture_ts)
+            elif self.mode in ("TV_FULL", "ORANGE_FULL"):
                 early = {}
                 submitted = []
                 def submit(line):

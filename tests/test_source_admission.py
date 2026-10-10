@@ -15,6 +15,20 @@ with compat:
 
 
 class SourceAdmissionTests(unittest.TestCase):
+    def test_live_handler_requests_ocr_only_and_returns_without_inline_publication(self):
+        pipeline=Mock(mode='ORANGE_FULL')
+        pipeline.process.return_value={'engine':'ppocr','timings_ms':{},'lines':[]}
+        publisher,live=Mock(),Mock()
+        session=('hdmi','google','192.168.1.11','8765','1')
+        with patch('gocr_worker.tv_server.receive_frame',return_value=(Image.new('RGB',(1280,720)),1,2)), \
+             patch('gocr_worker.tv_server.source_session',return_value=session), \
+             patch('gocr_worker.tv_server.require_current'),patch('gocr_worker.tv_server.send_result') as send:
+            FrameHandler(Mock(),None,SimpleNamespace(pipeline=pipeline,osd_publisher=publisher,live_translations=live))
+        self.assertTrue(pipeline.process.call_args.kwargs['ocr_only'])
+        live.observe.assert_called_once()
+        publisher.publish.assert_not_called()
+        self.assertEqual(send.call_args.args[1]['source_session'],list(session))
+
     def test_handler_discards_accepted_result_completed_after_off(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)/"state"

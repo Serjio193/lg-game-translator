@@ -6,7 +6,7 @@ import unicodedata
 
 
 def normalized(text):
-    return " ".join(unicodedata.normalize("NFC", text).casefold().split())
+    return " ".join(unicodedata.normalize("NFC", text).split())
 
 
 def overlap(a, b):
@@ -30,22 +30,31 @@ class OsdPublisher:
         self.clock = clock or (lambda: int(time.time()*1000))
         self.tracks, self.next_id, self.sequence = [], 1, None
         self.source = None
+        self.timestamp = None
+        self.capture_ts = None
 
-    def publish(self, result):
+    def observe(self, result):
         if result.get("engine") != "ppocr":
             return
         source = tuple(result.get("source_session", ()))
         if source and source != self.source:
             self.tracks, self.sequence, self.source = [], None, source
-        if result.get("sequence") == self.sequence:
-            return
+        captured = result.get("capture_ts")
+        fresh_clock = (isinstance(captured, (int, float)) and captured > 0
+                       and isinstance(self.capture_ts, (int, float))
+                       and self.capture_ts > 0 and captured > self.capture_ts)
+        if self.sequence is not None and result.get("sequence", 0) <= self.sequence:
+            if not fresh_clock:
+                return
+            if result["sequence"] < self.sequence:
+                # A restarted capture producer has a new clock sample but reset IDs.
+                self.tracks = []
         now = self.clock()
         entries, tracks, used = [], [], set()
         for line in result.get("lines", []):
             text, appearance = line.get("text", ""), line.get("appearance")
-            response = line.get("translation", {})
             if (line.get("translation_allowed") is not True
-                    or not appearance or not response.get("translation")):
+                    or not appearance or not text.strip()):
                 continue
             box, key = appearance["box"], normalized(text)
             candidates = [(overlap(box, t["box"]), i, t) for i, t in enumerate(self.tracks)
@@ -65,12 +74,33 @@ class OsdPublisher:
             admission = {"track_id": track["id"], "version_ms": track["version"],
                          "text": key, "observations": track["count"]}
             entries.append({"slot": slot, "admission": admission, "observations": track["count"],
-                            "source_text": text, "appearance": appearance})
-            atomic(self.root / f"ppocr-full-osd-slot-{slot:02}.json",
-                   {**response, "stage": "final", "provider": response.get("provider", "madlad"),
-                    "admission": admission})
+                            "source_text": text, "appearance": appearance, "line": line})
             tracks.append(track)
+        self.tracks, self.sequence, self.timestamp = tracks, result["sequence"], now
+        self.capture_ts = captured
+        return entries
+
+    def emit(self, entries, responses):
+        for entry in entries:
+            response = responses.get(entry["slot"])
+            if not response or not response.get("translation"):
+                continue
+            atomic(self.root / f'ppocr-full-osd-slot-{entry["slot"]:02}.json',
+                {**response, "admission": entry["admission"]})
+        visible = [{key: value for key, value in entry.items() if key != "line"}
+                   for entry in entries]
         atomic(self.root / "ppocr-full-osd-admission.json",
-               {"timestamp_ms": now, "sequence": result["sequence"], "complete": True,
-                "required": 3, "regions": entries})
-        self.tracks, self.sequence = tracks, result["sequence"]
+               {"timestamp_ms": self.timestamp, "sequence": self.sequence, "complete": True,
+                "required": 3, "regions": visible})
+
+    def publish(self, result):
+        entries = self.observe(result)
+        if entries is None:
+            return
+        responses = {}
+        for entry in entries:
+            response = entry["line"].get("translation", {})
+            if response.get("translation"):
+                responses[entry["slot"]] = {**response, "stage": response.get("stage", "final"),
+                    "provider": response.get("provider", "madlad")}
+        self.emit(entries, responses)

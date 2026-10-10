@@ -5,6 +5,13 @@ from progressive import results
 
 
 class ProgressiveTests(unittest.TestCase):
+    def tearDown(self):
+        # Join background work from the previous generator before submitting a
+        # blocking final in the next test; otherwise a late preview barrier races it.
+        from progressive import _finals, _previews
+        _finals.submit(lambda: None).result(timeout=3)
+        _previews.submit(lambda: None).result(timeout=3)
+
     def test_cache_hit_never_starts_models(self):
         final, preview = Mock(), Mock()
         events = list(results("Hello", lambda: {"provider": "madlad", "translation": "Привет"},

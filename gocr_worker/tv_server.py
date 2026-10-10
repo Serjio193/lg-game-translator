@@ -22,6 +22,7 @@ class FrameServer(socketserver.UnixStreamServer):
     def __init__(self, path, pipeline):
         self.pipeline = pipeline
         self.osd_publisher = None
+        self.live_translations = None
         self.timeout = 1
         socket_path = Path(path)
         if socket_path.exists():
@@ -48,7 +49,11 @@ class FrameHandler(socketserver.BaseRequestHandler):
             session = source_session() if guarded else None
             if guarded:
                 require_current(session)
-            result = self.server.pipeline.process(image, sequence, captured)
+            live = getattr(self.server, "live_translations", None)
+            if live is not None:
+                result = self.server.pipeline.process(image, sequence, captured, ocr_only=True)
+            else:
+                result = self.server.pipeline.process(image, sequence, captured)
             if guarded:
                 require_current(session)
                 result["source_session"] = list(session)
@@ -60,7 +65,9 @@ class FrameHandler(socketserver.BaseRequestHandler):
                 timing["capture_to_relay_ms"] = age
                 if age is not None:
                     timing["capture_to_detector_upper_ms"] = age+timing["relay_to_detector_upper_ms"]
-            if self.server.osd_publisher is not None:
+            if live is not None:
+                live.observe(result)
+            elif self.server.osd_publisher is not None:
                 self.server.osd_publisher.publish(result)
         except Exception as error:
             LOG.exception("selected GOCR frame failed")
@@ -101,10 +108,15 @@ def main():
         if os.environ.get("PP_OCR_FULL_OSD") == "1":
             from .osd_publisher import OsdPublisher
             server.osd_publisher = OsdPublisher()
+            if args.mode == "ORANGE_FULL":
+                from .live_translation import LiveTranslations
+                server.live_translations = LiveTranslations(server.osd_publisher)
         try:
             server.serve_forever()
         finally:
             Path(args.socket).unlink(missing_ok=True)
+            if server.live_translations is not None:
+                server.live_translations.close()
             pipeline.close()
 
 

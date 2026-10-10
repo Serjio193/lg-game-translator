@@ -9,6 +9,7 @@ MODULES = (
     "mobile-server.js mobile-auth.js mobile-store.js qr-url.js layer-settings.js "
     "translator-control.js translator-menu-route.js manual-menu-route.js orange-state.js "
     "tv-power.js luna-json-stream.js "
+    "admission.js "
     "manual-style.js subtitle-layout.js glyph-cover.js mask-grow.js mask-osd-raster.js "
     "line-cover-mask.js mask-edge-blur.js control-icons.js backdrop.js fit-area.js "
     "mobile/index.html mobile/mobile.js mobile/mobile.css mobile/preview-variants.css "
@@ -17,12 +18,13 @@ MODULES = (
 
 
 def main():
-    output = ROOT / "build/dist/mobile-osd-controller-0.1.7.tar.gz"
+    output = ROOT / "build/dist/mobile-osd-controller-0.1.8.tar.gz"
     output.parent.mkdir(parents=True, exist_ok=True)
     with tarfile.open(output, "w:gz") as archive:
         for name in MODULES:
             archive.add(ROOT / "overlay" / name, arcname=name)
-        for name in ("source_admission.py", "tv_server.py", "osd_publisher.py", "frame_client.py"):
+        for name in ("source_admission.py", "tv_server.py", "osd_publisher.py", "frame_client.py",
+                     "frame_pipeline.py", "translation_client.py", "live_translation.py"):
             archive.add(ROOT / "gocr_worker" / name, arcname="relay/" + name)
         archive.add(ROOT / "deployment/mobile-osd/install-mobile.js", arcname="install-mobile.js")
         for source in (ROOT / "deployment/app-menu/install-controller.sh",
