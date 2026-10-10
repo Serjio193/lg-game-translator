@@ -1,6 +1,7 @@
 // Privileged server-to-server proxy. Credentials never enter browser responses.
 'use strict';
 var fs=require('fs'),http=require('http'),crypto=require('crypto');
+var snapshots=require('./orange-state');
 var file='/media/developer/game-translator-provider.json';
 function call(method,value,callback) {
   var config,address;
@@ -20,7 +21,8 @@ function call(method,value,callback) {
     response.on('end',function(){
       try {var result=JSON.parse(Buffer.concat(chunks).toString('utf8'));
         if(response.statusCode!==200)throw new Error(result.error||'Ошибка сервера перевода');
-        finish(null,result);
+        var snapshot=snapshots.saveProvider(result);
+        finish(null,snapshots.view(snapshot,true));
       }catch(error){finish(error);}
     });
     response.on('error',function(){finish(new Error('Нет связи с переводчиком'));});
@@ -35,13 +37,18 @@ function update(value,callback) {
   }
   call('POST',value,callback);
 }
-exports.status=function(callback){call('GET',null,callback);};
+exports.status=function(callback){
+  if(!snapshots.enabled()){callback(null,snapshots.view(snapshots.provider(),false));return;}
+  call('GET',null,callback);
+};
+exports.liveStatus=function(callback){call('GET',null,callback);};
 exports.update=update;
 exports.localUpdate=function(value,callback){
   if(!value||typeof value!=='object'||Object.keys(value).some(function(key){return ['provider','key'].indexOf(key)<0;}))return callback(new Error('Неверные настройки'));
   if(!value.key)return update({provider:value.provider},callback);
   if(typeof value.key!=='string'||!/^[A-Za-z0-9_-]{20,200}$/.test(value.key))return callback(new Error('Неверный формат API-ключа'));
-  exports.status(function(error,state){
+  // Explicit key entry may provision while OFF; never use a stale RSA key.
+  call('GET',null,function(error,state){
     if(error)return callback(error);
     try {
       var encrypted=crypto.publicEncrypt({key:state.public_key,padding:crypto.constants.RSA_PKCS1_OAEP_PADDING,oaepHash:'sha256'},Buffer.from(value.key,'utf8'));

@@ -14,6 +14,8 @@ var foregroundId = '';
 var sourceEpoch = Date.now();
 var path = '/tmp/game-translator-control.state';
 var catalog = require('./app-catalog');
+var snapshots = require('./orange-state');
+var cancelRequest = null;
 var EXCLUDED = ['com.serjio193.lggametranslator.settings', 'com.serjio193.lggametranslator.overlay'];
 
 function manuallyEnabled() {
@@ -31,6 +33,10 @@ function publish(value) {
 }
 
 function poll() {
+  if (!manuallyEnabled()) {
+    if (cancelRequest) cancelRequest();
+    publish(false); return;
+  }
   if (busy) return;
   busy = true;
   var finished = false;
@@ -38,6 +44,7 @@ function poll() {
     if (finished) return;
     finished = true;
     busy = false;
+    cancelRequest = null;
     try { publish(value); } catch (error) { active = false; console.error('Control state write failed'); }
   }
   var request = http.get('http://192.168.1.11:8765/api/settings', function (response) {
@@ -57,6 +64,7 @@ function poll() {
         changed = provider !== settings.provider || host !== address[1] || port !== Number(address[2]);
         provider = settings.provider;
         host = address[1]; port = Number(address[2]);
+        snapshots.saveSettings(settings);
       } catch (error) { finish(false); return; }
       execFile('/usr/bin/luna-send', ['-n', '1', '-f',
         'luna://com.webos.applicationManager/getForegroundAppInfo', '{}'], {timeout: 1500},
@@ -75,10 +83,14 @@ function poll() {
   });
   request.setTimeout(1500, function () { request.destroy(); finish(false); });
   request.on('error', function () { finish(false); });
+  cancelRequest = function () { request.destroy(); finish(false); };
 }
 
 exports.start = function () {
-  var mobile = require('./mobile-server').start({policyChanged:function () {publish(false);}});
+  var mobile = require('./mobile-server').start({policyChanged:function () {
+    publish(false);
+    if (!manuallyEnabled() && cancelRequest) cancelRequest();
+  }});
   catalog.start(mobile); publish(false); poll(); setInterval(poll, 2000);
 };
 exports.allowed = function () { return active; };

@@ -12,11 +12,13 @@
   }
   function render(state){
     var b=state.budget;
+    element('google-status').textContent=state.stale?'Перевод выключен. '+(state.snapshot_at?'Последние данные: '+new Date(state.snapshot_at).toLocaleString('ru-RU'):'Сохранённых данных нет; Orange не опрашивается.'):'Данные обновлены';
+    element('google-key-state').textContent='Ключ: '+(state.key_configured===null?'нет сохранённых сведений':state.key_configured?'сохранён зашифрованным':'не задан');
+    if(!b){element('google-usage').textContent='Расход неизвестен — при OFF Orange не опрашивается.';element('google-progress').value=0;return;}
     element('google-usage').textContent='Отправлено: '+number(b.monthly_characters)+' / '+number(b.limit)+
       ' символов · '+b.period+' UTC. Осталось: '+number(b.remaining)+'. За 32 дня: '+number(b.safety_window_characters)+
       (b.blocked?'. Лимит исчерпан — только кэш.':'.');
     element('google-progress').value=b.monthly_characters;
-    element('google-key-state').textContent='Ключ: '+(state.key_configured?'сохранён зашифрованным':'не задан');
   }
   function refresh(){request('GET',null,function(error,state){if(error)element('google-status').textContent=error.message;else render(state);});}
   window.GoogleSettings={select:function(provider,callback){

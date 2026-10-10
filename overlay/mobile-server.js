@@ -51,7 +51,7 @@ function create(options) {
     if(request.method==='GET'&&request.url==='/api/translator') {
       translator.status(function(error,value){json(response,error?503:200,error?{error:error.message}:value);});return;
     }
-    if(!((request.method==='POST'&&['/api/pair','/api/logout','/api/translator'].indexOf(request.url)>=0)||request.method==='PATCH'&&request.url==='/api/settings')) return json(response,404,{error:'Not found'});
+    if(!((request.method==='POST'&&['/api/pair','/api/logout','/api/translator','/api/translator-key'].indexOf(request.url)>=0)||request.method==='PATCH'&&request.url==='/api/settings')) return json(response,404,{error:'Not found'});
     if(request.headers.origin!=='http://'+host) return json(response,403,{error:'Запрос должен исходить из меню ТВ'});
     if((request.headers['content-type']||'').split(';')[0]!=='application/json') return json(response,415,{error:'Нужен JSON'});
     var body='',tooLarge=false;
@@ -60,6 +60,10 @@ function create(options) {
       if(tooLarge)return;
       var value;try{value=JSON.parse(body);}catch(error){return json(response,400,{error:'Неверный JSON'});}
       try {
+        if(request.url==='/api/translator-key') {
+          if(!value||Array.isArray(value)||typeof value!=='object'||Object.keys(value).length)return json(response,400,{error:'Нужен пустой запрос настройки ключа'});
+          translator.liveStatus(function(error,result){json(response,error?503:200,error?{error:error.message}:result);});return;
+        }
         if(request.url==='/api/translator') {
           translator.update(value,function(error,result){json(response,error?400:200,error?{error:error.message}:result);});return;
         }

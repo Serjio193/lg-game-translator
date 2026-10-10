@@ -1,6 +1,7 @@
 # Мобильные настройки OSD
 
-Обновление 0.1.5: добавлен ручной `translationEnabled`, default OFF. TV-меню
+Обновление 0.1.6: ручной `translationEnabled`, default OFF, и локальные snapshots
+на OFF без фоновых обращений к Orange. TV-меню
 управляется кнопкой OK пульта; телефон меняет тот же флаг. Автоматический запуск
 по HDMI/приложениям и русскому языку отменён. См. `manual-translation-control.md`.
 
@@ -50,8 +51,8 @@ PIN действует 5 минут. Пять неверных попыток б
 
 ## Установка
 
-1. Установить `com.serjio193.lggametranslator.settings_0.1.5_all.ipk`.
-2. Распаковать `mobile-osd-controller-0.1.5.tar.gz` на ТВ.
+1. Установить `com.serjio193.lggametranslator.settings_0.1.6_all.ipk`.
+2. Распаковать `mobile-osd-controller-0.1.6.tar.gz` на ТВ.
 3. Выполнить `sh install-mobile.sh <директория распаковки>`.
 
 Установщик сохраняет резервные копии, добавляет renderer dependency

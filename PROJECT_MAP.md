@@ -128,3 +128,5 @@ postprocess работает после tensor decode, не управляет c
 - `overlay/translator-control.js`, `translator-menu-route.js`, `mobile/provider-settings.*`, `menu/google-settings.js`: TV/phone provider selection, encrypted key entry and live budget display; see `docs/google-budget-osd.md`.
 
 - `overlay/manual-menu-route.js`, `menu/manual-control.js`: authenticated local manual translation switch; `runtime-control.js` uses it instead of HDMI/app/language admission. See `docs/manual-translation-control.md`.
+
+- `overlay/orange-state.js`: owner-only cached Orange settings/budget for OFF; controller and menu background polling stay local. `menu/menu.test.js` and OFF/source-admission regressions cover network silence and late results.

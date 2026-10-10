@@ -3,21 +3,24 @@
   var started=false,preview=false,state=null,busy=false;
   function element(id){return document.getElementById(id);}
   function number(value){return Number(value).toLocaleString('ru-RU');}
-  async function request(method,value){
-    var response=await fetch('/api/translator',{method:method,credentials:'same-origin',
+  async function request(method,value,path){
+    var response=await fetch(path||'/api/translator',{method:method,credentials:'same-origin',
       headers:value?{'Content-Type':'application/json'}:{},body:value?JSON.stringify(value):undefined});
     var result=await response.json();if(!response.ok)throw new Error(result.error||'Нет связи с переводчиком');return result;
   }
   function render(value){
     state=value;var budget=value.budget;
-    element('translator-provider').value=value.provider;
-    element('translator-current').textContent='Выбран: '+(value.provider==='google'?'Google Translate API':'локальный переводчик');
+    if(value.provider)element('translator-provider').value=value.provider;
+    element('translator-current').textContent=value.provider?'Выбран: '+(value.provider==='google'?'Google Translate API':'локальный переводчик'):'Источник ещё не получен с Orange';
+    element('google-key-state').textContent='API-ключ: '+(value.key_configured===null?'нет сохранённых сведений':value.key_configured?'сохранён и зашифрован':'не задан');
+    element('translator-status').textContent=value.stale?'Перевод выключен. '+(value.snapshot_at?'Последние данные: '+new Date(value.snapshot_at).toLocaleString('ru-RU'):'Сохранённых данных нет; Orange не опрашивается.'):'Данные обновлены';
+    if(!budget){element('google-used').textContent='— / 490 000';element('google-progress').value=0;
+      element('google-remaining').textContent='Расход неизвестен. При OFF Orange не опрашивается.';return;}
     element('google-used').textContent=number(budget.monthly_characters)+' / '+number(budget.limit);
     element('google-progress').value=budget.monthly_characters;
     element('google-remaining').textContent='Осталось: '+number(budget.remaining)+' символов. Месяц '+budget.period+' (UTC). '+
       (budget.blocked?'Лимит исчерпан: доступны только переводы из кэша. ':'')+
       'Защитный лимит также действует за последние 32 дня: '+number(budget.safety_window_characters)+'.';
-    element('google-key-state').textContent='API-ключ: '+(value.key_configured?'сохранён и зашифрован':'не задан');
   }
   async function refresh(){if(preview||busy||element('controls').hidden)return;try{render(await request('GET'));}catch(error){element('translator-status').textContent=error.message;}}
   async function update(value){
@@ -37,7 +40,7 @@
       var input=element('google-key'),key=input.value;input.value='';
       try{
         if(!/^[A-Za-z0-9_-]{20,200}$/.test(key))throw new Error('Неверный формат ключа');
-        var fresh=await request('GET');
+        var fresh=await request('POST',{},'/api/translator-key');
         var bytes=Uint8Array.from(atob(fresh.public_key.replace(/-----[^-]+-----|\s/g,'')),function(c){return c.charCodeAt(0);});
         var publicKey=await crypto.subtle.importKey('spki',bytes,{name:'RSA-OAEP',hash:'SHA-256'},false,['encrypt']);
         var encrypted=new Uint8Array(await crypto.subtle.encrypt({name:'RSA-OAEP'},publicKey,new TextEncoder().encode(key)));

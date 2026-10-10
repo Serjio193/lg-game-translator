@@ -27,6 +27,7 @@ async function main() {
   var provider='madlad',providerUpdates=0;
   var instance=server.create({port:0,file:file,policyChanged:function(){changed++;},translator:{
     status:function(callback){callback(null,{provider:provider,budget:{monthly_characters:12}});},
+    liveStatus:function(callback){callback(null,{public_key:'public',provider:provider});},
     update:function(value,callback){
       if(Object.keys(value).some(function(key){return ['provider','encrypted_key'].indexOf(key)<0;}))return callback(new Error('Encrypted key required'));
       provider=value.provider||provider;providerUpdates++;callback(null,{provider:provider});
@@ -40,12 +41,16 @@ async function main() {
   try {
     assert.strictEqual((await call('/api/settings')).status,401);
     assert.strictEqual((await call('/api/translator')).status,401);
+    assert.strictEqual((await call('/api/translator-key','POST',{})).status,401);
     assert.strictEqual((await call('/api/translator','POST',{provider:'google'})).status,401);
     var response=await call('/api/pair','POST',{pin:instance.auth.newPin().pin},'http://evil.invalid');
     assert.strictEqual(response.status,403);
     response=await call('/api/pair','POST',{pin:instance.auth.newPin().pin});
     assert.strictEqual(response.status,200);cookie=response.headers.get('set-cookie').split(';')[0];
     assert(response.headers.get('set-cookie').includes('HttpOnly'));
+    assert.strictEqual((await call('/api/translator-key','POST',{},'http://evil.invalid')).status,403);
+    assert.strictEqual((await call('/api/translator-key','POST',{unknown:true})).status,400);
+    assert.strictEqual((await call('/api/translator-key','POST',{})).status,200);
     assert.strictEqual((await (await call('/api/translator')).json()).budget.monthly_characters,12);
     assert.strictEqual((await call('/api/translator','POST',{provider:'google'},'http://evil.invalid')).status,403);
     assert.strictEqual((await call('/api/translator','POST',{key:'plaintext'})).status,400);
