@@ -11,6 +11,8 @@ Environment=OMP_THREAD_LIMIT=1
 Environment=PP_OCR_POLICY_LIBRARY=%h/ppocr-full-experiment-20261009/libpiccap_ocr_policy.so
 Environment=PP_OCR_CTC_LIBRARY=%h/ppocr-native-ctc-experiment-20261010/build/libppocr_ctc.so
 Environment=PP_OCR_EXACT_CROP_CACHE=1
+Environment=PP_OCR_RECOGNIZER_WORKERS=3
+Environment=PP_OCR_CORE_LIBRARY=%h/ppocr-parallel-experiment-20261010/build/librknn_core_bridge.so
 ExecStart=%h/lg-game-ocr-runtime/.venv/bin/python -B serve-ppocr-frame-probe.py --library detector-build/libppocr_detector_replay.so --detector-prefix %h/ppocr-full-experiment-20261009/PP_OCRv5_mobile_det --runtime %h/lg-game-ocr-runtime --gocr-runtime %h/ppocr-full-experiment-20261009/transport-runtime --token-file %h/gocr-runtime/transport.token --bind 192.168.1.11 --port 18775
 Restart=on-failure
 RestartSec=3

@@ -65,3 +65,12 @@ to the Orange worker, not the TV frame consumer.
 Benchmarks exclude translation/display and keep the capture pipeline unchanged.
 See `docs/gocr-native-detector.md` for actual boundary, parity and timing evidence.
 See `docs/gocr-native-recognizer.md` for the complete selected-frame native path.
+
+Selected PP-OCR Orange full-frame service reuses original PicCap CPU detector,
+region/line extraction and PP-OCRv6 small NPU recognizer. Three persistent threads
+each exclusively own a narrow/wide RKNN context pinned to one NPU core, plus
+their control-icon helper. All lines of the current frame enter one bounded FIFO;
+ordered results are joined before another frame is admitted. Shared exact crop
+cache coalesces identical in-flight inputs. Detector geometry, appearance,
+classification and TV translation/OSD orchestration follow the existing path.
+The separate GOCR profiles above retain their own runtime contracts.

@@ -1,5 +1,6 @@
 """Bounded per-engine exact-pixel OCR cache; never caches empty/error responses."""
 from collections import OrderedDict
+from concurrent.futures import Future
 import hashlib
 import threading
 
@@ -13,6 +14,8 @@ class ExactCropCache:
         self.items = OrderedDict()
         self.bytes = self.hits = self.misses = self.recognize_calls = self.evictions = 0
         self.lock = threading.Lock()
+        self.pending = {}
+        self.shared_waits = 0
         self.identity = self.namespace()
 
     def __getattr__(self, name):
@@ -39,20 +42,44 @@ class ExactCropCache:
                 self.items.move_to_end(key)
                 self.hits += 1
                 return cached[1]
-            self.misses += 1
-            self.recognize_calls += 1
-        result = self.engine.recognize(mode, pixels, width, height)
+            pending_key = (key, pixels)  # Full bytes distinguish forced hash collisions.
+            pending = self.pending.get(pending_key)
+            if pending is not None:
+                self.shared_waits += 1
+                owner = False
+            else:
+                pending = Future()
+                self.pending[pending_key] = pending
+                self.misses += 1
+                self.recognize_calls += 1
+                owner = True
+        if not owner:
+            return pending.result()
+        try:
+            result = self.engine.recognize(mode, pixels, width, height)
+            self.store(key, identity, pixels, result)
+        except BaseException as error:
+            pending.set_exception(error)
+            raise
+        else:
+            pending.set_result(result)
+            return result
+        finally:
+            with self.lock:
+                self.pending.pop(pending_key, None)
+
+    def store(self, key, identity, pixels, result):
         status, tsv = result
         words = [line.split("\t", 11) for line in tsv.splitlines()]
         has_text = any(len(row) == 12 and row[0] == "5" and row[11].strip() for row in words)
         if status != 0 or not has_text:
-            return result
+            return
         cost = len(pixels)+len(tsv.encode("utf-8"))
         if cost > self.max_bytes:
-            return result
+            return
         with self.lock:
             if identity != self.identity:
-                return result
+                return
             prior = self.items.pop(key, None)
             if prior:
                 self.bytes -= prior[2]
@@ -62,11 +89,11 @@ class ExactCropCache:
                 _, removed = self.items.popitem(last=False)
                 self.bytes -= removed[2]
                 self.evictions += 1
-        return result
 
     def cache_stats(self):
         with self.lock:
             return {"hits": self.hits, "misses": self.misses,
                     "recognize_calls": self.recognize_calls, "evictions": self.evictions,
+                    "shared_waits": self.shared_waits,
                     "entries": len(self.items), "payload_bytes": self.bytes,
                     "max_payload_bytes": self.max_bytes, "max_entries": self.max_entries}

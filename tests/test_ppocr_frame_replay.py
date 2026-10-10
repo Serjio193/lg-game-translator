@@ -2,6 +2,9 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import threading
+import sys
 
 from PIL import Image
 
@@ -12,6 +15,34 @@ spec.loader.exec_module(module)
 
 
 class FrameContractTests(unittest.TestCase):
+    def test_queue_covers_separate_regions_and_preserves_output_order(self):
+        sys.path.insert(0, str(source.parent))
+        from ppocr_recognizer_pool import RecognizerPool
+        class Engine:
+            def __init__(self, mask):
+                self.npu = {}
+                self.local = threading.local()
+            def recognize(self, mode, pixels, width, height):
+                if pixels != b'd':
+                    barrier.wait(timeout=5)
+                return 0, "header\n5\t1\t1\t1\t1\t1\t0\t0\t1\t1\t95\t"+pixels.decode()+"\n"
+        class Detector:
+            def detect(self, gray):
+                return [module.Region(i, 0, 1, 1, 1, 0) for i in range(4)]
+            def lines(self, box):
+                return [box]
+        barrier = threading.Barrier(3)
+        pool = RecognizerPool(Engine)
+        try:
+            import numpy as np
+            with patch.object(module, "gray_frame", return_value=np.array([[97, 98, 99, 100]],
+                                                                          dtype=np.uint8)):
+                result = module.Pipeline(Detector(), pool, pool).ocr(None)
+            self.assertEqual([r["text"] for r in result["regions"]], ["a", "b", "c", "d"])
+            self.assertEqual(sum(pool.worker_stats()["completed_jobs"]), 4)
+        finally:
+            pool.close()
+
     def test_rgb_luminance_and_contiguous_frame(self):
         image = Image.new("RGB", (1280, 720), "white")
         for x, color in enumerate(((0, 0, 0), (255, 0, 0), (0, 255, 0), (0, 0, 255))):

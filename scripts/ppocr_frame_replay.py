@@ -1,5 +1,6 @@
 """Isolated full-frame replay using existing PicCap detector and Orange engines."""
 import ctypes as C
+from concurrent.futures import wait
 import time
 from pathlib import Path
 
@@ -113,13 +114,17 @@ class Pipeline:
         boxes = self.detector.detect(gray)
         detected = time.perf_counter()
         regions = []
-        for box in boxes:
-            rows = self.detector.lines(box)
-            if self.pool is None:
-                lines = [self.recognize_line(row, gray) for row in rows]
-            else:
-                jobs = [self.pool.submit(self.recognize_line, row, gray) for row in rows]
-                lines = [job.result() for job in jobs]
+        rows_by_box = [self.detector.lines(box) for box in boxes]
+        # Enqueue all regions before waiting; one-line regions can run concurrently too.
+        jobs = None
+        if self.pool is not None:
+            jobs = [[self.pool.submit(self.recognize_line, row, gray) for row in rows]
+                    for rows in rows_by_box]
+            # Drain the entire frame even if one crop fails, before the next frame starts.
+            wait([job for region_jobs in jobs for job in region_jobs])
+        for index, (box, rows) in enumerate(zip(boxes, rows_by_box)):
+            lines = ([self.recognize_line(row, gray) for row in rows] if jobs is None
+                     else [job.result() for job in jobs[index]])
             regions.append({"box": box.box(), "score": box.score, "lines": lines,
                             "text": " ".join(row["text"] for row in lines if row["text"])})
         finished = time.perf_counter()
@@ -129,9 +134,11 @@ class Pipeline:
             "detector": (detected - converted) * 1000,
             "lines_crop_recognition": (finished - detected) * 1000,
             "full_ocr": (finished - start) * 1000}}
+        if self.pool is not None:
+            result["recognition_workers"] = self.pool.worker_stats()
         if cache_before is not None:
             cache_after = stats()
             result["crop_cache"] = {**cache_after, "frame": {
                 k: cache_after[k]-cache_before[k]
-                for k in ("hits", "misses", "recognize_calls", "evictions")}}
+                for k in ("hits", "misses", "recognize_calls", "evictions", "shared_waits")}}
         return result

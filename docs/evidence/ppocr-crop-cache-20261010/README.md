@@ -33,3 +33,8 @@ Final observed cache: 68 entries, 673000 payload bytes. Capture connected/videoR
 Four cache unit tests cover exact hit, one-pixel change, dimensions/mode/model identity, forced hash collision, LRU/payload bounds, invalid size, empty/error/whitespace/oversize rejection. Twelve PP-OCR host tests pass. Saved corpus and actual endpoint checks run on Orange. Library/models/decoder unchanged; service restart active, translator health OK. Whitespace-only rejection refinement deployed after live collection; repeated benchmark still describes successful non-whitespace cases.
 
 Files: scripts/ppocr_crop_cache.py, benchmark-ppocr-crop-cache.py; optional server startup wrapper and per-frame telemetry in existing pipeline. Reports comparison.json, endpoint.json, live.json retain timings and quality evidence. This is OCR result reuse, separate from existing MADLAD translation database cache.
+
+Later on 2026-10-10 the three-worker integration added in-flight exact duplicate
+coalescing. Earlier concurrent-miss behavior described above is historical;
+current default shares the existing computation/result with identical waiters.
+See `../ppocr-three-workers-20261010/README.md` for current queue contract/tests.

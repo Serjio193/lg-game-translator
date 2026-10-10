@@ -80,11 +80,23 @@ def main():
     if os.environ.get("PP_OCR_POLICY_LIBRARY"):
         from ppocr_translation_policy import TranslationPolicy
         policy = TranslationPolicy(os.environ["PP_OCR_POLICY_LIBRARY"])
-    engines = Engines(args.runtime / "assets")
+    pool = None
+    workers = int(os.environ.get("PP_OCR_RECOGNIZER_WORKERS", "1"))
+    if workers != 1 and os.environ.get("PP_OCR_PROFILE_STAGES") == "1":
+        raise ValueError("Sequential stage profiler cannot measure concurrent workers")
+    if workers == 3:
+        from ppocr_recognizer_pool import RecognizerPool, pinned_engine
+        pool = RecognizerPool(lambda mask: pinned_engine(
+            args.runtime / "assets", os.environ["PP_OCR_CORE_LIBRARY"], mask))
+        engines = pool
+    elif workers == 1:
+        engines = Engines(args.runtime / "assets")
+    else:
+        raise ValueError("Supported recognizer workers: 1 or 3")
     if os.environ.get("PP_OCR_EXACT_CROP_CACHE") == "1":
         from ppocr_crop_cache import ExactCropCache
         engines = ExactCropCache(engines)
-    worker = Worker(Pipeline(detector, engines), policy)
+    worker = Worker(Pipeline(detector, engines, pool), policy)
     try:
         with ThreadingHTTPServer((args.bind, args.port), make_handler(worker, token)) as server:
             server.serve_forever()
@@ -92,6 +104,8 @@ def main():
         if worker.profiler:
             worker.profiler.close()
         detector.close()
+        if pool is not None:
+            pool.close()
 
 
 if __name__ == "__main__":

@@ -88,3 +88,10 @@ postprocess работает после tensor decode, не управляет c
 - `scripts/ppocr_crop_cache.py`, `benchmark-ppocr-crop-cache.py`: bounded exact
   OCR-input RAM reuse and unchanged/one-pixel quality gates; selected explicitly
   by PP_OCR_EXACT_CROP_CACHE, independent of the translation database cache.
+
+- `native/rknn_core_bridge/`, `scripts/ppocr_recognizer_pool.py`: three persistent
+  exclusive RKNN workers on separate NPU cores, one bounded whole-frame queue,
+  shared exact cache with in-flight deduplication; model/tensor processing reused.
+- `scripts/benchmark-ppocr-parallel.py`: frozen raw-output/TSV and alternating
+  sequential/three-worker full-frame parity/speed gate; evidence in
+  `docs/evidence/ppocr-three-workers-20261010/README.md`.
