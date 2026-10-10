@@ -19,7 +19,7 @@ function addresses() {
 }
 function create(options) {
   options=options||{};
-  var auth=authModule.create(),store=storeModule.create(options.file||'/media/developer/game-translator-layers.json',options.policyChanged);
+  var auth=authModule.create(),store=storeModule.create(options.file||'/media/developer/game-translator-layers.json',options.policyChanged,options.canTranslate);
   var port=options.port===undefined?18780:options.port;
   function json(response,status,value) {response.writeHead(status,{'Content-Type':'application/json; charset=utf-8'});response.end(JSON.stringify(value));}
   function token(request) {var match=/(?:^|;\s*)osd_session=([0-9a-f]{64})(?:;|$)/.exec(request.headers.cookie||'');return match?match[1]:'';}

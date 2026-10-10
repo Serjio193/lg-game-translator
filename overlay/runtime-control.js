@@ -15,6 +15,8 @@ var sourceEpoch = Date.now();
 var path = '/tmp/game-translator-control.state';
 var catalog = require('./app-catalog');
 var snapshots = require('./orange-state');
+var powerModule = require('./tv-power');
+var power = null, store = null, started = false;
 var cancelRequest = null;
 var EXCLUDED = ['com.serjio193.lggametranslator.settings', 'com.serjio193.lggametranslator.overlay'];
 
@@ -32,7 +34,21 @@ function publish(value) {
   fs.renameSync(path + '.tmp', path);
 }
 
+function forceOff(invalidateCommands) {
+  active = false;
+  try { publish(false); } catch (error) { console.error('Control state write failed'); }
+  if (cancelRequest) cancelRequest();
+  if (!store) return;
+  try {
+    var value = store.read();
+    if (value.settings.translationEnabled)
+      store.update({revision:value.revision,patch:{translationEnabled:false}});
+    if (invalidateCommands && store.invalidate) store.invalidate();
+  } catch (error) { console.error('Cannot persist translation OFF'); }
+}
+
 function poll() {
+  if (!power || !power.awake()) { forceOff(); return; }
   if (!manuallyEnabled()) {
     if (cancelRequest) cancelRequest();
     publish(false); return;
@@ -87,10 +103,22 @@ function poll() {
 }
 
 exports.start = function () {
+  if (started) return;
+  started = true;
   var mobile = require('./mobile-server').start({policyChanged:function () {
     publish(false);
     if (!manuallyEnabled() && cancelRequest) cancelRequest();
-  }});
+  },canTranslate:function () { return power !== null && power.awake(); }});
+  store = mobile.store;
+  forceOff(true);
+  power = powerModule.create({changed:function () { forceOff(true); }});
+  power.start();
+  if (typeof process !== 'undefined') {
+    process.once('exit', function () { power.stop(); });
+    ['SIGTERM','SIGINT'].forEach(function (signal) {
+      process.once(signal, function () { power.stop(); process.exit(0); });
+    });
+  }
   catalog.start(mobile); publish(false); poll(); setInterval(poll, 2000);
 };
 exports.allowed = function () { return active; };

@@ -2,7 +2,7 @@
 var assert=require('assert'),fs=require('fs'),os=require('os'),path=require('path'),EventEmitter=require('events');
 var route=require('./manual-menu-route'),stores=require('./mobile-store');
 var directory=fs.mkdtempSync(path.join(os.tmpdir(),'manual-menu-')),file=path.join(directory,'layers.json');
-var changed=0,store=stores.create(file,function(){changed++;}),read=fs.readFileSync,key='a'.repeat(64);
+var changed=0,powerAwake=true,store=stores.create(file,function(){changed++;},function(){return powerAwake;}),read=fs.readFileSync,key='a'.repeat(64);
 fs.readFileSync=function(name){if(name==='/media/developer/game-translator-mobile-menu.key')return key;return read.apply(fs,arguments);};
 function call(method,value,credential){
   var request=new EventEmitter();request.method=method;
@@ -21,5 +21,18 @@ try{
   assert.strictEqual(call('POST',{revision:first.value.revision,enabled:false}).statusCode,409);
   var off=call('POST',{revision:on.value.revision,enabled:false});assert.strictEqual(off.value.settings.translationEnabled,false);
   assert.strictEqual(changed,2);assert.strictEqual(stores.create(file).read().settings.translationEnabled,false);
+  powerAwake=false;
+  assert.strictEqual(call('POST',{revision:off.value.revision,enabled:true}).statusCode,400);
+  assert.strictEqual(store.read().settings.translationEnabled,false,'TV menu cannot arm translation during sleep');
+  powerAwake=true;store.invalidate();
+  assert.strictEqual(call('POST',{revision:off.value.revision,enabled:true}).statusCode,409,
+    'An ON prepared before a sleep/wake boundary is rejected even when power is awake again');
+  assert.strictEqual(store.read().settings.translationEnabled,false);
+  var fresh=store.read();
+  assert.strictEqual(call('POST',{revision:fresh.revision,enabled:true}).statusCode,200,
+    'A new explicit ON using the post-wake state is accepted');
+  var restarted=stores.create(file,null,function(){return true;});
+  assert.throws(function(){restarted.update({revision:store.read().revision,patch:{translationEnabled:true}});},
+    function(error){return error.status===409;},'A command prepared for the old controller cannot cross a restart');
   console.log('TV menu authentication, manual ON/OFF, revisions and persistence: PASS');
 }finally{fs.readFileSync=read;if(fs.existsSync(file))fs.unlinkSync(file);fs.rmdirSync(directory);}

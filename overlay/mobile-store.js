@@ -20,19 +20,23 @@ function validate(patch) {
   });
   return patch;
 }
-function create(file,changed) {
-  var revision=0,last='';
+function create(file,changed,canTranslate) {
+  // A previous controller's revision must not match the new process lifetime.
+  var revision=crypto.randomBytes(6).readUIntBE(0,6),last='';
   function read() {
     var raw='{}';try {raw=fs.readFileSync(file,'utf8');}catch(error){if(error.code!=='ENOENT') throw error;}
     if(raw!==last){revision++;last=raw;}
     return {settings:layers.normalize(JSON.parse(raw)),revision:revision,capabilities:{speech:false}};
   }
-  return {read:read,update:function (value) {
+  return {read:read,invalidate:function () {read();revision++;return read();},update:function (value) {
     var current=read();
     if(!value||!Number.isInteger(value.revision)||value.revision!==current.revision) {
       var conflict=new Error('Настройки изменились. Обновляем значения');conflict.status=409;throw conflict;
     }
-    var patch=validate(value.patch),next=layers.normalize(Object.assign({},current.settings,patch));
+    var patch=validate(value.patch);
+    if(patch.translationEnabled===true&&canTranslate&&!canTranslate())
+      throw new Error('Питание ТВ не подтверждено. Включите ТВ и повторите включение перевода.');
+    var next=layers.normalize(Object.assign({},current.settings,patch));
     var temporary=file+'.tmp.'+crypto.randomBytes(6).toString('hex');
     fs.mkdirSync(path.dirname(file),{recursive:true});
     try {fs.writeFileSync(temporary,JSON.stringify(next),{mode:384});fs.renameSync(temporary,file);}

@@ -61,16 +61,31 @@
       var result=await request('/api/settings','PATCH',{revision:revision,patch:patch});
       revision=result.revision;state=Object.assign(state,result.settings,dirty);render();status.textContent='Применено на ТВ';
     } catch (error) {
-      if (!error.status || error.status===409) dirty=Object.assign(patch,dirty);
+      if (!error.status || error.status===409) {
+        var retry=Object.assign({},patch);
+        if(retry.translationEnabled===true)delete retry.translationEnabled;
+        if(dirty.translationEnabled===true)delete dirty.translationEnabled;
+        dirty=Object.assign(retry,dirty);
+        if(patch.translationEnabled===true)state.translationEnabled=false;
+      }
       status.textContent=error.message;
       if (error.status===401) {document.getElementById('login').hidden=false;document.getElementById('controls').hidden=true;}
       if (error.status===409) {
         try {
           var fresh=await request('/api/settings');revision=fresh.revision;state=Object.assign(state,fresh.settings,dirty);render();
+          if(patch.translationEnabled===true)status.textContent='Состояние ТВ изменилось. Для включения нажмите переключатель ещё раз.';
         } catch (refreshError) {dirty={};status.textContent=refreshError.message;}
       }
     } finally {saving=false;}
     if (Object.keys(dirty).length) timer=setTimeout(save,400);
+  }
+  async function refreshLocal() {
+    if(preview||saving||Object.keys(dirty).length||document.getElementById('controls').hidden)return;
+    try {
+      var result=await request('/api/settings');
+      if(saving||Object.keys(dirty).length)return;
+      if(result.revision!==revision){revision=result.revision;state=Object.assign(state,result.settings);render();}
+    }catch(error){if(error.status===401){document.getElementById('controls').hidden=true;document.getElementById('login').hidden=false;}}
   }
   controls.forEach(function (input) {input.addEventListener('input',function () {
     if (input.type==='radio'&&!input.checked) return;
@@ -96,4 +111,5 @@
   if (preview) {document.getElementById('design-bar').hidden=false;show();}
   else request('/api/settings').then(function (result) {state=Object.assign(state,result.settings);revision=result.revision;show();})
     .catch(function () {document.getElementById('connection').textContent='Нужен PIN';});
+  if(!preview)setInterval(refreshLocal,3000);
 }());

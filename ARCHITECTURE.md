@@ -5,6 +5,10 @@ Translation admission is now the persistent local `translationEnabled` switch,
 default OFF, changed by the TV menu/pult or PIN-authenticated phone. HDMI/app
 allowlists and Russian-idle settings are legacy API fields, not admission gates.
 Foreground identity only invalidates old-source work and excludes our own UI.
+Controller startup clears a previously saved ON. An acknowledged tvpower Luna
+subscription gates manual ON; sleep/wake/unknown state clear it again. Settings
+format remains compatible, but ON never authorizes the next controller lifetime.
+Power and settings refreshes while OFF are TV-local, not Orange activity.
 OFF suppresses controller settings polling and proxies budget reads from a local
 owner-only Orange snapshot. TV-menu bootstrap also stays on loopback. Explicit
 user configuration actions may contact Orange; ordinary browser refreshes cannot

@@ -3,7 +3,9 @@ var assert = require('assert');
 var vm = require('vm');
 var fs = require('fs');
 var handlers, fail, poll, state;
-var manualEnabled=false;
+var manualEnabled=true;
+var powerState='unknown',powerChanged,canTranslate;
+var invalidations=0;
 var requests=0,destroyed=0,policyChanged;
 var foreground = 'com.webos.app.hdmi4';
 var settings = {hdmi_inputs: [foreground], provider: 'madlad', translation_server: 'http://192.168.1.11:8765'};
@@ -13,7 +15,14 @@ var context = {exports: {}, Date: {now: function () { return 10000; }}, console:
     if (name === 'fs') return {readFileSync:function(){return JSON.stringify({translationEnabled:manualEnabled});},writeFileSync: function (path, value) { state = value; }, renameSync: function () {}};
     if (name === './app-catalog') return {start: function () {}};
     if (name === './orange-state') return {saveSettings:function(){}};
-    if (name === './mobile-server') return {start: function (options) {policyChanged=options.policyChanged;return {};}};
+    if (name === './tv-power') return {create:function(options){powerChanged=options.changed;return {
+      start:function(){},awake:function(){return powerState==='awake';},stop:function(){}};}};
+    if (name === './mobile-server') return {start: function (options) {
+      policyChanged=options.policyChanged;canTranslate=options.canTranslate;
+      return {store:{read:function(){return {revision:1,settings:{translationEnabled:manualEnabled}};},
+        invalidate:function(){invalidations++;},
+        update:function(value){manualEnabled=value.patch.translationEnabled;policyChanged();}}};
+    }};
     if (name === 'child_process') return {execFile: function (path, args, options, callback) {
       callback(null, JSON.stringify({returnValue: true, appId: foreground}));
     }};
@@ -30,7 +39,11 @@ function deliver() { handlers.data(JSON.stringify(settings)); handlers.end(); }
 context.exports.start();
 assert(!context.exports.allowed());
 assert.strictEqual(requests,0,'OFF bootstrap does not contact Orange');
+assert.strictEqual(manualEnabled,false,'Previously persisted ON is reset on controller startup');
+assert(invalidations>0,'Controller startup invalidates prepared manual commands');
+assert(!canTranslate(),'Unknown power cannot authorize ON');
 assert(!context.exports.allowed(), 'Default manual OFF never starts OCR');
+powerState='awake';powerChanged('unknown','awake');assert(canTranslate());
 manualEnabled=true;poll();deliver();
 assert(context.exports.allowed(), 'Manual ON permits the current source');
 assert.strictEqual(state.trim().split(' ').slice(0,8).join(' '),'10000 1 madlad 192.168.1.11 8765 0 300 com.webos.app.hdmi4');
@@ -55,4 +68,19 @@ poll();manualEnabled=false;count=requests;policyChanged();
 assert(destroyed>0,'OFF aborts the already pending settings read');
 deliver();assert(!context.exports.allowed(),'Late settings reply cannot reactivate OFF');
 poll();assert.strictEqual(requests,count,'Late completion does not restart polling');
+manualEnabled=true;poll();deliver();assert(context.exports.allowed());
+poll();var cancelledBeforeSleep=destroyed;
+powerState='asleep';powerChanged('awake','asleep');
+var sleepInvalidations=invalidations;
+assert(destroyed>cancelledBeforeSleep,'A sleep event aborts an already pending Orange settings request');
+deliver();assert(!context.exports.allowed(),'Late reply after sleep cannot reactivate translation');
+assert.strictEqual(manualEnabled,false,'Sleep resets the manual flag even when the controller remains alive');
+count=requests;poll();assert.strictEqual(requests,count);assert(!context.exports.allowed());
+manualEnabled=true;powerState='awake';powerChanged('asleep','awake');
+assert(invalidations>sleepInvalidations,'Wake invalidates commands prepared before the transition');
+assert.strictEqual(manualEnabled,false,'Wake cannot restore ON, including attempts to arm during sleep');
+poll();assert.strictEqual(requests,count,'Wake never contacts Orange without a new manual ON');
+manualEnabled=true;poll();deliver();assert(context.exports.allowed());
+powerState='unknown';powerChanged('awake','unknown');
+assert.strictEqual(manualEnabled,false,'Lost subscription clears the authorization');
 console.log('Manual OFF/ON, no HDMI/app/language autostart, source invalidation and failure admission: PASS');

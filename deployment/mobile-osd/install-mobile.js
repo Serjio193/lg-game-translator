@@ -1,4 +1,4 @@
-// Execute on TV, after installing settings_0.1.6_all.ipk; preserves the watcher.
+// Execute on TV, after installing settings_0.1.7_all.ipk; preserves the watcher.
 'use strict';
 var fs=require('fs'),path=require('path'),crypto=require('crypto');
 var staging=path.resolve(process.argv[2]||'.');
@@ -7,6 +7,7 @@ var menu='/media/developer/apps/usr/palm/applications/com.serjio193.lggametransl
 var relay='/media/developer/gocr-runtime/ppocr-probe-transport/gocr_worker';
 var modules=['mobile-server.js','mobile-auth.js','mobile-store.js','qr-url.js','layer-settings.js',
   'translator-control.js','translator-menu-route.js','manual-menu-route.js','orange-state.js',
+  'tv-power.js','luna-json-stream.js',
   'manual-style.js','subtitle-layout.js','glyph-cover.js','mask-grow.js','mask-osd-raster.js',
   'line-cover-mask.js','mask-edge-blur.js','control-icons.js','backdrop.js','fit-area.js',
   'mobile/index.html','mobile/mobile.js','mobile/mobile.css','mobile/preview-variants.css',

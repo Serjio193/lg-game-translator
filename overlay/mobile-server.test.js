@@ -24,8 +24,8 @@ async function main() {
   assert.throws(function(){credentials.newPin();});now+=30001;assert(credentials.newPin());
   assert(server.privateAddress('192.168.1.3'));assert(!server.privateAddress('8.8.8.8'));
   var directory=fs.mkdtempSync(path.join(os.tmpdir(),'osd-mobile-')),file=path.join(directory,'layers.json'),changed=0;
-  var provider='madlad',providerUpdates=0;
-  var instance=server.create({port:0,file:file,policyChanged:function(){changed++;},translator:{
+  var provider='madlad',providerUpdates=0,powerAwake=true;
+  var instance=server.create({port:0,file:file,policyChanged:function(){changed++;},canTranslate:function(){return powerAwake;},translator:{
     status:function(callback){callback(null,{provider:provider,budget:{monthly_characters:12}});},
     liveStatus:function(callback){callback(null,{public_key:'public',provider:provider});},
     update:function(value,callback){
@@ -70,6 +70,10 @@ async function main() {
     assert.strictEqual(response.status,200);value=await response.json();
     assert.strictEqual(value.settings.translationEnabled,true);assert.strictEqual(changed,2);
     assert.strictEqual((await call('/api/settings','PATCH',{revision:value.revision,patch:{translationEnabled:'yes'}})).status,400);
+    powerAwake=false;
+    assert.strictEqual((await call('/api/settings','PATCH',{revision:value.revision,patch:{translationEnabled:true}})).status,400,
+      'Phone cannot arm translation without confirmed awake power');
+    assert.strictEqual(changed,2,'Rejected ON cannot change the persisted setting');
     assert.strictEqual((await call('/api/logout','POST',{})).status,200);
     assert.strictEqual((await call('/api/settings')).status,401);
     console.log('PIN expiry/lock/single-use, anonymous denial, CSRF, persistence, revision and speech gate: PASS');
