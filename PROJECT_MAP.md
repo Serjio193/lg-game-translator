@@ -109,3 +109,9 @@ postprocess работает после tensor decode, не управляет c
 - `docs/Логика системы.md`: обсуждаемая целевая цепочка с TYPEWRITER, готовностью
   OCR, двумя переводчиками и предложением русского языкового контроля;
   явно отделяет уже установленные функции от планируемых.
+
+- `menu/`: webOS settings app, HDMI and installed-app choices, local icons and
+  remote navigation; package id `com.serjio193.lggametranslator.settings`.
+- `overlay/runtime-control.js`, `app-catalog.js`, `app-icon.js`: existing source
+  admission plus loopback-only installed application catalogue adapted from
+  AmbiSun; `deployment/app-menu/install-controller.sh` applies the controller kit.

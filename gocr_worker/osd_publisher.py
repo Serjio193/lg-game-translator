@@ -29,9 +29,15 @@ class OsdPublisher:
         self.root = Path(root)
         self.clock = clock or (lambda: int(time.time()*1000))
         self.tracks, self.next_id, self.sequence = [], 1, None
+        self.source = None
 
     def publish(self, result):
-        if result.get("engine") != "ppocr" or result.get("sequence") == self.sequence:
+        if result.get("engine") != "ppocr":
+            return
+        source = tuple(result.get("source_session", ()))
+        if source and source != self.source:
+            self.tracks, self.sequence, self.source = [], None, source
+        if result.get("sequence") == self.sequence:
             return
         now = self.clock()
         entries, tracks, used = [], [], set()

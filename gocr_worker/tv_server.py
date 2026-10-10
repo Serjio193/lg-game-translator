@@ -13,6 +13,7 @@ from .frame_pipeline import FramePipeline
 from .frame_transport import receive_frame, send_result
 from .http_security import read_token
 from .translation_client import TranslationClient
+from .source_admission import source_session, require_current
 
 LOG = logging.getLogger("gocr-tv")
 
@@ -42,7 +43,15 @@ class FrameHandler(socketserver.BaseRequestHandler):
         try:
             image, sequence, captured = receive_frame(self.request)
             accepted_ms = time.monotonic()*1000
+            guarded = (self.server.osd_publisher is not None
+                       and self.server.pipeline.mode == "ORANGE_FULL")
+            session = source_session() if guarded else None
+            if guarded:
+                require_current(session)
             result = self.server.pipeline.process(image, sequence, captured)
+            if guarded:
+                require_current(session)
+                result["source_session"] = list(session)
             if "relay_to_detector_upper_ms" in result.get("timings_ms", {}):
                 from .capture_timing import capture_age_ms
                 age, source = capture_age_ms(captured, accepted_ms)

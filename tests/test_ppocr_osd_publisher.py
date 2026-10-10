@@ -14,6 +14,20 @@ def result(sequence, text="Emergency Guard", x=20):
 
 
 class PublisherTests(unittest.TestCase):
+    def test_source_switch_resets_observations_and_placement(self):
+        with tempfile.TemporaryDirectory() as folder:
+            publisher = OsdPublisher(Path(folder), lambda: 1000)
+            for sequence in (1, 2, 3):
+                item = result(sequence)
+                item['source_session'] = ['com.webos.app.hdmi1', 'madlad', '192.168.1.11', '8765']
+                publisher.publish(item)
+            item = result(4, x=21)
+            item['source_session'] = ['youtube.leanback.v4', 'madlad', '192.168.1.11', '8765']
+            publisher.publish(item)
+            gate = json.loads((Path(folder)/'ppocr-full-osd-admission.json').read_text())
+            self.assertEqual(gate['regions'][0]['observations'], 1)
+            self.assertEqual(gate['regions'][0]['appearance']['box']['x'], 21)
+
     def test_stability_changed_text_disappearance_and_duplicate_sequence(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

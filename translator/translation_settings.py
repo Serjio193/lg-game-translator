@@ -3,6 +3,7 @@
 import json
 import os
 import threading
+import re
 from urllib.parse import urlsplit
 from pathlib import Path
 
@@ -19,7 +20,7 @@ def read_settings():
     with _lock:
         path = settings_path()
         if not path.exists():
-            return {"hdmi_inputs": HDMI_INPUTS.copy(), "provider": "madlad",
+            return {"hdmi_inputs": HDMI_INPUTS.copy(), "applications": [], "provider": "madlad",
                     "translation_server": "http://192.168.1.11:8765",
                     "russian_idle": True, "language_check_seconds": 60}
         return validate(json.loads(path.read_text(encoding="utf-8")))
@@ -28,7 +29,7 @@ def read_settings():
 def validate(value):
     required = {"hdmi_inputs", "provider", "translation_server"}
     if not isinstance(value, dict) or not required <= set(value) or set(value) - required - {
-            "russian_idle", "language_check_seconds"}:
+            "russian_idle", "language_check_seconds", "applications"}:
         raise ValueError("Expected HDMI inputs, provider and translation_server")
     idle = value.get("russian_idle", True)
     seconds = value.get("language_check_seconds", 60)
@@ -37,6 +38,11 @@ def validate(value):
     inputs = value["hdmi_inputs"]
     if not isinstance(inputs, list) or any(item not in HDMI_INPUTS for item in inputs):
         raise ValueError("Only HDMI 1-4 are supported")
+    applications = value.get("applications", [])
+    if (not isinstance(applications, list) or len(applications) > 256
+            or any(not isinstance(item, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}", item)
+                   or item in HDMI_INPUTS for item in applications)):
+        raise ValueError("Applications must contain valid webOS app IDs")
     if value["provider"] not in ("madlad", "google"):
         raise ValueError("Provider must be madlad or google")
     address = value["translation_server"]
@@ -49,15 +55,19 @@ def validate(value):
             or not 1 <= (server.port or 80) <= 65535):
         raise ValueError("Use an HTTP server address, for example http://192.168.1.11:8765")
     return {"hdmi_inputs": [item for item in HDMI_INPUTS if item in inputs],
+            "applications": list(dict.fromkeys(applications)),
             "provider": value["provider"],
             "translation_server": f"http://{server.hostname}:{server.port or 80}",
             "russian_idle": idle, "language_check_seconds": seconds}
 
 
 def save_settings(value):
-    settings = validate(value)
     with _lock:
         path = settings_path()
+        if isinstance(value, dict) and "applications" not in value and path.exists():
+            current = validate(json.loads(path.read_text(encoding="utf-8")))
+            value = {**value, "applications": current["applications"]}
+        settings = validate(value)
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_suffix(".tmp")
         temporary.write_text(json.dumps(settings) + "\n", encoding="utf-8")

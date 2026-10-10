@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game Translator</title>
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+  <main>
+    <p class="eyebrow">GAME TRANSLATOR</p>
+    <h1>Источники перевода</h1>
+    <p class="intro">Выберите HDMI и приложения, в которых нужен перевод.</p>
+    <form id="settings">
+      <div class="inputs">
+        <label><span>HDMI 1</span><input type="checkbox" value="com.webos.app.hdmi1" disabled></label>
+        <label><span>HDMI 2</span><input type="checkbox" value="com.webos.app.hdmi2" disabled></label>
+        <label><span>HDMI 3</span><input type="checkbox" value="com.webos.app.hdmi3" disabled></label>
+        <label><span>HDMI 4</span><input type="checkbox" value="com.webos.app.hdmi4" disabled></label>
+      </div>
+      <section class="applications" aria-label="Приложения">
+        <div class="app-heading"><h2>Приложения ТВ</h2><button id="refresh-apps" type="button">Обновить приложения</button></div>
+        <div id="app-list"></div>
+        <p id="app-status" role="status">Загрузка приложений ТВ…</p>
+      </section>
+      <div class="translator">
+        <label>Переводчик <select id="provider" disabled><option value="madlad">MADLAD</option><option value="google">Google</option></select></label>
+        <label>Сервер перевода <input id="server" type="url" value="http://192.168.1.11:8765" disabled></label>
+      </div>
+      <div class="translator">
+        <label>Щадящий режим при русском тексте <input id="russian-idle" type="checkbox" disabled></label>
+        <label>Проверять язык в щадящем режиме <select id="language-check" disabled>
+          <option value="60">Раз в минуту</option><option value="120">Раз в 2 минуты</option>
+          <option value="300">Раз в 5 минут</option></select></label>
+      </div>
+      <div class="actions"><button id="save" type="submit" disabled>Сохранить</button>
+        <button id="back" type="button">Вернуться к игре</button></div>
+    </form>
+    <p id="status" role="status">Загрузка настроек…</p>
+    <p class="note">Настройки сохраняются после перезапуска. Подсветка продолжает работать.</p>
+    <p class="note">Для Google нужен настроенный API-ключ на сервере перевода.</p>
+  </main>
+  <script src="app-picker.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "id": "com.serjio193.lggametranslator.settings",
+  "version": "0.1.2",
+  "vendor": "Serjio193",
+  "type": "web",
+  "main": "index.html",
+  "title": "Game Translator",
+  "icon": "icon.png",
+  "resolution": "1920x1080"
+}

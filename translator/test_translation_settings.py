@@ -8,6 +8,20 @@ from translation_settings import read_settings, save_settings, validate, HDMI_IN
 
 
 class SettingsTests(unittest.TestCase):
+    def test_application_selection_and_old_client_preservation(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ,
+                {"TRANSLATOR_SETTINGS": str(Path(directory)/"settings.json")}):
+            self.assertEqual(read_settings()["applications"], [])
+            value = {**read_settings(), "applications": ["youtube.leanback.v4", "youtube.leanback.v4"]}
+            saved = save_settings(value)
+            self.assertEqual(saved["applications"], ["youtube.leanback.v4"])
+            old = {k: v for k, v in saved.items() if k != "applications"}
+            self.assertEqual(save_settings(old)["applications"], saved["applications"])
+            self.assertEqual(save_settings({**old, "applications": []})["applications"], [])
+            for ids in ("app.test", ["../bad"], ["with spaces"], [HDMI_INPUTS[0]], [None]):
+                with self.assertRaises(ValueError):
+                    validate({**old, "applications": ids})
+
     def test_defaults_and_persistence(self):
         with tempfile.TemporaryDirectory() as directory:
             with patch.dict(os.environ, {"TRANSLATOR_SETTINGS": str(Path(directory) / "settings.json")}):
