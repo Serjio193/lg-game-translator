@@ -53,6 +53,28 @@ class OrangeFullTests(unittest.TestCase):
             self.assertEqual(sent, 1280*720*3+28)
             self.assertIn("frame_to_text", result["timings_ms"])
 
+    def test_all_scope_requires_capability_and_is_forwarded(self):
+        image = Image.new("RGB", (1280, 720))
+        request = Request(self.address + "/v1/ocr-frame", data=b"short", headers={
+            "Authorization": "Bearer " + "t"*32, "X-PP-OCR-Policy": "all",
+            "Content-Type": "application/x-gocr-frame"})
+        with self.assertRaises(HTTPError) as rejected:
+            urlopen(request, timeout=2)
+        self.assertEqual(rejected.exception.code, 400)
+        with patch.object(FrameClient, "translation_scope", return_value="all"):
+            original = self.worker.ocr
+            seen = []
+
+            def scoped(frame, scope="normal"):
+                seen.append(scope)
+                return original(frame)
+
+            self.worker.supports_translation_scope = True
+            self.worker.ocr = scoped
+            result, _ = self.client.ocr(image)
+            self.assertEqual(seen, ["all"])
+            self.assertEqual(result["translation_scope"], "all")
+
     def test_auth_and_truncated_body_rejected(self):
         for token, status in (("wrong", 401), ("t"*32, 413)):
             request = Request(self.address+"/v1/ocr-frame", data=b"short",

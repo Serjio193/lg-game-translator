@@ -13,6 +13,7 @@ from ppocr_region_events import region_line
 
 class Worker:
     supports_region_events = True
+    supports_translation_scope = True
 
     def __init__(self, pipeline, policy=None):
         self.pipeline = pipeline
@@ -23,14 +24,14 @@ class Worker:
             from ppocr_stage_profiler import StageProfiler
             self.profiler = StageProfiler(pipeline)
 
-    def ocr(self, image, on_region=None):
+    def ocr(self, image, on_region=None, scope="normal"):
         rgb = np.asarray(image)
         ready = {}
         def completed(index, region):
             line = region_line(index, region, rgb)
             ready[index] = line
             if self.policy is not None:
-                self.policy.apply([line])
+                self.policy.apply([line], scope)
             if on_region is not None and line.get("translation_allowed") is True:
                 on_region(line)
         with self.lock:
@@ -41,7 +42,7 @@ class Worker:
                 result["ocr_stage_profile"] = self.profiler.snapshot()
         lines = [ready[i] for i in range(len(result["regions"]))]
         if self.policy is not None:
-            self.policy.apply(lines)
+            self.policy.apply(lines, scope)
         # Reuse the project's validated wire envelope, identifying PP-OCR explicitly.
         result.update(schema="gocr.worker.v1", engine="ppocr", width=1280, height=720,
                       lines=lines, recognizer=self.pipeline.engines.model_name)

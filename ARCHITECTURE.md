@@ -1,5 +1,11 @@
 # OCR architecture boundaries
 
+Mobile OSD settings run in the existing persistent TV controller, not in capture.
+The LAN HTTP endpoint authenticates phones using a one-use TV PIN and writes
+the existing layers JSON. The watcher applies it to its background overlay.
+Only translation scope crosses the frame RPC; Orange changes admission policy,
+never OCR arithmetic. See `docs/osd-mobile-settings.md`.
+
 Existing PicCap selects the RGB 1280×720 frame. Capture scheduler/settings/API
 belong to the separate hyperion-webos repository and are not replaced by GOCR.
 

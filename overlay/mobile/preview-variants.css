@@ -1,0 +1,84 @@
+body[data-view=settings]{
+  --page:#f4f2ed;
+  --surface:#fff;
+  --line:#dedfd8;
+  --ink:#273328;
+  --muted:#748173;
+  --accent:#426a47;
+  --accent-ink:#fff
+}
+body[data-view=settings] .phone{
+  max-width:480px
+}
+body[data-view=settings] .card{
+  border-radius:14px;
+  padding:16px
+}
+body[data-view=settings] .section-tabs{
+  display:none
+}
+body[data-view=settings] .scene{
+  height:95px
+}
+body[data-view=settings] .dialogue{
+  top:26px;
+  height:42px
+}
+body[data-view=settings] .preview-values{
+  display:none
+}
+body[data-view=settings] .field{
+  margin:14px 0
+}
+body[data-view=settings] h2{
+  font-size:19px
+}
+body[data-view=panel]{
+  --page:#161522;
+  --surface:#242235;
+  --line:#3a374e;
+  --ink:#f1eefb;
+  --muted:#ada6c3;
+  --accent:#c2b3fa;
+  --accent-ink:#2c2348
+}
+body[data-view=panel] .section-tabs{
+  display:none
+}
+body[data-view=panel] .preview{
+  position:sticky;
+  top:12px;
+  z-index:2;
+  box-shadow:0 12px 30px #0b081c55
+}
+body[data-view=panel] .scene{
+  height:190px
+}
+body[data-view=panel] .setting-section{
+  border-radius:16px
+}
+body[data-view=panel] .phone{
+  max-width:980px
+}
+@media(min-width:760px){
+  body[data-view=panel] #controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    align-items:start
+  }
+  body[data-view=panel] .preview{
+    grid-column:1;
+    grid-row:1;
+    top:24px
+  }
+  body[data-view=panel] .settings-grid{
+    grid-column:2
+  }
+  body[data-view=panel] footer{
+    grid-column:1 / 3
+  }
+  body[data-view=panel] .scene{
+    height:240px
+  }
+}

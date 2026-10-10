@@ -11,6 +11,8 @@
     <p class="eyebrow">GAME TRANSLATOR</p>
     <h1>Источники перевода</h1>
     <p class="intro">Выберите HDMI и приложения, в которых нужен перевод.</p>
+    <button id="pair-phone" type="button">Подключить телефон · настройки OSD</button>
+    <section id="phone-pairing" hidden aria-live="polite"></section>
     <form id="settings">
       <div class="inputs">
         <label><span>HDMI 1</span><input type="checkbox" value="com.webos.app.hdmi1" disabled></label>
@@ -42,5 +44,7 @@
   </main>
   <script src="app-picker.js"></script>
   <script src="menu.js"></script>
+  <script src="menu-key.js"></script>
+  <script src="mobile-pairing.js"></script>
 </body>
 </html>

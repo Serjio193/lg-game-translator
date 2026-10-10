@@ -78,6 +78,9 @@ function poll() {
   request.on('error', function () { finish(false); });
 }
 
-exports.start = function () { catalog.start(); publish(false); poll(); setInterval(poll, 2000); };
+exports.start = function () {
+  var mobile = require('./mobile-server').start({policyChanged:function () {publish(false);}});
+  catalog.start(mobile); publish(false); poll(); setInterval(poll, 2000);
+};
 exports.allowed = function () { return active; };
 exports.provider = function () { return provider; };

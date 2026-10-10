@@ -3,6 +3,8 @@
 var http = require('http');
 var execFile = require('child_process').execFile;
 var icons = require('./app-icon');
+var fs = require('fs');
+var auth = require('./mobile-auth');
 var EXCLUDED = ['com.serjio193.lggametranslator.settings', 'com.serjio193.lggametranslator.overlay',
   'com.webos.app.home', 'com.webos.app.inputcommon', 'com.webos.app.screensaver',
   'com.webos.app.tvhotkey', 'com.webos.app.voice', 'com.webos.app.welcomewizard'];
@@ -42,12 +44,26 @@ function load(callback, refresh) {
     });
 }
 
-exports.start = function () {
+exports.start = function (mobile) {
   if (server) return;
   server = http.createServer(function (request, response) {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Cache-Control', 'no-store');
     response.setHeader('Content-Type', 'application/json; charset=utf-8');
+    if (request.url === '/pairing' && mobile) {
+      response.setHeader('Access-Control-Allow-Headers', 'X-OSD-Menu-Key');
+      response.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+      if (request.method === 'OPTIONS') { response.end(); return; }
+      var key;
+      try { key = fs.readFileSync('/media/developer/game-translator-mobile-menu.key', 'utf8').trim(); }
+      catch (error) { key = ''; }
+      if (request.method !== 'POST' || !auth.equal(key, request.headers['x-osd-menu-key'])) {
+        response.statusCode = 403; response.end('{"error":"Подключение разрешено только из меню ТВ"}'); return;
+      }
+      try { response.end(JSON.stringify(mobile.pairing())); }
+      catch (error) { response.statusCode = 503; response.end(JSON.stringify({error:error.message})); }
+      return;
+    }
     if (request.method !== 'GET' || ['/apps', '/apps?refresh=1'].indexOf(request.url) < 0) {
       response.statusCode = 404; response.end('{"error":"Not found"}'); return;
     }

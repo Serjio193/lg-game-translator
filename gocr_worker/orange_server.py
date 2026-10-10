@@ -83,6 +83,12 @@ def make_handler(worker, token):
                 self.wfile.write(f"{len(raw):x}\r\n".encode()+raw+b"\r\n")
                 self.wfile.flush()
             try:
+                scope = self.headers.get("X-PP-OCR-Policy", "normal")
+                if scope not in ("normal", "all"):
+                    return self.reject(400, "invalid translation scope")
+                if scope != "normal" and not getattr(worker, "supports_translation_scope", False):
+                    return self.reject(400, "translation scope unsupported")
+                options = {"scope": scope} if getattr(worker, "supports_translation_scope", False) else {}
                 size = int(self.headers.get("Content-Length", "0"))
                 expected_size = HEADER.size+WIDTH*HEIGHT*3
                 encoding = self.headers.get("Content-Encoding", "identity")
@@ -115,9 +121,10 @@ def make_handler(worker, token):
                     self.end_headers()
                     streaming = True
                     result = worker.ocr(image, on_region=lambda line: event(
-                        {"event": "region", **context, "line": line}))
+                        {"event": "region", **context, "line": line}), **options)
                 else:
-                    result = worker.ocr(image)
+                    result = worker.ocr(image, **options)
+                result["translation_scope"] = scope
                 result.update(sequence=sequence, capture_ts=captured, frame_sha256=frame_hash,
                               execution_location="orange", experimental=True)
                 result["timings_ms"].update(frame_decode=decode_ms,

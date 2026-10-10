@@ -34,6 +34,17 @@ def main():
     assert not low["translation_allowed"]
     policy.apply([title])
     assert not title["translation_allowed"], "Heading requires description in same panel"
+    item = line("Gear", body_box)
+    policy.apply([item], "all")
+    assert item["translation_allowed"]
+    policy.apply([item])
+    assert not item["translation_allowed"], "Normal scope must reject single-word items"
+    policy.apply([low], "all")
+    assert not low["translation_allowed"], "All scope must preserve OCR quality gate"
+    for text in ("[button]", "123", "Русский текст"):
+        invalid = line(text, body_box)
+        policy.apply([invalid], "all")
+        assert not invalid["translation_allowed"], text
     print("PASS: six labels rejected; description and short sentence accepted; panel title gated; low confidence rejected")
 
 

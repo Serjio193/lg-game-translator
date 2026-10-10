@@ -115,3 +115,11 @@ postprocess работает после tensor decode, не управляет c
 - `overlay/runtime-control.js`, `app-catalog.js`, `app-icon.js`: existing source
   admission plus loopback-only installed application catalogue adapted from
   AmbiSun; `deployment/app-menu/install-controller.sh` applies the controller kit.
+
+- `overlay/mobile/`: телефонное HTML-меню «Пульт» и альтернативные demo layouts.
+- `overlay/mobile-server.js`, `mobile-auth.js`, `mobile-store.js`, `qr-url.js`:
+  LAN web server в существующем контроллере OSD, PIN pairing, сохранение layers.
+- `overlay/manual-style.js`: независимое ручное оформление текста/заливки.
+- `menu/mobile-pairing.js`, `deployment/mobile-osd/`, `scripts/package-mobile-osd.py`:
+  подключение телефона на ТВ и подготовка комплекта без замены watcher/PicCap.
+- `docs/osd-mobile-settings.md`: API, установка, проверки и границы live proof.

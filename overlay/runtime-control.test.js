@@ -10,6 +10,7 @@ var context = {exports: {}, Date: {now: function () { return 10000; }}, console:
   require: function (name) {
     if (name === 'fs') return {writeFileSync: function (path, value) { state = value; }, renameSync: function () {}};
     if (name === './app-catalog') return {start: function () {}};
+    if (name === './mobile-server') return {start: function () {return {};}};
     if (name === 'child_process') return {execFile: function (path, args, options, callback) {
       callback(null, JSON.stringify({returnValue: true, appId: foreground}));
     }};

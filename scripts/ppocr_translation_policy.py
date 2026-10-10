@@ -1,5 +1,6 @@
 """Use the existing PicCap C policy and panel-heading admission rules."""
 import ctypes as C
+import re
 from pathlib import Path
 
 
@@ -42,7 +43,9 @@ class TranslationPolicy:
             self.lib.ocr_policy_classify_evidence(encoded, average, False, False, C.byref(result))
         return result
 
-    def apply(self, lines):
+    def apply(self, lines, scope="normal"):
+        if scope not in ("normal", "all"):
+            raise ValueError("invalid translation scope")
         candidates = []
         for line in lines:
             rows = line.get("recognition_lines", [])
@@ -51,9 +54,10 @@ class TranslationPolicy:
             average = (sum(r.get("average_confidence", 0)*r.get("ocr_word_count", 0)
                            for r in rows)/words if words else 0)
             policy = self.classify(line["text"], minimum, average, words)
-            row_classes = [self.classify(r["text"], r.get("minimum_confidence", 0),
+            row_policies = [self.classify(r["text"], r.get("minimum_confidence", 0),
                                        r.get("average_confidence", 0), r.get("ocr_word_count", 0))
-                           .classification for r in rows if r["text"]]
+                           for r in rows if r["text"]]
+            row_classes = [result.classification for result in row_policies]
             whole = len(row_classes) > 1 and (1 not in row_classes or policy.classification == 2)
             classification = (policy.classification if whole else
                               2 if row_classes and all(c == 2 for c in row_classes) else
@@ -69,6 +73,17 @@ class TranslationPolicy:
                 "heading_candidate": heading,
                 "reasons": [policy.reasons[i].decode() for i in range(policy.reason_count)]}
             line["translation_allowed"] = classification == 2
+            if scope == "all":
+                blocked = {"truncated_text", "non_english_characters",
+                           "low_or_invalid_confidence", "empty_text"}
+                line["translation_allowed"] = (bool(rows) and bool(policy.word_count)
+                    and not blocked.intersection(line["translation_policy"]["reasons"])
+                    and all(not blocked.intersection(result.reasons[i].decode()
+                        for i in range(result.reason_count)) for result in row_policies)
+                    and bool(self.lib.ocr_policy_has_english_word(
+                        re.sub(r"\[button\]", "", line["text"]).encode())))
+                line["translation_policy"]["user_override"] = "all"
+                continue
             if classification == 2 or heading:
                 candidates.append((line, heading))
         bodies = [line for line, heading in candidates if not heading]

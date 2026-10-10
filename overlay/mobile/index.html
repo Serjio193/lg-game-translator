@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Настройки OSD</title><link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="preview-variants.css"></head>
+<body data-view="pult">
+<div class="design-bar" id="design-bar" hidden>
+  <span>Выбери вид меню</span><div class="designs" role="group" aria-label="Варианты меню">
+    <button data-view="pult" class="selected">1 · Пульт</button>
+    <button data-view="settings">2 · Настройки</button>
+    <button data-view="panel">3 · Панель</button>
+  </div><p>Макет: изменения видны здесь, ТВ не подключён.</p>
+</div>
+<main class="phone">
+  <header><div class="brand"><span class="mark">GT</span><div><small>GAME TRANSLATOR</small><h1>Твой OSD</h1></div></div>
+    <span id="connection" class="badge">Подключение</span></header>
+  <section id="login" class="login card">
+    <span class="kicker">ПОДКЛЮЧЕНИЕ К ТЕЛЕВИЗОРУ</span><h2>Введи PIN с экрана ТВ</h2>
+    <p>Открой в меню телевизора «Подключить телефон». QR-код приведёт сюда, а PIN разрешит менять настройки.</p>
+    <form id="pair-form"><label for="pin">PIN-код</label><input id="pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required>
+      <button class="primary" type="submit">Подключиться</button></form><p id="login-status" role="status"></p>
+  </section>
+  <div id="controls" hidden>
+    <section class="preview card" aria-label="Предпросмотр оформления">
+      <div class="card-heading"><span class="kicker">ОФОРМЛЕНИЕ</span><span class="preview-note">Пример, не снимок ТВ</span></div>
+      <div class="scene"><div class="mountain"></div><div class="tree"></div><div class="dialogue">
+        <span class="original">Ready to explore!</span><span id="sample-cover"></span><span id="sample-text">Готовы к приключениям!</span>
+      </div><span class="scene-label">Предпросмотр</span></div>
+      <div class="preview-values"><span id="height-value">Высота 100%</span><span id="width-value">Ширина 100%</span><span id="grow-value">Заливка +2 px</span></div>
+    </section>
+    <nav class="section-tabs" aria-label="Разделы настроек">
+      <button data-section="cover" class="selected">Заливка</button><button data-section="text">Буквы</button><button data-section="rules">Перевод</button>
+    </nav>
+    <div class="settings-grid">
+      <section class="card setting-section" data-section="cover">
+        <div class="card-heading"><div><span class="kicker">ОРИГИНАЛЬНЫЙ ТЕКСТ</span><h2>Заливка</h2></div>
+          <label class="switch"><span class="sr">Закрашивать оригинал</span><input type="checkbox" data-key="cover" checked><span></span></label></div>
+        <label class="field"><span>Запас вокруг букв <output data-output="coverGrow">2 px</output></span>
+          <input type="range" min="0" max="16" step="1" value="2" data-key="coverGrow" aria-label="Запас заливки"></label>
+        <p class="hint">Расширяет маску или область заливки. Координаты текста остаются прежними.</p>
+        <label class="field"><span>Цвет под буквами</span><select data-key="fillMode"><option value="auto">Брать из игры</option><option value="solid">Выбрать свой</option></select></label>
+        <label class="color-field"><span>Свой фон <small data-color-value="fillColor">#f1d68a</small></span><input type="color" value="#f1d68a" data-key="fillColor" aria-label="Цвет фона"></label>
+        <label class="field"><span>Непрозрачность <output data-output="opacity">100%</output></span><input type="range" min="0" max="100" value="100" data-key="opacity" aria-label="Непрозрачность заливки"></label>
+      </section>
+      <section class="card setting-section" data-section="text">
+        <div class="card-heading"><div><span class="kicker">РУССКИЕ СУБТИТРЫ</span><h2>Буквы</h2></div>
+          <label class="switch"><span class="sr">Показывать перевод</span><input type="checkbox" data-key="text" checked><span></span></label></div>
+        <label class="field"><span>Цвет текста</span><select data-key="textColorMode"><option value="auto">Брать из игры</option><option value="custom">Выбрать свой</option></select></label>
+        <label class="color-field"><span>Свой цвет <small data-color-value="textColor">#15251f</small></span><input type="color" value="#15251f" data-key="textColor" aria-label="Цвет букв"></label>
+        <label class="field"><span>Высота букв <output data-output="fontHeight">100%</output></span><input type="range" min="50" max="200" value="100" data-key="fontHeight" aria-label="Высота букв"></label>
+        <label class="field"><span>Ширина букв <output data-output="fontWidth">100%</output></span><input type="range" min="50" max="200" value="100" data-key="fontWidth" aria-label="Ширина букв"></label>
+        <p class="hint">100% — размер, подобранный по оригиналу. Высота и ширина меняются отдельно.</p>
+      </section>
+      <section class="card setting-section" data-section="rules">
+        <span class="kicker">ЧТО ПЕРЕВОДИТЬ</span><h2>Правила перевода</h2>
+        <label class="choice"><input type="radio" name="scope" value="normal" data-key="translationScope" checked><span><strong>Реплики и описания</strong><small>Обычные правила для игры</small></span></label>
+        <label class="choice"><input type="radio" name="scope" value="all" data-key="translationScope"><span><strong>Все области</strong><small>Также предметы, имена и подписи из одного слова</small></span></label>
+        <p class="hint">Режим действует до переключения обратно. Проверка качества OCR сохраняется.</p>
+        <div class="speech"><div><strong>Озвучка</strong><small>Пока не подключена</small></div><label class="switch"><span class="sr">Озвучка недоступна</span><input type="checkbox" disabled><span></span></label></div>
+      </section>
+    </div>
+    <footer><span id="save-status" role="status">Готово к настройке</span><button id="reset" class="quiet">Сбросить оформление</button><button id="logout" class="quiet">Отключить телефон</button></footer>
+  </div>
+</main><script src="mobile.js"></script>
+</body></html>

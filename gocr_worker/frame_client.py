@@ -53,6 +53,8 @@ class FrameClient:
                 payload, encoding = compressed, "lz4-block"
         encode_ms = (time.perf_counter()-started)*1000
         headers = {"Content-Type": "application/x-gocr-frame", "Content-Encoding": encoding}
+        scope = self.translation_scope()
+        headers["X-PP-OCR-Policy"] = scope
         if on_region is not None:
             headers["Accept"] = "application/x-ndjson"
         if self.token:
@@ -78,6 +80,8 @@ class FrameClient:
                     or result.get("frame_sha256") != frame_hash
                     or not isinstance(result.get("lines"), list)):
                 raise ValueError("Orange changed selected-frame identity")
+            if result.get("translation_scope", "normal") != scope:
+                raise ValueError("Orange changed translation scope")
             for line in result["lines"]:
                 quad_points(line["source_quad"])
                 if not isinstance(line.get("text"), str):
@@ -95,6 +99,15 @@ class FrameClient:
         except Exception:
             self.close()
             raise
+
+    @staticmethod
+    def translation_scope():
+        try:
+            with open("/media/developer/game-translator-layers.json", encoding="utf-8") as stream:
+                value = json.load(stream).get("translationScope", "normal")
+            return "all" if value == "all" else "normal"
+        except (OSError, ValueError, AttributeError):
+            return "normal"
 
     def read_events(self, response, sequence, captured, frame_hash, on_region):
         if response.getheader("Content-Type", "").split(";", 1)[0] != "application/x-ndjson":
