@@ -3,6 +3,8 @@ var assert=require('assert'), settings=require('./layer-settings');
 var defaults=settings.get();
 assert(defaults.cover && defaults.text && defaults.edgeBlur && defaults.pixelated);
 assert.strictEqual(defaults.opacity,100);
+assert.strictEqual(defaults.translationEnabled,false);
+assert.strictEqual(settings.normalize({translationEnabled:true}).translationEnabled,true);
 settings.set({text:false,opacity:37,offsetX:4,fillMode:'solid',fillColor:'#AaBBcc'});
 assert.strictEqual(settings.get().text,false);
 assert.strictEqual(settings.get().fillColor,'#aabbcc');

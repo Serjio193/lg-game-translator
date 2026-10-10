@@ -2,12 +2,12 @@
 var fs=require('fs'),path=require('path'),crypto=require('crypto');
 var layers=require('./layer-settings');
 var KEYS=['cover','text','coverGrow','fillMode','fillColor','opacity','textColorMode','textColor',
-  'fontHeight','fontWidth','translationScope','speechEnabled'];
+  'fontHeight','fontWidth','translationScope','translationEnabled','speechEnabled'];
 function validate(patch) {
   if(!patch||typeof patch!=='object'||Array.isArray(patch)||Object.keys(patch).some(function(k){return KEYS.indexOf(k)<0;})) throw new Error('Неизвестная настройка');
   Object.keys(patch).forEach(function(key) {
     var value=patch[key];
-    if(['cover','text','speechEnabled'].indexOf(key)>=0&&typeof value!=='boolean') throw new Error('Нужен переключатель');
+    if(['cover','text','translationEnabled','speechEnabled'].indexOf(key)>=0&&typeof value!=='boolean') throw new Error('Нужен переключатель');
     if(['coverGrow','opacity','fontHeight','fontWidth'].indexOf(key)>=0) {
       var limits=key==='coverGrow'?[0,16]:key==='opacity'?[0,100]:[50,200];
       if(typeof value!=='number'||!isFinite(value)||Math.floor(value)!==value||value<limits[0]||value>limits[1]) throw new Error('Размер вне диапазона');
@@ -37,7 +37,7 @@ function create(file,changed) {
     fs.mkdirSync(path.dirname(file),{recursive:true});
     try {fs.writeFileSync(temporary,JSON.stringify(next),{mode:384});fs.renameSync(temporary,file);}
     finally {if(fs.existsSync(temporary)) fs.unlinkSync(temporary);}
-    if(changed&&current.settings.translationScope!==next.translationScope) changed();
+    if(changed&&(current.settings.translationScope!==next.translationScope||current.settings.translationEnabled!==next.translationEnabled)) changed();
     return read();
   }};
 }

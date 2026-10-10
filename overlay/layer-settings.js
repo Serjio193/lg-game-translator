@@ -3,12 +3,12 @@
   var defaults={cover:true,text:true,edgeBlur:true,pixelated:true,opacity:100,
     offsetX:0,offsetY:0,fillMode:'auto',fillColor:'#ffffff',redBackground:false,probe:'off',
     coverGrow:2,textColorMode:'auto',textColor:'#ffffff',fontHeight:100,fontWidth:100,
-    translationScope:'normal',speechEnabled:false};
+    translationScope:'normal',translationEnabled:false,speechEnabled:false};
   var current=normalize({});
   function normalize(input) {
     input=input || {};
     var result={};
-    ['cover','text','edgeBlur','pixelated','redBackground'].forEach(function (key) {
+    ['cover','text','edgeBlur','pixelated','redBackground','translationEnabled'].forEach(function (key) {
       result[key]=typeof input[key]==='boolean' ? input[key] : defaults[key];
     });
     ['opacity','offsetX','offsetY','coverGrow','fontHeight','fontWidth'].forEach(function (key) {

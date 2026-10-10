@@ -2,7 +2,7 @@
   'use strict';
   var preview = /(?:\?|&)preview=1(?:&|$)/.test(location.search);
   var state = {cover:true,text:true,coverGrow:2,fillMode:'auto',fillColor:'#f1d68a',opacity:100,
-    textColorMode:'auto',textColor:'#15251f',fontHeight:100,fontWidth:100,translationScope:'normal'};
+    textColorMode:'auto',textColor:'#15251f',fontHeight:100,fontWidth:100,translationScope:'normal',translationEnabled:false};
   var revision = 0, dirty = {}, timer = null, saving = false, section = 'cover';
   var controls = Array.prototype.slice.call(document.querySelectorAll('[data-key]'));
   var status = document.getElementById('save-status');

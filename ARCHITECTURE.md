@@ -1,9 +1,13 @@
 # OCR architecture boundaries
 
 Mobile OSD settings run in the existing persistent TV controller, not in capture.
+Translation admission is now the persistent local `translationEnabled` switch,
+default OFF, changed by the TV menu/pult or PIN-authenticated phone. HDMI/app
+allowlists and Russian-idle settings are legacy API fields, not admission gates.
+Foreground identity only invalidates old-source work and excludes our own UI.
 The LAN HTTP endpoint authenticates phones using a one-use TV PIN and writes
 the existing layers JSON. The watcher applies it to its background overlay.
-Only translation scope crosses the frame RPC; Orange changes admission policy,
+Translation scope crosses the frame RPC; Orange changes admission policy,
 never OCR arithmetic. See `docs/osd-mobile-settings.md`.
 
 The same PIN-authenticated phone endpoint proxies provider selection and Google

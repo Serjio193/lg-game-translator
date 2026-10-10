@@ -1,4 +1,4 @@
-// HDMI/application admission controller. PicCap capture remains independent.
+// Manual translation admission. Source identity invalidates late work, never starts it.
 'use strict';
 var fs = require('fs');
 var http = require('http');
@@ -8,14 +8,18 @@ var provider = 'madlad';
 var host = '192.168.1.11';
 var port = 8765;
 var busy = false;
-var russianIdle = true;
-var languageCheck = 60;
+var russianIdle = false;
+var languageCheck = 300;
 var foregroundId = '';
 var sourceEpoch = Date.now();
 var path = '/tmp/game-translator-control.state';
 var catalog = require('./app-catalog');
-var EXCLUDED = ['com.serjio193.lggametranslator.settings', 'com.serjio193.lggametranslator.overlay',
-  'com.webos.app.home', 'com.webos.app.inputcommon', 'com.webos.app.screensaver'];
+var EXCLUDED = ['com.serjio193.lggametranslator.settings', 'com.serjio193.lggametranslator.overlay'];
+
+function manuallyEnabled() {
+  try {return JSON.parse(fs.readFileSync('/media/developer/game-translator-layers.json','utf8')).translationEnabled===true;}
+  catch(error) {return false;}
+}
 
 function publish(value) {
   if (value === true && !active) sourceEpoch = Math.max(sourceEpoch + 1, Date.now());
@@ -47,16 +51,12 @@ function poll() {
       var settings, changed = false;
       try {
         settings = JSON.parse(body);
-        if (response.statusCode !== 200 || !Array.isArray(settings.hdmi_inputs)) throw new Error();
-        if (settings.applications !== undefined && !Array.isArray(settings.applications)) throw new Error();
+        if (response.statusCode !== 200) throw new Error();
         var address = /^http:\/\/([a-zA-Z0-9.-]+):(\d+)$/.exec(settings.translation_server);
         if (!address || ['madlad', 'google'].indexOf(settings.provider) < 0) throw new Error();
         changed = provider !== settings.provider || host !== address[1] || port !== Number(address[2]);
         provider = settings.provider;
         host = address[1]; port = Number(address[2]);
-        russianIdle = settings.russian_idle !== false;
-        languageCheck = [60, 120, 300].indexOf(settings.language_check_seconds) >= 0
-          ? settings.language_check_seconds : 60;
       } catch (error) { finish(false); return; }
       execFile('/usr/bin/luna-send', ['-n', '1', '-f',
         'luna://com.webos.applicationManager/getForegroundAppInfo', '{}'], {timeout: 1500},
@@ -65,8 +65,7 @@ function poll() {
             var foreground = JSON.parse(stdout);
             var id = foreground.appId;
             var valid = typeof id === 'string' && /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(id);
-            var selected = valid && EXCLUDED.indexOf(id) < 0 &&
-              (settings.hdmi_inputs.indexOf(id) >= 0 || (settings.applications || []).indexOf(id) >= 0);
+            var selected = manuallyEnabled() && valid && EXCLUDED.indexOf(id) < 0;
             var sourceChanged = foregroundId !== '' && foregroundId !== (valid ? id : 'none');
             foregroundId = valid ? id : 'none';
             finish(!changed && !sourceChanged && !error && foreground.returnValue === true && selected);

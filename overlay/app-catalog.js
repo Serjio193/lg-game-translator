@@ -50,6 +50,9 @@ exports.start = function (mobile) {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Cache-Control', 'no-store');
     response.setHeader('Content-Type', 'application/json; charset=utf-8');
+    if (request.url === '/translation-toggle' && mobile) {
+      require('./manual-menu-route').handle(request,response,mobile.store); return;
+    }
     if (request.url === '/translator-settings') {
       require('./translator-menu-route').handle(request,response); return;
     }

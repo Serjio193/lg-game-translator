@@ -61,6 +61,10 @@ async function main() {
     assert.strictEqual((await call('/api/settings','PATCH',{revision:value.revision,patch:{speechEnabled:true}})).status,400);
     assert.strictEqual((await call('/api/settings','PATCH',{revision:value.revision,patch:{unknown:1}})).status,400);
     assert.strictEqual((await call('/api/settings','PATCH',{revision:value.revision,patch:{fontHeight:999}})).status,400);
+    response=await call('/api/settings','PATCH',{revision:value.revision,patch:{translationEnabled:true}});
+    assert.strictEqual(response.status,200);value=await response.json();
+    assert.strictEqual(value.settings.translationEnabled,true);assert.strictEqual(changed,2);
+    assert.strictEqual((await call('/api/settings','PATCH',{revision:value.revision,patch:{translationEnabled:'yes'}})).status,400);
     assert.strictEqual((await call('/api/logout','POST',{})).status,200);
     assert.strictEqual((await call('/api/settings')).status,401);
     console.log('PIN expiry/lock/single-use, anonymous denial, CSRF, persistence, revision and speech gate: PASS');

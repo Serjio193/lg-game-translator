@@ -126,3 +126,5 @@ postprocess работает после tensor decode, не управляет c
 
 - `translator/google_budget.py`, `google_vault.py`, `google_control.py`: durable Google character reservations, encrypted credential storage and protected provisioning/status.
 - `overlay/translator-control.js`, `translator-menu-route.js`, `mobile/provider-settings.*`, `menu/google-settings.js`: TV/phone provider selection, encrypted key entry and live budget display; see `docs/google-budget-osd.md`.
+
+- `overlay/manual-menu-route.js`, `menu/manual-control.js`: authenticated local manual translation switch; `runtime-control.js` uses it instead of HDMI/app/language admission. See `docs/manual-translation-control.md`.
