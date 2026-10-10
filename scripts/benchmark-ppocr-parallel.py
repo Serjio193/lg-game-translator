@@ -7,7 +7,6 @@ import statistics
 import sys
 import threading
 
-from ppocr_crop_cache import ExactCropCache
 from ppocr_frame_replay import Detector, Pipeline
 from ppocr_recognizer_pool import RecognizerPool, close_engine, pinned_engine
 
@@ -95,16 +94,9 @@ def main():
                     result = (serial if label == "serial" else parallel).ocr(image)
                     assert result["regions"] == base["regions"], "Full frame recognition differs"
                     samples[label].append(result)
-            # Fresh cache and exact repeated image with the actual worker path.
-            cache = ExactCropCache(pool)
-            cached = Pipeline(detector, cache, pool)
-            first = cached.ocr(image)
-            repeated = cached.ocr(image)
-            assert first["regions"] == repeated["regions"] == base["regions"]
             report["frames"].append({"frame": path.name, "exact": True, "samples": samples,
                 "median_ms": {k: statistics.median(r["timings_ms"]["full_ocr"] for r in v)
-                              for k, v in samples.items()},
-                "cache_first": first, "cache_repeat": repeated})
+                              for k, v in samples.items()}})
             print(path.name, report["frames"][-1]["median_ms"], flush=True)
         report["workers"] = pool.worker_stats()
     finally:

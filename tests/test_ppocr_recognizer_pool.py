@@ -5,7 +5,6 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/"scripts"))
 from ppocr_recognizer_pool import RecognizerPool
-from ppocr_crop_cache import ExactCropCache
 
 
 class Engine:
@@ -48,38 +47,14 @@ class PoolTests(unittest.TestCase):
             pool.close()
         self.assertFalse(any(t.is_alive() for t in pool.threads))
 
-    def test_duplicate_inflight_crops_share_success_and_exception(self):
-        class SlowEngine(Engine):
-            def recognize(self, *args):
-                entered.set()
-                release.wait(timeout=5)
-                return super().recognize(*args)
-        pool = RecognizerPool(SlowEngine)
-        cache = ExactCropCache(pool)
+    def test_repeated_pixels_are_recognized_for_each_job(self):
+        pool = RecognizerPool(Engine)
         try:
-            for pixels in (b"a", b"!"):
-                entered, release = threading.Event(), threading.Event()
-                first = pool.submit(cache.recognize, 4, pixels, 1, 1)
-                self.assertTrue(entered.wait(timeout=5))
-                second = pool.submit(cache.recognize, 4, pixels, 1, 1)
-                # A third job waits until the duplicate has entered the cache wait path.
-                import time
-                deadline = time.monotonic()+5
-                target = 1 if pixels == b"a" else 2
-                while cache.cache_stats()["shared_waits"] < target and time.monotonic() < deadline:
-                    time.sleep(0.001)
-                self.assertEqual(cache.cache_stats()["shared_waits"], target)
-                release.set()
-                if pixels == b"!":
-                    for job in (first, second):
-                        with self.assertRaises(RuntimeError):
-                            job.result(timeout=5)
-                else:
-                    self.assertEqual(first.result(timeout=5), second.result(timeout=5))
-            self.assertEqual(cache.cache_stats()["recognize_calls"], 2)
-            self.assertFalse(cache.pending)
+            jobs = [pool.submit(pool.recognize, 4, b"a", 1, 1) for _ in range(10)]
+            results = [job.result(timeout=5) for job in jobs]
+            self.assertTrue(all(result == results[0] for result in results))
+            self.assertEqual(sum(pool.worker_stats()["completed_jobs"]), 10)
         finally:
-            release.set()
             pool.close()
 
     def test_initialization_failure_closes_other_workers(self):

@@ -87,9 +87,6 @@ def main():
         engines = Engines(args.runtime / "assets")
     else:
         raise ValueError("Supported recognizer workers: 1 or 3")
-    if os.environ.get("PP_OCR_EXACT_CROP_CACHE") == "1":
-        from ppocr_crop_cache import ExactCropCache
-        engines = ExactCropCache(engines)
     worker = Worker(Pipeline(detector, engines, pool), policy)
     try:
         with ThreadingHTTPServer((args.bind, args.port), make_handler(worker, token)) as server:

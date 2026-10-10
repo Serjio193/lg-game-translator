@@ -1,5 +1,8 @@
 # Exact-pixel PP-OCR crop cache — 2026-10-10
 
+Historical experiment: removed from code and the deployed service on 2026-10-10
+at the user's request. The measurements below describe the former implementation.
+
 ## Contract
 
 Per-engine RAM LRU cache wraps existing Engines.recognize; no persistent database and no translated-text reuse. Key: engine model name/directory/layout, recognition mode, width/height, SHA256 of EXACT immutable grayscale input bytes. Hash hit also compares complete stored bytes, protecting against collisions. Cache instance is tied to one loaded engine/process/decoder configuration; restart clears it. Runtime model-identity change clears entries. Recognition is deterministic on tested inputs. No fuzzy matching, downsampling, image-difference tolerance, text substitution or geometry anchoring added.

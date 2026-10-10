@@ -106,8 +106,6 @@ class Pipeline:
         return result
 
     def ocr(self, image, on_region=None):
-        stats = getattr(self.engines, "cache_stats", None)
-        cache_before = stats() if stats is not None else None
         start = time.perf_counter()
         gray = gray_frame(image)
         converted = time.perf_counter()
@@ -157,9 +155,4 @@ class Pipeline:
             "full_ocr": (finished - start) * 1000}}
         if self.pool is not None:
             result["recognition_workers"] = self.pool.worker_stats()
-        if cache_before is not None:
-            cache_after = stats()
-            result["crop_cache"] = {**cache_after, "frame": {
-                k: cache_after[k]-cache_before[k]
-                for k in ("hits", "misses", "recognize_calls", "evictions", "shared_waits")}}
         return result

@@ -52,16 +52,16 @@ User accepted native class-major CTC as the default. Keep original RKNN models/b
 
 Capture-side patch is archived as patches/piccap-ocr/fresh-frame-demand.patch. Apply only against the documented current PicCap source snapshot with LF-normalized files, using git apply --unidiff-zero; patch reverse-check passed on that snapshot. It does not snapshot or commit unrelated changes in the external PicCap checkout.
 
-2026-10-10: default PP_OCR_EXACT_CROP_CACHE=1 enables bounded exact-grayscale
-crop RAM cache (16 MiB payload, 256 entries). Text/confidence/TSV reused only
-when mode, shape, loaded model identity and ALL input bytes match. New pixels,
-empty/error responses and appearance/policy updates follow normal processing.
-Rollback: remove setting and restart Orange unit. Gates/live evidence:
-`docs/evidence/ppocr-crop-cache-20261010/README.md`.
+2026-10-10: exact-pixel OCR crop cache removed from the default service and
+code at the user's request. Every queued crop runs recognition; the translation
+database cache by source text remains. Crop-cache evidence is historical.
+Deployed and restarted on Orange: authenticated `/v1/health` HTTP 200;
+saved Emergency Guard frame returned 18 regions with three workers,
+`crop_cache` absent. Relevant PP-OCR/live regression suites: 33 tests passed.
 
 2026-10-10: default PP_OCR_RECOGNIZER_WORKERS=3 uses one frame queue and three
-exclusive persistent contexts on NPU cores 0/1/2. Shared exact cache coalesces
-in-flight duplicates. PP_OCR_CORE_LIBRARY points to the native wrapper around
+exclusive persistent contexts on NPU cores 0/1/2. One queue assigns each job
+to exactly one worker. PP_OCR_CORE_LIBRARY points to the native wrapper around
 the original unchanged bridge. Raw-output/TSV and complete endpoint gates pass;
 uncached saved-frame OCR improves 1.76–2.03x. Rollback: workers=1 and restart.
 Build, memory, timings and deployment evidence:
