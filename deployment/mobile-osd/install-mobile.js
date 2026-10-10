@@ -19,7 +19,8 @@ function copy(source,target) {fs.mkdirSync(path.dirname(target),{recursive:true}
 if(!fs.existsSync(path.join(app,'translation-watcher.js'))||!fs.existsSync(path.join(menu,'mobile-pairing.js'))) throw new Error('Install the unified OSD package first');
 modules.forEach(function(name){if(!fs.existsSync(path.join(staging,name)))throw new Error('Incomplete bundle: '+name);});
 if(!fs.existsSync(path.join(staging,'relay/frame_client.py')))throw new Error('Missing frame client');
-var relayModules=['frame_client.py','frame_pipeline.py','translation_client.py','live_translation.py',
+var relayModules=['source_admission.py','tv_server.py','osd_publisher.py',
+  'frame_client.py','frame_pipeline.py','translation_client.py','live_translation.py',
   'sentence_preview.py','sentence_boundaries.py'];
 if(fs.existsSync(relay))relayModules.forEach(function(name){
   if(!fs.existsSync(path.join(staging,'relay',name)))throw new Error('Missing relay module: '+name);

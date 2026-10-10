@@ -25,6 +25,7 @@ class LiveTranslations:
         self.running, self.groups, self.entries = {}, {}, []
         self.session, self.closed = None, False
         self.sentences = SentencePreviews()
+        self.region_frame, self.region_lines = None, {}
 
     def _current(self, session):
         try:
@@ -32,6 +33,16 @@ class LiveTranslations:
             return True
         except (ValueError, OSError):
             return False
+
+    def observe_region(self, context, line):
+        """Feed complete OCR blocks immediately, counting each capture only once."""
+        with self.lock:
+            identity = (tuple(context['source_session']), context['sequence'], context['capture_ts'])
+            if identity != self.region_frame:
+                self.region_frame, self.region_lines = identity, {}
+            self.region_lines[line['line_id']] = line
+            self.observe({**context, 'engine': 'ppocr', 'partial': True,
+                          'lines': list(self.region_lines.values())})
 
     def observe(self, result):
         """Only OCR observations advance stability; translations never do."""

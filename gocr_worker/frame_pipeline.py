@@ -46,15 +46,21 @@ class FramePipeline:
             self.full = FullGocrWorker(assets,threads,detector_threads=detector_threads,
                                       recognizer_threads=recognizer_threads)
 
-    def process(self, image, sequence=0, capture_ts=None, *, ocr_only=False):
+    def process(self, image, sequence=0, capture_ts=None, *, ocr_only=False, on_region=None):
         if image.size != (1280, 720) or image.mode != "RGB":
             raise ValueError("GOCR needs the existing selected RGB 1280x720 frame")
         started = time.perf_counter()
+        region_times = []
+        def region_ready(line):
+            region_times.append((time.perf_counter()-started)*1000)
+            on_region(line)
         with self.lock:
             if ocr_only:
                 if self.mode != "ORANGE_FULL":
                     raise ValueError("Deferred translations require ORANGE_FULL")
-                result, sent = self.frame_client.ocr(image, sequence, capture_ts)
+                result, sent = (self.frame_client.ocr(image, sequence, capture_ts, on_region=region_ready)
+                                if on_region is not None else
+                                self.frame_client.ocr(image, sequence, capture_ts))
             elif self.mode in ("TV_FULL", "ORANGE_FULL"):
                 early = {}
                 submitted = []
@@ -131,6 +137,8 @@ class FramePipeline:
                               "raw_piece_count":det.get("raw_piece_count"),
                               "raw_group_count":det.get("raw_group_count")}}
         stages = result["timings_ms"]
+        if region_times:
+            stages.update(early_region_count=len(region_times), first_region_ready=region_times[0])
         stages.update({"recognizer": sum(line["timings_ms"].get("recognizer", 0) for line in result["lines"]),
                        "network": stages.get("frame_network", 0)+sum(line["timings_ms"].get("network", 0) + max(0,
                            line.get("translation", {}).get("request_ms", 0) -

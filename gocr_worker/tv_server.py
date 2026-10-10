@@ -41,6 +41,7 @@ class FrameServer(socketserver.UnixStreamServer):
 class FrameHandler(socketserver.BaseRequestHandler):
     def handle(self):
         self.request.settimeout(30)
+        live, session = None, None
         try:
             image, sequence, captured = receive_frame(self.request)
             accepted_ms = time.monotonic()*1000
@@ -51,7 +52,12 @@ class FrameHandler(socketserver.BaseRequestHandler):
                 require_current(session)
             live = getattr(self.server, "live_translations", None)
             if live is not None:
-                result = self.server.pipeline.process(image, sequence, captured, ocr_only=True)
+                context = {"source_session": list(session), "sequence": sequence, "capture_ts": captured}
+                def ready(line):
+                    require_current(session)
+                    live.observe_region(context, line)
+                result = self.server.pipeline.process(image, sequence, captured, ocr_only=True,
+                                                      on_region=ready)
             else:
                 result = self.server.pipeline.process(image, sequence, captured)
             if guarded:
@@ -71,6 +77,12 @@ class FrameHandler(socketserver.BaseRequestHandler):
                 self.server.osd_publisher.publish(result)
         except Exception as error:
             LOG.exception("selected GOCR frame failed")
+            if live is not None and session is not None:
+                try:
+                    live.observe({"engine": "ppocr", "source_session": list(session),
+                                  "sequence": sequence, "capture_ts": captured, "lines": []})
+                except (OSError, ValueError):
+                    LOG.warning("Could not clear failed partial frame")
             result = {"schema": "gocr.worker.error.v1", "error": type(error).__name__}
         send_result(self.request, result)
 

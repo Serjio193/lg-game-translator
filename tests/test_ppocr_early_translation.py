@@ -85,3 +85,47 @@ class EarlyTranslationTests(unittest.TestCase):
             self.assertEqual(result["lines"][0]["translation"]["translation"], "New text.")
         finally:
             pipeline.close()
+
+    def test_ocr_only_stream_does_not_wait_for_other_regions(self):
+        from tempfile import TemporaryDirectory
+        from gocr_worker.live_translation import LiveTranslations
+        from gocr_worker.osd_publisher import OsdPublisher
+        translated = threading.Event()
+        class PreviewClient:
+            def preview(self, text, **metadata):
+                translated.set()
+                return {'provider': 'madlad', 'translation': 'За мной!',
+                        'stage': 'preliminary', 'engine': 'bergamot'}
+        class Worker:
+            supports_region_events = True
+            def ocr(self, image, on_region=None):
+                body = {**line(0, 'Follow me!'), 'appearance':
+                        {'box': {'x': 0, 'y': 0, 'width': 10, 'height': 10}, 'lines': 1}}
+                on_region(body)
+                if not translated.wait(3):
+                    raise AssertionError('Live preview waited for remaining OCR')
+                return {'schema': 'gocr.worker.v1', 'engine': 'ppocr', 'width': 1280,
+                        'height': 720, 'lines': [body], 'timings_ms': {}}
+        http = ThreadingHTTPServer(('127.0.0.1', 0), make_handler(Worker(), 'test-token'))
+        thread = threading.Thread(target=http.serve_forever)
+        thread.start()
+        client = FrameClient(f'http://127.0.0.1:{http.server_port}', 'test-token')
+        pipeline = FramePipeline(Path('unused'), 'ORANGE_FULL', frame_client=client,
+                                 translator=object())
+        session = ('hdmi', 'madlad', 'localhost', '8765', '1')
+        try:
+            with TemporaryDirectory() as folder:
+                live = LiveTranslations(OsdPublisher(Path(folder)),
+                        client_factory=lambda _: PreviewClient(), guard=lambda _: None)
+                try:
+                    context = {'sequence': 1, 'capture_ts': 2, 'source_session': session}
+                    result = pipeline.process(Image.new('RGB', (1280, 720)), 1, 2,
+                            ocr_only=True, on_region=lambda row: live.observe_region(context, row))
+                    live.observe({**result, 'source_session': session})
+                    self.assertTrue(translated.is_set())
+                    self.assertEqual(live.publisher.tracks[0]['count'], 1)
+                finally:
+                    live.close()
+        finally:
+            pipeline.close(); client.close()
+            http.shutdown(); http.server_close(); thread.join()

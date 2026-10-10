@@ -222,5 +222,51 @@ class LiveTests(unittest.TestCase):
         self.manager.observe(frame(2,('Follow us!',)));self.preview_visible('Follow us!')
         self.assertEqual(self.client.previews, ['Follow me!', 'Follow us!'])
 
+    def test_early_region_publishes_preview_before_final_frame(self):
+        context = {'sequence': 1, 'capture_ts': 10, 'source_session': SESSION}
+        first = frame(1)['lines'][0]
+        self.manager.observe_region(context, {**first, 'line_id': '0'})
+        self.preview_visible('Follow me!')
+        self.assertEqual(self.publisher.tracks[0]['count'], 1)
+        self.manager.observe({**frame(1), 'capture_ts': 10})
+        self.assertEqual(self.publisher.tracks[0]['count'], 1)
+        self.assertEqual(self.client.previews, ['Follow me!'])
+        self.assertEqual(self.client.finals, [])
+
+    def test_multiple_early_events_do_not_count_as_multiple_frames(self):
+        for sequence in (1, 2, 3):
+            context = {'sequence': sequence, 'capture_ts': sequence * 10, 'source_session': SESSION}
+            lines = frame(sequence, ('Follow me!', 'Take care!'))['lines']
+            for i, line in enumerate(lines):
+                self.manager.observe_region(context, {**line, 'line_id': str(i)})
+            self.manager.observe({**frame(sequence, ('Follow me!', 'Take care!')),
+                                  'capture_ts': sequence * 10})
+            self.assertEqual([t['count'] for t in self.publisher.tracks], [sequence, sequence])
+        self.publisher.wait(lambda entries, responses: len(responses) == 2 and
+                            all(r.get('stage') == 'final' for r in responses.values()))
+        self.assertEqual(sorted(self.client.finals), ['Follow me!', 'Take care!'])
+
+    def test_partial_frame_preserves_unfinished_regions_without_confirming_them(self):
+        self.manager.observe({**frame(1, ('Follow me!', 'Take care!')), 'capture_ts': 10})
+        self.manager.observe_region({'sequence': 2, 'capture_ts': 20, 'source_session': SESSION},
+                                   {**frame(2)['lines'][0], 'line_id': '0'})
+        self.assertEqual([t['count'] for t in self.publisher.tracks], [2, 1])
+        self.manager.observe({**frame(2), 'capture_ts': 20})
+        self.assertEqual(len(self.publisher.tracks), 1)
+        self.assertEqual(self.publisher.tracks[0]['count'], 2)
+
+    def test_rejected_final_removes_partial_region_and_blocks_late_preview(self):
+        self.client.block_preview = True
+        context = {'sequence': 1, 'capture_ts': 10, 'source_session': SESSION}
+        self.manager.observe_region(context, {**frame(1)['lines'][0], 'line_id': '0'})
+        self.assertTrue(self.client.preview_started.wait(1))
+        self.manager.observe({**context, 'engine': 'ppocr', 'lines': []})
+        self.client.release.set()
+        with self.manager.changed:
+            self.assertTrue(self.manager.changed.wait_for(lambda: not self.manager.running, 3))
+        self.assertEqual(self.manager.groups, {})
+        self.assertEqual(self.publisher.entries, [])
+        self.assertFalse(any(responses for entries, responses in self.publisher.events))
+
 
 if __name__=='__main__':unittest.main()

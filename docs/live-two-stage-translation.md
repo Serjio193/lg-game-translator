@@ -94,3 +94,21 @@ HTTP-задания, NPU/переводные модели остаются на
 есть точный счётчик исходного текста и существующая translation policy. Три
 быстрых равных кадра не доказывают конец печати: эту границу нужно проверить
 на сложных сохранённых/живых репликах перед включением Google в production.
+
+## Early regions in the live OCR-only path
+
+`tv_server` passes authenticated NDJSON region callbacks through the existing
+`FramePipeline` OCR-only branch into `LiveTranslations.observe_region`.
+A complete admitted block can start sentence-cache/Bergamot work and publish
+before the remaining frame OCR finishes. Partial results retain unfinished
+previous regions without adding observations. Final replies reconcile the
+frame; `(sequence, capture_ts)` counts once per track, including early/final
+updates. OFF/session changes are checked before callback admission and requests.
+Transport failures reconcile an empty frame rather than retain partial work.
+
+`timings_ms.first_region_ready` and `early_region_count` expose the callback
+latency/count. These are block events, not token streaming inside NPU inference.
+Native installed policy checks: Go back!/Are you ready? admitted; Items./Mario!/
+Attack Combos. rejected. No OCR model/threshold or translation cache changes.
+
+Installed relay verification and saved-frame timings: [early-region evidence](evidence/live-early-regions-20261010/README.md). Physical check awaits console wake.

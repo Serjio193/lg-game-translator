@@ -32,6 +32,8 @@ class OsdPublisher:
         self.source = None
         self.timestamp = None
         self.capture_ts = None
+        self.partial = False
+        self.entries = []
 
     def observe(self, result):
         if result.get("engine") != "ppocr":
@@ -39,17 +41,23 @@ class OsdPublisher:
         source = tuple(result.get("source_session", ()))
         if source and source != self.source:
             self.tracks, self.sequence, self.source = [], None, source
+            self.entries = []
+            self.partial = False
         captured = result.get("capture_ts")
         fresh_clock = (isinstance(captured, (int, float)) and captured > 0
                        and isinstance(self.capture_ts, (int, float))
                        and self.capture_ts > 0 and captured > self.capture_ts)
-        if self.sequence is not None and result.get("sequence", 0) <= self.sequence:
+        same_open_frame = (self.partial and result.get("sequence") == self.sequence
+                           and captured == self.capture_ts)
+        if not same_open_frame and self.sequence is not None and result.get("sequence", 0) <= self.sequence:
             if not fresh_clock:
                 return
             if result["sequence"] < self.sequence:
                 # A restarted capture producer has a new clock sample but reset IDs.
                 self.tracks = []
+                self.entries = []
         now = self.clock()
+        frame_key = (result["sequence"], captured)
         entries, tracks, used = [], [], set()
         for line in result.get("lines", []):
             text, appearance = line.get("text", ""), line.get("appearance")
@@ -62,12 +70,14 @@ class OsdPublisher:
             score, index, prior = max(candidates, default=(0, -1, None), key=lambda r: r[0])
             if score >= .5:
                 used.add(index)
-                track = {**prior, "count": min(3, prior["count"]+1)}
+                increment = prior.get("observed_frame") != frame_key
+                track = {**prior, "count": min(3, prior["count"]+int(increment))}
                 appearance = prior["appearance"]
             else:
                 track = {"id": self.next_id, "version": now, "count": 1,
                          "text": key, "box": box, "appearance": appearance}
                 self.next_id += 1
+            track["observed_frame"] = frame_key
             slot = len(entries)
             if slot >= 20:
                 break
@@ -76,6 +86,16 @@ class OsdPublisher:
             entries.append({"slot": slot, "admission": admission, "observations": track["count"],
                             "source_text": text, "appearance": appearance, "line": line})
             tracks.append(track)
+        if result.get("partial"):
+            # Missing regions have not finished OCR yet, so they have not disappeared.
+            for old, prior in zip(self.entries, self.tracks):
+                if len(entries) >= 20:
+                    break
+                if not any(overlap(prior["box"], t["box"]) >= .5 for t in tracks):
+                    entries.append({**old, "slot": len(entries)})
+                    tracks.append(prior)
+        self.entries = entries
+        self.partial = bool(result.get("partial"))
         self.tracks, self.sequence, self.timestamp = tracks, result["sequence"], now
         self.capture_ts = captured
         return entries

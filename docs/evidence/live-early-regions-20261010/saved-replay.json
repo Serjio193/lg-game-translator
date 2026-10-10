@@ -1,0 +1,115 @@
+{
+  "scope": "saved RGB frame replay through installed TV live OCR-only/NDJSON modules; temporary OSD files, no live display",
+  "runs": [
+    {
+      "sequence": 1,
+      "timings_ms": {
+        "detector_completed_monotonic_ms": 3377501533.3543262,
+        "gray": 10.642306879162788,
+        "detector": 103.90103328973055,
+        "lines_crop_recognition": 728.6071879789233,
+        "full_ocr": 843.1505281478167,
+        "frame_decode": 13.210134115070105,
+        "frame_decompress": 0.0017499551177024841,
+        "orange_request": 874.35382604599,
+        "after_detector_to_reply_ms": 732.7468028068542,
+        "frame_encode": 22.83002000012857,
+        "frame_rpc": 1007.6224200001889,
+        "frame_compress": 0,
+        "frame_network": 133.26859395419888,
+        "frame_to_text": 1030.4524400003174,
+        "relay_to_detector_upper_ms": 297.7056371934632,
+        "early_region_count": 1,
+        "first_region_ready": 555.2004000001034,
+        "recognizer": 0,
+        "network": 133.26859395419888,
+        "translation": 0,
+        "end_to_end": 1031.4605200001097
+      },
+      "observations": [
+        1,
+        1
+      ]
+    },
+    {
+      "sequence": 2,
+      "timings_ms": {
+        "detector_completed_monotonic_ms": 3377503337.971421,
+        "gray": 18.88741133734584,
+        "detector": 124.66502282768488,
+        "lines_crop_recognition": 689.9958672001958,
+        "full_ocr": 833.5483013652265,
+        "frame_decode": 5.91848511248827,
+        "frame_decompress": 0.005832873284816742,
+        "orange_request": 1598.825188819319,
+        "after_detector_to_reply_ms": 694.9880213737488,
+        "frame_encode": 20.3390000001491,
+        "frame_rpc": 1727.7500000000146,
+        "frame_compress": 0,
+        "frame_network": 128.92481118069554,
+        "frame_to_text": 1748.0890000001637,
+        "relay_to_detector_upper_ms": 1053.1009786264149,
+        "early_region_count": 1,
+        "first_region_ready": 1358.3535999996457,
+        "recognizer": 0,
+        "network": 128.92481118069554,
+        "translation": 0,
+        "end_to_end": 1749.1188399999373
+      },
+      "observations": [
+        2,
+        2
+      ]
+    },
+    {
+      "sequence": 3,
+      "timings_ms": {
+        "detector_completed_monotonic_ms": 3377505226.817553,
+        "gray": 7.667898200452328,
+        "detector": 103.79574075341225,
+        "lines_crop_recognition": 689.4454918801785,
+        "full_ocr": 800.909130834043,
+        "frame_decode": 7.287856657058001,
+        "frame_decompress": 0.0032079406082630157,
+        "orange_request": 1718.8868457451463,
+        "after_detector_to_reply_ms": 691.0496549606323,
+        "frame_encode": 20.265399999971123,
+        "frame_rpc": 1846.527779999633,
+        "frame_compress": 0,
+        "frame_network": 127.64093425448664,
+        "frame_to_text": 1866.793179999604,
+        "relay_to_detector_upper_ms": 1175.7435250389717,
+        "early_region_count": 1,
+        "first_region_ready": 1526.412540000365,
+        "recognizer": 0,
+        "network": 127.64093425448664,
+        "translation": 0,
+        "end_to_end": 1867.9666000002726
+      },
+      "observations": [
+        3,
+        3
+      ]
+    }
+  ],
+  "preview_requests": [
+    {
+      "text": "Hold [button] R while an enemy attacks to guard against it.",
+      "start_ms": 562.0967200002269,
+      "cache_hit": false,
+      "end_ms": 786.3587800002279
+    },
+    {
+      "text": "This will decrease the amount of damage you take.",
+      "start_ms": 788.924500000121,
+      "cache_hit": false,
+      "end_ms": 935.4679799998848
+    },
+    {
+      "text": "Emergency Guard",
+      "start_ms": 1888.851280000381,
+      "cache_hit": true,
+      "end_ms": 1904.8581200004264
+    }
+  ]
+}
