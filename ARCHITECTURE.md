@@ -6,6 +6,14 @@ the existing layers JSON. The watcher applies it to its background overlay.
 Only translation scope crosses the frame RPC; Orange changes admission policy,
 never OCR arithmetic. See `docs/osd-mobile-settings.md`.
 
+The same PIN-authenticated phone endpoint proxies provider selection and Google
+usage to the translation service through a separate owner-only control token.
+TV key entry stays on loopback; Node encrypts it with the server's RSA-OAEP public
+key before LAN transfer. Phone key entry requires a secure browser context and
+uses WebCrypto; ordinary LAN HTTP disables it. Orange stores credentials using
+AES-256-GCM and reserves code points in SQLite immediately before each Google
+HTTP attempt. Cache hits bypass that reservation. See `docs/google-budget-osd.md`.
+
 Existing PicCap selects the RGB 1280×720 frame. Capture scheduler/settings/API
 belong to the separate hyperion-webos repository and are not replaced by GOCR.
 

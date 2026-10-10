@@ -35,7 +35,7 @@ function create(options) {
     response.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'");
     var host=request.headers.host||'';
     if(!privateAddress(request.socket.remoteAddress)||!addresses().some(function(ip){return host===ip+':'+port;})) return json(response,403,{error:'Только локальная сеть ТВ'});
-    if(request.method==='GET'&&['/','/index.html','/mobile.js','/mobile.css','/preview-variants.css'].indexOf(request.url.split('?')[0])>=0) {
+    if(request.method==='GET'&&['/','/index.html','/mobile.js','/mobile.css','/preview-variants.css','/provider-settings.js','/provider-settings.css'].indexOf(request.url.split('?')[0])>=0) {
       var name=request.url.split('?')[0].slice(1)||'index.html';
       fs.readFile(path.join(__dirname,'mobile',name),function(error,body) {
         if(error) return json(response,503,{error:'Меню недоступно'});
@@ -47,7 +47,11 @@ function create(options) {
     if(request.method==='GET'&&request.url==='/api/settings') {
       try{return json(response,200,store.read());}catch(error){return json(response,503,{error:'Не удалось прочитать настройки'});}
     }
-    if(!((request.method==='POST'&&['/api/pair','/api/logout'].indexOf(request.url)>=0)||request.method==='PATCH'&&request.url==='/api/settings')) return json(response,404,{error:'Not found'});
+    var translator=options.translator||require('./translator-control');
+    if(request.method==='GET'&&request.url==='/api/translator') {
+      translator.status(function(error,value){json(response,error?503:200,error?{error:error.message}:value);});return;
+    }
+    if(!((request.method==='POST'&&['/api/pair','/api/logout','/api/translator'].indexOf(request.url)>=0)||request.method==='PATCH'&&request.url==='/api/settings')) return json(response,404,{error:'Not found'});
     if(request.headers.origin!=='http://'+host) return json(response,403,{error:'Запрос должен исходить из меню ТВ'});
     if((request.headers['content-type']||'').split(';')[0]!=='application/json') return json(response,415,{error:'Нужен JSON'});
     var body='',tooLarge=false;
@@ -56,6 +60,9 @@ function create(options) {
       if(tooLarge)return;
       var value;try{value=JSON.parse(body);}catch(error){return json(response,400,{error:'Неверный JSON'});}
       try {
+        if(request.url==='/api/translator') {
+          translator.update(value,function(error,result){json(response,error?400:200,error?{error:error.message}:result);});return;
+        }
         if(request.url==='/api/pair') {
           var credential=auth.pair(value&&value.pin);
           response.setHeader('Set-Cookie','osd_session='+credential+'; HttpOnly; SameSite=Strict; Path=/; Max-Age=28800');

@@ -29,6 +29,16 @@
         <label>Переводчик <select id="provider" disabled><option value="madlad">MADLAD</option><option value="google">Google</option></select></label>
         <label>Сервер перевода <input id="server" type="url" value="http://192.168.1.11:8765" disabled></label>
       </div>
+      <section aria-label="Google Translate">
+        <h2>Google Translate · расход символов</h2>
+        <p id="google-usage" aria-live="polite">Загрузка счётчика…</p>
+        <progress id="google-progress" max="490000" value="0" style="width:100%"></progress>
+        <p id="google-key-state"></p>
+        <label>API-ключ <input id="google-key" type="password" autocomplete="off" maxlength="200"></label>
+        <button id="google-key-save" type="button">Сохранить ключ зашифрованным</button>
+        <p id="google-status" role="status"></p>
+        <p class="note">На сервер отправляется зашифрованный ключ. Переводы из кэша не расходуют символы.</p>
+      </section>
       <div class="translator">
         <label>Щадящий режим при русском тексте <input id="russian-idle" type="checkbox" disabled></label>
         <label>Проверять язык в щадящем режиме <select id="language-check" disabled>
@@ -46,5 +56,6 @@
   <script src="menu.js"></script>
   <script src="menu-key.js"></script>
   <script src="mobile-pairing.js"></script>
+  <script src="google-settings.js"></script>
 </body>
 </html>

@@ -44,6 +44,7 @@
     document.getElementById('login').hidden=true; document.getElementById('controls').hidden=false;
     document.getElementById('connection').textContent=preview?'Макет':'Телефон подключён';
     document.getElementById('logout').hidden=preview; render();
+    window.TranslatorSettings.start(preview);
   }
   async function request(path, method, value) {
     var response=await fetch(path,{method:method||'GET',credentials:'same-origin',

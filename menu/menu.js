@@ -50,12 +50,15 @@
       .map(function (input) { return input.value; });
     enabled(false);
     status.textContent = 'Сохранение…';
-    request('POST', {hdmi_inputs: selected, applications: window.AppPicker.get(), provider: provider.value,
-      translation_server: server.value.trim(), russian_idle: idle.checked,
-      language_check_seconds: Number(languageCheck.value)}, function (error) {
-      enabled(true);
-      status.textContent = error ? error.message + '. Настройки не сохранены.' : 'Сохранено';
-      save.focus();
+    window.GoogleSettings.select(provider.value, function (providerError) {
+      if (providerError) { enabled(true); status.textContent = providerError.message; return; }
+      request('POST', {hdmi_inputs: selected, applications: window.AppPicker.get(), provider: provider.value,
+        translation_server: server.value.trim(), russian_idle: idle.checked,
+        language_check_seconds: Number(languageCheck.value)}, function (error) {
+        enabled(true);
+        status.textContent = error ? error.message + '. Настройки не сохранены.' : 'Сохранено';
+        save.focus();
+      });
     });
   });
   document.getElementById('back').addEventListener('click', function () { window.close(); });
@@ -63,10 +66,11 @@
     if (event.keyCode === 461 || event.key === 'Escape') { window.close(); return; }
     if (save.disabled && event.keyCode === 13 && inputs[0].disabled) { load(); return; }
     var controls = inputs.concat(window.AppPicker.controls(), [document.getElementById('refresh-apps'),
-      provider, server, idle, languageCheck, save, document.getElementById('back')]);
+      provider, server, document.getElementById('google-key'), document.getElementById('google-key-save'),
+      idle, languageCheck, save, document.getElementById('back')]);
     var index = controls.indexOf(document.activeElement);
     if (event.keyCode >= 37 && event.keyCode <= 40) {
-      if (document.activeElement === server && (event.keyCode === 37 || event.keyCode === 39)) return;
+      if ((document.activeElement === server || document.activeElement === document.getElementById('google-key')) && (event.keyCode === 37 || event.keyCode === 39)) return;
       if ((document.activeElement === provider || document.activeElement === languageCheck)
           && (event.keyCode === 37 || event.keyCode === 39)) {
         event.preventDefault();

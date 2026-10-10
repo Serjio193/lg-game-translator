@@ -123,3 +123,6 @@ postprocess работает после tensor decode, не управляет c
 - `menu/mobile-pairing.js`, `deployment/mobile-osd/`, `scripts/package-mobile-osd.py`:
   подключение телефона на ТВ и подготовка комплекта без замены watcher/PicCap.
 - `docs/osd-mobile-settings.md`: API, установка, проверки и границы live proof.
+
+- `translator/google_budget.py`, `google_vault.py`, `google_control.py`: durable Google character reservations, encrypted credential storage and protected provisioning/status.
+- `overlay/translator-control.js`, `translator-menu-route.js`, `mobile/provider-settings.*`, `menu/google-settings.js`: TV/phone provider selection, encrypted key entry and live budget display; see `docs/google-budget-osd.md`.

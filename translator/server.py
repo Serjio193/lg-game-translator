@@ -21,6 +21,7 @@ from cache_identity import identity, NORMALIZATION_VERSION
 from abbreviated_names import has_abbreviated_names, translate_preserving_names
 from progressive import results as progressive_results
 from bergamot import translate as translate_bergamot
+import google_control
 
 
 LOG = logging.getLogger("lg-game-translator")
@@ -152,9 +153,8 @@ def _translate_madlad(text: str) -> dict:
 
 
 def _translate_google(text: str, source_lang="en", target_lang="ru") -> dict:
-    key = os.environ.get("GOOGLE_API_KEY")
-    if not key:
-        raise RuntimeError("Google provider is not configured on Orange Pi")
+    vault, budget = google_control.state()
+    key = vault.get()
     body = _json_bytes({"q": text, "source": source_lang, "target": target_lang, "format": "text"})
     request = Request(
         "https://translation.googleapis.com/language/translate/v2",
@@ -166,17 +166,18 @@ def _translate_google(text: str, source_lang="en", target_lang="ru") -> dict:
         method="POST",
     )
     started = time.perf_counter()
+    attempt = budget.reserve(text)
     try:
         with urlopen(request, timeout=30) as response:
             payload = json.loads(response.read().decode("utf-8"))
     except HTTPError as error:
-        detail = error.read(2048).decode("utf-8", errors="replace")
-        raise RuntimeError(f"Google API returned HTTP {error.code}: {detail}") from None
+        raise RuntimeError(f"Google API returned HTTP {error.code}") from None
     except URLError as error:
-        raise RuntimeError(f"Google API connection failed: {error.reason}") from None
+        raise RuntimeError("Google API connection failed; attempt remains counted") from None
     translations = payload.get("data", {}).get("translations", [])
     if not translations or not translations[0].get("translatedText"):
         raise RuntimeError("Google API returned no translation")
+    budget.complete(attempt)
     return {
         "provider": "google",
         "translation": translations[0]["translatedText"],
@@ -208,6 +209,12 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        if self.path == "/api/google-control":
+            if not google_control.authorized(self.headers):
+                self._send_json(401, {"error": "Control authentication required"})
+                return
+            self._send_json(200, google_control.status())
+            return
         if self.path == "/api/settings":
             try:
                 self._send_json(200, read_settings())
@@ -225,21 +232,30 @@ class Handler(BaseHTTPRequestHandler):
                     and importlib.util.find_spec("tokenizers") is not None,
                     "loaded": _model is not None,
                 },
-                "google": {"available": bool(os.environ.get("GOOGLE_API_KEY"))},
+                "google": {"available": google_control.state()[0].configured()},
             })
             return
         self._send_json(404, {"error": "Not found"})
 
     def do_POST(self):
-        if self.path not in ("/api/translate", "/api/translate-progressive", "/api/settings"):
+        if self.path not in ("/api/translate", "/api/translate-progressive", "/api/settings", "/api/google-control"):
             self._send_json(404, {"error": "Not found"})
             return
         try:
+            if self.path == "/api/google-control" and not google_control.authorized(self.headers):
+                self._send_json(401, {"error": "Control authentication required"})
+                return
             length = int(self.headers.get("Content-Length", "0"))
             if length <= 0 or length > MAX_BODY_BYTES:
                 self._send_json(413, {"error": "Request body must be 1–65536 bytes"})
                 return
             data = json.loads(self.rfile.read(length).decode("utf-8"))
+            if self.path == "/api/google-control":
+                try:
+                    self._send_json(200, google_control.update(data))
+                except ValueError as error:
+                    self._send_json(400, {"error": str(error)})
+                return
             if self.path == "/api/settings":
                 try:
                     self._send_json(200, save_settings(data))

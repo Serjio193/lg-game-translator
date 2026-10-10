@@ -2,7 +2,7 @@
 <html lang="ru">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Настройки OSD</title><link rel="stylesheet" href="mobile.css">
-<link rel="stylesheet" href="preview-variants.css"></head>
+<link rel="stylesheet" href="preview-variants.css"><link rel="stylesheet" href="provider-settings.css"></head>
 <body data-view="pult">
 <div class="design-bar" id="design-bar" hidden>
   <span>Выбери вид меню</span><div class="designs" role="group" aria-label="Варианты меню">
@@ -52,6 +52,16 @@
         <p class="hint">100% — размер, подобранный по оригиналу. Высота и ширина меняются отдельно.</p>
       </section>
       <section class="card setting-section" data-section="rules">
+        <span class="kicker">ИСТОЧНИК ПЕРЕВОДА</span><h2>Переводчик</h2>
+        <label class="field"><span>Откуда приходит перевод</span><select id="translator-provider"><option value="madlad">Локальный · Bergamot + MADLAD</option><option value="google">Google Translate API</option></select></label>
+        <p id="translator-current" class="hint" aria-live="polite">Загрузка источника…</p>
+        <label class="field"><span>Отправлено в Google <output id="google-used">—</output></span><progress id="google-progress" max="490000" value="0" style="width:100%"></progress></label>
+        <p id="google-remaining" class="hint">Лимит: 490 000 символов. Кэш не расходует символы.</p>
+        <p id="google-key-state" class="hint">API-ключ: проверяем…</p>
+        <label class="field"><span>Google API-ключ</span><input id="google-key" type="password" autocomplete="off" maxlength="200" disabled></label>
+        <button id="google-key-save" type="button" class="quiet" disabled>Сохранить зашифрованный ключ</button>
+        <p id="google-key-help" class="hint">Ключ вводится на ТВ. Через HTTP на телефоне ввод закрыт.</p>
+        <p id="translator-status" class="hint" role="status"></p>
         <span class="kicker">ЧТО ПЕРЕВОДИТЬ</span><h2>Правила перевода</h2>
         <label class="choice"><input type="radio" name="scope" value="normal" data-key="translationScope" checked><span><strong>Реплики и описания</strong><small>Обычные правила для игры</small></span></label>
         <label class="choice"><input type="radio" name="scope" value="all" data-key="translationScope"><span><strong>Все области</strong><small>Также предметы, имена и подписи из одного слова</small></span></label>
@@ -61,5 +71,5 @@
     </div>
     <footer><span id="save-status" role="status">Готово к настройке</span><button id="reset" class="quiet">Сбросить оформление</button><button id="logout" class="quiet">Отключить телефон</button></footer>
   </div>
-</main><script src="mobile.js"></script>
+</main><script src="provider-settings.js"></script><script src="mobile.js"></script>
 </body></html>

@@ -7,14 +7,16 @@ ROOT = Path(__file__).resolve().parents[1]
 MODULES = (
     "runtime-control.js app-catalog.js app-icon.js AmbiSun-LICENSE.txt "
     "mobile-server.js mobile-auth.js mobile-store.js qr-url.js layer-settings.js "
+    "translator-control.js translator-menu-route.js "
     "manual-style.js subtitle-layout.js glyph-cover.js mask-grow.js mask-osd-raster.js "
     "line-cover-mask.js mask-edge-blur.js control-icons.js backdrop.js fit-area.js "
-    "mobile/index.html mobile/mobile.js mobile/mobile.css mobile/preview-variants.css"
+    "mobile/index.html mobile/mobile.js mobile/mobile.css mobile/preview-variants.css "
+    "mobile/provider-settings.js mobile/provider-settings.css"
 ).split()
 
 
 def main():
-    output = ROOT / "build/dist/mobile-osd-controller-0.1.3.tar.gz"
+    output = ROOT / "build/dist/mobile-osd-controller-0.1.4.tar.gz"
     output.parent.mkdir(parents=True, exist_ok=True)
     with tarfile.open(output, "w:gz") as archive:
         for name in MODULES:

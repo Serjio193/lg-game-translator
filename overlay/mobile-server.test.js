@@ -24,7 +24,14 @@ async function main() {
   assert.throws(function(){credentials.newPin();});now+=30001;assert(credentials.newPin());
   assert(server.privateAddress('192.168.1.3'));assert(!server.privateAddress('8.8.8.8'));
   var directory=fs.mkdtempSync(path.join(os.tmpdir(),'osd-mobile-')),file=path.join(directory,'layers.json'),changed=0;
-  var instance=server.create({port:0,file:file,policyChanged:function(){changed++;}});
+  var provider='madlad',providerUpdates=0;
+  var instance=server.create({port:0,file:file,policyChanged:function(){changed++;},translator:{
+    status:function(callback){callback(null,{provider:provider,budget:{monthly_characters:12}});},
+    update:function(value,callback){
+      if(Object.keys(value).some(function(key){return ['provider','encrypted_key'].indexOf(key)<0;}))return callback(new Error('Encrypted key required'));
+      provider=value.provider||provider;providerUpdates++;callback(null,{provider:provider});
+    }
+  }});
   await new Promise(function(resolve){instance.server.listen(0,'127.0.0.1',resolve);});
   var url='http://127.0.0.1:'+instance.server.address().port,cookie='';
   async function call(route,method,body,origin) {
@@ -32,11 +39,19 @@ async function main() {
   }
   try {
     assert.strictEqual((await call('/api/settings')).status,401);
+    assert.strictEqual((await call('/api/translator')).status,401);
+    assert.strictEqual((await call('/api/translator','POST',{provider:'google'})).status,401);
     var response=await call('/api/pair','POST',{pin:instance.auth.newPin().pin},'http://evil.invalid');
     assert.strictEqual(response.status,403);
     response=await call('/api/pair','POST',{pin:instance.auth.newPin().pin});
     assert.strictEqual(response.status,200);cookie=response.headers.get('set-cookie').split(';')[0];
     assert(response.headers.get('set-cookie').includes('HttpOnly'));
+    assert.strictEqual((await (await call('/api/translator')).json()).budget.monthly_characters,12);
+    assert.strictEqual((await call('/api/translator','POST',{provider:'google'},'http://evil.invalid')).status,403);
+    assert.strictEqual((await call('/api/translator','POST',{key:'plaintext'})).status,400);
+    assert.strictEqual(providerUpdates,0);
+    assert.strictEqual((await call('/api/translator','POST',{provider:'google'})).status,200);
+    assert.strictEqual(providerUpdates,1);
     var value=await (await call('/api/settings')).json();
     response=await call('/api/settings','PATCH',{revision:value.revision,patch:{fontHeight:130,coverGrow:6,translationScope:'all'}});
     assert.strictEqual(response.status,200);value=await response.json();

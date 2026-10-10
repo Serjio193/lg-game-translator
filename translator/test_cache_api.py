@@ -3,6 +3,7 @@ import threading
 import unittest
 from http.server import ThreadingHTTPServer
 from unittest.mock import patch
+from unittest.mock import Mock
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
@@ -62,12 +63,17 @@ class CacheApiTests(unittest.TestCase):
     def test_google_receives_actual_source_language(self):
         import io
         body = io.BytesIO(b'{"data":{"translations":[{"translatedText":"test"}]}}')
-        with patch.dict(server.os.environ, {"GOOGLE_API_KEY": "test-key"}), \
+        vault, budget = Mock(), Mock()
+        vault.get.return_value = "test-key"
+        budget.reserve.return_value = "attempt"
+        with patch.object(server.google_control, "state", return_value=(vault, budget)), \
                 patch.object(server, "urlopen", return_value=body) as request:
             server._translate_google("你好", "zh", "ru")
         payload = json.loads(request.call_args.args[0].data)
         self.assertEqual(payload["source"], "zh")
         self.assertEqual(payload["target"], "ru")
+        budget.reserve.assert_called_once_with("你好")
+        budget.complete.assert_called_once_with("attempt")
 
 
 if __name__ == "__main__":
