@@ -53,8 +53,16 @@
       ? appearance.layout_height*sy : height;
     var minimum = 18, maximum = Math.min(72, Math.floor((layoutHeight - 8) / (lines * fittedLineHeight)));
     var area = fitArea.limits(appearance, viewport, neighbours);
+    var anchor = appearance.sentence_flow && appearance.flow_anchor;
+    if (anchor && Number.isFinite(anchor.x) && anchor.x >= 0 && anchor.x <= box.x) {
+      area.width += area.x - anchor.x*sx;
+      area.x = anchor.x*sx;
+    }
+    if (appearance.sentence_flow) area.left = area.x;
+    if (appearance.sentence_flow && appearance.preview_font_size > 0)
+      maximum = Math.min(maximum, appearance.preview_font_size);
     var found = fitArea.search(area, maximum, minimum, function (available, size) {
-      var result = partition(text, lines, available - 8, function (word) {
+      var result = (appearance.sentence_flow ? flow : partition)(text, lines, available - 8, function (word) {
         return controls.measure(word, size, icons, measure);
       });
       return result && result.every(function (line) {
@@ -72,9 +80,9 @@
               (width - 8 - measure(line, size)) / characters));
         });
         return {text: result.join('\n'), size: size, spacing: spacing,
-        x: found.x, y: box.y * sy,
+        x: found.x, y: anchor && Number.isFinite(anchor.y) && anchor.y >= 0 ? anchor.y*sy : box.y * sy,
         sourceWidth: box.width * sx,
-        width: width, height: height, paddingTop: Math.max(4,
+        width: width, height: height, paddingTop: appearance.sentence_flow ? 4 : Math.max(4,
           (height - lines * size * fittedLineHeight) / 2), background: appearance.background_reliable
           ? color(appearance.background) : 'transparent',
         foreground: color(appearance.foreground) || 'white', outline: 'transparent', stroke: 0,
@@ -82,13 +90,26 @@
     }
     return null;
   }
+  function flow(text, lines, width, measure) {
+    var result = [''], words=text.trim().split(/\s+/);
+    for(var i=0;i<words.length;i++) {
+      var word=words[i];
+      if(measure(word)>width)return null;
+      var last = result.length - 1, candidate = result[last] ? result[last] + ' ' + word : word;
+      if (measure(candidate) <= width) result[last] = candidate;
+      else result.push(word);
+      if(result.length>lines)return null;
+    }
+    return result;
+  }
   function render(element, text, appearance, neighbours) {
     var layers=layerSettings.get();
     var style = element.style;
     style.left = '8%'; style.right = '8%'; style.bottom = '6%'; style.top = 'auto';
     style.width = 'auto'; style.height = 'auto'; style.fontSize = '48px';
     style.background = 'transparent'; style.color = 'white'; style.padding = '0';
-    style.boxSizing = 'border-box'; style.lineHeight = '1.3'; style.textAlign = 'center';
+    style.boxSizing = 'border-box'; style.lineHeight = '1.3';
+    style.textAlign = appearance && appearance.sentence_flow ? 'left' : 'center';
     style.letterSpacing = '0px';
     style.backgroundImage = 'none';
     style.backgroundOrigin = 'padding-box'; style.backgroundPosition = '0px 0px';
@@ -97,6 +118,7 @@
     element.textContent = text;
     if (!text || !appearance) {
       delete element.translationLayout;
+      style.transition = 'none';
       manualStyle.text(element,layers);
       return;
     }
@@ -106,10 +128,13 @@
     var cached=element.translationLayout, result;
     if(cached && cached.key===cacheKey) result=Object.assign({},cached.result);
     else {
+      var fittingAppearance=appearance;
+      if(appearance.sentence_flow && cached && text.indexOf(cached.sourceText + ' ')===0)
+        fittingAppearance=Object.assign({},appearance,{preview_font_size:cached.result.size});
       var canvas = document.createElement('canvas'), context = canvas.getContext('2d');
-      result = fit(text, appearance, viewport,
+      result = fit(text, fittingAppearance, viewport,
         function (word, size) { context.font = '700 ' + size + 'px Arial'; return context.measureText(word).width; }, neighbours);
-      if(result) element.translationLayout={key:cacheKey,result:Object.assign({},result)};
+      if(result) element.translationLayout={key:cacheKey,sourceText:text,result:Object.assign({},result)};
     }
     if (!result) {
       var icons = (appearance.icons || []).slice(0, 4);
@@ -129,6 +154,9 @@
     style.width = result.width + 'px'; style.height = result.height + 'px'; style.padding = '4px';
     style.paddingTop = result.paddingTop + 'px';
     style.fontSize = result.size + 'px'; style.lineHeight = String(fittedLineHeight);
+    if(!cached) style.transition = 'none';
+    else if(cached.key!==cacheKey) style.transition = 'font-size 180ms ease, letter-spacing 180ms ease';
+    style.transformOrigin = 'left top';
     style.letterSpacing = result.spacing + 'px'; style.textAlign = 'left';
     style.background = result.background || 'transparent'; style.color = result.foreground;
     style.webkitTextStroke = result.stroke + 'px ' + result.outline; style.textShadow = 'none';

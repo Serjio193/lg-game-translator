@@ -55,3 +55,32 @@ assert.strictEqual(cleared.style.letterSpacing, '0px');
 assert.strictEqual(cleared.style.webkitTextStroke, '0px transparent');
 assert.strictEqual(cleared.style.textShadow, 'none');
 console.log('Original ROI scaling, two-line fitting, color and readable fallback: PASS');
+var flowing=Object.assign({},appearance,{sentence_flow:true,
+  box:{x:200,y:400,width:500,height:80}});
+var first=layout.fit('Первая фраза.',flowing,{width:1920,height:1080},measure);
+var appended=layout.fit('Первая фраза. Следующее предложение гораздо длиннее.',
+  Object.assign({},flowing,{preview_font_size:first.size}),{width:1920,height:1080},measure);
+assert(first && appended);
+assert.strictEqual(first.x,flowing.box.x*1.5);
+assert.strictEqual(appended.x,first.x,'Appending must not move the left edge');
+assert.strictEqual(appended.paddingTop,4);
+assert(appended.size<=first.size,'Append never enlarges a fitting font');
+assert.strictEqual(appended.text.replace(/\s+/g,' '),
+  'Первая фраза. Следующее предложение гораздо длиннее.');
+global.window={innerWidth:1920,innerHeight:1080};
+global.document={createElement:function(){return {getContext:function(){return {
+  font:'',measureText:function(word){return {width:measure(word,Number(this.font.split(' ')[1].replace('px','')))};}
+};}};}};
+require('./layer-settings').set({cover:false,text:true});
+var element={style:{}};
+layout.render(element,'Первая фраза.',flowing);
+var originalLeft=element.style.left;
+assert.strictEqual(element.style.transition,'none');
+layout.render(element,'Первая фраза. Следующее предложение гораздо длиннее.',flowing);
+assert.strictEqual(element.style.left,originalLeft);
+assert.strictEqual(element.style.textAlign,'left');
+assert(element.style.transition.indexOf('180ms')>=0);
+layout.render(element,'Первая фраза. Следующее предложение гораздо длиннее.',flowing);
+assert(element.style.transition.indexOf('180ms')>=0,'An OCR refresh must not cancel the transition');
+layout.render(element,'',null);
+assert.strictEqual(element.style.transition,'none');

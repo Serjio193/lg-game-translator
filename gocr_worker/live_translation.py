@@ -5,6 +5,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 from .source_admission import require_current
 from .translation_client import TranslationClient
+from .sentence_preview import SentencePreviews, units
+from .osd_publisher import overlap
 
 LOG = logging.getLogger("gocr-tv")
 
@@ -22,6 +24,7 @@ class LiveTranslations:
                       for stage in ("preview", "final")}
         self.running, self.groups, self.entries = {}, {}, []
         self.session, self.closed = None, False
+        self.sentences = SentencePreviews()
 
     def _current(self, session):
         try:
@@ -39,6 +42,13 @@ class LiveTranslations:
             entries = self.publisher.observe(result)
             if entries is None:
                 return
+            for entry in entries:
+                candidates = [old for old in self.entries if session == self.session
+                              and old.get('flow_anchor')
+                              and entry['source_text'].startswith(old['source_text'])
+                              and overlap(entry['appearance']['box'], old['appearance']['box']) >= .5]
+                if candidates:
+                    entry['flow_anchor'] = candidates[0]['flow_anchor']
             self.session, self.entries = session, entries
             groups = {}
             for entry in entries:
@@ -54,10 +64,15 @@ class LiveTranslations:
                              "final_done": False, "preview": None, "final": None}
                 if key not in groups:
                     group["entries"] = []
+                    if group['preview'] is None:
+                        cached = self.sentences.snapshot(group)
+                        if cached and cached.get('stage') == 'preliminary':
+                            group['preview'] = {**cached, 'confirmation_policy': 'three-final-v1'}
                 group["entries"].append(entry)
                 groups[key] = group
             # No historical pending queue: only <=20 groups of the latest frame.
             self.groups = groups
+            self.sentences.retain(groups.values())
             self._emit()
             self._pump()
 
@@ -70,9 +85,14 @@ class LiveTranslations:
                 response = group["final"] if entry["observations"] >= 3 else group["preview"]
                 response = response or group["preview"]
                 if response is not None:
+                    box = entry['appearance']['box']
+                    entry.setdefault('flow_anchor', {'x': box['x'], 'y': box['y']})
                     responses[entry["slot"]] = response
         # The gate keeps the latest real OCR timestamp, not callback completion time.
-        self.publisher.emit(self.entries, responses)
+        entries = [{**entry, 'appearance': {**entry['appearance'], 'sentence_flow': True,
+                                           'flow_anchor': entry.get('flow_anchor')}}
+                   for entry in self.entries]
+        self.publisher.emit(entries, responses)
 
     @staticmethod
     def _priority(group):
@@ -91,6 +111,9 @@ class LiveTranslations:
                 if slots <= 0:
                     break
                 if job in self.running or group[stage + "_done"]:
+                    continue
+                if stage == 'preview' and not units(group['text'],
+                        max(e['observations'] for e in group['entries']) >= 3):
                     continue
                 if stage == "final" and (not group["preview_done"] or
                         max(entry["observations"] for entry in group["entries"]) < 3):
@@ -111,7 +134,11 @@ class LiveTranslations:
             if stage == "final" and max(e["observations"] for e in group["entries"]) < 3:
                 return None
         function = group["client"].preview if stage == "preview" else group["client"].translate
-        result = function(text, **metadata)
+        result = (self.sentences.translate(group, self.guard,
+                  lambda response: self._progress(group, response)) if stage == 'preview'
+                  else function(text, **metadata))
+        if result is None:
+            return None
         if result.get("provider") != group["session"][1] or not result.get("translation", "").strip():
             raise ValueError("Invalid translation identity")
         if stage == "preview":
@@ -121,6 +148,12 @@ class LiveTranslations:
                 raise ValueError("Invalid preview stage")
             return {**result, "confirmation_policy": "three-final-v1"}
         return {**result, "stage": "final", "engine": group["session"][1]}
+
+    def _progress(self, group, response):
+        with self.lock:
+            if self.groups.get(group['key']) is group and self._current(group['session']):
+                group['preview'] = {**response, 'confirmation_policy': 'three-final-v1'}
+                self._emit()
 
     def _complete(self, group, stage, job, future):
         failed = False

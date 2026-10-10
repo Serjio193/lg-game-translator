@@ -9,7 +9,7 @@ _ABBREVIATIONS = {
 }
 
 
-def split_sentences(text: str) -> list[str]:
+def completed_sentences(text: str) -> tuple[list[str], str]:
     parts = []
     start = 0
     for match in _END.finditer(text):
@@ -31,6 +31,9 @@ def split_sentences(text: str) -> list[str]:
             parts.append(part)
         start = match.end()
     remainder = text[start:].strip()
-    if remainder:
-        parts.append(remainder)
-    return parts
+    return parts, remainder
+
+
+def split_sentences(text: str) -> list[str]:
+    parts, remainder = completed_sentences(text)
+    return parts + ([remainder] if remainder else [])

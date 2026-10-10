@@ -118,3 +118,11 @@ uncached preliminary stage; selected Google/MADLAD final is requested only after
 three real source observations. Identical groups share requests; each region
 retains its own final gate. Cached finals also keep that source gate. The existing
 Google budget/vault/cache are reused. See `docs/live-two-stage-translation.md`.
+# Sentence preview extension (0.1.9)
+
+LiveTranslations uses session-local SentencePreviews for finished sentence units;
+the canonical translator/sentences.py is also packaged into the TV relay.
+Final providers retain whole-block identity and three-observation admission.
+The OSD sentence_flow flag selects left/top flow and font-size transitions without
+changing capture, detector geometry, mask generation or OCR numerical behavior.
+See docs/sentence-preview-osd.md for completion and partial-mask limitations.

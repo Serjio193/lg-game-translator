@@ -1,4 +1,4 @@
-// Execute on TV, after installing settings_0.1.8_all.ipk; preserves the watcher.
+// Execute on TV, after installing settings_0.1.9_all.ipk; preserves the watcher.
 'use strict';
 var fs=require('fs'),path=require('path'),crypto=require('crypto');
 var staging=path.resolve(process.argv[2]||'.');
@@ -9,6 +9,7 @@ var modules=['mobile-server.js','mobile-auth.js','mobile-store.js','qr-url.js','
   'translator-control.js','translator-menu-route.js','manual-menu-route.js','orange-state.js',
   'tv-power.js','luna-json-stream.js',
   'admission.js',
+  'translation-pairs.js','layout-height.js','multi-subtitles.js',
   'manual-style.js','subtitle-layout.js','glyph-cover.js','mask-grow.js','mask-osd-raster.js',
   'line-cover-mask.js','mask-edge-blur.js','control-icons.js','backdrop.js','fit-area.js',
   'mobile/index.html','mobile/mobile.js','mobile/mobile.css','mobile/preview-variants.css',
@@ -18,7 +19,8 @@ function copy(source,target) {fs.mkdirSync(path.dirname(target),{recursive:true}
 if(!fs.existsSync(path.join(app,'translation-watcher.js'))||!fs.existsSync(path.join(menu,'mobile-pairing.js'))) throw new Error('Install the OSD and settings 0.1.3 first');
 modules.forEach(function(name){if(!fs.existsSync(path.join(staging,name)))throw new Error('Incomplete bundle: '+name);});
 if(!fs.existsSync(path.join(staging,'relay/frame_client.py')))throw new Error('Missing frame client');
-var relayModules=['frame_client.py','frame_pipeline.py','translation_client.py','live_translation.py'];
+var relayModules=['frame_client.py','frame_pipeline.py','translation_client.py','live_translation.py',
+  'sentence_preview.py','sentence_boundaries.py'];
 if(fs.existsSync(relay))relayModules.forEach(function(name){
   if(!fs.existsSync(path.join(staging,'relay',name)))throw new Error('Missing relay module: '+name);
 });
