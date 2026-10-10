@@ -1,12 +1,14 @@
-# Game Translator settings
+# Embedded Game Translator menu
 
-Separate normal webOS app; the subtitle overlay and PicCap remain separate.
-Package using the existing CLI: `ares-package menu -e '*.test.js' -o build/dist`.
-Install through the existing developer IPK workflow and launch
-`com.serjio193.lggametranslator.settings`. The control API is the Orange Pi server
-at 192.168.1.11:8765. This app does not store API keys or alter PicCap settings.
+This directory supplies the menu assets inside the single OSD application,
+`com.serjio193.lggametranslator.overlay`, titled «Перевод игры». It has no separate
+appinfo/package. Build with `python scripts/package-unified-osd.py`, then the
+controller archive via `python scripts/package-mobile-osd.py`.
+Opening the icon displays a centered ON/OFF switch; settings are a secondary
+panel. Back hides the menu while the transparent subtitle surface stays alive.
+See `docs/unified-osd-app.md`. The API remains on Orange Pi at 192.168.1.11:8765.
 
-HDMI checkbox selection, selected applications, translation provider and compatible
+Legacy API fields for HDMI checkbox selection, selected applications, translation provider and compatible
 translation server URL are loaded from and saved to `/api/settings`. All HDMI
 inputs default on; applications default off. Old saved settings migrate to an
 empty applications list. Older clients omitting applications preserve saved choices.

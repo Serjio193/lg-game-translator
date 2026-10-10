@@ -1,0 +1,17 @@
+{
+  "id": "com.serjio193.lggametranslator.overlay",
+  "version": "0.2.0",
+  "vendor": "Serjio193",
+  "type": "web",
+  "main": "index.html",
+  "title": "Перевод игры",
+  "icon": "icon.png",
+  "transparent": true,
+  "defaultWindowType": "overlay",
+  "handlesRelaunch": true,
+  "noSplashOnLaunch": true,
+  "spinnerOnLaunch": false,
+  "disableBackHistoryAPI": true,
+  "supportTouchMode": "none",
+  "resolution": "1920x1080"
+}

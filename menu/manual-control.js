@@ -8,7 +8,8 @@
       if(!response.ok)throw new Error(data.error||'Ошибка переключателя');return data;
     });});}
   function render(value){revision=value.revision;enabled=value.settings.translationEnabled===true;
-    button.textContent=enabled?'Перевод включён · OK выключить':'Перевод выключен · OK включить';
+    button.textContent=enabled?'ВКЛЮЧЕНО':'ВЫКЛЮЧЕНО';
+    button.setAttribute('aria-checked',String(enabled));
     button.disabled=false;}
   button.addEventListener('click',function(){busy=true;button.disabled=true;
     request('POST',{revision:revision,enabled:!enabled}).then(function(value){render(value);

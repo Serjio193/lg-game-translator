@@ -1,9 +1,9 @@
-// Execute on TV, after installing settings_0.1.9_all.ipk; preserves the watcher.
+// Execute on TV after installing the unified OSD 0.2.0; preserves the watcher.
 'use strict';
 var fs=require('fs'),path=require('path'),crypto=require('crypto');
 var staging=path.resolve(process.argv[2]||'.');
 var app='/media/developer/apps/usr/palm/applications/com.serjio193.lggametranslator.overlay';
-var menu='/media/developer/apps/usr/palm/applications/com.serjio193.lggametranslator.settings';
+var menu=path.join(app,'menu');
 var relay='/media/developer/gocr-runtime/ppocr-probe-transport/gocr_worker';
 var modules=['mobile-server.js','mobile-auth.js','mobile-store.js','qr-url.js','layer-settings.js',
   'translator-control.js','translator-menu-route.js','manual-menu-route.js','orange-state.js',
@@ -16,7 +16,7 @@ var modules=['mobile-server.js','mobile-auth.js','mobile-store.js','qr-url.js','
   'mobile/provider-settings.js','mobile/provider-settings.css'];
 var backup='/media/developer/gocr-runtime/backups/mobile-osd-'+Date.now();
 function copy(source,target) {fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(source,target);}
-if(!fs.existsSync(path.join(app,'translation-watcher.js'))||!fs.existsSync(path.join(menu,'mobile-pairing.js'))) throw new Error('Install the OSD and settings 0.1.3 first');
+if(!fs.existsSync(path.join(app,'translation-watcher.js'))||!fs.existsSync(path.join(menu,'mobile-pairing.js'))) throw new Error('Install the unified OSD package first');
 modules.forEach(function(name){if(!fs.existsSync(path.join(staging,name)))throw new Error('Incomplete bundle: '+name);});
 if(!fs.existsSync(path.join(staging,'relay/frame_client.py')))throw new Error('Missing frame client');
 var relayModules=['frame_client.py','frame_pipeline.py','translation_client.py','live_translation.py',

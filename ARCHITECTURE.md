@@ -1,5 +1,10 @@
 # OCR architecture boundaries
 
+Since 0.2.0 one launcher application owns both the transparent subtitle surface
+and the embedded manual-control menu. OSD launch routing distinguishes explicit
+menu launches from translation payloads; closing the embedded menu retains OSD.
+The former standalone settings app is removed. See docs/unified-osd-app.md.
+
 Mobile OSD settings run in the existing persistent TV controller, not in capture.
 Translation admission is now the persistent local `translationEnabled` switch,
 default OFF, changed by the TV menu/pult or PIN-authenticated phone. HDMI/app

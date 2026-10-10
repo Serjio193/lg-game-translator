@@ -1,5 +1,8 @@
 # Мобильные настройки OSD
 
+С 0.2.0 меню встроено в единственный OSD app «Перевод игры», отдельный
+settings IPK больше не собирается: [unified-osd-app.md](unified-osd-app.md).
+
 Обновление 0.1.7: ручной `translationEnabled`, сброс OFF на старте и sleep/wake,
 подтверждённое питание как условие ручного ON, и локальные snapshots
 на OFF без фоновых обращений к Orange. TV-меню
@@ -52,8 +55,8 @@ PIN действует 5 минут. Пять неверных попыток б
 
 ## Установка
 
-1. Установить `com.serjio193.lggametranslator.settings_0.1.9_all.ipk`.
-2. Распаковать `mobile-osd-controller-0.1.9.tar.gz` на ТВ.
+1. Установить `com.serjio193.lggametranslator.overlay_0.2.0_all.ipk`.
+2. Распаковать `mobile-osd-controller-0.2.0.tar.gz` на ТВ.
 3. Выполнить `sh install-mobile.sh <директория распаковки>`.
 
 Установщик сохраняет резервные копии, добавляет renderer dependency

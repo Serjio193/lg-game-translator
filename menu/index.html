@@ -8,11 +8,16 @@
 </head>
 <body>
   <main>
-    <p class="eyebrow">GAME TRANSLATOR</p>
-    <h1>Управление переводом</h1>
-    <p class="intro">Включайте и выключайте перевод вручную кнопкой OK на пульте.</p>
-    <button id="translation-toggle" type="button" disabled>Загрузка переключателя…</button>
-    <p id="translation-status" role="status"></p>
+    <section class="toggle-home">
+      <p class="eyebrow">ПЕРЕВОД ИГРЫ</p>
+      <h1>Перевод поверх игры</h1>
+      <button id="translation-toggle" type="button" role="switch" aria-checked="false" disabled>Загрузка…</button>
+      <p id="translation-status" role="status">Нажмите OK, чтобы включить перевод.</p>
+      <div class="actions"><button id="open-settings" type="button">Настройки</button>
+        <button id="back" type="button">Вернуться к игре</button></div>
+    </section>
+    <section id="settings-panel" hidden>
+    <button id="close-settings" type="button">Назад к переключателю</button>
     <button id="pair-phone" type="button">Подключить телефон · настройки OSD</button>
     <section id="phone-pairing" hidden aria-live="polite"></section>
     <form id="settings">
@@ -32,11 +37,12 @@
       </section>
       <div class="actions"><button id="save" type="submit" disabled>Сохранить</button>
         <button id="refresh-settings" type="button">Обновить настройки с Orange</button>
-        <button id="back" type="button">Вернуться к игре</button></div>
+        </div>
     </form>
     <p id="status" role="status">Загрузка настроек…</p>
     <p class="note">Настройки сохраняются после перезапуска. Подсветка продолжает работать.</p>
     <p class="note">Для Google нужен настроенный API-ключ на сервере перевода.</p>
+    </section>
   </main>
   <script src="menu-key.js"></script>
   <script src="menu.js"></script>

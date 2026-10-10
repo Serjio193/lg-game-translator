@@ -19,7 +19,7 @@ MODULES = (
 
 
 def main():
-    output = ROOT / "build/dist/mobile-osd-controller-0.1.9.tar.gz"
+    output = ROOT / "build/dist/mobile-osd-controller-0.2.0.tar.gz"
     output.parent.mkdir(parents=True, exist_ok=True)
     with tarfile.open(output, "w:gz") as archive:
         for name in MODULES:

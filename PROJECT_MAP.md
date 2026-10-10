@@ -136,3 +136,5 @@ postprocess работает после tensor decode, не управляет c
 - `gocr_worker/live_translation.py`: latest-frame bounded preview/final queues, source confirmation before final, current-session provider and asynchronous OSD. `translator/test_preview_api.py` covers the reused cache/Bergamot endpoint; see `docs/live-two-stage-translation.md`.
 
 - `gocr_worker/sentence_preview.py`: session-local completed-sentence previews sharing the canonical translator boundaries. `overlay/translation-pairs.js`, `multi-subtitles.js`, `layout-height.js` reuse the existing main-checkout reading/rendering path for append-in-place; see `docs/sentence-preview-osd.md`.
+
+- `overlay/appinfo.json`, `index.html`, `overlay.js`, `osd-shell.js`: one launcher app with transparent OSD and embedded `menu/` control assets; `scripts/package-unified-osd.py` builds the sole IPK. See `docs/unified-osd-app.md`.

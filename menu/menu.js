@@ -31,12 +31,25 @@
     }
     if(provider.value==='google')window.GoogleSettings.select('google',persist);else persist(null);
   });
-  document.getElementById('back').addEventListener('click',function(){window.close();});
+  var panel=document.getElementById('settings-panel'),home=document.querySelector('.toggle-home');
+  function showSettings(value){panel.hidden=!value;home.hidden=value;
+    document.getElementById(value?'close-settings':'translation-toggle').focus();}
+  function leave(){
+    if(window.parent!==window)window.parent.postMessage({osdMenu:'close'},'*');
+    else window.close();
+  }
+  document.getElementById('open-settings').addEventListener('click',function(){showSettings(true);});
+  document.getElementById('close-settings').addEventListener('click',function(){showSettings(false);});
+  document.getElementById('back').addEventListener('click',leave);
   document.addEventListener('keydown',function(event){
-    if(event.keyCode===461||event.key==='Escape'){window.close();return;}
-    var controls=[document.getElementById('translation-toggle'),document.getElementById('pair-phone'),
+    if(event.keyCode===461||event.key==='Escape'){
+      if(!panel.hidden)showSettings(false);else leave();return;
+    }
+    var controls=panel.hidden?[document.getElementById('translation-toggle'),
+      document.getElementById('open-settings'),document.getElementById('back')]:
+      [document.getElementById('close-settings'),document.getElementById('pair-phone'),
       provider,server,document.getElementById('google-key'),document.getElementById('google-key-save'),save,
-      document.getElementById('refresh-settings'),document.getElementById('back')];
+      document.getElementById('refresh-settings')];
     var index=controls.indexOf(document.activeElement);
     if(event.keyCode>=37&&event.keyCode<=40){
       if((document.activeElement===server||document.activeElement===document.getElementById('google-key'))&&(event.keyCode===37||event.keyCode===39))return;
